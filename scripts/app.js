@@ -509,7 +509,6 @@ angular.module("adminApp", ["authService", "ngRoute", "ngResource", "satellizer"
    controller: 'SancionesCtrl'
   })*/
   //=========================         ASIGNACION DE ZONAS     ==============================
-
   .when('/asignacion_zonas/crear',{
    templateUrl:'templates/asignacion_zonas/crear.html',
    controller: 'CrearAsignacionCtrl',
@@ -522,7 +521,7 @@ angular.module("adminApp", ["authService", "ngRoute", "ngResource", "satellizer"
    templateUrl:'templates/empresatramite/ver.html',
    controller: 'VerEmpresaCtrl',
     data: {
-      authorized: [ROLES.ADMIN_USACSIA.ROL,ROLES.ADMIN_CERTIFICADO.ROL]
+      authorized: [ROLES.ADMIN_USACSIA.ROL,ROLES.ADMIN_CERTIFICADO.ROL,ROLES.INSPECTOR.ROL]
     }
   })
   //ver establecimiento solicitante

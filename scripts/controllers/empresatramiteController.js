@@ -139,6 +139,19 @@ angular.module("adminApp")
           titulo:'Información General del Establecimiento'
         }
       }
+    }else{
+      $scope.ajustes = {
+        menu:{
+          titulo: 'Gestión de Establecimientos Solicitantes',
+          items:[
+            
+           {nombre:'Establecimientos validados', enlace:'#/lista-validacion', estilo:''},
+            {nombre:'Establecimientos inspeccionados', enlace:'#/lista-inspeccionados', estilo:''}]
+        },
+        pagina:{
+          titulo:'Información General del Establecimiento'
+        }
+      }
     }
   /*  else if(CONFIG.ROL_CURRENT_USER == 15 ){
       $scope.ajustes = {
