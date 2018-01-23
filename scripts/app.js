@@ -1,4 +1,4 @@
-'use strict';
+﻿'use strict';
 angular.module("adminApp", ["authService", "ngRoute", "ngResource", "satellizer", "toastr", "platypus.tabs", 'ngMap', 'vcRecaptcha','angular.filter', 'angularMoment'])
 
 .config(['$routeProvider', '$authProvider', 'CONFIG', 'ROLES', function ($routeProvider, $authProvider, CONFIG, ROLES){
@@ -1036,7 +1036,20 @@ angular.module("adminApp", ["authService", "ngRoute", "ngResource", "satellizer"
       authorized: [ROLES.ADMIN_CARNET.ROL, ROLES.RESPONSABLE_LAB.ROL]
     }
   })
-
+  .when('/aprobados', {
+    templateUrl: 'templates/personatramite/aprobados.html',
+    controller: 'AprobadosController',
+    data: {
+      authorized: [ROLES.ADMIN_CARNET.ROL, ROLES.ADMIN_USACSIA.ROL]
+    }
+  })
+  .when('/observados', {
+    templateUrl: 'templates/personatramite/observdos.html',
+    controller: 'ObservadosController',
+    data: {
+      authorized: [ROLES.ADMIN_CARNET.ROL, ROLES.ADMIN_USACSIA.ROL]
+    }
+  })
 
 
 

@@ -5,7 +5,7 @@ angular.module("adminApp")
   $scope.ajustes = {
     //Configuraciones del menu:
     menu:{
-      titulo: 'Gestión de Establecimientos Solicitantes',
+      titulo: 'Gestión de Establecimientos',
       items:[
       
         {nombre:'Establecimientos Registrados', enlace:'#/establecimientossol', estilo:'active'},
@@ -43,7 +43,7 @@ angular.module("adminApp")
       $scope.msg = data.status;
     }
   },function () {
-      console.log("error");
+      
       toastr.error("ERROR INESPERADO, POR FAVOR ACTUALICE LA PÁGINA");
       $scope.loading = false;
       $scope.msg = false;
@@ -497,7 +497,7 @@ $scope.initMap = function(){
      $scope.user = {
     rol_id: CONFIG.ROL_CURRENT_USER
   }
-    if ($scope.user.rol_id == 1 || $scope.user.rol_id == 14) {
+    if ($scope.user.rol_id == 1 || $scope.user.rol_id == 14 || $scope.user.rol_id == 15) {
       $scope.ajustes = {
         //Configuraciones del menu:
         menu:{
@@ -616,11 +616,12 @@ $scope.initMap = function(){
       
       console.log("ver est____",$scope.establecimiento);
       console.log("length   ____",Object.keys($scope.establecimiento.propietario).length);
-      if (Object.keys($scope.establecimiento.propietario).length==7) {
+         
+      if ($scope.establecimiento.propietario.pro_tipo=='J') {
         $scope.propietario=$scope.establecimiento.propietario.pjur_razon_social;
         console.log("propietario juridico  ____",$scope.propietario);
       }
-      if (Object.keys($scope.establecimiento.propietario).length==22) {
+      if ($scope.establecimiento.propietario.pro_tipo=='N') {
         $scope.propietario=$scope.establecimiento.propietario.per_nombres+' '+$scope.establecimiento.propietario.per_apellido_primero+' '+$scope.establecimiento.propietario.per_apellido_segundo;
         console.log("propietario natural  ____",$scope.propietario);
       }
@@ -658,7 +659,6 @@ function buscaPersonaRegistradaController($http, $scope, CONFIG){
               $scope.ver=true;
               $scope.resultado='';
               $scope.persona = respuesta.persona.persona;
-              $scope.imagen = respuesta.persona.imagen;
               $scope.zona = respuesta.persona.zona;
               $scope.municipio = respuesta.persona.municipio;
               $scope.provincia = respuesta.persona.provincia;

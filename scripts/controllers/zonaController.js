@@ -5,7 +5,7 @@ angular.module("adminApp")
   function ($scope, CONFIG, Zonas,$routeParams, $route, toastr, $location,$timeout){
   $scope.ajustes = {
     menu:{
-      titulo: 'Tramites administrativos',
+      titulo: 'Trámites administrativos',
       items:[
        {nombre:'Gestión de Parasitos', enlace:'#/parasito', estilo:''},
         {nombre:'Gestión de Tratamientos', enlace:'#/tratamiento', estilo:''}/*,

@@ -181,11 +181,13 @@ angular.module("adminApp")
 
       console.log("ver est____",$scope.establecimiento);
       console.log("length   ____",Object.keys($scope.establecimiento.propietario).length);
-      if (Object.keys($scope.establecimiento.propietario).length==7) {
+   
+    
+      if ($scope.establecimiento.propietario.pro_tipo=='J') {
         $scope.propietario=$scope.establecimiento.propietario.pjur_razon_social;
         console.log("propietario juridico  ____",$scope.propietario);
       }
-      if (Object.keys($scope.establecimiento.propietario).length==22) {
+      if ($scope.establecimiento.propietario.pro_tipo=='N') {
         $scope.propietario=$scope.establecimiento.propietario.per_nombres+' '+$scope.establecimiento.propietario.per_apellido_primero+' '+$scope.establecimiento.propietario.per_apellido_segundo;
 console.log("propietario natural  ____",$scope.propietario);
       }
@@ -335,29 +337,36 @@ console.log("propietario natural  ____",$scope.propietario);
         }
       }
   }
-
+  var FunG = localStorage.getItem("Funcionario");
+  var FunG = JSON.parse(FunG);
+  var fun_id = FunG.fun_id;
 
 
     $scope.sortType = 'te_fecha'; // ESTABLECIENDO EL TIPO DE ORDENAMIENTO
     $scope.sortReverse  = true;  // PARA ORDENAR ASCENDENTEMENTO O DESCENDENTEMENTE
     $scope.loading=true;//PARA HACER UN LOADING EN EL TEMPLATE
-  var FunG = localStorage.getItem("Funcionario");
-  var FunG = JSON.parse(FunG);
-  var fun_id = FunG.fun_id;
+
+
   //LISTA DE INSPECTORES
   ListaInspector.get({fun_id:fun_id}, function (argument) {
       $scope.establecimientos = argument.empresa_tramite;
-
-
-      angular.forEach($scope.establecimientos, function(value, key){
+     if($scope.establecimientos.length >0){
+      $scope.loading = false;
+      $scope.msg = true;
+    }
+    else{
+      $scope.loading = false;
+      $scope.msg = false;
+    }
+    angular.forEach($scope.establecimientos, function(value, key){
             console.log( 'fecha:',value.te_fecha);
             value.te_fecha=moment(value.te_fecha,"YYYY-MM-DD").format("DD-MM-YYYY");
-         });
-    //PARA HACER UN LOADING EN EL TEMPLATE  
-    if(argument.status){
-        $scope.loading = false;
-        $scope.msg = argument.status;
-      }
+    });
+   
+    },function () {
+            toastr.error("ERROR INESPERADO, por favor actualize la página");
+            $scope.loading = false;
+            $scope.msg = false;
     }); 
   
 
@@ -422,8 +431,7 @@ console.log("propietario natural  ____",$scope.propietario);
     $scope.sortType = 'te_fecha'; // ESTABLECIENDO EL TIPO DE ORDENAMIENTO
     $scope.sortReverse  = true;  // PARA ORDENAR ASCENDENTEMENTO O DESCENDENTEMENTE
     $scope.loading=true;//PARA HACER UN LOADING EN EL TEMPLATE
-    $scope.tabla2=false;
-     $scope.msg = false
+
     var condiciones={
       eta_id:2,
       te_estado:'APROBADO'
@@ -432,28 +440,20 @@ console.log("propietario natural  ____",$scope.propietario);
   ListaEmpTraEtapaEstado.get(condiciones, function (argument) {
       $scope.establecimientos = argument.empresa_tramite;
 
-      if($scope.establecimientos.length == 0){
-        $scope.loading = false;
-          $scope.msg = false;
-        $scope.tabla=false;
-         $scope.tabla2=true;
-        }
-        else{
-          $scope.loading = false;
-          $scope.msg = true;
-          $scope.tabla=true;
-      
-        }
+     if($scope.establecimientos.length >0){
+      $scope.loading = false;
+      $scope.msg = true;
+    }
+    else{
+      $scope.loading = false;
+      $scope.msg = false;
+    }
 
       angular.forEach($scope.establecimientos, function(value, key){
 
             value.te_fecha=moment(value.te_fecha,"YYYY-MM-DD").format("DD-MM-YYYY");
          });
-    //PARA HACER UN LOADING EN EL TEMPLATE  
-    if(argument.status){
-        $scope.loading = false;
-        $scope.msg = argument.status;
-      }
+
     },function () {
       toastr.error("ERROR INESPERADO, POR FAVOR ACTUALICE LA PÁGINA");
       $scope.loading = false;
@@ -542,6 +542,7 @@ console.log("propietario natural  ____",$scope.propietario);
     $scope.sortType = 'te_fecha'; // ESTABLECIENDO EL TIPO DE ORDENAMIENTO
     $scope.sortReverse  = true;  // PARA ORDENAR ASCENDENTEMENTO O DESCENDENTEMENTE
     $scope.loading=true;//PARA HACER UN LOADING EN EL TEMPLATE
+
     var condiciones={
       eta_id:3,
       te_estado:'APROBADO'
@@ -549,18 +550,27 @@ console.log("propietario natural  ____",$scope.propietario);
     }
   ListaEmpTraEtapaEstado.get(condiciones, function (argument) {
       $scope.establecimientos = argument.empresa_tramite;
-      console.log('establecimientos', $scope.establecimientos);
+      console.log('establecimientos', argument.status);
+      if($scope.establecimientos.length >0){
+      $scope.loading = false;
+      $scope.msg = true;
+    }
+    else{
+      $scope.loading = false;
+      $scope.msg = false;
+    }
+
 
       angular.forEach($scope.establecimientos, function(value, key){
             console.log( 'fecha:',value.te_fecha);
             value.te_fecha=moment(value.te_fecha,"YYYY-MM-DD").format("DD-MM-YYYY");
          });
-    //PARA HACER UN LOADING EN EL TEMPLATE  
-    if(argument.status){
-        $scope.loading = false;
-        $scope.msg = argument.status;
-      }
-  });
+   
+  },function () {
+            toastr.error("ERROR INESPERADO, por favor actualize la página");
+            $scope.loading = false;
+            $scope.msg = false;
+          });
 
     var id = 0;
     var ci=0;
@@ -978,21 +988,24 @@ console.log("propietario natural  ____",$scope.propietario);
   ListaEmpTraEtapaEstado.get(condiciones, function (argument) {
       $scope.establecimientos = argument.empresa_tramite;
       console.log('establecimientos', $scope.establecimientos);
-
-      angular.forEach($scope.establecimientos, function(value, key){
-            console.log( 'fecha:',value.te_fecha);
-            value.te_fecha=moment(value.te_fecha,"YYYY-MM-DD").format("DD-MM-YYYY");
-         });
-    //PARA HACER UN LOADING EN EL TEMPLATE  
-    if(argument.status){
-        $scope.loading = false;
-        $scope.msg = argument.status;
+      if($scope.establecimientos.length >0){
+      $scope.loading = false;
+      $scope.msg = true;
       }
-    }); 
-  
+      else{
+        $scope.loading = false;
+        $scope.msg = false;
+      }
+      angular.forEach($scope.establecimientos, function(value, key){
+              console.log( 'fecha:',value.te_fecha);
+              value.te_fecha=moment(value.te_fecha,"YYYY-MM-DD").format("DD-MM-YYYY");
+           });
 
-
-
+      },function () {
+            toastr.error("ERROR INESPERADO, por favor actualize la página");
+            $scope.loading = false;
+            $scope.msg = false;
+      });//fin emptra  
 }])
 
 
@@ -1049,7 +1062,7 @@ console.log("propietario natural  ____",$scope.propietario);
  $scope.user = {
     rol_id: CONFIG.ROL_CURRENT_USER
   }
-  if ($scope.user.rol_id == 14) {
+  if ($scope.user.rol_id == 1 || $scope.user.rol_id == 14) {
     $scope.ajustes = {
     menu:{
       titulo: 'Gestión de Establecimientos que no cancelaron',
@@ -1091,7 +1104,11 @@ console.log("propietario natural  ____",$scope.propietario);
                 $scope.zon=true;
          /* }*/
           
-      })
+      },function () {
+            toastr.error("ERROR INESPERADO, por favor actualize la página");
+            $scope.loading = false;
+            $scope.msg = false;
+          });
   };
 
 }])

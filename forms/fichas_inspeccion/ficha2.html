@@ -1,0 +1,501 @@
+
+                      <h4 class="text-center text-primary">II. INFRAESTRUCTURA E INSTALACIONES</h4>
+                          <hr class="bg-red"> 
+ 
+                  <div class="row" >
+                        <div class="col-md-4">
+                            <label for="seguro" class="control-label ">Camas: <strong class="fg_red">*</strong></label>
+                            <select class="form-control" name="seguro" ng-model="ficha2.fi2_cama" required>
+                               <option value="SIMPLES">SIMPLES</option>
+                                  <option value="DOBLES">DOBLES</option>
+                                <option value="TRIPLES">TRIPLES</option>
+                                <option value="NINGUNO">NINGUNO</option>
+                                
+                            </select>
+                            <span class="messages" ng-show="formficha2.$submitted || formficha2.seguro.$touched">
+                            <span ng-show="formficha2.seguro.$error.required">El campo es obligatorio</span>
+                            </span>
+                        </div>
+                        <!-- <div class="col-md-4" nf-if="">
+                            <label for="seguro" class="control-label ">Otros: <strong class="fg_red">*</strong></label>
+                            <input type="text" name="otro" ng-model="ficha2.fi2_cama">
+                            
+                        </div> -->
+                        <div class="col-md-4">
+                          <label for="serv" class="control-label ">No total habitaciones:<strong class="fg_red">*</strong></label>
+                          <input name="serv" type="number" ng-model-options="{ updateOn: 'blur' }" class="form-control" id="serv" placeholder="número de habitaciones" ng-model="ficha2.fi2_nro_habitaciones" min="0" max="400" required>
+                          <span class="messages" ng-show="formficha2.$submitted || formficha2.serv.$touched ">
+                           <span ng-show="formficha2.serv.$error.required">El campo es obligatorio</span>
+                           
+                           <span ng-show="formficha2.serv.$error.min">La frecuencia no puede ser menor de 0 lpm</span>
+                          </span> 
+                      </div>
+                       <div class="col-md-4">
+                          <label for="serv" class="control-label ">No total almacenes:<strong class="fg_red">*</strong></label>
+                          <input name="serv" type="number" ng-model-options="{ updateOn: 'blur' }" class="form-control" id="serv" placeholder="número de almacenes" ng-model="ficha2.fi2_nro_almacenes" min="0" max="400" required>
+                          <span class="messages" ng-show="formficha2.$submitted || formficha2.serv.$touched ">
+                           <span ng-show="formficha2.serv.$error.required">El campo es obligatorio</span>
+                           
+                           <span ng-show="formficha2.serv.$error.min">La frecuencia no puede ser menor de 0 lpm</span>
+                          </span> 
+                      </div>
+                  </div>
+                  <div class="row" >
+                        <div class="col-md-4">
+                          <label for="serv" class="control-label ">No de salones:<strong class="fg_red">*</strong></label>
+                          <input name="serv" type="number" ng-model-options="{ updateOn: 'blur' }" class="form-control" id="serv" placeholder="número de salones" ng-model="ficha2.fi2_nro_salones" min="0" max="400" required>
+                          <span class="messages" ng-show="formficha2.$submitted || formficha2.serv.$touched ">
+                           <span ng-show="formficha2.serv.$error.required">El campo es obligatorio</span>
+                           
+                           <span ng-show="formficha2.serv.$error.min">La frecuencia no puede ser menor de 0 lpm</span>
+                          </span> 
+                      </div>
+                        <div class="col-md-4">
+                          <label for="serv" class="control-label ">Buenos %:<strong class="fg_red">*</strong></label>
+                          <input name="serv" type="number" ng-model-options="{ updateOn: 'blur' }" class="form-control" id="serv" placeholder="buenos" ng-model="ficha2.fi2_salones_bueno" min="0" max="400" required>
+                          <span class="messages" ng-show="formficha2.$submitted || formficha2.serv.$touched ">
+                           <span ng-show="formficha2.serv.$error.required">El campo es obligatorio</span>
+                           
+                           <span ng-show="formficha2.serv.$error.min">La frecuencia no puede ser menor de 0 lpm</span>
+                          </span> 
+                      </div>
+                       <div class="col-md-4">
+                          <label for="serv" class="control-label ">Malos %:<strong class="fg_red">*</strong></label>
+                          <input name="serv" type="number" ng-model-options="{ updateOn: 'blur' }" class="form-control" id="serv" placeholder="malos" ng-model="ficha2.fi2_salones_regular" min="0" max="400" required>
+                          <span class="messages" ng-show="formficha2.$submitted || formficha2.serv.$touched ">
+                           <span ng-show="formficha2.serv.$error.required">El campo es obligatorio</span>
+                           
+                           <span ng-show="formficha2.serv.$error.min">La frecuencia no puede ser menor de 0 lpm</span>
+                          </span> 
+                      </div>
+                  </div>
+                  <div class="row" >
+                        <div class="col-md-4">
+                          <label for="serv" class="control-label ">Piscina y/o Sauna:<strong class="fg_red">*</strong></label>
+                          <input name="serv" type="number" ng-model-options="{ updateOn: 'blur' }" class="form-control" id="serv" placeholder="piscina y sauna" ng-model="ficha2.fi2_piscina_o_sauna" min="0" max="400" required>
+                          <span class="messages" ng-show="formficha2.$submitted || formficha2.serv.$touched ">
+                           <span ng-show="formficha2.serv.$error.required">El campo es obligatorio</span>
+                           
+                           <span ng-show="formficha2.serv.$error.min">La frecuencia no puede ser menor de 0 lpm</span>
+                          </span> 
+                      </div>
+                        <div class="col-md-4">
+                          <label for="serv" class="control-label ">Buenos %:<strong class="fg_red">*</strong></label>
+                          <input name="serv" type="number" ng-model-options="{ updateOn: 'blur' }" class="form-control" id="serv" placeholder="buenos" ng-model="ficha2.fi2_piscina_bueno" min="0" max="400" required>
+                          <span class="messages" ng-show="formficha2.$submitted || formficha2.serv.$touched ">
+                           <span ng-show="formficha2.serv.$error.required">El campo es obligatorio</span>
+                           
+                           <span ng-show="formficha2.serv.$error.min">La frecuencia no puede ser menor de 0 lpm</span>
+                          </span> 
+                      </div>
+                       <div class="col-md-4">
+                          <label for="serv" class="control-label ">Regular %:<strong class="fg_red">*</strong></label>
+                          <input name="serv" type="number" ng-model-options="{ updateOn: 'blur' }" class="form-control" id="serv" placeholder="regular" ng-model="ficha2.fi2_piscina_regular" min="0" max="400" required>
+                          <span class="messages" ng-show="formficha2.$submitted || formficha2.serv.$touched ">
+                           <span ng-show="formficha2.serv.$error.required">El campo es obligatorio</span>
+                           
+                           <span ng-show="formficha2.serv.$error.min">La frecuencia no puede ser menor de 0 lpm</span>
+                          </span> 
+                      </div>
+                  </div>
+                  <div class="row" >
+                        <div class="col-md-4">
+                          <label for="serv" class="control-label ">No Cocina(s):<strong class="fg_red">*</strong></label>
+                          <input name="serv" type="number" ng-model-options="{ updateOn: 'blur' }" class="form-control" id="serv" placeholder="número cocina" ng-model="ficha2.fi2_nro_cocina" min="0" max="400" required>
+                          <span class="messages" ng-show="formficha2.$submitted || formficha2.serv.$touched ">
+                           <span ng-show="formficha2.serv.$error.required">El campo es obligatorio</span>
+                           
+                           <span ng-show="formficha2.serv.$error.min">La frecuencia no puede ser menor de 0 lpm</span>
+                          </span> 
+                      </div>
+                        <div class="col-md-4">
+                          <label for="serv" class="control-label ">No Cocina(s) Apart Hoteles:<strong class="fg_red">*</strong></label>
+                          <input name="serv" type="number" ng-model-options="{ updateOn: 'blur' }" class="form-control" id="serv" placeholder="apart hotel" ng-model="ficha2.fi2_nro_cocinas_apart_hotel" min="0" max="400" required>
+                          <span class="messages" ng-show="formficha2.$submitted || formficha2.serv.$touched ">
+                           <span ng-show="formficha2.serv.$error.required">El campo es obligatorio</span>
+                           
+                           <span ng-show="formficha2.serv.$error.min">La frecuencia no puede ser menor de 0 lpm</span>
+                          </span> 
+                      </div>
+                       <div class="col-md-4">
+                          <label for="serv" class="control-label ">No Total de Gambusas:<strong class="fg_red">*</strong></label>
+                          <input name="serv" type="number" ng-model-options="{ updateOn: 'blur' }" class="form-control" id="serv" placeholder="número total de gambusas" ng-model="ficha2.fi2_total_gambusas" min="0" max="400" required>
+                          <span class="messages" ng-show="formficha2.$submitted || formficha2.serv.$touched ">
+                           <span ng-show="formficha2.serv.$error.required">El campo es obligatorio</span>
+                           
+                           <span ng-show="formficha2.serv.$error.min">La frecuencia no puede ser menor de 0 lpm</span>
+                          </span> 
+                      </div>
+                     
+                  </div>
+                   <div class="row" >
+                        <div class="col-md-4">
+                         
+                          <label for="serv" class="control-label ">Area de recepcion B:<strong class="fg_red">*</strong></label>
+                          <input name="serv" type="number" ng-model-options="{ updateOn: 'blur' }" class="form-control" id="serv" placeholder="area recepcion" ng-model="ficha2.fi2_recepcion" min="0" max="400" required>
+                          <span class="messages" ng-show="formficha2.$submitted || formficha2.serv.$touched ">
+                           <span ng-show="formficha2.serv.$error.required">El campo es obligatorio</span>
+                           
+                           <span ng-show="formficha2.serv.$error.min">La frecuencia no puede ser menor de 0 lpm</span>
+                          </span> 
+                      </div>
+                      <div class="col-md-4">
+                          <label for="serv" class="control-label ">No de restaurante:<strong class="fg_red">*</strong></label>
+                          <input name="serv" type="number" ng-model-options="{ updateOn: 'blur' }" class="form-control" id="serv" placeholder="número de restaurantes" ng-model="ficha2.fi2_nro_restautant" min="0" max="400" required>
+                          <span class="messages" ng-show="formficha2.$submitted || formficha2.serv.$touched ">
+                           <span ng-show="formficha2.serv.$error.required">El campo es obligatorio</span>
+                           
+                           <span ng-show="formficha2.serv.$error.min">La frecuencia no puede ser menor de 0 lpm</span>
+                          </span> 
+                      </div>
+                        
+                  </div>
+             
+                      <h4 class="text-center text-primary">II. CARACTERISTICA DE LA HABITACIÓN</h4>
+                          <hr class="bg-red"> 
+              
+                  <div class="row">
+                    <div class="col-md-4">
+                         <div class="formulario">
+                              <div class="checkbox">
+                              <input class="checkbox" type="checkbox" name="ai" id="seleccion" ng-model="ficha2.fi2_aire_acondicionado">
+                              <label for="seleccion">Aire acondicionado</label>
+                              </div>
+                        </div>
+                    </div>
+                     <div class="col-md-4">
+                        <div class="formulario">
+                              <div class="checkbox">
+                              <input class="checkbox" type="checkbox" name="ag" id="agua" ng-model="ficha2.fi2_agua_caliente" ng-init="true" >
+                              <label for="agua">Agua caliente</label>
+                              </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="formulario">
+                              <div class="checkbox">
+                              <input class="checkbox" type="checkbox" name="ag" id="calf" ng-model="ficha2.fi2_calefaccion" ng-init="checked=false" >
+                              <label for="calf">Calefacción</label>
+                              </div>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="row" >
+                    <div class="col-md-4">
+                        <div class="formulario">
+                              <div class="checkbox">
+                              <input class="checkbox" type="checkbox" name="ag" id="fri" ng-model="ficha2.fi2_frigobar" ng-init="checked=false" >
+                              <label for="fri">Frigobar</label>
+                              </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="formulario">
+                              <div class="checkbox">
+                              <input class="checkbox" type="checkbox" name="ag" id="room" ng-model="ficha2.fi2_room_service" ng-init="checked=false" >
+                              <label for="room">Room service</label>
+                              </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="formulario">
+                              <div class="checkbox">
+                              <input class="checkbox" type="checkbox" name="ag" id="telf" ng-model="ficha2.fi2_telefono_hab" ng-init="checked=false" >
+                              <label for="telf">Telefono en habitación</label>
+                              </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="formulario">
+                              <div class="checkbox">
+                              <input class="checkbox" type="checkbox" name="ag" id="tv" ng-model="ficha2.fi2_tv" ng-init="checked=false" >
+                              <label for="tv">TV habitación</label>
+                              </div>
+                        </div>
+                    </div>
+                  
+                </div>
+
+                      <h4 class="text-center text-primary">II. EQUIPAMIENTO DE LA HABITACIÓN</h4>
+                          <hr class="bg-red"> 
+ 
+                  <div class="row">
+                  <!--   <div class="col-md-4">
+                         <div class="formulario">
+                              <div class="checkbox">
+                              <input class="checkbox" type="checkbox" name="ai" id="seleccion" ng-model="ficha2.fi2_aire_acondicionado" ng-init="checked=false" >
+                              <label for="seleccion">Cama</label>
+                              </div>
+                        </div>
+                    </div> -->
+                     <div class="col-md-4">
+                        <div class="formulario">
+                              <div class="checkbox">
+                              <input class="checkbox" type="checkbox" name="ag" id="cub" ng-model="ficha2.fi2_cubrecolchones" ng-init="checked=false" >
+                              <label for="cub">Cubre colchones</label>
+                              </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="formulario">
+                              <div class="checkbox">
+                              <input class="checkbox" type="checkbox" name="ag" id="mes" ng-model="ficha2.fi2_mesa" ng-init="checked=false" >
+                              <label for="mes">Mesa de noche</label>
+                              </div>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="row" >
+                    <div class="col-md-4">
+                        <div class="formulario">
+                              <div class="checkbox">
+                              <input class="checkbox" type="checkbox" name="ag" id="toc" ng-model="ficha2.fi2_tocador" ng-init="checked=false" >
+                              <label for="toc">Tocador de mesa</label>
+                              </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="formulario">
+                              <div class="checkbox">
+                              <input class="checkbox" type="checkbox" name="ag" id="lamp" ng-model="ficha2.fi2_lampara" ng-init="checked=false" >
+                              <label for="lamp">Lampara de lectura</label>
+                              </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="formulario">
+                              <div class="checkbox">
+                              <input class="checkbox" type="checkbox" name="ag" id="sill" ng-model="ficha2.fi2_sillones" ng-init="checked=false" >
+                              <label for="sill">Sillones o sillas</label>
+                              </div>
+                        </div>
+                    </div>
+                   
+                </div>
+                <div class="row" >
+                    <div class="col-md-4">
+                        <div class="formulario">
+                              <div class="checkbox">
+                              <input class="checkbox" type="checkbox" name="ag" id="esp" ng-model="ficha2.fi2_espejo" ng-init="checked=false" >
+                              <label for="esp">Espejo</label>
+                              </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="formulario">
+                              <div class="checkbox">
+                              <input class="checkbox" type="checkbox" name="ag" id="cest" ng-model="ficha2.fi2_cesto_basura" ng-init="checked=false" >
+                              <label for="cest">Cesto de basura</label>
+                              </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="formulario">
+                              <div class="checkbox">
+                              <input class="checkbox" type="checkbox" name="ag" id="por" ng-model="ficha2.fi2_portamaletas" ng-init="checked=false" >
+                              <label for="por">Portamaletas</label>
+                              </div>
+                        </div>
+                    </div>
+                   
+                </div>
+                <div class="row" >
+                    <div class="col-md-4">
+                        <div class="formulario">
+                              <div class="checkbox">
+                              <input class="checkbox" type="checkbox" name="ag" id="rop" ng-model="ficha2.fi2_ropero" ng-init="checked=false" >
+                              <label for="rop">Closet o ropero</label>
+                              </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="formulario">
+                              <div class="checkbox">
+                              <input class="checkbox" type="checkbox" name="ag" id="bo" ng-model="ficha2.fi2_lavanderia" ng-init="checked=false" >
+                              <label for="bo">Bolsa de lavanderia</label>
+                              </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="formulario">
+                              <div class="checkbox">
+                              <input class="checkbox" type="checkbox" name="ag" id="cor" ng-model="ficha2.fi2_cortina" ng-init="checked=false" >
+                              <label for="cor">Cortina persiana o similar</label>
+                              </div>
+                        </div>
+                    </div>                
+                </div>
+
+                      <h4 class="text-center text-primary">II. EQUIPAMIENTO DE BAÑOS</h4>
+                          <hr class="bg-red"> 
+
+                  <div class="row">
+                    <div class="col-md-4">
+                         <div class="formulario">
+                              <div class="checkbox">
+                              <input class="checkbox" type="checkbox" name="ai" id="pi" ng-model="ficha2.fi2_pisos_bano" ng-init="checked=false" >
+                              <label for="pi">Pisos</label>
+                              </div>
+                        </div>
+                    </div>
+                     <div class="col-md-4">
+                        <div class="formulario">
+                              <div class="checkbox">
+                              <input class="checkbox" type="checkbox" name="ag" id="az" ng-model="ficha2.fi2_azulejos" ng-init="checked=false" >
+                              <label for="az">De azulejos o material similar</label>
+                              </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="formulario">
+                              <div class="checkbox">
+                              <input class="checkbox" type="checkbox" name="ag" id="dep" ng-model="ficha2.fi2_depiso" ng-init="checked=false" >
+                              <label for="dep">De piso a techo</label>
+                              </div>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="row" >
+                    <div class="col-md-4">
+                        <div class="formulario">
+                              <div class="checkbox">
+                              <input class="checkbox" type="checkbox" name="ag" id="in" ng-model="ficha2.fi2_inodoro" ng-init="checked=false" >
+                              <label for="in">Inodoro</label>
+                              </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="formulario">
+                              <div class="checkbox">
+                              <input class="checkbox" type="checkbox" name="ag" id="lav" ng-model="ficha2.fi2_lavamanos" ng-init="checked=false" >
+                              <label for="lav">Lavamanos</label>
+                              </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="formulario">
+                              <div class="checkbox">
+                              <input class="checkbox" type="checkbox" name="ag" id="po" ng-model="ficha2.fi2_porta_papel" ng-init="checked=false" >
+                              <label for="po">Porta papel higienico</label>
+                              </div>
+                        </div>
+                    </div>
+                   
+                </div>
+                <div class="row" >
+                    <div class="col-md-4">
+                        <div class="formulario">
+                              <div class="checkbox">
+                              <input class="checkbox" type="checkbox" name="ag" id="ba" ng-model="ficha2.fi2_basura_bano" ng-init="checked=false" >
+                              <label for="ba">Cesto de basura</label>
+                              </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="formulario">
+                              <div class="checkbox">
+                              <input class="checkbox" type="checkbox" name="ag" id="du" ng-model="ficha2.fi2_ducha" ng-init="checked=false" >
+                              <label for="du">Ducha</label>
+                              </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="formulario">
+                              <div class="checkbox">
+                              <input class="checkbox" type="checkbox" name="ag" id="pd" ng-model="ficha2.fi2_pieducha" ng-init="checked=false" >
+                              <label for="pd">Pie de ducha</label>
+                              </div>
+                        </div>
+                    </div>
+                     <div class="col-md-4">
+                        <div class="formulario">
+                              <div class="checkbox">
+                              <input class="checkbox" type="checkbox" name="ag" id="col" ng-model="ficha2.fi2_colgador" ng-init="checked=false" >
+                              <label for="col">Colgadores</label>
+                              </div>
+                        </div>
+                    </div>
+                   
+                </div>
+
+                      <h4 class="text-center text-primary">II. EQUIPOS</h4>
+                          <hr class="bg-red"> 
+
+                
+                  <div class="row">
+                        <div class="col-md-6">
+                          <label for="resolucion" class="control-label">Sala de Maquinas:</label>
+                          <input class="form-control" id="sal" type="Text" ng-model="ficha2.fi2_sala_maquina" >    
+                        </div> 
+                        <div class="col-md-6">
+                          <label for="resolucion" class="control-label">Refrigeracion y congelamiento:</label>
+                          <input class="form-control" id="ref" type="Text" ng-model="ficha2.fi2_refrigeracion" >    
+                        </div> 
+                    
+                  </div>
+                   <div class="row">
+                        <div class="col-md-6">
+                          <label for="resolucion" class="control-label">Sistema Independiente de extracción de grasas:</label>
+                          <input class="form-control" id="gra" type="Text" ng-model="ficha2.fi2_grasas" >    
+                        </div> 
+                        <div class="col-md-6">
+                          <label for="resolucion" class="control-label">Sistema de iluminación:</label>
+                          <input class="form-control" id="il" type="Text" ng-model="ficha2.fi2_iluminacion" >    
+                        </div>                   
+                  </div>
+                  <div class="row">
+                        <div class="col-md-6">
+                          <label for="resolucion" class="control-label">Sistema de climatización(calefaciión):</label>
+                          <input class="form-control" id="red" type="Text" ng-model="ficha2.fi2_mantenimieno" >    
+                        </div> 
+                        <div class="col-md-6">
+                          <label for="resolucion" class="control-label">Area de servicio de mantenimiento</label>
+                          <input class="form-control" id="man" type="Text" ng-model="ficha2.fi2_estado" >    
+                        </div>                   
+                  </div>
+                  <div class="row">
+                        <div class="col-md-6">
+                          <label for="resolucion" class="control-label">Depositos de residuos sólidos</label>
+                          <input class="form-control" id="red" type="Text" ng-model="ficha2.fi2_depositos" >    
+                        </div> 
+                        <div class="col-md-6">
+                          <label for="resolucion" class="control-label">Area de lavado y planchado</label>
+                          <input class="form-control" id="red" type="Text" ng-model="ficha2.fi2_area_lavado_planchado" >    
+                        </div>                   
+                  </div>
+                  <div class="row">
+                        <div class="col-md-6">
+                          <label for="resolucion" class="control-label">Extinguidores 1 por cada 10 habitaciones</label>
+                          <input class="form-control" id="red" type="Text" ng-model="ficha2.fi2_extinguidor" >    
+                        </div> 
+                        <div class="col-md-6">
+                          <label for="resolucion" class="control-label">Control de vectores</label>
+                          <input class="form-control" id="red" type="Text" ng-model="ficha2.fi2_vectores" >    
+                        </div>                   
+                  </div>
+                   <div class="row">
+                    <div class="col-md-6">
+                            <label for="equi" class="control-label ">OBSERVACIONES :<strong class="fg_red">*</strong></label><br>
+                            <textarea name="equi" ng-model-options="{ updateOn: 'blur' }" rows="6" cols="100" style="resize: vertical;min-height:70px;max-height: 150px;" placeholder="Observaciones" ng-model="ficha2.fi2_observacion" required></textarea>
+                            <span class="messages" ng-show="formficha2.$submitted || formficha2.equi.$touched">
+                            <span ng-show="formficha2.equi.$error.required">El campo es obligatorio</span>
+                            </span>
+                     </div>
+                   </div>
+
+       <p ng-show="$parent.ajustes.pagina.success" class="alert alert-success">{{$parent.ajustes.pagina.success}}</p>
+      
+
+       <center>
+     
+                  <button type="submit" data-toggle="modal" ng-click="submitf2($parent.ficha2)"  class="btn btn-primary" ng-disabled="formficha2.$invalid" ><span class="glyphicon glyphicon-save"></span> GUARDAR</button>
+                 <!--  <a href="#/establecimientos/pacientes">
+                  <button type="submit" data-toggle="modal"  class="btn btn-danger"  ><span class="glyphicon glyphicon-remove"></span> CANCELAR</button>
+                  </a> -->
+      </center>

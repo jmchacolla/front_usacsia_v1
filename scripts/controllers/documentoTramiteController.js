@@ -116,7 +116,7 @@ function ($http,CONFIG,$scope, DocumentoTramite2,DocumentoTramiteL,PersonasEstab
     },
     //Configuraciones de la página
     pagina:{
-      titulo:'Tramites iniciados'
+      titulo:'Trámites iniciados'
     }
   }
 }

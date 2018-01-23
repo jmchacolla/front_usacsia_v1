@@ -11,7 +11,7 @@ angular.module("adminApp")
         {nombre:'Busqueda de personas registradas', enlace:'#/tramite/crear', estilo:''}]
     },
     pagina:{
-      titulo:'Tramites de Carné Sanitario'
+      titulo:'Trámites de Carné Sanitario'
     }
   }
   var FunG = localStorage.getItem("Funcionario");
@@ -192,10 +192,10 @@ angular.module("adminApp")
     menu:{
       titulo: 'Gestión de tramites Concluidos de Carné Sanitario',
       items:[
-        {nombre:'Tramites Concluidos', enlace:'#/tramites_concluidos', estilo:'active'}]
+        {nombre:'Trámites Concluidos', enlace:'#/tramites_concluidos', estilo:'active'}]
     },
     pagina:{
-      titulo:'Tramites de Carné Sanitario'
+      titulo:'Trámites de Carné Sanitario'
     }
   }
   $scope.user = {
@@ -330,7 +330,7 @@ angular.module("adminApp")
       menu:{
         titulo: 'Gestión de tramites Concluidos de Carné Sanitario',
         items:[
-            {nombre:'Tramites concluidos', enlace:'#/tramites_concluidos', estilo:''},
+            {nombre:'Trámites concluidos', enlace:'#/tramites_concluidos', estilo:''},
             {nombre:'Detalle de Trámite concluido', enlace:'#/tramites_concluidos/ver/'+pt_id, estilo:'active'}]
       },
       pagina:{
@@ -363,7 +363,7 @@ function ($scope, ListarTramitesService, $route, toastr,$location)
         {nombre:'Solicitudes de Carné Sanitario', enlace:'#/persona-usacsia', estilo:'active'}]
     },
     pagina:{
-      titulo:'Tramites de Certificado Sanitario'
+      titulo:'Trámites de Certificado Sanitario'
     }
   }
 
@@ -583,8 +583,78 @@ function ($scope, ListarTramitesService, $route, toastr,$location)
 
 }])//=================  FIN pdf_pago_Ctrl
 
+.controller('AprobadosController', ['$http','CONFIG','$scope','Ficha', '$route', 'toastr', 'Aprobados',
+  function ($http,CONFIG,$scope,Ficha, $route, toastr, Aprobados){
+  $scope.user = {
+    rol_id: CONFIG.ROL_CURRENT_USER
+  }
+  if ($scope.user.rol_id==1) {
+  $scope.ajustes = {
+    menu:{
+      titulo: 'Aprobados por fecha',
+      items:[
+        {nombre:'Aprobados por fecha', enlace:'#/aprobados', estilo:'active'}
+      ]
+    },
+    pagina:{
+      titulo:'Lista de trámites'
+    }
+  }
+ }
+  $scope.fecha_ini1 = null;
+  $scope.fecha_fin1 = null;
+  $scope.loading = true;
+  $scope.show = false;
 
-// 
+
+  $scope.get_rep=function(fecha1){
+     $scope.show = true;
+     var fecha1 = moment(fecha1,"DD-MM-YYYY").format("YYYY-MM-DD");
+
+
+      $scope.fecha={
+        fecha:fecha1
+      }
+console.log("__ para enviar fecha__",fecha1);
+      Aprobados.get($scope.fecha).$promise.then(function(data){
+          $scope.persona_tramite = data.persona_tramite;
+        console.log("__ aprobado por fecha__",$scope.persona_tramite);
+        if($scope.persona_tramite.length >0){
+          $scope.loading = false;
+          $scope.msg = true;
+        }
+        else{
+          $scope.loading = false;
+          $scope.msg = false;
+        }
+
+          /*if($scope.persona_tramite.length > 0){
+            for(var i in $scope.persona_tramite) {
+              $scope.pacientes[i].fecha = moment($scope.pacientes[i].fecha,"YYYY-MM-DD").format("DD-MM-YYYY");
+              console.log("fecha "+ $scope.pacientes[i].fecha);
+            }
+          }        
+
+          if($scope.observados.length > 0){
+              $scope.nro_observados = $scope.observados[0].nro_observados;
+              $scope.nro_noobservados = $scope.observados[0].nro_noobservados;
+          }
+          if($scope.parasitos.length > 0){
+               $scope.show=true;
+          }
+          //
+          $scope.cont = 0;
+          for (var i = 0; i < $scope.parasitos.length; i++) {
+              $scope.cont = $scope.parasitos[i].cantidad + $scope.cont;
+          };
+
+          $scope.total_pac=0;
+          for (var i = 0; i < $scope.pacientes.length; i++) {
+            $scope.total_pac = $scope.pacientes[i].usacsia + $scope.total_pac;
+          }*/
+      });
+  }
+}])
 
 
 

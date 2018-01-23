@@ -5,10 +5,10 @@ angular.module("adminApp")
     menu:{
       titulo: 'Gestión de Fichas',
       items:[
-        {nombre:'Asignacion de Número de Ficha', enlace:'#/numero-ficha/crear', estilo:'active'}]
+        {nombre:'Asignación de Número de Ficha', enlace:'#/numero-ficha/crear', estilo:'active'}]
     },
     pagina:{
-      titulo:'Asignacion de Número de Ficha'
+      titulo:'Asignación de Número de Ficha'
     }
   }
   $scope.CurrentDate=new Date();

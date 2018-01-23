@@ -14,7 +14,7 @@ angular.module("adminApp")
         {nombre:'Busqueda de personas registradas', enlace:'#/tramite/crear', estilo:''}*/]
     },
     pagina:{
-      titulo:'Tramites de Certificado Sanitario'
+      titulo:'Trámites de Certificado Sanitario'
     }
   }
 var FunG = localStorage.getItem("Funcionario");
@@ -77,7 +77,7 @@ var FunG = localStorage.getItem("Funcionario");
         {nombre:'Busqueda de personas registradas', enlace:'#/tramite/crear', estilo:''}*/]
     },
     pagina:{
-      titulo:'Tramites de Certificado Sanitario'
+      titulo:'Trámites de Certificado Sanitario'
     }
   }
   var FunG = localStorage.getItem("Funcionario");
@@ -158,11 +158,11 @@ var FunG = localStorage.getItem("Funcionario");
   EmpTra.get({et_id:et_id},function(data){
     $scope.emp_tra=data.establecimiento;
 
-    if (Object.keys($scope.emp_tra.propietario).length==7) {
+    if ($scope.emp_tra.propietario.pro_tipo=='J') {
       $scope.propietario=$scope.emp_tra.propietario.pjur_razon_social;
     }
-    if (Object.keys($scope.emp_tra.propietario).length==22) {
-      $scope.propietario=$scope.emp_tra.propietario.per_nombres+' '+$scope.emp_tra.propietario.per_apellido_primero+' '+$scope.emp_tra.propietario.per_apellido_segundo;
+    if ($scope.emp_tra.propietario.pro_tipo=='N') {
+      $scope.propietario=$scope.emp_tra.propietario.per_nombres+' '+$scope.emp_tra.propietario.per_apellido_primero+' '+$scope.emp_tra.propietario.per_apellido_segundo;   
     }
     $scope.direccion=$scope.emp_tra.establecimiento_sol.ess_avenida_calle+' #'+$scope.emp_tra.establecimiento_sol.ess_numero+' '+$scope.emp_tra.establecimiento_sol.ess_stand
    
@@ -304,11 +304,11 @@ var FunG = localStorage.getItem("Funcionario");
 EmpTra.get({et_id:et_id},function(data){
     $scope.emp_tra=data.establecimiento;
 
-    if (Object.keys($scope.emp_tra.propietario).length==7) {
+    if ($scope.emp_tra.propietario.pro_tipo=='J') {
       $scope.propietario=$scope.emp_tra.propietario.pjur_razon_social;
     }
-    if (Object.keys($scope.emp_tra.propietario).length==22) {
-      $scope.propietario=$scope.emp_tra.propietario.per_nombres+' '+$scope.emp_tra.propietario.per_apellido_primero+' '+$scope.emp_tra.propietario.per_apellido_segundo;
+    if ($scope.emp_tra.propietario.pro_tipo=='N') {
+      $scope.propietario=$scope.emp_tra.propietario.per_nombres+' '+$scope.emp_tra.propietario.per_apellido_primero+' '+$scope.emp_tra.propietario.per_apellido_segundo;   
     }
     $scope.direccion=$scope.emp_tra.establecimiento_sol.ess_avenida_calle+' #'+$scope.emp_tra.establecimiento_sol.ess_numero+' '+$scope.emp_tra.establecimiento_sol.ess_stand
     Rubro.get({emp_id:$scope.emp_tra.empresa.emp_id},function(data){
@@ -422,11 +422,7 @@ $scope.checkedI=false;
    $scope.pregunta=false;
    VerFicha6.get({fi_id:fi_id}, function(data){
           $scope.suma=data.suma;
-          var s=$scope.suma.fi6_ubicacion+$scope.suma.fi6_exibicion_certificado+$scope.suma.fi6_capacidad_dependencias+
-          $scope.suma.fi6_piso+
-          $scope.suma.fi6_cielo_raso+$scope.suma.fi6_muralla+$scope.suma.fi6_puerta_ventana+$scope.suma.fi6_ventilacion+$scope.suma.fi6_iluminacion+$scope.suma.fi6_abastecimiento_agua+$scope.suma.fi6_purificacion_agua+$scope.suma.fi6_eliminacion_agua+$scope.suma.fi6_servicios_higienicos+$scope.suma.fi6_facilidad_aseo+$scope.suma.fi6_guardaropa+$scope.suma.fi6_eliminacion_basura+$scope.suma.fi6_aseo_dependencias+$scope.suma.fi6_maquinaria_artefactos+$scope.suma.fi6_fitros+$scope.suma.fi6_transfugadora+$scope.suma.fi6_lavado_envases+$scope.suma.fi6_desinfeccion_envases+$scope.suma.fi6_materia_prima+$scope.suma.fi6_eliminacion_productos+$scope.suma.fi6_proteccion_contaminacion+$scope.suma.fi6_deposito;
-          var w=parseInt(s,10);
-          console.log("aaaaaaaaaa__________________________",w);
+         
          
       })
       
@@ -566,13 +562,11 @@ $scope.checkedI=false;
       EmpTra.get({et_id:$scope.ficha_inspeccion.ficha_inspeccion.et_id},function(data){
           $scope.emp_tra=data.establecimiento;
 
-          if (Object.keys($scope.emp_tra.propietario).length==7) {
+          if ($scope.emp_tra.propietario.pro_tipo=='J') {
             $scope.propietario=$scope.emp_tra.propietario.pjur_razon_social;
-
           }
-          if (Object.keys($scope.emp_tra.propietario).length==22) {
-            $scope.propietario=$scope.emp_tra.propietario.per_nombres+' '+$scope.emp_tra.propietario.per_apellido_primero+' '+$scope.emp_tra.propietario.per_apellido_segundo;
-
+          if ($scope.emp_tra.propietario.pro_tipo=='N') {
+            $scope.propietario=$scope.emp_tra.propietario.per_nombres+' '+$scope.emp_tra.propietario.per_apellido_primero+' '+$scope.emp_tra.propietario.per_apellido_segundo;   
           }
           $scope.direccion=$scope.emp_tra.establecimiento_sol.ess_avenida_calle+' #'+$scope.emp_tra.establecimiento_sol.ess_numero+' '+$scope.emp_tra.establecimiento_sol.ess_stand
           Rubro.get({emp_id:$scope.emp_tra.empresa.emp_id},function(data){
@@ -842,12 +836,12 @@ var fc_id=$routeParams.fc_id;
 
   EmpTra.get({et_id:et_id},function(data){
     $scope.emp_tra=data.establecimiento;
-
-    if (Object.keys($scope.emp_tra.propietario).length==7) {
+  console.log("__aaaaaaa_", $scope.emp_tra);
+    if ($scope.emp_tra.propietario.pro_tipo=='J') {
       $scope.propietario=$scope.emp_tra.propietario.pjur_razon_social;
     }
-    if (Object.keys($scope.emp_tra.propietario).length==22) {
-      $scope.propietario=$scope.emp_tra.propietario.per_nombres+' '+$scope.emp_tra.propietario.per_apellido_primero+' '+$scope.emp_tra.propietario.per_apellido_segundo;
+    if ($scope.emp_tra.propietario.pro_tipo=='N') {
+      $scope.propietario=$scope.emp_tra.propietario.per_nombres+' '+$scope.emp_tra.propietario.per_apellido_primero+' '+$scope.emp_tra.propietario.per_apellido_segundo;   
     }
     $scope.direccion=$scope.emp_tra.establecimiento_sol.ess_avenida_calle+' #'+$scope.emp_tra.establecimiento_sol.ess_numero+' '+$scope.emp_tra.establecimiento_sol.ess_stand
    
@@ -866,8 +860,8 @@ var fc_id=$routeParams.fc_id;
 
 
 
-.controller('CrearFicha1Ctrl', ['$http','CONFIG','$scope','Ficha1', '$route', 'toastr','EmpTra', function ($http,CONFIG,$scope,Ficha1, $route, toastr,EmpTra){
-  $scope.ajustes = {
+.controller('CrearFicha1Ctrl', ['$http','CONFIG','$scope','Ficha1', '$route', 'toastr','EmpTra','$routeParams','$timeout','$location', function ($http,CONFIG,$scope,Ficha1, $route, toastr,EmpTra,$routeParams,$timeout,$location){
+/*  $scope.ajustes = {
     menu:{
       titulo: 'Gestión de Fichas de Inspección',
       items:[
@@ -877,19 +871,18 @@ var fc_id=$routeParams.fc_id;
       titulo:'Crear Ficha'
     }
   }
-var et_id=1;
+var et_id=1;*/
+ var et_id=$routeParams.et_id;
  $scope.CurrentDate = new Date();
  var mes=$scope.CurrentDate.getMonth()+1;
- //var mess=mes+1;
- 
  var fecha=$scope.CurrentDate.getDate()+"-"+mes+"-"+$scope.CurrentDate.getFullYear();
 
   var FunG = localStorage.getItem("Funcionario");
   var FunG = JSON.parse(FunG);
   var fun_id = FunG.fun_id;
-  console.log("__HORA__",fecha);
+/*  console.log("__HORA__",fecha);*/
 $scope.checked=true;
-
+/*
   $scope.propietario='';
 
   EmpTra.get({et_id:et_id},function(data){
@@ -903,7 +896,7 @@ $scope.checked=true;
     }
     $scope.direccion=$scope.emp_tra.establecimiento_sol.ess_avenida_calle+' #'+$scope.emp_tra.establecimiento_sol.ess_numero+' '+$scope.emp_tra.establecimiento_sol.ess_stand
    
-  });
+  });*/
 
   $scope.ficha1 = {
 
@@ -919,7 +912,6 @@ $scope.checked=true;
       fi_exibe_carne:false,
       fi_extinguidor:'',
       fi_botiquin:'',
-     /* fi_id:null,*/
       fi1_fecha_realizacion :fecha,
       fi1_observacion:'',
       fi1_estado :'',
@@ -963,27 +955,25 @@ $scope.checked=true;
         $scope.ficha1.fi_fecha_realizacion= fecha;
         $scope.ficha1.fi1_fecha_realizacion=fecha;
         $scope.ficha1.fi_observacion=$scope.ficha1.fi1_observacion;
+        console.log("_______GURDANDO_______",$scope.ficha1);
 
-
-     console.log("_______GURDANDO_______",$scope.ficha1);
-    
-      Ficha1.save($scope.ficha1).$promise.then(function(data)
-      {
-        console.log("------GUARDADO.---------",data);
-        if(data.msg)
+        Ficha1.save($scope.ficha1).$promise.then(function(data)
         {
-          console.log("data",data);
-          angular.copy({}, $scope.ficha1);
-          $scope.ajustes.pagina.success = "FICHA REGISTRADA CORRECTAMENTE";
-          toastr.success('FICHA REGISTRADA CORRECTAMENTE');
-          $route.reload();
-          /*$timeout(function() {
-            $location.path('/funcionarios');
-          },1000);*/
-        }
-      },function () {
-        toastr.error("Error inesperado");
-      })
+          console.log("------GUARDADO.---------",data);
+          if(data.msg)
+          {
+            console.log("data",data);
+            angular.copy({}, $scope.ficha1);
+            $scope.ajustes.pagina.success = "FICHA REGISTRADA CORRECTAMENTE";
+            toastr.success('FICHA REGISTRADA CORRECTAMENTE');
+            /*$route.reload();*/
+            $timeout(function() {
+              $location.path('/inspeccion/categoria/crear/'+data.ficha1_inspeccion.ficha_inspeccion.fi_id+'/'+et_id);
+            },10);
+          }
+        },function () {
+          toastr.error("Error inesperado");
+        })
     }
     $scope.reset = function(form) {
       $scope.ficha1 = {};
@@ -993,17 +983,14 @@ $scope.checked=true;
       }
     };
 
-
-
-
 /*  $scope.recarga=function(){
     $route.reload();
   }*/
 
 }])
 
-.controller('CrearFicha2Ctrl', ['$http','CONFIG','$scope','Ficha2', '$route', 'toastr','EmpTra', function ($http,CONFIG,$scope,Ficha2, $route, toastr,EmpTra){
-  $scope.ajustes = {
+.controller('CrearFicha2Ctrl', ['$http','CONFIG','$scope','Ficha2', '$route', 'toastr','EmpTra','$routeParams','$timeout','$location', function ($http,CONFIG,$scope,Ficha2, $route, toastr,EmpTra,$routeParams,$timeout,$location){
+/*  $scope.ajustes = {
     menu:{
       titulo: 'Gestión de Fichas de Inspección',
       items:[
@@ -1013,17 +1000,18 @@ $scope.checked=true;
       titulo:'Crear Ficha'
     }
   }
-  var et_id=$routeParams;
+  var et_id=$routeParams;*/
+   var et_id=$routeParams.et_id;
  $scope.CurrentDate = new Date();
- var mes=$scope.CurrentDate.getMonth()+1;
+var mes=$scope.CurrentDate.getMonth()+1;
  //var mess=mes+1;
  
  var fecha=$scope.CurrentDate.getDate()+"-"+mes+"-"+$scope.CurrentDate.getFullYear();
 
-  var FunG = localStorage.getItem("Funcionario");
+ var FunG = localStorage.getItem("Funcionario");
   var FunG = JSON.parse(FunG);
   var fun_id = FunG.fun_id;
-  console.log("__HORA__",fecha);
+ /*   console.log("__HORA__",fecha);
 
 
   $scope.propietario='';
@@ -1039,7 +1027,7 @@ $scope.checked=true;
     }
     $scope.direccion=$scope.emp_tra.establecimiento_sol.ess_avenida_calle+' #'+$scope.emp_tra.establecimiento_sol.ess_numero+' '+$scope.emp_tra.establecimiento_sol.ess_stand
    
-  });
+  });*/
 
   $scope.ficha2 = {
 
@@ -1116,8 +1104,9 @@ $scope.checked=true;
     $scope.patternCadena = /^[a-zA-ZñÑáéíóúÁÉÍÓÚ ]*$/;
     $scope.patternCadenaNumero = /^[a-zA-ZñÑáéíóúÁÉÍÓÚ 0-9.]*$/;
     
-    $scope.submit = function(b)
+    $scope.submitf2 = function(b)
     {
+      console.log("__________entor__________");
         $scope.ficha2.fun_id=fun_id;
         $scope.ficha2.et_id=et_id;
         $scope.ficha2.fi_estado='INSPECCIONADO';
@@ -1147,10 +1136,9 @@ $scope.checked=true;
           angular.copy({}, $scope.ficha2);
           $scope.ajustes.pagina.success = "FICHA REGISTRADA CORRECTAMENTE";
           toastr.success('FICHA REGISTRADA CORRECTAMENTE');
-          $route.reload();
-          /*$timeout(function() {
-            $location.path('/funcionarios');
-          },1000);*/
+         $timeout(function() {
+              $location.path('/inspeccion/categoria/crear/'+data.ficha2_inspeccion.ficha_inspeccion.fi_id+'/'+et_id);
+            },10);
         }
       },function () {
         toastr.error("Error inesperado");
@@ -1163,7 +1151,7 @@ $scope.checked=true;
         form.$setUntouched();
       }
     };
-
+//1 true
 
 
 
@@ -1484,244 +1472,6 @@ $scope.checked=true;
     };
 
 }])
-
-
-// VERONIC   -- FICHAS SAUNA Y HORNO
-
-
-.controller('CrearFichaHornoCtrl', ['$http','CONFIG','$scope','Ficha4', '$route', 'toastr','EmpTra','Funcionarios','$routeParams','$timeout','$location',
-function ($http,CONFIG,$scope,Ficha4, $route, toastr,EmpTra,Funcionarios,$routeParams,$timeout,$location){
- 
-   var et_id=$routeParams.et_id;
-  $scope.CurrentDate = new Date();
-  var mes=$scope.CurrentDate.getMonth()+1;
-  //var mess=mes+1;
-  var fecha=$scope.CurrentDate.getDate()+"-"+mes+"-"+$scope.CurrentDate.getFullYear();
-
-  var FunG = localStorage.getItem("Funcionario");
-  var FunG = JSON.parse(FunG);
-  var fun_id = FunG.fun_id;
-  console.log("__HORA__",fecha);
-
-  $scope.ficha4 = {
-
-        et_id :null,
-        fun_id :null,
-        cat_id :null,
-        
-        fi_observacion:'',
-        fi_estado:'',
-        fi_foco_insalubridad:false,
-        fi_exibe_certificado:false,
-        fi_exibe_carne:false,
-        fi_extinguidor:'',
-        fi_botiquin:'',
-        
-        fi4_ubicacion :null,
-        fi4_certificado :null,
-        fi4_dependencias :null,
-        fi4_pisos :null,
-        fi4_cielo :null,
-        fi4_murallas :null,
-        fi4_muralla_altura:null,
-        fi4_muralla_puntaje:null,
-        fi4_puerta_ventana :null,
-        fi4_iluminacion :null,
-        fi4_ventilacion :null,
-        fi4_abastecimiento :null,
-        fi4_servicio_higienico :null,
-        fi4_lavamanos :null,
-        fi4_jabocillo :null,
-        fi4_ducha :null,
-        fi4_desagues :null,
-        fi4_desgrasadores :null,
-        fi4_basurero :null,
-        fi4_insectos :null,
-        fi4_roedores :null,
-        fi4_artezas :null,
-        fi4_enfriadores :null,
-        fi4_clavijeras :null,
-        fi4_mesones :null,
-        fi4_maquinarias :null,
-        fi4_lavado_envases :null,
-        fi4_depositos :null,
-        fi4_heridas :null,
-        fi4_dinero :null,
-        fi4_botiquin_extinguidor :null,
-        fi4__recomendaciones:"",
-        fi4_estado :"",
-        fi4_total :null
-    };
-
-    $scope.patternCadena = /^[a-zA-ZñÑáéíóúÁÉÍÓÚ ]*$/;
-    $scope.patternCadenaNumero = /^[a-zA-ZñÑáéíóúÁÉÍÓÚ 0-9.]*$/;
-    
-    $scope.submit = function()
-    {
-        $scope.ficha4.fun_id=fun_id;
-        $scope.ficha4.et_id=et_id;
-        $scope.ficha4.fi_estado='INSPECCIONADO';
-        
-        
-        $scope.ficha4.fi_fecha_realizacion= fecha;
-        $scope.ficha4.fi4_fecha_realizacion=fecha;        
-    
-        console.log('Lo que va a guarfar', $scope.ficha4);
-      Ficha4.save($scope.ficha4).$promise.then(function(data)
-      {
-        console.log("------GUARDADO.---------",data);
-        if(data.msg)
-        {
-          console.log("data",data);
-          $scope.ajustes.pagina.success = "FICHA REGISTRADA CORRECTAMENTE";
-          toastr.success('FICHA REGISTRADA CORRECTAMENTE');
-           $timeout(function() {
-            $location.path('/inspeccion/categoria/crear/'+data.ficha4_inspeccion.ficha_inspeccion.fi_id+'/'+et_id);
-          },10);
-        }
-      },function () {
-        toastr.error("Error inesperado");
-      })
-    }
-    $scope.reset = function(form) {
-      $scope.ficha2 = {};
-      if (form) {
-        form.$setPristine();
-        form.$setUntouched();
-      }
-    };
-
-}])
-
-
-
-
-.controller('CrearFichaSaunaCtrl', ['$http','CONFIG','$scope','Ficha6', '$route', 'toastr','EmpTra','Funcionarios','$routeParams','$timeout','$location', function ($http,CONFIG,$scope,Ficha6, $route, toastr,EmpTra,Funcionarios,$routeParams,$timeout,$location){
-  $scope.ajustes = {
-    menu:{
-      titulo: 'Gestión de Fichas de Inspección',
-      items:[
-        {nombre:'Crear Ficha', enlace:'#/numero-ficha/crear', estilo:'active'}]
-    },
-    pagina:{
-      titulo:'Formulario Inspección'
-    }
-  }
-  var et_id=$routeParams.et_id;
-  $scope.CurrentDate = new Date();
-  var mes=$scope.CurrentDate.getMonth()+1;
-  //var mess=mes+1;
-  var fecha=$scope.CurrentDate.getDate()+"-"+mes+"-"+$scope.CurrentDate.getFullYear();
-
-  var FunG = localStorage.getItem("Funcionario");
-  var FunG = JSON.parse(FunG);
-  var fun_id = FunG.fun_id;
-  console.log("__HORA__",fecha);
-
-
-  $scope.ficha6 = {
-
-        et_id :null,
-        fun_id :null,
-        cat_id :null,
-        fi_fecha_asignacion:fecha,
-        fi_fecha_realizacion:fecha,
-        fi_observacion:'',
-        fi_estado:'',
-        fi_foco_insalubridad:false,
-        fi_exibe_certificado:false,
-        fi_exibe_carne:false,
-        fi_extinguidor:'',
-        fi_botiquin:'',
-        
-        fi6_ubicacion:null ,
-        fi6_exibicion_certificado:null ,
-        fi6_capacidad_dependencias:null ,
-        fi6_piso:null ,
-        fi6_cielo_raso:null ,
-        fi6_muralla:null ,
-        fi6_puerta_ventana:null ,
-        fi6_ventilacion:null ,
-        fi6_iluminacion:null ,
-        fi6_abastecimiento_agua:null ,
-        fi6_purificacion_agua:null ,
-        fi6_eliminacion_agua:null ,
-        fi6_servicios_higienicos:null ,
-        fi6_facilidad_aseo:null ,
-        fi6_guardaropa:null ,
-        fi6_eliminacion_basura:null ,
-        fi6_aseo_dependencias:null ,
-        fi6_maquinaria_artefactos:null ,
-        fi6_fitros:null ,
-        fi6_transfugadora:null ,
-        fi6_lavado_envases:null ,
-        fi6_desinfeccion_envases:null ,
-        fi6_materia_prima:null ,
-        fi6_eliminacion_productos:null ,
-        fi6_proteccion_contaminacion:null ,
-        fi6_deposito:null ,
-        fi6_manipulador_salud:null ,
-        fi6_manipulador_aseo:null ,
-        fi6_manipulador_habitos:null ,
-        fi6_manipulador_carne:null ,
-        fi6_overoles:null ,
-        fi6_botiquin:null ,
-        fi6_extinguidor:null ,
-        fi6_control_vectores:'' ,
-        fi6_observaciones:'',
-        fi6_hombres:0,
-        fi6_mujeres:0
-    };
-
-    $scope.patternCadena = /^[a-zA-ZñÑáéíóúÁÉÍÓÚ ]*$/;
-    $scope.patternCadenaNumero = /^[a-zA-ZñÑáéíóúÁÉÍÓÚ 0-9.]*$/;
-    
-    $scope.submit = function(b)
-    {
-        $scope.ficha6.fun_id=fun_id;
-        $scope.ficha6.et_id=et_id;
-        $scope.ficha6.fi_estado='INSPECCIONADO';
-
-        /* if ($scope.ficha2.fi2_exibe_carnes!=null) {
-          $scope.ficha2.fi_exibe_carne=true;
-         }
-         if ($scope.ficha2.fi2_exibe_certificado!=null) {
-          $scope.ficha2.fi_exibe_certificado=true;
-         } */
-        
-        $scope.ficha6.fi_foco_insalubridad=$scope.ficha6.fi6_foco_insalubridad;
-        $scope.ficha6.fi_fecha_realizacion= fecha;
-        $scope.ficha6.fi6_fecha_realizacion=fecha;
-        $scope.ficha6.fi_observacion=$scope.ficha6.fi6_observacion;
-    
-      Ficha6.save($scope.ficha6).$promise.then(function(data)
-      {
-        console.log("------GUARDADO.---------",data);
-        if(data.msg)
-        {
-          console.log("data",data);
-          angular.copy({}, $scope.ficha1);
-          $scope.ajustes.pagina.success = "FICHA REGISTRADA CORRECTAMENTE";
-          toastr.success('FICHA REGISTRADA CORRECTAMENTE');
-          /*$route.reload();*/
-           $timeout(function() {
-            $location.path('/inspeccion/categoria/crear/'+data.ficha6_inspeccion.ficha_inspeccion.fi_id+'/'+et_id);
-          },10);
-        }
-      },function () {
-        toastr.error("Error inesperado");
-      })
-    }
-    $scope.reset = function(form) {
-      $scope.ficha2 = {};
-      if (form) {
-        form.$setPristine();
-        form.$setUntouched();
-      }
-    };
-
-}])
-
 
 /*
 .controller('apiAppCtrl_estadoCar', ['$http', '$scope', 'CONFIG', buscaEstadoCarCtrl])

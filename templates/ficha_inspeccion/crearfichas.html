@@ -70,15 +70,13 @@
 						    
                     </div> 
                     <br>
-                    <h4 class="text-center text-primary">II. FICHAS DE INSPECCIÓN</h4>
-                    <hr class="bg-red">  
 			<div class="row">
 				<div class="col-md-12">
 					<tabs>
 					<!-- .............. FICHA 1 ................. -->
 						<pane title="INFORME NARRATIVO 1">
 							<br>
-							<div class="well well-sm" style="background-color:#fff;">
+							<div class="well well-sm" ng-controller="CrearFicha1Ctrl" style="background-color:#fff;">
 								<div class="row">
 									<div class="col-md-12">
 										<form name="formficha1" novalidate ng-include="'forms/fichas_inspeccion/ficha1.html'">
@@ -90,10 +88,25 @@
 								</div>	
 							</div>
 						</pane>
+						<!-- .............. FICHA 2 ................. -->
+						<pane title="INFORME NARRATIVO 2">
+							<br>
+							<div class="well well-sm" ng-controller="CrearFicha2Ctrl" style="background-color:#fff;">
+								<div class="row">
+									<div class="col-md-12">
+										<form name="formficha2" novalidate ng-include="'forms/fichas_inspeccion/ficha2.html'">
+											
+ 
+
+										</form>
+									</div>
+								</div>	
+							</div>
+						</pane>
 					<!-- .............. FICHA 3 ................. -->
 						<pane title="FORMULARIO DE INSPECCIÓN">
 							<br>
-							<div class="well well-sm" style="background-color:#fff;">
+							<div class="well well-sm" ng-controller="CrearFicha3Ctrl" style="background-color:#fff;">
 								<div class="row" >
 									<div class="col-md-12">
 										<form name="formficha3" novalidate ng-include="'forms/fichas_inspeccion/ficha3.html'">
@@ -120,37 +133,6 @@
 								</div>	
 							</div>
 						</pane>
-						<!-- .............. FICHA 5 VERO .. RENOMBRAR ................. -->
-						<!-- <pane title="CONTROL DE SAUNAS">
-							<br>
-							<div class="well well-sm" ng-controller="CrearFichaHornoCtrl" style="background-color:#fff;">
-								<div class="row">
-									<div class="col-md-12">
-										<form name="formfichaSauna" novalidate ng-include="'forms/fichas_inspeccion/fichaSauna.html'">
-											
- 
-
-										</form>
-									</div>
-								</div>	
-							</div>
-						</pane> -->
-						<!-- .............. FICHA 4 VERO .. RENOMBRAR ................. -->
-						<pane title="CLASIFICACIÓN PARA HORNOS DE PANIFICACIÓN">
-							<br>
-							<div class="well well-sm" ng-controller="CrearFichaSaunaCtrl" style="background-color:#fff;">
-								<div class="row">
-									<div class="col-md-12">
-										<form name="formfichaHorno" novalidate ng-include="'forms/fichas_inspeccion/fichaHorno.html'">
-											
- 
-
-										</form>
-									</div>
-								</div>	
-							</div>
-						</pane>
-						<!--  -->
 					</tabs>
 				</div>
 			</div>

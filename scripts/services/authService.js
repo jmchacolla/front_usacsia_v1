@@ -70,7 +70,11 @@ angular.module('authService', [])
 						//console.log("GUARDANDO DATOS DE PERSONA EN LOCALSTORAGE",persona)
 						persona = JSON.stringify(persona);
 						localStorage.setItem("DatosPer", persona);
-					});
+					},function () {
+      				  toastr.error("ERROR INESPERADO, POR FAVOR ACTUALICE LA PÁGINA");
+				      $scope.loading = false;
+				      $scope.msg = false;
+				    });
 	
 					} else {
 						EstabSols.get({ess_id:per_id}, function(data){
@@ -81,11 +85,7 @@ angular.module('authService', [])
 						console.log("sessss___",persona);
 					});
 					}
-					
-
-
-
-//para el rol
+					//para el rol
 					CONFIG.ROL_CURRENT_USER = parseInt(response.data.user.rol_id, 10);//este es el usuario que esta logueado
 					/*console.log("ROL",CONFIG.ROL_CURRENT_USER );*/
 					//DEBERIA GUARDARSE EL ROL NOMBRE AQUI, MIENTRAS ESTOY PONIENDO USU_NICK
@@ -110,17 +110,18 @@ angular.module('authService', [])
 					          /*console.log("GUARDANDO DATOS DE FUNCIONARIO EN LOCALSTORAGE",funcionario)*/
 							funcionario = JSON.stringify(funcionario);
 							localStorage.setItem("Funcionario", funcionario);
-					        
-
-						}
-					});
-
-
+					    }
+					},function () {
+				      
+				      toastr.error("ERROR INESPERADO, POR FAVOR ACTUALICE LA PÁGINA");
+				      $scope.loading = false;
+				      $scope.msg = false;
+				    });
 					}//fin del if
 					
 					$timeout(function() {
 		              $location.path('/');
-		          	},1500);
+		          	},2000);
 
 				},
 				function(){
@@ -129,7 +130,6 @@ angular.module('authService', [])
 				}
 			);
 		};
-		
 		return {
 			loginApi: function(loginForm){
 				login(loginForm);
@@ -142,7 +142,7 @@ angular.module('authService', [])
 				localStorage.removeItem("ROL_CURRENT_USER_NAME");
 				localStorage.removeItem("DatosEstablecimiento");
 				localStorage.removeItem("Funcionario");
-			//	localStorage.removeItem("PacId");
+			    //localStorage.removeItem("PacId");
 				localStorage.removeItem("aux_es_id");
 				localStorage.removeItem("DOS_ESTAB");
 				

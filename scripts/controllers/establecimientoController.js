@@ -174,7 +174,6 @@ angular.module("adminApp")
           },0);
         }  
       })
-
     }
     function toTime(timeString){
       var timeTokens = timeString.split(':');

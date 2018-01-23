@@ -377,11 +377,12 @@ angular.module("adminApp")
       $scope.establecimiento=argument.establecimiento;
       console.log('$scope.establecimiento+++++++',$scope.establecimiento);
       $scope.establecimiento.empresa_tramite.et_fecha_ini=moment($scope.establecimiento.empresa_tramite.et_fecha_ini, 'YYYY-MM-DD').format('DD-MM-YYYY');
-      if (Object.keys($scope.establecimiento.propietario).length==7) {
+
+      if ($scope.establecimiento.propietario.pro_tipo=='J') {
         $scope.propietario=$scope.establecimiento.propietario.pjur_razon_social;
 
       }
-      if (Object.keys($scope.establecimiento.propietario).length==22) {
+      if ($scope.establecimiento.propietario.pro_tipo=='N') {
         $scope.propietario=$scope.establecimiento.propietario.per_nombres+' '+$scope.establecimiento.propietario.per_apellido_primero+' '+$scope.establecimiento.propietario.per_apellido_segundo;
 
       }
@@ -409,10 +410,11 @@ angular.module("adminApp")
       $scope.establecimiento=argument.establecimiento;
       console.log('$scope.establecimiento+++++++',$scope.establecimiento);
       $scope.establecimiento.empresa_tramite.et_fecha_ini=moment($scope.establecimiento.empresa_tramite.et_fecha_ini, 'YYYY-MM-DD').format('DD-MM-YYYY');
-      if (Object.keys($scope.establecimiento.propietario).length==7) {
+     
+      if ($scope.establecimiento.propietario.pro_tipo=='J') {
         $scope.propietario=$scope.establecimiento.propietario.pjur_razon_social;
       }
-      if (Object.keys($scope.establecimiento.propietario).length==22) {
+      if ($scope.establecimiento.propietario.pro_tipo=='N') {
         $scope.propietario=$scope.establecimiento.propietario.per_nombres+' '+$scope.establecimiento.propietario.per_apellido_primero+' '+$scope.establecimiento.propietario.per_apellido_segundo;
       }
 

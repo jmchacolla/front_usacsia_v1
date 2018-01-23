@@ -1,4 +1,4 @@
-'use strict';
+﻿'use strict';
 angular.module("adminApp")
 //30-11-2017   ***********************    WENDY   *****************************************
 //*************************P E R S O N A S***************************
@@ -869,3 +869,9 @@ angular.module("adminApp")
   })
 }])
 
+/*w---------------- aprobados del dia */
+.factory('Aprobados', ['$resource', 'CONFIG', function ($resource, CONFIG) {
+  return $resource(CONFIG.DOMINIO_SERVICIOS+"/persona_tramite_aprobados", {},{ 
+    update:{}
+  })
+}])

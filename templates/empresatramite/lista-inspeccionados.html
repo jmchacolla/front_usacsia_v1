@@ -19,7 +19,7 @@
         <div class="well well-sm">
            <strong class="pull-left lead">Herramientas: &nbsp;</strong>
             <form class="form-inline pull-left">
-            <input type="text" class="form-control" placeholder="Filtrar por nombre departamento" ng-model="dep_nombre">
+            <input type="text" class="form-control" placeholder="Filtrar por nombre  de empresa" ng-model="dep_nombre">
             </form>
         <div class="clearfix"></div>
             
@@ -32,8 +32,8 @@
         <!-- INICIO -->
         <div class="table-responsive">
             <div class="text-center" ng-show="loading"><br><img ng-src="./images/image.gif" class="loader-img"></div>
-        <div ng-show="!tabla && tabla2">No se encontraron resultados</div>
-        <div class="table-responsive" ng-show="tabla">
+        <div ng-show="!loading && !msg">No se encontraron resultados</div>
+        <div class="table-responsive" ng-show="!loading && msg">
             <table   class="table table-hovertable table-bordered table-striped table-hover" >
                 <thead>
                     
@@ -58,7 +58,7 @@
                      <span ng-show="sortType == 'dep_nombre' && sortReverse" class="glyphicon glyphicon-sort-by-alphabet-alt"></span>
                         </a>
                     </th>
-                    <th class="text-primary" ng-show="user.rol_id==1 || user.rol_id == '16' || user.rol_id == '14'">Inspecciones</th>
+                    <th class="text-primary" ng-show="user.rol_id==1 || user.rol_id == '16' || user.rol_id == '14'">Ver Inspección</th>
                   <!--   <th class="text-primary" ng-show="user.rol_id==1 || user.rol_id == '14'">Ver trámite</th> -->
                     <th class="text-primary" ng-show="user.rol_id==1 || user.rol_id==15  ">Ver Orden</th>
                    
@@ -71,7 +71,7 @@
                     <td>{{establecimiento.te_fecha}}</td>
                     <td class="text-center" ng-show="user.rol_id==1 || user.rol_id == '16' || user.rol_id == '14'">
               
-                    <a href="#/inspecciones/{{establecimiento.et_id}}" class="btn btn-success" title="VER INSPECCIONES" ng-show="establecimiento.pro_tipo!='J'"><span class="glyphicon glyphicon-list"></span></a>
+                    <a href="#/inspecciones/{{establecimiento.et_id}}" class="btn btn-success" title="VER INSPECCIONES" ng-show="establecimiento.pro_tipo!='J'"><span class="glyphicon glyphicon-file"></span></a>
 
                      <a href="#/inspeccionesJ/{{establecimiento.et_id}}" class="btn btn-success" title="VER INSPECCIONES" ng-show="establecimiento.pro_tipo!='N'"><span class="glyphicon glyphicon-file"></span></a>
                    </td >
