@@ -1,0 +1,151 @@
+<!-- TOP-MENU inicio -->
+<div ng-include="'./templates/menu_inicio.html'"></div>
+<!-- CONTEXT-MENU  -->
+<div ng-include="'./templates/menu_lateral.html'"></div>
+<!-- CONTENIDO MODULO inicio -->
+<div class="col-md-8 col-sm-8">
+  <div class="row">
+    <div class="col-md-12">
+      <h2 class="text-primary">
+        <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+        {{ajustes.pagina.titulo}}
+      </h2>
+      <hr>
+    </div>
+  </div>
+  <div class="col-md-12">
+    <!-- BUSCAPJURIDICACTRL-->       
+        <p>
+          <h4 class="text-primary">Instrucciones</h4>
+          Para la registrar a una persona como miembro de su empresa:
+          <ul>
+            <li>Debe ingresar en el buscador; el C.I. de la persona que desea registrar.</li>
+            <li>Luego pulse en <b>Buscar</b></li>
+          </ul>
+        </p>      
+        <div>
+          <div class="well well-sm">
+           <div class="row">
+            <form name="perForm" novalidate>
+             <div class="col-md-6 col-md-offset-2">
+                <input name="perci" class="form-control input-lg" ng-change="cambioper_ci()" ng-model="per_ci" type="text" placeholder="Escriba el C.I." required autofocus>
+             </div>
+             <div class="col-md-4">
+                <button class="btn btn-primary btn-lg" ng-click="verificarper(per_ci)"><span class="glyphicon glyphicon-search"></span><strong> BUSCAR</strong></button>
+             </div>
+            </form>
+           </div>  
+         </div>
+        </div>
+        <div class="table-responsive">
+        <table class="table table-bordered  table-hover" ng-show="estado_persona!=null && per_ci!=null || sin_tramite">
+            <tr class="warning">
+                    <th class="text-primary">C.I.</th>
+                    <th class="text-primary">Empleado</th>
+                    <th class="text-primary">Trámite Carnet Sanitario</th>
+                    <th class="text-primary" ng-show="!en_establecimiento" >Opciones</th>
+                    <th class="text-primary" ng-show="en_establecimiento" >Estado</th>
+                </tr>
+            <tbody>
+                <tr class="warning">
+                    <td>{{estado_persona.per_ci+" "+estado_persona.per_ci_expedido}}</td>
+                    <td>{{estado_persona.per_nombres+" "+estado_persona.per_apellido_primero+" "+estado_persona.per_apellido_segundo}}</td>
+                    <td ng-show="sin_tramite" >SIN TRÁMITE</td>
+                    <td ng-show="!sin_tramite" >{{estado_persona.pt_estado_tramite}}</td>
+                    <td ng-show="en_establecimiento" >{{mensajee}}</td>
+                    <td class="text-primary" ng-show="!en_establecimiento" >
+                        
+                            
+                        <center>
+                            <button class="btn btn-warning" data-toggle="modal" ng-click="get_perid(estado_persona.per_id,estado_persona.per_nombres,estado_persona.per_apellido_primero,estado_persona.per_apellido_segundo)" data-target="#miCuadroModal2" title="Registrar como funcionario"><span class="glyphicon glyphicon-plus"></span> Agregar
+                            </button>
+                        </center>
+                        
+                        <div id="miCuadroModal2" class="modal fade" role="dialog" tabindex="-1">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                  <div class="modal-header bg-red">
+                                    <button type="button" class="close" data-dismiss="modal">x</button>
+                                    <h4 class="modal-title fg-white">Registrar funcionario</h4>
+                                    </div>
+                                    <div class="modal-body lead text-center">Registrar como funcionario a:<br>
+                                        <div class="well well-sm">
+                                        <strong>{{nombres}}</strong>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <label>Cargo</label>
+                                            <input class="form-control" ng-model="cargo" placeholder="Ej. Cocinero"/>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">
+                                        <span class="glyphicon glyphicon-remove"></span> NO</button>
+                                        <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="submit(cargo)">
+                                        <span class="glyphicon glyphicon-ok"></span> SI</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+        <h4 class="alert alert-{{class}} text-center" ng-show="mensajee!=null && per_ci!=null && !en_establecimiento && !sin_tramite">
+            {{mensajee}}<br/>
+            <a ng-show="sin_registro" href="#/servicios_ciudadanos/preregistro" target="_blank">Realizar Registro</a>
+        </h4>
+        <hr>
+        <div class="text-center" ng-show="loading" ><br><img ng-src="./images/image.gif" class="loader-img"></div>
+        <div ng-show="!loading && !msg">No se encontraron resultados</div>
+        <div class="table-responsive">
+            <table class="table table-bordered  table-hover" ng-show="!loading && msg" id="tableCON">
+                <thead>
+                    <th class="text-primary">Nº</th>
+                    <th class="text-primary">C.I.</th>
+                    <th class="text-primary">Empleado</th>
+                    <th class="text-primary">Fecha de inicio</th>
+                    <th class="text-primary">Cargo</th>
+                    <th class="text-primary">Opciones</th>
+                </thead>
+                <tbody ng-repeat="pe in personas_x_establecimiento | orderBy:sortType:sortReverse | filter:searchText" >
+                    <tr>
+                        <td>{{$index + 1}}</td>
+                        <td>{{pe.per_ci+" "+pe.per_ci_expedido}}</td>
+                        <td>{{pe.per_nombres+"&nbsp;"+pe.per_apellido_primero+" "+pe.per_apellido_segundo}}</td>
+                        <td>{{pe.ep_inicio_trabajo}}</td>
+                        <td>{{pe.ep_cargo}}</td>
+                        <td >
+                            <button class="btn btn-danger" data-toggle="modal" ng-click="get_perid2(pe.ep_id,pe.per_nombres,pe.per_apellido_primero,pe.per_apellido_segundo)" data-target="#modal" title="Retirar funcionario"><span class="glyphicon glyphicon-remove"></span></button>
+                            <div id="modal" class="modal fade" role="dialog" tabindex="-1">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                      <div class="modal-header bg-red">
+                                        <button type="button" class="close" data-dismiss="modal">x</button>
+                                        <h4 class="modal-title fg-white">Retirar funcionario</h4>
+                                        </div>
+                                        <div class="modal-body lead text-center">Esta seguro de retirar a este funcionario?<br>
+                                            <div class="well well-sm">
+                                                <strong>{{nombres}}</strong>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="remove()">
+                                            <span class="glyphicon glyphicon-ok"></span>SI</button>
+                                            <button type="button" class="btn btn-danger" data-dismiss="modal">
+                                            <span class="glyphicon glyphicon-remove"></span>NO</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+

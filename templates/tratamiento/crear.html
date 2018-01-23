@@ -1,0 +1,64 @@
+<!--TOP-MENU inicio -->
+<div ng-include="'./templates/menu_inicio.html'"></div>
+<!-- CONTEXT-MENU  -->
+	<div ng-include="'./templates/menu_lateral.html'">
+	</div>
+<!-- CONTENIDO MODULO inicio -->
+<div class="col-md-8 col-sm-8">
+    <div class="row">
+      <div class="col-md-12">
+        <h2 class="text-primary">
+          <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+          {{ajustes.pagina.titulo}}
+        </h2>
+        <hr class="bg-green">
+      </div>
+    </div>
+    
+    <label class="control-label">Los campos marcados con asterisco<strong class="fg_red"> *</strong> son obligatorios</label>
+    <!--FIN herramientas para la vista-->
+    <div class="row">
+      	<div class="col-md-12">
+  		<!-- AQUI VAN LAS TABLAS O FORMULARIOS incrustados -->
+  		<!-- INICIO -->
+		<form name="userForm" novalidate>
+	       	<!-- ver habilitado por false -->
+	       	<div>
+		       	<div class="well well-sm" style="background-color:#fff;" >
+		            <div class="panel">
+		              	<div class="text-center text-primary">I. DATOS DEL TRATAMIENTO</div>
+		              	<hr class="bg-green">
+		              	<div class="panel-body">
+		              		<div class="row">
+				                <div class="col-md-4">
+				                  	<label class="control-label ">Nombre:</label>
+				                    <input type="" class="form-control" id="" ng-model="tratamiento.trat_nombre">
+				                </div>
+				                <div class="col-md-4">
+					               	<label class="control-label ">Dosis:</label>
+					               	<input type="" class="form-control" id="" ng-model="tratamiento.trat_dosis">
+				               	</div>
+				               	<div class="form-group col-md-4">
+				                  	<label for="sevref" class="control-label ">Descripción:<strong class="fg_red"> *</strong></label>
+				                    <input  type="" class="form-control" id="" ng-model="tratamiento.trat_descripcion">
+				                </div>
+			                </div>
+		             	</div>
+		            </div>
+		            <center>
+		                  <button type="submit" data-toggle="modal"  class="btn btn-default"  ><span class="glyphicon glyphicon-remove"></span> CANCELAR</button>
+                        <button type="submit" class="btn btn-primary" ng-disabled="userForm.$invalid" ng-click="save($parent.tratamiento)"><span class="glyphicon glyphicon-save"></span>GUARDAR</button>
+		            </center>
+		       	</div>
+		    </div>
+   		</form>
+
+
+
+   		<p ng-show="ajustes.pagina.success" class="alert alert-success">{{ajustes.pagina.success}}</p>
+		<!-- FIN -->
+		<!-- AQUI VAN LOAS TABLAS O FORMULARIOS incrustados -->
+		</div>
+	</div>
+</div>
+<!-- CONTENIDO MODULO fin

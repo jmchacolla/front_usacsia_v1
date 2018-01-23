@@ -1,0 +1,73 @@
+
+<!-- TOP-MENU inicio -->
+<div ng-include="'./templates/menu_inicio.html'"></div>
+<!-- CONTEXT-MENU  -->
+<div ng-include="'./templates/menu_lateral.html'"></div>
+<!-- CONTENIDO MODULO inicio -->
+    <div class="col-md-8 col-sm-8">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="text-primary">
+                    <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
+                    {{ajustes.pagina.titulo}} 
+                </h2>
+                <hr>
+            </div>
+        </div>
+        <!--HERRAMIENTAS PARA LA VISTA-->
+        <div class="well well-sm" style="background-color:#fff;" class="animated">
+        <div class="row">
+            <div class="col-md-12">
+            <!-- AQUI VAN LAS TABLAS O FORMULARIOS incrustados -->
+            <!-- INICIO -->
+           <div class="row">
+                <div class="col-md-6">
+                  <div class="required-field-block">
+                    <label for="nombre" class="control-label">Nombre: <strong class="fg_red"></strong></label>
+                    <br> 
+                    {{enfermedad.enfe_nombre}}
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="required-field-block">
+                    <label for="nombre" class="control-label">Causas de la enfermedad: <strong class="fg_red"></strong></label>
+                    <br>
+                    {{enfermedad.enfe_causas}}
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="required-field-block">
+                    <label for="nombre" class="control-label">Consecuencias de la enfermedad: <strong class="fg_red"></strong></label>
+                    <br>
+                    {{enfermedad.enfe_consecuencia}}
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="required-field-block">
+                    <label for="nombre" class="control-label">Prevención de la enfermedad: <strong class="fg_red"></strong></label>
+                    <br>
+                    {{enfermedad.enfe_prevencion}}
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="required-field-block">
+                    <label for="nombre" class="control-label">Descripción de la enfermedad: <strong class="fg_red"></strong></label>
+                      <br>
+                      {{enfermedad.enfe_descripcion}}
+                  </div>
+                </div>
+              </div>
+            <!-- FIN -->
+            <!-- AQUI VAN LOAS TABLAS O FORMULARIOS incrustados -->
+            </div>
+        </div>
+    </div>
+    </div>
+        <!--FIN herramientas para la vista-->
+
+       
+<!-- CONTENIDO MODULO fin -->

@@ -1,0 +1,94 @@
+<!-- TOP-MENU inicio -->
+<div ng-include="'./templates/menu_inicio.html'"></div>
+<!-- CONTEXT-MENU  -->
+<div ng-include="'./templates/menu_lateral.html'"></div>
+<!-- CONTENIDO MODULO inicio -->
+<div class="col-md-8 col-sm-8">
+  <div class="row">
+    <div class="col-md-12">
+      <h2 class="text-primary">
+        <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+        {{ajustes.pagina.titulo}}
+      </h2>
+      <hr>
+    </div>
+  </div>
+  <div class="col-md-12">
+  <!-- inicio contenido -->
+  <div ng-controller="BuscaPersonaCtrl">
+        <p>
+          <h4 class="text-primary">Instrucciones</h4>
+          Para el registro del pago de tramites:</b>
+          <ul>
+            <li>Debe ingresar el n&uacute;mero de carnet en el respectivo buscador</li>
+            <li>Luego pulse en <b>Buscar</b></li>
+            <li>En el conjunto de resultados, pulse en <b>Registrar Pago</b></li>
+          </ul>
+        </p>
+        <!-- Inicio Controller apiAppCtrl -->
+       <div class="well well-sm">
+         <div class="row" >
+          <form name="busqForm" novalidate>
+            <div class="col-md-6 col-md-offset-2">
+                <input name="perci" class="form-control input-lg" ng-model="per_ci" type="text" placeholder="Escriba el Nro. de C.I." required autofocus>
+            </div>
+             <div class="col-md-4">
+             <button  class="btn btn-primary btn-lg" ng-disabled="busqForm.$invalid" ng-click="buscaPersona()"><span class="glyphicon glyphicon-search"></span><strong> BUSCAR</strong></button>
+             </div>
+           </form>
+         </div>  
+       </div>
+        &nbsp;&nbsp;
+       <div><center><h3>RESULTADOS<span class="text-primary">{{resultado}} </span></h3></center></div>
+         <div class="well well-sm" ng-if="ver">
+          <div class="panel">
+              <h4 class="text-primary text-center">I. DATOS DE LA PERSONA</h4>
+              <form name="userForm" novalidate>
+              <hr class="bg-red">
+                <div class="panel-body">
+                  <div class="row">
+                    <div class="col-md-6">
+                       <label class="text-primary">Nombre:</label> 
+                       {{persona.per_nombres+" "+persona.per_apellido_primero+" "+persona.per_apellido_segundo}}
+                    </div>
+                    <div class="col-md-6">
+                        <label class="text-primary">CI:</label> {{persona.per_ci+" "+persona.per_ci_expedido}}
+                    </div>                   
+                    <div class="col-md-6">
+                      <label for="tra" class="text-primary">Trámite:</label>
+                      {{tramite.tra_nombre}}
+                    </div>
+                    <div class="col-md-12">
+                        <label class="text-primary ">Costo del trámite:</label>
+                        <center>
+                          <div class="well well-sm">
+                            <center>
+                              <h1 class="h1" ng-if="tramite.tra_costo!=null"><strong>Bs. {{tramite.tra_costo | number:2}}</strong></h1>
+                            </center>
+                          </div>
+                        </center>
+                    </div>                      
+                  </div>
+
+                </div>
+              
+              <div class="row">
+                <div class="col-md-4 col-md-offset-4 text-center" >
+                    <button type="submit" class="btn btn-success" ng-click="save($parent.persona_tramite, persona.per_id,tramite.tra_id,tramite.tra_costo)" ><span class="glyphicon glyphicon-plus" ng-disabled="!bloqueo"></span> REGISTRAR PAGO</button>
+                </div>
+              </div>
+              </form>
+          </div>
+        </div> <!-- div del message -->
+       <!--  <div class="row panel-group tabla-cuerpo">  -->
+      </div>  
+   <!-- fin ng-show -->
+</div>  
+
+
+
+
+  <!-- fin contenido -->
+  </div>
+</div>
+<!-- CONTENIDO MODULO fin -->

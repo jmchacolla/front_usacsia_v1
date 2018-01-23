@@ -1,0 +1,46 @@
+<!-- TOP-MENU inicio -->
+<div ng-include="'./templates/menu_inicio_rol.html'"></div>
+<!-- CONTENIDO MODULO inicio -->
+	<div class="col-md-offset-2 col-md-8 col-sm-8">
+		<div class="row">
+			<div class="col-md-12">
+				<img src="./images/banner_sesar.png" style="width:100%;" class="img-responsive img-thumbnail">
+				<hr>
+			</div>	
+		</div>	
+		<div class="row">
+			<div class="col-md-12">
+				<div class="panel panel-primary">
+				  <h3 class="text-primary text-center">SELECCIONAR ROL</h3>
+				  <hr class="bg-green">
+				  <div class="panel-body lead text-justify">
+					  Seleccione como desea ingresar:
+					  <br>
+					  <div class="text-center" ng-if="admin_sedes_rol" >
+					  	<button type="button" class="btn btn-primary btn-lg col-md-offset-3 col-md-6 col-sm-12 col-xs-12" ng-click="selecciona_rol_admin_sedes()">ADMINISTRADOR SEDES</button>
+					  	<br>
+					  </div>
+					  <!--Cuando un usuario es funcionario y paciente-->
+					  <div ng-show="fun_rol && pac_rol" class="text-center">
+					  	<button type="button" class="btn btn-primary btn-lg col-md-offset-3 col-md-6 col-sm-12 col-xs-12" ng-click="selecciona_rol_funcionario()">FUNCIONARIO</button>
+					  	<br><br>
+					  	<button type="button" class="btn btn-primary btn-lg col-md-offset-3 col-md-6 col-sm-12 col-xs-12" ng-click="selecciona_rol_paciente()">PACIENTE</button>
+					  	<br><br>
+					  </div>
+					  <form name="Seleccionar" ng-if="fun_rol && !pac_rol && !admin_sedes_rol" class="text-center">
+					  	Seleccione el establecimiento en el cual desea iniciar sesión: 
+					  	<br>
+					  	<select name="consu" class="form-control" ng-model="estab_selecc" ng-options="establecimientos as establecimientos.es_nombre for establecimientos in nombres_establecimientos" required></select>
+					  	<span class="messages" ng-show="AsignaRol.$submitted || AsignaRol.rol.$touched">
+			              <span ng-show="AsignaRol.rol.$error.required">El campo es obligatorio</span>
+			            </span>
+					  	<br>
+					  	<button type="button" class="btn btn-primary btn-lg col-md-offset-3 col-md-6 col-sm-12 col-xs-12" ng-click="continua_sesion(estab_selecc)">Iniciar con el establecimiento seleccionado</button>
+					  	<br><br>
+					  </form>
+				  </div>
+				</div>
+			</div>	
+		</div>
+	</div>
+<!-- CONTENIDO MODULO fin -->

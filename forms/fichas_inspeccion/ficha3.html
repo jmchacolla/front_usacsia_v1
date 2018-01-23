@@ -1,0 +1,573 @@
+<div ng-controller="CrearFicha3Ctrl">
+ 
+<hr>
+<h4 class="text-center text-primary">II. INSPECCIÓN FISICA</h4>
+<hr class="bg-red"> 
+    <div class="row" >
+    <div class="col-md-4">
+    <label for="resolucion" class="control-label">No carnet sanitario:</label>
+    <input  class="form-control" id="red" type="Text" ng-model="ficha3.fi3_numero_car" >          
+    </div> 
+        <div class="col-md-4">
+        <label for="resolucion" class="control-label">Extinguidores:</label>
+        <input class="form-control" id="red" type="Text" ng-model="ficha3.fi_extinguidor">     
+        </div> 
+        <div class="col-md-4">
+        <label for="resolucion" class="control-label">Certificado de fumigación:</label>
+        <input class="form-control" id="red" type="Text" ng-model="ficha3.fi3_fumigacion">     
+        </div> 
+    </div>
+<br>
+    <div class="row">
+        <div class="col-md-6">
+        <label class="control-label"> Ubicación alejada de focos de insalubridad <strong class="fg_red">*</strong></label>
+        <div class="formulario">
+            <div class="radio">
+                <div class="col-md-4">
+                <input type="radio" name="foco_insalubridad" id="true1" value="true" ng-model="ficha3.fi_foco_insalubridad">
+                <label for="true1">Si</label>
+                </div>
+                <div class="col-md-4">
+                <input type="radio" name="foco_insalubridad" id="false1" value="false" ng-model="ficha3.fi_foco_insalubridad">
+                <label for="false1">No</label>
+                </div>
+                <span class="messages" ng-show="addPersona.$submitted || addPersona.foco_insalubridad.$touched">
+                <span ng-show="addPersona.foco_insalubridad.$error.required">El campo es obligatorio.</span>
+                </span>
+            </div>
+        </div>
+        </div>
+        <div class="col-md-6">
+        <label for="diagnostico" class="control-label ">Observaciones:</label><br>
+        <textarea name="diagnostico" ng-model-options="{ updateOn: 'blur' }" rows="6" cols="40" style="resize: vertical;min-height:70px;max-height: 150px;" placeholder="Detalle de la infraestructura" ng-model="ficha3.fi3_foco_insalubridad_obs" value="NINGUNA"></textarea>
+
+        </div>
+    </div> 
+    <div class="row" >
+        <div class="col-md-6">
+        <label class="control-label">Comunicación con vivienda o habitación <strong class="fg_red">*</strong></label>
+            <div class="formulario">
+                <div class="radio">
+                    <div class="col-md-4">
+                    <input type="radio" name="exibe_certificado" id="true2" value="true" ng-model="ficha3.fi3_comunicacion">
+                    <label for="true2">Si</label>
+                    </div>
+                    <div class="col-md-4">
+                    <input type="radio" name="exibe_certificado" id="false2" value="false" ng-model="ficha3.fi3_comunicacion">
+                    <label for="false2">No</label>
+                    </div>
+                    <span class="messages" ng-show="addPersona.$submitted || addPersona.exibe_certificado.$touched">
+                    <span ng-show="addPersona.exibe_certificado.$error.required">El campo es obligatorio.</span>
+                    </span>
+                </div>
+            </div>
+        </div> 
+        <div class="col-md-6">
+        <label for="diagnostico" class="control-label ">Observaciones:</label><br>
+        <textarea name="diagnostico" ng-model-options="{ updateOn: 'blur' }" rows="6" cols="40" style="resize: vertical;min-height:70px;max-height: 150px;" placeholder="Detalle de la infraestructura" ng-model="ficha3.fi3_comunicacion_obs" ></textarea>
+        </div>
+    </div> 
+    <div class="row" >
+        <div class="col-md-6">
+        <label class="control-label">Superficie utilen Mts2: <strong class="fg_red">*</strong></label>
+        <input  class="form-control" id="red" type="Text" ng-model="ficha3.fi3_superficie_util" > 
+        <!-- <div class="formulario">
+        <div class="radio">
+        <div class="col-md-4">
+        <input type="radio" name="exibe_carnes" id="true3" value="true" ng-model="ficha3.fi3_superficie_util">
+        <label for="true3">Si</label>
+        </div>
+        <div class="col-md-4">
+        <input type="radio" name="exibe_carnes" id="false3" value="false" ng-model="ficha3.fi3_superficie_util">
+        <label for="false3">No</label>
+        </div>
+        <span class="messages" ng-show="addPersona.$submitted || addPersona.exibe_carnes.$touched">
+        <span ng-show="addPersona.exibe_carnes.$error.required">El campo es obligatorio.</span>
+        </span>
+        </div>
+        </div> -->
+        </div> 
+        <div class="col-md-6">
+        <label for="diagnostico" class="control-label ">Observaciones:</label><br>
+        <textarea name="diagnostico" ng-model-options="{ updateOn: 'blur' }" rows="6" cols="40" style="resize: vertical;min-height:70px;max-height: 150px;" placeholder="Detalle de la infraestructura" ng-model="ficha3.fi3_superficie_obs" ></textarea>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <label for="mur" class="control-label ">Muros pintados <strong class="fg_red">*</strong></label>
+            <select class="form-control" name="mur" ng-model="ficha3.fi3_muros_pintados" required>
+            <option value="BUENO">BUENO</option>
+            <option value="REGULAR">REGULAR</option>
+            <option value="MALO">MALO</option>
+
+            </select>
+            <span class="messages" ng-show="userForm.$submitted || userForm.mur.$touched">
+            <span ng-show="userForm.mur.$error.required">El campo es obligatorio</span>
+            </span>
+        </div>
+        <div class="col-md-6">
+        <label for="ob1" class="control-label ">Observaciones:</label><br>
+        <textarea name="ob1" ng-model-options="{ updateOn: 'blur' }" rows="6" cols="40" style="resize: vertical;min-height:70px;max-height: 150px;" placeholder="Detalle de la infraestructura" ng-model="ficha3.fi3_muros_pintados_obs" ></textarea>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+          <label for="zoc" class="control-label ">Zocalos <strong class="fg_red">*</strong></label>
+          <select class="form-control" name="zoc" ng-model="ficha3.fi3_zocalos" required>
+          <option value="BUENO">BUENO</option>
+          <option value="REGULAR">REGULAR</option>
+          <option value="MALO">MALO</option>
+
+          </select>
+          <span class="messages" ng-show="userForm.$submitted || userForm.zoc.$touched">
+          <span ng-show="userForm.zoc.$error.required">El campo es obligatorio</span>
+          </span>
+        </div>  
+        <div class="col-md-6">
+          <label for="ob2" class="control-label ">Observaciones:</label><br>
+          <textarea name="ob2" ng-model-options="{ updateOn: 'blur' }" rows="6" cols="40" style="resize: vertical;min-height:70px;max-height: 150px;" placeholder="Detalle de la infraestructura" ng-model="ficha3.fi3_zocalos_obs" ></textarea>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <label for="pi" class="control-label ">Pisos <strong class="fg_red">*</strong></label>
+            <select class="form-control" name="pi" ng-model="ficha3.fi3_piso" required>
+            <option value="BUENO">BUENO</option>
+            <option value="REGULAR">REGULAR</option>
+            <option value="MALO">MALO</option>
+
+            </select>
+            <span class="messages" ng-show="userForm.$submitted || userForm.pi.$touched">
+            <span ng-show="userForm.pi.$error.required">El campo es obligatorio</span>
+            </span>
+        </div>
+        <div class="col-md-6">
+        <label for="ob3" class="control-label ">Observaciones:</label><br>
+        <textarea name="ob3" ng-model-options="{ updateOn: 'blur' }" rows="6" cols="40" style="resize: vertical;min-height:70px;max-height: 150px;" placeholder="Detalle de la infraestructura" ng-model="ficha3.fi3_piso_obs" ></textarea>
+
+        </div>
+
+    </div>
+    <div class="row">
+    <div class="col-md-4">
+    <label for="sum" class="control-label ">Sumidero o desague <strong class="fg_red">*</strong></label>
+    <select class="form-control" name="sum" ng-model="ficha3.fi3_sumidero_desague" required>
+    <option value="BUENO">BUENO</option>
+    <option value="REGULAR">REGULAR</option>
+    <option value="MALO">MALO</option>
+
+    </select>
+    <span class="messages" ng-show="userForm.$submitted || userForm.sum.$touched">
+    <span ng-show="userForm.sum.$error.required">El campo es obligatorio</span>
+    </span>
+    </div>
+    <div class="col-md-6">
+    <label for="ob4" class="control-label ">Observaciones:</label><br>
+    <textarea name="ob4" ng-model-options="{ updateOn: 'blur' }" rows="6" cols="40" style="resize: vertical;min-height:70px;max-height: 150px;" placeholder="Detalle de la infraestructura" ng-model="ficha3.fi3_sumidero_desague_obs" ></textarea>
+
+    </div>
+    </div>
+    <div class="row">
+    <div class="col-md-4">
+    <label for="ci" class="control-label ">Ciela raso <strong class="fg_red">*</strong></label>
+    <select class="form-control" name="ci" ng-model="ficha3.fi3_cielo_raso" required>
+    <option value="BUENO">BUENO</option>
+    <option value="REGULAR">REGULAR</option>
+    <option value="MALO">MALO</option>
+
+    </select>
+    <span class="messages" ng-show="userForm.$submitted || userForm.ci.$touched">
+    <span ng-show="userForm.ci.$error.required">El campo es obligatorio</span>
+    </span>
+    </div>
+    <div class="col-md-6">
+    <label for="ob5" class="control-label ">Observaciones:</label><br>
+    <textarea name="ob5" ng-model-options="{ updateOn: 'blur' }" rows="6" cols="40" style="resize: vertical;min-height:70px;max-height: 150px;" placeholder="Detalle de la infraestructura" ng-model="ficha3.fi3_cielo_raso_obs" ></textarea>
+
+    </div>
+    </div>
+    <div class="row" >
+        <div class="col-md-12">
+        <label class="control-label">Ventilación: <strong class="fg_red">*</strong></label>
+            <div class="formulario">
+                <div class="radio">
+                    <div class="col-md-4">
+                    <input type="radio" name="ventilacion" id="inyeccion" value="true" ng-model="ficha3.fi3_ventilacion_inyeccion">
+                    <label for="inyeccion">Inyeccion</label>
+                    </div>
+                    <div class="col-md-4">
+                    <input type="radio" name="ventilacion" id="extraccion" value="true" ng-model="ficha3.fi3_ventilacion_extraccion">
+                    <label for="extraccion">Extracción</label>
+                    </div>
+                    <div class="col-md-4">
+                    <input type="radio" name="ventilacion" id="elec" value="true" ng-model="ficha3.fi3_ventilacion_electrica">
+                    <label for="elec">Sist. electrico</label>
+                    </div>
+                    <div class="col-md-4">
+                    <input type="radio" name="ventilacion" id="eolico" value="true" ng-model="ficha3.fi3_ventilacion_eolico">
+                    <label for="eolico">SIst. eólico</label>
+                    </div>
+                <span class="messages" ng-show="addPersona.$submitted || addPersona.exibe_carnes.$touched">
+                <span ng-show="addPersona.exibe_carnes.$error.required">El campo es obligatorio.</span>
+                </span>
+                </div>
+            </div>
+
+        </div> 
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <label for="il" class="control-label ">Iluminación<strong class="fg_red">*</strong></label>
+            <select class="form-control" name="il" ng-model="ficha3.fi3_iluminacion" required>
+            <option value="BUENO">BUENO</option>
+            <option value="REGULAR">REGULAR</option>
+            <option value="MALO">MALO</option>
+
+            </select>
+            <span class="messages" ng-show="userForm.$submitted || userForm.il.$touched">
+            <span ng-show="userForm.il.$error.required">El campo es obligatorio</span>
+            </span>
+        </div> 
+        <div class="col-md-6">
+            <label for="ob6" class="control-label ">Observaciones:</label><br>
+            <textarea name="ob6" ng-model-options="{ updateOn: 'blur' }" rows="6" cols="40" style="resize: vertical;min-height:70px;max-height: 150px;" placeholder="Detalle de la infraestructura" ng-model="ficha3.fi3_iluminacion_obs" ></textarea>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <label for="alm" class="control-label ">Almacenes<strong class="fg_red">*</strong></label>
+            <select class="form-control" name="alm" ng-model="ficha3.fi3_almacenes" required>
+            <option value="BUENO">BUENO</option>
+            <option value="REGULAR">REGULAR</option>
+            <option value="MALO">MALO</option>
+
+            </select>
+            <span class="messages" ng-show="userForm.$submitted || userForm.alm.$touched">
+            <span ng-show="userForm.alm.$error.required">El campo es obligatorio</span>
+            </span>
+        </div>
+        <div class="col-md-6">
+        <label for="ob7" class="control-label ">Observaciones:</label><br>
+        <textarea name="ob7" ng-model-options="{ updateOn: 'blur' }" rows="6" cols="40" style="resize: vertical;min-height:70px;max-height: 150px;" placeholder="Detalle de la infraestructura" ng-model="ficha3.fi3_almacenes_obs" ></textarea>
+
+        </div>
+    </div>
+<h4 class="text-center text-primary">III. ASPECTOS SANITARIOS</h4>
+<hr class="bg-red"> 
+    <div class="row">
+        <div class="col-md-4">
+        <label for="abs" class="control-label ">Abastecimiento de agua<strong class="fg_red">*</strong></label>
+        <select class="form-control" name="abs" ng-model="ficha3.fi3_abastecimiento_agua" required>
+        <option value="BUENO">BUENO</option>
+        <option value="REGULAR">REGULAR</option>
+        <option value="MALO">MALO</option>
+
+        </select>
+        <span class="messages" ng-show="userForm.$submitted || userForm.abs.$touched">
+        <span ng-show="userForm.abs.$error.required">El campo es obligatorio</span>
+        </span>
+        </div>
+        <div class="col-md-6">
+        <label for="ob8" class="control-label ">Observaciones:</label><br>
+        <textarea name="ob8" ng-model-options="{ updateOn: 'blur' }" rows="6" cols="40" style="resize: vertical;min-height:70px;max-height: 150px;" placeholder="Detalle de la infraestructura" ng-model="ficha3.fi3_abastecimiento_agua_obs" ></textarea>
+
+        </div>
+    </div>
+<div class="row">
+<div class="col-md-4">
+<label for="agg" class="control-label ">Eliminación de aguas servidas<strong class="fg_red">*</strong></label>
+<select class="form-control" name="agg" ng-model="ficha3.fi3_eliminacion_agua" required>
+<option value="BUENO">BUENO</option>
+<option value="REGULAR">REGULAR</option>
+<option value="MALO">MALO</option>
+
+</select>
+<span class="messages" ng-show="userForm.$submitted || userForm.agg.$touched">
+<span ng-show="userForm.agg.$error.required">El campo es obligatorio</span>
+</span>
+</div>   
+<div class="col-md-6">
+<label for="ob9" class="control-label ">Observaciones:</label><br>
+<textarea name="ob9" ng-model-options="{ updateOn: 'blur' }" rows="6" cols="40" style="resize: vertical;min-height:70px;max-height: 150px;" placeholder="Detalle de la infraestructura" ng-model="ficha3.fi3_eliminacion_agua_obs" ></textarea>
+</div>
+</div>
+<div class="row">
+<div class="col-md-4">
+<label for="aus" class="control-label ">Ausencias de agua en piso<strong class="fg_red">*</strong></label>
+<select class="form-control" name="aus" ng-model="ficha3.fi3_agua_piso" required>
+<option value="BUENO">BUENO</option>
+<option value="REGULAR">REGULAR</option>
+<option value="MALO">MALO</option>
+
+</select>
+<span class="messages" ng-show="userForm.$submitted || userForm.aus.$touched">
+<span ng-show="userForm.aus.$error.required">El campo es obligatorio</span>
+</span>
+</div>
+<div class="col-md-6">
+<label for="ob10" class="control-label ">Observaciones:</label><br>
+<textarea name="ob10" ng-model-options="{ updateOn: 'blur' }" rows="6" cols="40" style="resize: vertical;min-height:70px;max-height: 150px;" placeholder="Detalle de la infraestructura" ng-model="ficha3.fi3_agua_piso_obs" ></textarea>
+
+</div>
+</div>
+<div class="row">
+<div class="col-md-4">
+<label for="servh" class="control-label ">Servicios higienicos y duchas<strong class="fg_red">*</strong></label>
+<select class="form-control" name="servh" ng-model="ficha3.fi3_serv_higienicos" required>
+<option value="BUENO">BUENO</option>
+<option value="REGULAR">REGULAR</option>
+<option value="MALO">MALO</option>
+
+</select>
+<span class="messages" ng-show="userForm.$submitted || userForm.servh.$touched">
+<span ng-show="userForm.servh.$error.required">El campo es obligatorio</span>
+</span>
+</div>
+<div class="col-md-6">
+<label for="ob11" class="control-label ">Observaciones:</label><br>
+<textarea name="ob11" ng-model-options="{ updateOn: 'blur' }" rows="6" cols="40" style="resize: vertical;min-height:70px;max-height: 150px;" placeholder="Detalle de la infraestructura" ng-model="ficha3.fi3_serv_higienicos_obs" ></textarea>
+
+</div>
+</div>
+<div class="row">
+<div class="col-md-4">
+<label for="disp" class="control-label ">Disposición de servicios<strong class="fg_red">*</strong></label>
+<select class="form-control" name="disp" ng-model="ficha3.fi3_disp_desperdicios" required>
+<option value="BUENO">BUENO</option>
+<option value="REGULAR">REGULAR</option>
+<option value="MALO">MALO</option>
+
+</select>
+<span class="messages" ng-show="userForm.$submitted || userForm.disp.$touched">
+<span ng-show="userForm.disp.$error.required">El campo es obligatorio</span>
+</span>
+</div>
+<div class="col-md-6">
+<label for="ob12" class="control-label ">Observaciones:</label><br>
+<textarea name="ob12" ng-model-options="{ updateOn: 'blur' }" rows="6" cols="40" style="resize: vertical;min-height:70px;max-height: 150px;" placeholder="Detalle de la infraestructura" ng-model="ficha3.fi3_disp_desperdicios_obs" ></textarea>
+
+</div>
+</div>
+<div class="row">
+<div class="col-md-4">
+<label for="pro" class="control-label ">Protección de insectos y roedores<strong class="fg_red">*</strong></label>
+<select class="form-control" name="pro" ng-model="ficha3.fi3_roedores_insectos" required>
+<option value="BUENO">BUENO</option>
+<option value="REGULAR">REGULAR</option>
+<option value="MALO">MALO</option>
+
+</select>
+<span class="messages" ng-show="userForm.$submitted || userForm.pro.$touched">
+<span ng-show="userForm.pro.$error.required">El campo es obligatorio</span>
+</span>
+</div>
+<div class="col-md-6">
+<label for="ob13" class="control-label ">Observaciones:</label><br>
+<textarea name="ob13" ng-model-options="{ updateOn: 'blur' }" rows="6" cols="40" style="resize: vertical;min-height:70px;max-height: 150px;" placeholder="Detalle de la infraestructura" ng-model="ficha3.fi3_roedores_insectos_obs" ></textarea>
+
+</div>
+</div>
+<h4 class="text-center text-primary">IV. ASPECTOS DE HIGIENE Y MANTENIMIENTO DE ALIMENTOS</h4>
+<hr class="bg-red">
+<div class="row">
+<div class="col-md-4">
+<label for="dl" class="control-label ">Del establecimiento<strong class="fg_red">*</strong></label>
+<select class="form-control" name="dl" ng-model="ficha3.fi3_establecimiento" required>
+<option value="BUENO">BUENO</option>
+<option value="REGULAR">REGULAR</option>
+<option value="MALO">MALO</option>
+
+</select>
+<span class="messages" ng-show="userForm.$submitted || userForm.dl.$touched">
+<span ng-show="userForm.dl.$error.required">El campo es obligatorio</span>
+</span>
+</div>
+<div class="col-md-6">
+<label for="ob14" class="control-label ">Observaciones:</label><br>
+<textarea name="ob14" ng-model-options="{ updateOn: 'blur' }" rows="6" cols="40" style="resize: vertical;min-height:70px;max-height: 150px;" placeholder="Detalle de la infraestructura" ng-model="ficha3.fi3_establecimiento_obs" ></textarea>
+
+</div>
+</div>
+<div class="row">
+<div class="col-md-4">
+<label for="dp" class="control-label ">De paredes y pisos<strong class="fg_red">*</strong></label>
+<select class="form-control" name="dp" ng-model="ficha3.fi3_paredes_pisos" required>
+<option value="BUENO">BUENO</option>
+<option value="REGULAR">REGULAR</option>
+<option value="MALO">MALO</option>
+
+</select>
+<span class="messages" ng-show="userForm.$submitted || userForm.dp.$touched">
+<span ng-show="userForm.dp.$error.required">El campo es obligatorio</span>
+</span>
+</div>
+<div class="col-md-6">
+<label for="ob15" class="control-label ">Observaciones:</label><br>
+<textarea name="ob15" ng-model-options="{ updateOn: 'blur' }" rows="6" cols="40" style="resize: vertical;min-height:70px;max-height: 150px;" placeholder="Detalle de la infraestructura" ng-model="ficha3.fi3_paredes_pisos_obs" ></textarea>
+
+</div>
+</div>
+<div class="row">
+<div class="col-md-4">
+<label for="dv" class="control-label ">De vajilla y menaje<strong class="fg_red">*</strong></label>
+<select class="form-control" name="dv" ng-model="ficha3.fi3_menaje" required>
+<option value="BUENO">BUENO</option>
+<option value="REGULAR">REGULAR</option>
+<option value="MALO">MALO</option>
+
+</select>
+<span class="messages" ng-show="userForm.$submitted || userForm.dv.$touched">
+<span ng-show="userForm.dv.$error.required">El campo es obligatorio</span>
+</span>
+</div>
+<div class="col-md-6">
+<label for="ob16" class="control-label ">Observaciones:</label><br>
+<textarea name="ob16" ng-model-options="{ updateOn: 'blur' }" rows="6" cols="40" style="resize: vertical;min-height:70px;max-height: 150px;" placeholder="Detalle de la infraestructura" ng-model="ficha3.fi3_menaje_obs" ></textarea>
+</div>
+</div>
+<div class="row">
+<div class="col-md-4">
+<label for="plp" class="control-label ">Del personal<strong class="fg_red">*</strong></label>
+<select class="form-control" name="plp" ng-model="ficha3.fi3_personal" required>
+<option value="BUENO">BUENO</option>
+<option value="REGULAR">REGULAR</option>
+<option value="MALO">MALO</option>
+
+</select>
+<span class="messages" ng-show="userForm.$submitted || userForm.plp.$touched">
+<span ng-show="userForm.plp.$error.required">El campo es obligatorio</span>
+</span>
+</div>
+<div class="col-md-6">
+<label for="ob17" class="control-label ">Observaciones:</label><br>
+<textarea name="ob17" ng-model-options="{ updateOn: 'blur' }" rows="6" cols="40" style="resize: vertical;min-height:70px;max-height: 150px;" placeholder="Detalle de la infraestructura" ng-model="ficha3.fi3_personal_obs" ></textarea>
+
+</div>
+</div>
+<div class="row">
+<div class="col-md-4">
+<label for="ropa" class="control-label ">De la ropa de trabajo<strong class="fg_red">*</strong></label>
+<select class="form-control" name="ropa" ng-model="ficha3.fi3_ropa" required>
+<option value="BUENO">BUENO</option>
+<option value="REGULAR">REGULAR</option>
+<option value="MALO">MALO</option>
+
+</select>
+<span class="messages" ng-show="userForm.$submitted || userForm.ropa.$touched">
+<span ng-show="userForm.ropa.$error.required">El campo es obligatorio</span>
+</span>
+</div>
+<div class="col-md-6">
+<label for="ob18" class="control-label ">Observaciones:</label><br>
+<textarea name="ob18" ng-model-options="{ updateOn: 'blur' }" rows="6" cols="40" style="resize: vertical;min-height:70px;max-height: 150px;" placeholder="Detalle de la infraestructura" ng-model="ficha3.fi3_ropa_obs" ></textarea>
+</div>
+</div>
+<div class="row">
+<div class="col-md-4">
+<label for="dd" class="control-label ">De detergentes y desinfectantes<strong class="fg_red">*</strong></label>
+<select class="form-control" name="dd" ng-model="ficha3.fi3_detergente" required>
+<option value="BUENO">BUENO</option>
+<option value="REGULAR">REGULAR</option>
+<option value="MALO">MALO</option>
+
+</select>
+<span class="messages" ng-show="userForm.$submitted || userForm.dd.$touched">
+<span ng-show="userForm.dd.$error.required">El campo es obligatorio</span>
+</span>
+</div>
+<div class="col-md-6">
+<label for="ob19" class="control-label ">Observaciones:</label><br>
+<textarea name="ob19" ng-model-options="{ updateOn: 'blur' }" rows="6" cols="40" style="resize: vertical;min-height:70px;max-height: 150px;" placeholder="Detalle de la infraestructura" ng-model="ficha3.fi3_detergente_obs" ></textarea>
+</div>
+</div>
+<div class="row">
+<div class="col-md-4">
+<label for="man" class="control-label ">Manipulación de alimentos<strong class="fg_red">*</strong></label>
+<select class="form-control" name="man" ng-model="ficha3.fi3_man_alimento" required>
+<option value="BUENO">BUENO</option>
+<option value="REGULAR">REGULAR</option>
+<option value="MALO">MALO</option>
+
+</select>
+<span class="messages" ng-show="userForm.$submitted || userForm.man.$touched">
+<span ng-show="userForm.man.$error.required">El campo es obligatorio</span>
+</span>
+</div>
+<div class="col-md-6">
+<label for="ob20" class="control-label ">Observaciones:</label><br>
+<textarea name="ob20" ng-model-options="{ updateOn: 'blur' }" rows="6" cols="40" style="resize: vertical;min-height:70px;max-height: 150px;" placeholder="Detalle de la infraestructura" ng-model="ficha3.fi3_man_alimento_obs" ></textarea>
+</div>
+</div>
+<div class="row">
+<div class="col-md-4">
+<label for="cns" class="control-label ">Conservacion de alimentos<strong class="fg_red">*</strong></label>
+<select class="form-control" name="cns" ng-model="ficha3.fi3_con_alimento" required>
+<option value="BUENO">BUENO</option>
+<option value="REGULAR">REGULAR</option>
+<option value="MALO">MALO</option>
+
+</select>
+<span class="messages" ng-show="userForm.$submitted || userForm.cns.$touched">
+<span ng-show="userForm.cns.$error.required">El campo es obligatorio</span>
+</span>
+</div>
+<div class="col-md-6">
+<label for="ob21" class="control-label ">Observaciones:</label><br>
+<textarea name="ob21" ng-model-options="{ updateOn: 'blur' }" rows="6" cols="40" style="resize: vertical;min-height:70px;max-height: 150px;" placeholder="Detalle de la infraestructura" ng-model="ficha3.fi3_con_alimento_obs" ></textarea>
+</div>
+</div>
+<div class="row">
+<div class="col-md-4">
+<label for="prc" class="control-label ">Productos con registro sanitario<strong class="fg_red">*</strong></label>
+<select class="form-control" name="prc" ng-model="ficha3.fi3_producto_registro" required>
+<option value="BUENO">BUENO</option>
+<option value="REGULAR">REGULAR</option>
+<option value="MALO">MALO</option>
+
+</select>
+<span class="messages" ng-show="userForm.$submitted || userForm.prc.$touched">
+<span ng-show="userForm.prc.$error.required">El campo es obligatorio</span>
+</span>
+</div>
+<div class="col-md-6">
+<label for="ob22" class="control-label ">Observaciones:</label><br>
+<textarea name="ob22" ng-model-options="{ updateOn: 'blur' }" rows="6" cols="40" style="resize: vertical;min-height:70px;max-height: 150px;" placeholder="Detalle de la infraestructura" ng-model="ficha3.fi3_producto_registro_obs" ></textarea>
+
+</div>
+</div>
+<div class="row">
+<div class="col-md-4">
+<label for="pal" class="control-label ">Practicas de almacenamiento<strong class="fg_red">*</strong></label>
+<select class="form-control" name="pal" ng-model="ficha3.fi3_almacenamiento" required>
+<option value="BUENO">BUENO</option>
+<option value="REGULAR">REGULAR</option>
+<option value="MALO">MALO</option>
+
+</select>
+<span class="messages" ng-show="userForm.$submitted || userForm.pal.$touched">
+<span ng-show="userForm.pal.$error.required">El campo es obligatorio</span>
+</span>
+</div>
+<div class="col-md-6">
+<label for="ob23" class="control-label ">Observaciones:</label><br>
+<textarea name="ob23" ng-model-options="{ updateOn: 'blur' }" rows="6" cols="40" style="resize: vertical;min-height:70px;max-height: 150px;" placeholder="Detalle de la infraestructura" ng-model="ficha3.fi3_almacenamiento_obs" ></textarea>
+
+</div>
+</div>
+<div class="row">
+<div class="col-md-6">
+<label for="ob24" class="control-label ">Observaciones:</label><br>
+<textarea name="ob24" ng-model-options="{ updateOn: 'blur' }" rows="6" cols="40" style="resize: vertical;min-height:70px;max-height: 150px;" placeholder="Detalle de la infraestructura" ng-model="ficha3.fi3_observacion" ></textarea>
+
+</div>
+</div>
+       
+
+ <center>
+     
+                  <button type="submit" data-toggle="modal" ng-click="submit($parent.ficha3)"  class="btn btn-primary" ng-disabled="formficha3.$invalid" ><span class="glyphicon glyphicon-save"></span> GUARDAR FICHA</button>
+            
+      </center>
+      </div>

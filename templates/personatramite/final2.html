@@ -1,0 +1,104 @@
+<!-- TOP-MENU inicio -->
+<div ng-include="'./templates/menu_inicio.html'"></div>
+<!-- CONTEXT-MENU -->
+<div ng-include="'./templates/menu_lateral.html'"></div>
+<!-- CONTENIDO MODULO inicio -->
+<div class="col-md-8 col-sm-8">
+  <div class="row">
+    <div class="col-md-12">
+      <h2 class="text-primary">
+        <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+        {{ajustes.pagina.titulo}}
+      </h2>
+      <hr class="bg-red">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="well well-sm">
+        <strong class="pull-left lead">Herramientas: &nbsp;</strong>
+        <form class="form-inline pull-left">
+          <input type="text" class="form-control" placeholder="Filtrar por ..." ng-model="per_ci">
+        </form>
+        &nbsp;&nbsp;
+        <button class="btn btn-default" onclick="generateFUN_AE()"><span class="glyphicon glyphicon-save-file"></span> Exportar lista en PDF</button>
+        <div class="clearfix"></div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 ">
+      <!-- AQUI VAN LAS TABLAS O FORMULARIOS incrustados -->
+      <!-- INICIO -->
+      <div class="text-center" ng-show="loading"><br><img ng-src="./images/image.gif" class="loader-img"></div>
+      <div ng-show="!loading && !msg">No se encontraron resultados</div>
+      <div class="table-responsive">
+        <table class="table table-bordered table-striped table-hover" ng-show="!loading && msg" id="table">
+          <thead >
+            <th class="text-primary" >
+              <a href="" ng-click="sortType = 'per_ci'; sortReverse = !sortReverse">C.I.</a>
+              <span ng-show="sortType == 'per_ci' && !sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+              <span ng-show="sortType == 'per_ci' && sortReverse" class="glyphicon glyphicon-chevron-down"></span>
+            </th>
+            <th class="text-primary" >
+              <a href="" ng-click="sortType = 'per_apellido_primero'; sortReverse = !sortReverse">Apellidos 
+              <span ng-show="sortType == 'per_apellido_primero' && !sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+              <span ng-show="sortType == 'per_apellido_primero' && sortReverse" class="glyphicon glyphicon-chevron-down"></span></a>
+            </th>
+            <th class="text-primary" >
+              <a href="" ng-click="sortType = 'per_nombres'; sortReverse = !sortReverse">Nombres 
+              <span ng-show="sortType == 'per_nombres' && !sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+              <span ng-show="sortType == 'per_nombres' && sortReverse" class="glyphicon glyphicon-chevron-down"></span></a>
+            </th>
+            <th class="text-primary" >Ocupación</th>
+            <th class="text-primary" ng-if="user.rol_id == '1' || user.rol_id == '2'">Aprobación</th>
+            <th class="text-primary" >Ver</th>
+           <!--  <th>Editar</th>
+            <th>Dar de baja</th> -->
+          </thead>
+          <tbody>
+            <tr  ng-repeat="pt in persona_tramite  | orderBy:sortType:sortReverse | filter:per_ci" ng-class='{success : pt.pt_estado_tramite=="APROBADO", danger: pt.pt_estado_tramite=="CONCLUIDO"}'>
+              <td>{{pt.per_ci + ""}} {{pt.per_ci_expedido | uppercase}}</td>
+              <td>{{pt.per_apellido_primero + " " + pt.per_apellido_segundo}}</td>
+              <td>{{pt.per_nombres}}</td>
+              <td>{{pt.per_ocupacion}}</td>
+              <td ng-if="user.rol_id == '1' || user.rol_id == '2'">
+                <!-- BOTON PARA CUADROS MODALES -->
+                <button ng-disabled="pt.pt_estado_tramite == 'APROBADO'" class="btn btn-xs btn-warning glyphicon glyphicon-check" data-toggle="modal" ng-click="rec(pt.pt_id,pt.per_id)" data-target="#miCuadroModal1" title="Recepción" >Aprobación</button>
+                  <!--CUADRO MODAL-->
+                <div id="miCuadroModal1" class="modal fade" role="dialog" tabindex="-1">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header bg-red">
+                            <button type="button" class="close" data-dismiss="modal">×</button>
+                            <h4 class="modal-title fg-white">APROBACIÓN DE TRÁMITE</h4>
+                          </div>
+                          <div class="modal-body lead text-center">
+                             Aprobación de la persona:
+                             <br>
+                              <div class="well well-sm">
+                                  <strong>{{nombre | uppercase}}</strong>
+                              </div>
+                             
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> NO</button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="recepcionar(pt.pt_id)"><span class="glyphicon glyphicon-ok"></span> SI</button>
+                          </div>
+                        </div>
+                    </div>
+              </div>
+                <!--FIN CUADRO MODAL-->
+              </td>
+              <td class="text-center">
+                <a href="#/tramites_concluidos/ver/{{pt.pt_id}}" class="btn btn-success" title="VER DATOS DE PERSONA" ng-disabled="pt.pt_estado_tramite == 'CONCLUIDO'"><span class="glyphicon glyphicon-file"></span></a>
+                
+              </td>
+
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

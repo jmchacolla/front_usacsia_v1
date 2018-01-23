@@ -1,0 +1,69 @@
+<!-- TOP-MENU inicio --> 
+<div ng-include="'./templates/menu_inicio.html'"></div>
+<!-- CONTEXT-MENU  -->
+<div ng-include="'./templates/menu_lateral.html'"></div>
+ 
+<!-- CONTENIDO MODULO -->
+	<div class="col-md-8 col-sm-8">
+		<div class="row">
+			<div class="col-md-12">
+				<h2 class="text-primary">
+					<span class="glyphicon glyphicon-file" aria-hidden="true"></span>
+					{{ajustes.pagina.titulo}}
+				</h2>
+				<hr>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-12">
+			  <!-- AQUI VAN LAS TABLAS O FORMULARIOS incrustados -->
+			  <!-- INICIO -->
+        <div class="well well-sm" style="background-color:#fff;">
+        <h4 class="text-primary text-center">DESCRIPCIÓN DEL LABORATORIO </h4>
+            <hr class="bg-red">
+          <div class="row">
+            
+            <div class="col-md-6">
+              <label class="text-primary">Nombre del laboratorio:</label><br>
+              {{laboratorios.ambientes.amb_nombre}}
+            </div>    
+            <div class="col-md-6">
+              <label class="text-primary">Código:</label><br>
+              {{laboratorios.laboratorios.lab_cod}}
+            </div>   
+            <div class="col-md-6">
+              <label class="text-primary">Tipo:</label><br>
+              {{laboratorios.ambientes.amb_tipo}}
+            </div> 
+            <div class="col-md-6">
+              <label class="text-primary">Descripción:</label><br>
+              {{laboratorios.ambientes.amb_descripcion}}
+            </div>  
+          </div>
+           <h4 class="text-primary text-center">RESPONSABLE </h4>
+            <hr class="bg-red">
+         <div class="row">
+           
+            <div class="col-md-6">
+              <label class="text-primary">Nombre del funcionario:</label><br>
+              {{laboratorios.persona.per_nombres +' '+ laboratorios.persona.per_apellido_primero +' '+ laboratorios.persona.per_apellido_segundo }}
+            </div>    
+            <div class="col-md-6">
+              <label class="text-primary">C.I.:</label><br>
+              {{laboratorios.persona.per_ci}}
+            </div>   
+            <div class="col-md-6">
+              <label class="text-primary">Cargo:</label><br>
+              {{laboratorios.funcionario.fun_cargo}}
+            </div> 
+              
+          </div>
+         
+        </div>
+	  </div>
+    </div>
+    <!-- fin cuerpo -->
+  </div>
+<!-- CONTENIDO MODULO fin -->
+<!--  <button type="button" class="btn  btn-resaltar form-signin">REGISTRAR</button>

@@ -1,0 +1,191 @@
+<div ng-include="'./templates/menu_inicio.html'"></div>
+
+<!-- CONTEXT-MENU  -->
+  <div ng-include="'./templates/menu_lateral.html'">
+  </div>
+<!-- CONTENIDO MODULO inicio -->
+    <div class="col-md-8 col-sm-8">
+        <div class="row">
+          <div class="col-md-12">
+            <h2 class="text-primary">
+              <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+              {{ajustes.pagina.titulo}}
+            </h2>
+            <hr>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+          <div class="well well-sm">
+            <strong class="pull-left lead">Herramientas: &nbsp;</strong>
+            <form class="form-inline pull-left">
+              <input type="text" class="form-control" placeholder="Filtrar por ..." ng-model="cle.cle_codigo">
+            </form>
+            &nbsp;&nbsp;
+            <!--
+            <button class="btn btn-primary"><span class="glyphicon glyphicon-tasks"></span> Exportar lista en XLS</button>
+            <button class="btn btn-default"><span class="glyphicon glyphicon-save-file"></span> Exportar lista en PDF</button><br><br>
+            </div>--> 
+            <div class="clearfix"></div>
+          </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 ">
+          <div class="text-center" ng-show="loading"><br><img ng-src="./images/image.gif" class="loader-img"></div>
+          <div ng-show="!loading && !msg" class="well"><span class="glyphicon glyphicon-info-sign text-info"> </span> No se encontraron resultados</div>
+          <form name="addClasificacion">
+              <div>
+                  <span class="btn btn-primary" ng-click="veragregar()"><span class="glyphicon glyphicon-plus"> </span> Agregar</span>
+              </div>
+              <div class="well well-sm" ng-if="verform">
+                <div class="form-group">
+                  <label for="codigo" class="text-primary">Seleccione una clasificación general:<strong class="fg_red">*</strong></label><br>
+                  <select name="serv" class="form-control" ng-model="clasigral.cg_id" ng-options="clasigral.cg_id as clasigral.cg_nombre for clasigral in clasigral" required ng-change="buscagral(clasigral.cg_id)">
+                  <option value="">--Seleccione una opción--</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="codigo" class="text-primary">Seleccione una clasificación de especialidad:<strong class="fg_red">*</strong></label><br>
+                  <select name="serv" class="form-control" ng-model="sub.cle_id" ng-model="sub.cle_id" ng-options="cle.cle_id as cle.cle_nombre for cle in cle" required>
+                  <option value="">--Seleccione una opción--</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                    <label for="codigo" class="text-primary">Ingrese código:<strong class="fg_red">*</strong></label>
+                    <input type="" class="form-control" name="codigo" placeholder="Código" ng-model="sub_codigo" ng-model-options="{ updateOn: 'blur' }" required ng-pattern="patternCadenaNumero" >
+                    <span class="messages" ng-show="addClasificacion.codigo.$touched">
+                    <span ng-show="addClasificacion.codigo.$error.required">El campo es obligatorio.</span>
+                    <span ng-show="addClasificacion.codigo.$error.pattern">No se admiten símbolos especiales.</span>
+                    </span>
+                </div>
+                <div class="form-group">
+                    <label for="nombre" class="text-primary">Ingrese nombre:<strong class="fg_red">*</strong></label>
+                    <input type="" class="form-control" name="nombre" placeholder="Nombre" ng-model="sub_nombre" ng-model-options="{ updateOn: 'blur' }" required ng-pattern="patternCadenaNumero" >
+                    <span class="messages" ng-show="addClasificacion.nombre.$touched">
+                    <span ng-show="addClasificacion.nombre.$error.required">El campo es obligatorio.</span>
+                    <span ng-show="addClasificacion.nombre.$error.pattern">No se admiten símbolos especiales.</span>
+                    </span>
+                </div>
+                <div>
+                    <button class="btn btn-primary" ng-click="submit();reset(addClasificacion)" ng-disabled="addClasificacion.$invalid" title="Debe llenar todos los campos obligatorios de manera correcta"> 
+                      <span class="glyphicon glyphicon-save"></span> GUARDAR
+                    </button>
+                    <span class="btn btn-default" ng-click="reset(addClasificacion);veragregar()"><span class="glyphicon glyphicon-remove"> </span> Cancelar</span>
+                </div>
+              </div>
+          </form>
+          <div class="table-responsive">
+            
+            <table class="table table-bordered table-striped table-hover" ng-show="!loading && msg">
+              <thead >
+                <th class="text-primary text-center">
+                  <a href="" ng-click="sortType = 'cle_id'; sortReverse = !sortReverse">Código</a>
+                  <span ng-show="sortType == 'cle_codigo' && !sortReverse" class="glyphicon glyphicon-sort-by-order"></span>
+                  <span ng-show="sortType == 'cle_codigo' && sortReverse" class="glyphicon glyphicon-sort-by-order-alt"></span>
+                </th>
+                <th class="text-primary text-center">
+                  <a href="" ng-click="sortType = 'cle_nombre'; sortReverse = !sortReverse">Nombre 
+                  <span ng-show="sortType == 'cle_nombre' && !sortReverse" class="glyphicon glyphicon-sort-by-alphabet"></span>
+                  <span ng-show="sortType == 'cle_nombre' && sortReverse" class="glyphicon glyphicon-sort-by-alphabet-alt"></span></a>
+                </th>
+                <!-- <th class="text-primary">Ver</th> -->
+                <th class="text-primary text-center">Editar</th>
+                <th class="text-primary text-center">Eliminar</th>
+              </thead>
+              <tbody ng-repeat="subclacificacion in subclacificacion | orderBy:sortType:sortReverse | filter:cle_id">
+                <tr>
+                  <td>{{subclacificacion.sub_codigo | uppercase}}</td>
+                  <td>{{subclacificacion.sub_nombre}}</td>
+<!--                   <td>
+                    <a href="#/cle/ver/{{cle.cle_id}}" class="btn btn-success" title="Detalle"><span class="glyphicon glyphicon-file" title="Ver"></span></a>
+                  </td> -->
+                  <td class="text-center">
+                    <a class="btn btn-primary" title="Editar" data-toggle="modal" data-target="#ModalEdit" ng-click="get_id(subclacificacion.sub_id, subclacificacion.sub_codigo, subclacificacion.sub_nombre, subclacificacion.cle_id)">
+                    <span class="glyphicon glyphicon-pencil"></span></a>
+                    <div id="ModalEdit" class="modal fade" role="dialog" tabindex="-1">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header bg-red">
+                            <button type="button" class="close" data-dismiss="modal">×</button>
+                            <h4 class="modal-title  fg-white">MODIFICAR DATOS DE CLASIFICACIÓN</h4>
+                          </div>
+                          <div class="modal-body text-center">
+                            Ingrese los datos a modificar
+                            <br>
+                            <div class="row" align="center">
+                              <form>
+                                <div class="form-group col-md-12">
+                                  <label for="codigo" class="text-primary">Seleccione una clasificación general:<strong class="fg_red">*</strong></label><br>
+                                  <select name="serv" class="form-control" ng-model="clasigral.cg_id" ng-options="clasigral.cg_id as clasigral.cg_nombre for clasigral in clasigral" required ng-change="buscagral(clasigral.cg_id)">
+                                  <option value="">--Seleccione una opción--</option>
+                                  </select>
+                                </div>
+                                <div class="form-group col-md-12">
+                                  <label for="codigo" class="text-primary">Seleccione una clasificación de especialidad:<strong class="fg_red">*</strong></label><br>
+                                  <select name="serv" class="form-control" ng-model="cle_id" ng-options="cle.cle_id as cle.cle_nombre for cle in cle" required>
+                                  <option value="">--Seleccione una opción--</option>
+                                  </select>
+                                </div>
+                                <div class="col-md-12">
+                                    <label for="editcodigo" class="text-primary ">Ingrese código:<strong class="fg_red">*</strong></label>
+                                    <br><input type="text" name="editcodigo" ng-model="sub_codigo" class="form-control">
+                                </div>
+                                <div class="col-md-12">
+                                    <label for="editnombre" class="text-primary ">Ingrese nombre de subclasificación:<strong class="fg_red">*</strong></label>
+                                    <br><input type="text" name="editnombre" ng-model="sub_nombre" class="form-control">
+                                </div>
+                            </form>
+                            </div>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">
+                              <span class="glyphicon glyphicon-remove"></span> NO
+                            </button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="update(id, sub_codigo, sub_nombre, cle_id)">
+                              <span class="glyphicon glyphicon-ok"></span> SI
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="text-center">
+                    <button class="btn btn-danger" title="Borrar" data-toggle="modal" data-target="#miCuadroModal1" ng-click="get_id(subclacificacion.sub_id, subclacificacion.sub_codigo, subclacificacion.sub_nombre, subclacificacion.cle_id)" title="Eliminar"><span class="glyphicon glyphicon-trash"></span></button> <!--archivar -->
+                    <div id="miCuadroModal1" class="modal fade" role="dialog" tabindex="-1">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header bg-red">
+                            <button type="button" class="close" data-dismiss="modal">×</button>
+                            <h4 class="modal-title  fg-white">ELIMINAR REGISTRO DE CATEGORÍA</h4>
+                          </div>
+                          <div class="modal-body lead text-center">
+                            ¿Está seguro que desea eliminar el registro?
+                            <br>
+                            <div class="well well-sm">
+                              <strong>{{sub_codigo | uppercase}} {{sub_nombre | uppercase}}</strong>
+                            </div>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">
+                              <span class="glyphicon glyphicon-remove"></span> NO
+                            </button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="remove()">
+                              <span class="glyphicon glyphicon-ok"></span> SI
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <!-- FIN -->
+          <!-- AQUI VAN LOAS TABLAS O FORMULARIOS incrustados -->
+          
+          </div>
+        </div>
+
+    </div>

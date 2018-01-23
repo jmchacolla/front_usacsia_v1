@@ -1,0 +1,83 @@
+<div ng-include="'./templates/publico/menu_inicio_publico.html'"></div>
+<!-- CONTEXT-MENU  -->
+	<!-- CONTENIDO MODULO inicio -->
+	<div class="col-md-12">
+		<div class="row">
+			<div class="col-md-12">
+				<h2 class="text-primary text-center">
+					<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+					{{ajustes.pagina.titulo}}
+				</h2>
+				<hr class="bg-green">
+				<div class="lead text-center">
+				Consulte información sobre todos los establecimientos de Salud del Departamento de La Paz, como por ejemplo: servicios de salud, funcionarios, geolocalización, entre otros. 	
+				</div>
+			</div>
+		</div>
+		<!--HERRAMIENTAS PARA LA VISTA-->
+		<div class="row">
+			<div class="col-md-6 col-md-offset-3">
+			<div class="well text-center">
+				<form class="form-inline">
+				  <div class="form-group form-group-lg">
+					<div class="input-group">
+						<input type="text" class="form-control input-lg" placeholder="Buscar por nombre" ng-model="es_nombre">
+					  <div class="input-group-addon lead bg-green fg-white"><i class="glyphicon glyphicon-search"></i></div>
+					</div>
+				  </div>
+  
+				</form>
+			</div>
+			</div>
+		</div>
+		<!--FIN herramientas para la vista-->
+		<div class="row">
+			<div class="col-md-12">
+			<!-- AQUI VAN LAS TABLAS O FORMULARIOS incrustados -->
+			<!-- INICIO -->
+			<div class="text-center" ng-show="loading"><br><img ng-src="./images/image.gif" class="loader-img"></div>
+			<div class="text-center" ng-show="!loading && !msg">
+				<div class="alert alert-warning lead">
+				No se encontraron resultados
+				</div>
+			</div>
+			<div class="table-responsive">
+				<table class="table table-hovertable table-bordered table-striped table-hover" ng-show="!loading && msg">
+					<thead>
+						<th >Nº</th>
+						<th >
+							<a href="" ng-click="sortType = 'es_nombre'; sortReverse = !sortReverse">
+	                    	Nombre
+	                    	<span ng-show="sortType == 'es_nombre' && !sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+	                        <span ng-show="sortType == 'es_nombre' && sortReverse" class="glyphicon glyphicon-chevron-down"></span>
+	                        </a>
+						</th>
+						<th >Nivel</th>
+						<th >Horario</th>
+						<th >Dirección</th>
+						<th >Operación</th>
+					</thead>
+					<tbody ng-repeat="establecimiento in establecimientos | filter:es_nombre | orderBy:sortType:sortReverse">
+					  <tr>
+					  	<td>{{$index + 1}}</td>
+						<td> <a href="#/servicios_informacion/establecimientos_salud/{{establecimiento.es_id}}">{{establecimiento.es_nombre}}</a></td>
+						<td>{{establecimiento.es_nivel}}</td>
+						<td>{{establecimiento.es_inicio_atencion + " - " + establecimiento.es_final_atencion}}</td>
+						
+						<!--<td ng-if="establecimiento.es_zona_localidad_comuni == '' && establecimiento.es_avenida_calle == '' && establecimiento.es_numero == ''">---</td>-->
+						<td>{{establecimiento.es_zona_localidad_comuni + " " + establecimiento.es_avenida_calle + " " + establecimiento.es_numero}}</td>
+						<td>
+						  <a class="btn btn-primary btn-xs" href="#/servicios_informacion/establecimientos_salud/{{establecimiento.es_id}}">
+							Ver información
+						  </a>
+						</td>
+					  </tr>
+					</tbody>
+				</table>
+			</div>
+			<!-- FIN -->
+			<!-- AQUI VAN LOAS TABLAS O FORMULARIOS incrustados -->
+			</div>
+		</div>
+	</div>
+<!-- CONTENIDO MODULO fin -->

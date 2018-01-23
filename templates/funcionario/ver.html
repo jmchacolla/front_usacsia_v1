@@ -1,0 +1,154 @@
+<!-- TOP-MENU inicio -->
+<div ng-include="'./templates/menu_inicio.html'"></div>
+<!-- CONTEXT-MENU  -->
+<div ng-include="'./templates/menu_lateral.html'"></div>
+<!-- CONTENIDO MODULO inicio -->
+	<div class="col-md-8 col-sm-8">
+		<div class="row">
+			<div class="col-md-12">
+				<h2 class="text-primary">
+					<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+					{{ajustes.pagina.titulo}}
+				</h2>
+				<hr>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<!-- INICIO -->
+				<div class="well well-sm" style="background-color:#fff;" class="animated">
+		            <h4 class="text-center text-primary">I. DATOS GENERALES</h4>
+		            <hr class="bg-red">
+			        <br>
+				    <div class="row" >
+			          	<div class="col-md-3 col-sm-4 text-center">
+			          	<!--persona.imagen[0].ima_enlace / persona.imagen[0].ima_nombre -->
+			            	<img ng-src="{{funcionarios.imagen.ima_enlace}}/{{funcionarios.imagen.ima_nombre}}" class="img-thumbnail center">
+			          	</div>    
+			          	<div class="col-md-9 col-sm-8">
+			            	<div class="row">
+			              		<div class="col-md-4 col-sm-6">
+			                		<label class="text-primary">Nombre:</label><br>
+			                		{{persona.persona.per_nombres}}
+			              		</div>
+			              		<div class="col-md-4 col-sm-6">
+			                		<label class="text-primary">Apellido paterno:</label><br>
+			                		{{persona.persona.per_apellido_primero}}
+			              		</div>
+			              		<div class="col-md-4 col-sm-6">
+			                		<label class="text-primary">Apellido materno:</label><br>
+			                		{{persona.persona.per_apellido_segundo}}
+			                	</div>
+			            	</div>
+			            	<br>
+			            	<div class="row">
+			              		<div class="col-md-4 col-sm-6">
+			                		<label class="text-primary">Fecha de nacimiento:</label><br>
+			                		{{fecha_nac}}
+			                		
+			              		</div>
+			              		<div class="col-md-4 col-sm-6">
+			                		<label class="text-primary ">CI:</label><br>
+			                		{{persona.persona.per_ci + " "}} {{persona.persona.per_ci_expedido | uppercase}}
+			              		</div>
+			              		<div class="col-md-4 col-sm-6">
+			                		<label class="text-primary ">Genero:</label><br>
+			                		{{persona.persona.per_genero}}
+			              		</div>
+			            	</div>
+			            	<br>
+			            	<div class="row">
+								<div class="col-md-4 col-sm-6">
+			                		<label class="text-primary">Nro. Celular:</label><br>
+			                		{{persona.persona.per_numero_celular}}
+			              		</div>
+			              		 <div ng-show="persona.persona.per_email != null" class="col-md-4 col-sm-6 texto">
+					                <label class="text-primary">Email:</label>
+					                 {{persona.persona.per_email}}
+					           </div>
+					           <div class="col-md-4 col-sm-6 texto" ng-show="persona.persona.per_email == null">
+					                <label class="text-primary">Email:              
+					                    <div class="texto" ng-show="referencias.referencia.br_acomp == null"></div>NO TIENE
+					                  </label>
+					            </div>
+			              		<!-- <div class="col-md-4 col-sm-6 texto">
+			                		<label class="text-primary">Email:</label><br>
+			                		{{persona.persona.per_email}}
+			              		</div> -->
+			              		<div class="col-md-4 col-sm-6 texto">
+			                		<label class="text-primary">Ocupación:</label><br>
+			                		{{persona.persona.per_ocupacion}}
+			              		</div>
+			              	</div>
+			            	<br>
+			            	<div class="row">
+			              				
+			            	</div>
+			            	<br>
+			          	</div>    
+			        </div>
+		            <h4 class="text-center text-primary">II. DIRECCIÓN</h4>
+		            <hr class="bg-red">
+		        	<br>
+		        	<!--  ng-repeat="direccion in persona.direccion"-->
+		        	
+				        <div class="row">
+			          		<div class="col-md-3 col-sm-4">
+			            		<label class="text-primary">Zona:</label><br>
+			            		{{funcionarios.zona.zon_nombre}}
+			          		</div>    
+			          		<div class="col-md-3 col-sm-4">
+			            		<label class="text-primary">Calle/Avenida:</label><br>
+			            		{{funcionarios.persona.per_avenida_calle}}
+			          		</div>    
+			          		<div class="col-md-3 col-sm-4">
+			            		<label class="text-primary">Número:</label><br>
+			            		{{funcionarios.persona.per_numero}}
+			          		</div>    
+			        	</div> 
+			        	<br>
+			       
+			        <br>
+		            <h4 class="text-center text-primary">III. DATOS DEL FUNCIONARIO</h4>
+		            <hr class="bg-red">
+		        	<br>
+		        	<div class="row">
+		          		<div class="col-md-3 col-sm-4">
+		            		<label class="text-primary">Profesión:</label><br>
+		            		{{funcionarios.funcionario.fun_profesion}}
+		          		</div>
+		          		<div class="col-md-3 col-sm-4">
+		            		<label class="text-primary">Cargo:</label><br>
+		            		{{funcionarios.funcionario.fun_cargo}}
+		          		</div>
+		          		
+		          		<!--PARA CUANDO SE UTILIZEN LAS FECHAS
+		          		<div class="col-md-3 col-sm-4" ng-if="funcionarios.funcionario.fun_estado_laboral == 'permanente' || funcionarios.fun_estado_laboral == 'PERMANENTE'">
+		            		<label class="text-primary">Inicio trabajo:</label><br>
+		            		{{fecha_ini}}
+		          		</div>    
+		          		<div class="col-md-3 col-sm-4" ng-if="funcionarios.funcionario.fun_estado_laboral == 'contrato' || funcionarios.fun_estado_laboral == 'CONTRATO'">
+		            		<label class="text-primary">Inicio trabajo:</label><br>
+		            		{{fecha_ini}}
+		          		</div>    
+		          		<div class="col-md-3 col-sm-4" ng-if="funcionarios.funcionario.fun_estado_laboral == 'contrato' || funcionarios.fun_estado_laboral == 'CONTRATO'">
+		            		<label class="text-primary">Fin trabajo:</label><br>
+		            		{{fecha_fin}}
+		          		</div>
+		          		-->
+		          	<!-- 	<div class="col-md-3 col-sm-4" ng-if="funcionarios.funcionario_establecimiento.fe_estado_laboral == 'permanente' || funcionarios.funcionario_establecimiento.fe_estado_laboral == 'PERMANENTE'">
+		            		<label class="text-primary">Nro. Item/Contrato: </label><br>
+		            		{{funcionarios.funcionario_establecimiento.fe_memorandum}}
+		          		</div>    
+		          		<div class="col-md-3 col-sm-4" ng-if="funcionarios.funcionario_establecimiento.fe_estado_laboral == 'contrato' || funcionarios.funcionario_establecimiento.fe_estado_laboral == 'CONTRATO'">
+		            		<label class="text-primary">Nro. Item/Contrato: </label><br>
+		            		{{funcionarios.funcionario_establecimiento.fe_memorandum}}
+		          		</div>     -->
+			        </div> 
+		        	<br>
+			    </div>
+				<!-- FIN -->
+			</div>
+		</div>
+	</div>
+<!-- CONTENIDO MODULO fin -->

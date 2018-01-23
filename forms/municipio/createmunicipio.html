@@ -1,0 +1,136 @@
+<!-- TOP-MENU inicio -->
+<div ng-include="'./templates/menu_inicio.html'"></div>
+
+<!-- CONTEXT-MENU  -->
+	<div ng-include="'./templates/menu_lateral.html'"> </div>
+<!-- CONTENIDO MODULO inicio -->
+<div class="col-md-8 col-sm-8">
+    <div class="row">
+      <div class="col-md-12">
+        <h2 class="text-primary">
+          <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+          {{ajustes.pagina.titulo}}
+        </h2>
+        <hr>
+      </div>
+    </div>
+    <div class="row">
+      	<div class="col-md-12">
+  		<!-- AQUI VAN LAS TABLAS O FORMULARIOS incrustados -->
+  		<!-- INICIO -->
+  	
+	  			
+			<!-- CONTENIDO MODULO inicio -->
+			<form role="form" name="addMunicipio">
+				<div class="row">
+						<div class="col-md-4">
+							<div class="required-field-block">
+								<label for="nombre" class="control-label">Nombre del Municipio: <strong class="fg_red">*</strong></label>
+							    <input type="text" placeholder="Nombre del Municipio" ng-model="municipio.mun_nombre" class="form-control"></input>
+							    <div class="required-icon">
+							        <div class="text"></div>
+							    </div>
+							</div>
+						</div>
+						<div class="col-md-4">
+						 <div class="required-field-block">
+							<label for="sicemun" class="control-label">Código de SICE de Municipio: <strong class="fg_red">*</strong></label>
+							    <input type="text" placeholder="sicemun" ng-model="municipio.mun_cod_sice" class="form-control"></input>
+							    <div class="required-icon">
+							        <div class="text"></div>
+							    </div>
+							</div>
+						</div>
+						<div class="col-md-4">
+						 <div class="required-field-block">
+							<label for="sicepro" class="control-label">Código de SICE de Municipio: <strong class="fg_red">*</strong></label>
+							    <input type="text" placeholder="sicepro" ng-model="municipio.pro_cod_sice" class="form-control"></input>
+							    <div class="required-icon">
+							        <div class="text"></div>
+							    </div>
+							</div>
+						</div>
+						
+					</div>
+				
+					
+
+			<div class="row">
+				<div class="col-md-6">
+                  <div class="required-field-block">
+                  <label for="provincia" class="control-label">Provincia: <strong class="fg_red"></strong></label>
+                      <select class="form-control" name="provincia" ng-model="municipio.pro_id" ng-model-options="{ updateOn: 'blur' }" required >
+                        <option value="1">MURILLO</option>
+                        <option value="2">INGAVI</option>
+                        <option value="3">CARANAVI</option>
+                        <option value="4">AROMA</option>
+                        <option value="5">INQUISIVI</option>
+                        <option value="6">OMASUYOS</option>
+                        <option value="7">LARECAJA</option>
+                        <option value="8">MANGO KAPAC</option>
+                        <option value="9">MUÑECAS</option>
+                        <option value="10">PACAJES</option>
+                        <option value="11">GENERAL ELIODORO CAMACHO</option>
+                        <option value="12">FRANZ TAMAYO</option>
+                        <option value="13">LOAYZA</option>
+                        <option value="14">SUB YUNGAS</option>
+                        <option value="15">LOS ANDES</option>
+                        <option value="16">NOR YUNGAS</option>
+                        <option value="17">ABEL ITURRALDE</option>
+                        <option value="18">BAUTISTA SAAVEDRA</option>
+                        <option value="19">GUALBERTO VILLARROEL</option>
+                        <option value="20">GENERAL JOSE MANUEL PANDO</option>
+                        
+                      </select>
+                      <span class="messages" ng-show="addMunicipio.$submitted || addMunicipio.pro_id.$touched">
+                        <span ng-show="addMunicipio.pro_id.$error.required">El campo es obligatorio.</span>
+                      </span>
+                  </div>
+                </div>
+                	<div class="col-md-6">
+                  <div class="required-field-block">
+                  <label for="region" class="control-label">Región: <strong class="fg_red"></strong></label>
+                      <select class="form-control" name="region" ng-model="municipio.reg_id" ng-model-options="{ updateOn: 'blur' }" required >
+                        <option value="1">AMAZONIA</option>
+                        <option value="2">ALTIPLANO NORTE</option>
+                        <option value="3">ALTIPLANO SUR</option>
+                        <option value="4">VALLES NORTE</option>
+                        <option value="5">VALLE SUR</option>
+                        <option value="6">YUNGAS</option>
+                        <option value="7">REGIÓN METROPOLITANA</option>
+                       </select>
+                      <span class="messages" ng-show="addMunicipio.$submitted || addMunicipio.reg_id.$touched">
+                        <span ng-show="addMunicipio.reg_id.$error.required">El campo es obligatorio.</span>
+                      </span>
+                  </div>
+                </div>
+             </div>
+            
+
+					<hr>
+					<div class="row">
+						 <div class="col-md-2 col-md-offset-5 text-center">
+							<button class="btn btn-primary" ng-click="submit($parent.municipio)"><span class="glyphicon glyphicon-save"></span> {{$parent.ajustes.pagina.action}}</button>
+						</div>
+					</div>
+						
+
+					
+						
+					<!-- AQUI VAN LOS TABLAS O FORMULARIOS incrustados -->
+					
+					</div>
+					</div>
+				</div>
+			</form>
+			<!-- CONTENIDO MODULO fin -->
+			
+			
+		<p ng-show="$parent.ajustes.pagina.success" class="alert alert-success">{{$parent.ajustes.pagina.success}}</p>
+		</div> <!-- fin controlador de imagen -->
+
+		<!-- FIN -->
+		<!-- AQUI VAN LOAS TABLAS O FORMULARIOS incrustados -->
+	</div>
+</div>
+

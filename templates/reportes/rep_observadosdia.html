@@ -1,0 +1,47 @@
+<!-- TOP-MENU inicio -->
+<div ng-include="'./templates/menu_inicio.html'"></div>
+<!-- CONTEXT-MENU  -->
+  <div ng-include="'./templates/menu_lateral.html'">
+  </div>
+<!-- CONTENIDO MODULO inicio -->
+  <div class="col-md-8 col-sm-8">
+    <div class="row">
+      <div class="col-md-12">
+        <h2 class="text-primary">
+          <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+          {{ajustes.pagina.titulo}}
+     
+        </h2>
+        <hr>
+      </div>
+    </div>
+    <div class="col-md-12">
+    	<div class="panel panel-default">
+		    <h5>&nbsp;Apertura de historias cl&iacute;nicas y control de signos vitales del d&iacute;a <b>{{hoy}}</b></h5>
+		</div>
+		<button class="btn btn-default" onclick="generate_observado()"><span class="glyphicon glyphicon-save-file"></span> Exportar reporte en PDF</button>
+      	<br>
+      	<br>
+   		<div class="table-responsive" >
+   			<table  class="table table-bordered table-hover" id="tableREP">
+   				<thead  class="well well-sm">
+   					<th class="text-primary">Nro. muestra</th>
+   					<!-- <th class="text-primary">Carnet sanitario</th> -->
+   					<th class="text-primary">Nombre</th>
+   					<th class="text-primary">Resultado de prueba</th>
+   					<th class="text-primary">Responsable</th>
+   				</thead>
+   				<tbody ng-repeat="observado in observados">
+   					<tr>
+   						<td>{{observado.mue_num_muestra}}</td>
+   						<!-- <td>{{""}}</td> -->
+   						<td>{{observado.per_nombres +" "+observado.per_apellido_primero}}</td>
+   						<td>{{observado.pl_estado}}</td>
+   						<td>{{observado.responsable}}</td>
+   					</tr>
+   				</tbody>
+   			</table>
+	   	</div>
+
+    </div>
+

@@ -1,0 +1,59 @@
+<div ng-include="'./templates/menu_inicio.html'"></div>
+
+<!-- CONTENIDO MODULO inicio -->
+<div ng-include="'./templates/menu_lateral.html'"></div>
+<!-- CONTENIDO MODULO inicio -->
+	<div class="col-md-8 col-sm-8">
+		<div class="row">
+			<div class="col-md-12">
+				<img src="./images/banner_sesar.png" style="width:100%;" class="img-responsive img-thumbnail">
+				<hr>
+			</div>	
+		</div>	
+		<div class="row">
+			<div class="col-md-12">
+				<div class="panel panel-primary">
+				  <h3 class="text-primary text-center">SELECCIONAR FICHA INSPECCION</h3>
+				  <hr class="bg-red">
+				  <div class="panel-body lead text-justify">
+					  Seleccione ficha para el registro:
+					  <br><br>
+					  <!--  ng-if="admin_sedes_rol" -->
+					  <div class="text-center" >
+					  	<!-- <button type="button" class="btn btn-primary btn-lg col-md-offset-3 col-md-6 col-sm-12 col-xs-12" ng-click="selecciona_rol_admin_sedes()">INFORME NARRATIVO 1</button> -->
+					  	<a href="#/inspeccion/fichas/crear1">
+		                  <button type="button" data-toggle="modal"  class="btn btn-primary btn-lg col-md-offset-3 col-md-6 col-sm-12 col-xs-12"  ><span ></span> INFORME NARRATIVO 1</button>
+		                </a>
+					  	<br><br>
+					  </div>
+					  <!--ng-show="fun_rol && pac_rol"-->
+					  <div  class="text-center">
+					  	<button type="button" class="btn btn-primary btn-lg col-md-offset-3 col-md-6 col-sm-12 col-xs-12" ng-click="selecciona_rol_funcionario()">INFORME NARRATIVO 2</button>
+					  	
+					  	<br><br>
+					  </div>
+					  <!-- ng-if="admin_sedes_rol" -->
+					  <div class="text-center"  >
+					  	<button type="button" class="btn btn-primary btn-lg col-md-offset-3 col-md-6 col-sm-12 col-xs-12" ng-click="selecciona_rol_admin_sedes()">FORMULARIO DE INPECCION (RESTAURANTES)</button>
+					  	<br><br>
+					  </div>
+					  <div class="text-center" >
+					  	<button type="button" class="btn btn-primary btn-lg col-md-offset-3 col-md-6 col-sm-12 col-xs-12" ng-click="selecciona_rol_admin_sedes()">FICHA DE CALIFICACIÓN PARA HORNOS DE PANIFICACIÓN</button>
+					  	<br><br>
+					  </div>
+					  <div class="text-center"  >
+					  	<button type="button" class="btn btn-primary btn-lg col-md-offset-3 col-md-6 col-sm-12 col-xs-12" ng-click="selecciona_rol_admin_sedes()">FICHA DE CONTROL PARA SAUNAS</button>
+					  	<br><br>
+					  </div>
+					  <div class="text-center" >
+					  	<button type="button" class="btn btn-primary btn-lg col-md-offset-3 col-md-6 col-sm-12 col-xs-12" ng-click="selecciona_rol_admin_sedes()">FICHA DE CALIFICACIÓN DE FABRICAS DE BEBIDAS GASEOSAS Y ALCOHOLICAS</button>
+					  	<br><br>
+					  </div>
+	
+					 
+				  </div>
+				</div>
+			</div>	
+		</div>
+	</div>
+<!-- CONTENIDO MODULO fin -->

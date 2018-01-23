@@ -1,0 +1,159 @@
+<!-- TOP-MENU inicio -->
+<div ng-include="'./templates/menu_inicio.html'"></div>
+<!-- CONTEXT-MENU -->
+<div ng-include="'./templates/menu_lateral.html'"></div>
+<!-- CONTENIDO MODULO inicio -->
+<div class="col-md-8 col-sm-8">
+    <div class="row">
+        <div class="col-md-12" >
+            <h2 class="text-primary">
+                <span class="glyphicon glyphicon-th-large" aria-hidden="true"></span>
+                {{ajustes.pagina.titulo}}
+            </h2>
+            <hr class="bg-red">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+        <!-- AQUI VAN LOAS TABLAS O FORMULARIOS incrustados -->
+            <div class="well well-sm" style="background-color: #fff;">
+                <div class="row">
+                    <div class="col-md-12" id="datos">
+                        <h4 class="text-center text-primary">I. DATOS GENERALES</h4>
+                        <hr class="bg-red">
+                        <div class="col-md-4 col-sm-6">
+                            <label class="text-primary control-label">Propietario:</label>
+                            <span>{{propietario}}</span>
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                            <label class="text-primary control-label">Establecimiento:</label>
+                            <span>{{establecimiento.est_sol.ess_razon_social}}</span>
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                            <label class="text-primary control-label">Zona:</label>
+                            <span>{{establecimiento.zona.zon_nombre}}</span>
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                            <label class="text-primary control-label">Avenida/Calle:</label>
+                            <span>{{establecimiento.est_sol.ess_avenida_calle}}</span>
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                                <label class="text-primary control-label">Número:</label>
+                                <span>{{establecimiento.est_sol.ess_numero}}</span>
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                            <label class="text-primary control-label">Stand:</label>
+                            <span ng-if="establecimiento.est_sol.ess_stand !=''">
+                                {{establecimiento.est_sol.ess_stand}}</span>
+                            <span ng-if="establecimiento.est_sol.ess_stand ==''">---</span>
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                            <label class="text-primary control-label">Tipo:</label>
+                                {{establecimiento.est_sol.ess_tipo}} 
+                         </div>
+                        <div class="col-md-4 col-sm-6">
+                                <label class="text-primary control-label">Número de trámite:</label>
+                                {{emptra.et_numero_tramite}}
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                                <label class="text-primary control-label">Kardex:</label>
+                                <span ng-if="establecimiento.empresa.emp_kardex">{{establecimiento.empresa.emp_kardex}}</span>
+                                <span ng-if="!establecimiento.empresa.emp_kardex">POR DESIGNAR</span>
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                                <label class="text-primary control-label">Inicio de trámite:</label>
+                                {{emptra.et_fecha_ini}}
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                                <label class="text-primary control-label">Número de NIT:</label>
+                                <span ng-if="establecimiento.empresa.emp_nit">{{establecimiento.empresa.emp_nit}}</span>
+                                <span ng-if="!establecimiento.empresa.emp_nit">PENDIENTE</span>
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                                <label class="text-primary">Lic. de funcionamiento:</label>
+                                {{establecimiento.empresa.emp_licencia}}
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-sm-12">
+                        <div class="table-responsive">
+                            <table class="table table-hovertable table-bordered table-striped table-hover"  id="tablaArancel">
+                                <thead>
+                                    <caption class="text-primary text-center">ARANCEL</caption>
+                                    <th class="text-primary text-center">Nro.</th>
+                                    <th class="text-primary text-center">Arancel</th>
+                                    <th class="text-primary text-center">Monto (Bs.)</th>
+                                </thead>
+                                <tbody >
+                                  <tr ng-repeat="pagoa in pagoa | orderBy:sortType:sortReverse">
+                                    <td class="text-center">{{$index+1}}</td>
+                                    <td class="text-center">{{pagoa.pa_descripcion}}</td>
+                                    <td align="right">{{pagoa.pa_monto  | number:2}}</td>
+                                  </tr>
+                                <!-- </tbody> -->
+                                <!-- <tbody>
+                                    <tr>
+                                        <td class="text-primary text-center" colspan="2">Total:</td>
+                                        <td align="right">Bs. {{parciales.arancel | number:2}}</td>
+                                    </tr>
+                                </tbody> -->
+                           <!--  </table>
+                        </div>
+                        <div ng-if='cantsancion<=0' class="well">
+                            <span class="glyphicon glyphicon-ok-sign text-success"> </span> No se registraron sanciones.
+                        </div>
+                        <div class="table-responsive" ng-if='cantsancion>0'>
+                            <table class="table table-hovertable table-bordered table-striped table-hover"  id="tablaES"> -->
+                                <tr>
+                                    <td></td>
+                                    <td class="text-primary text-center" colspan="">SANCIONES</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <th class="text-primary text-center">Nro.</th>
+                                    <th class="text-primary text-center">Categoria</th>
+                                    <th class="text-primary text-center">Monto (Bs.)</th>
+                                </tr>
+                                <tbody >
+                                  <tr ng-repeat="pagos in pagos | orderBy:sortType:sortReverse">
+                                    <td class="text-center">{{$index+1}}</td>
+                                    <td class="text-center">{{pagos.ps_descripcion }}</td>
+                                    <td align="right">{{pagos.ps_monto | number:2}}</td>
+                                  </tr>
+                                <!-- </tbody> -->
+                                <!-- <tbody>
+                                    <tr>
+                                        <td class="text-primary text-center" colspan="2">Total:</td>
+                                        <td align="right">Bs {{parciales.sancion | number:2}}</td>
+                                    </tr>
+                                </tbody> -->
+                           <!--  </table>
+                        </div>
+                        <div class="table-responsive" >
+                            <table class="table table-hovertable table-bordered table-striped table-hover" id="total">
+                                <tbody> -->
+                                    <tr>
+                                        <td colspan="" rowspan="" headers=""></td>
+                                        <td class="text-primary text-center" colspan=""><strong>Total a cancelar:</strong></td>
+                                        <td align="right" class="lead"><strong>Bs. {{ordenpago.op_monto_total | number:2}}</strong></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-sm-12" align="center" ng-if="tramitecerestado.te_estado=='ASIGNADO'">
+                        <span class="btn btn-primary" ng-click="pagarorden()"><span class="glyphicon glyphicon-plus-sign"> </span> REGISTRAR PAGO</span>
+                        <a class="btn btn-default" href="#/buscar-propietario"><span class="glyphicon glyphicon-remove"> </span> CANCELAR</a>
+                    </div>
+                    <div class="col-md-12">
+                    <hr>
+                      <div align="center" ng-if="tramitecerestado.te_estado=='APROBADO'">
+                         <button type="button" class="btn btn-default" onclick="ordenPago()" >IMPRIMIR PAGO  <span class="glyphicon glyphicon-open-file"></span></button>
+                         <button type="button"  class="btn btn-default" ng-click="downloadOrdenPDF()">Descargar PDF PAGO  <span class="glyphicon glyphicon-download-alt"></span></button>
+                      </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,390 @@
+<!-- TOP-MENU inicio -->
+<div ng-include="'./templates/menu_inicio.html'"></div>
+<!-- CONTEXT-MENU  -->
+  <div ng-include="'./templates/menu_lateral.html'"></div>
+   <div class="col-md-8 col-sm-8">     
+      <div class="row">
+        <div class="col-md-12">
+          <h2 class="text-primary">
+            <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+            {{ajustes.pagina.titulo}}
+          </h2>
+          <hr>
+        </div>
+      </div>
+      <!-- CONTENIDO MODULO inicio -->
+      <div class="well well-sm" style="background-color:#fff;" ng-controller="UploadCiudCtrl as vista">
+          <!-- B U S C A    P E R S O N A  -->
+          <div ng-controller="apiAppCtrl as vm">
+              <div class="well well-sm text-justify" style="background-color:#ACE4D6;">
+                  <h4><center><span class="text-primary"><strong>Agregar familiar de :  </strong></span><strong>{{persona_fam.nombre  +"  "+persona_fam.apellido_p +"  "+persona_fam.apellido_m}}</strong></center></h4>
+              </div>
+              <div class="well well-sm" ng-show="mg">
+                <div class="row">
+                  <div class="col-md-8">
+                    <label>Ingrese el número de carnet de la persona a registrar, y pulse el boton buscar.</label>
+                  </div>                   
+                </div>
+                <div class="row">
+                  <div class="  col-md-4">
+                      <strong class="pull-center lead">  Buscar por (<strong >C.I.</strong>): &nbsp;</strong>
+                  </div>
+                  <div class=" col-md-4">
+                      <input class="form-control input-lg" ng-model="vm.per_ci"  type="text" placeholder="Filtrar por CI">  
+                  </div>
+                  <div class="col-md-4">
+                    <button class="btn btn-primary btn-lg" ng-click="vm.buscaPersona()"><span class="glyphicon glyphicon-search"></span><strong> BUSCAR</strong></button>
+                  </div>
+                </div>  
+              </div>
+              <div ng-show="msg">
+                <center>RESULTADOS {{tamanio}}<br></center>
+                <hr>
+                  <p ng-show="$parent.ajustes.pagina.success" class="alert alert-success fade in">{{$parent.ajustes.pagina.success}}
+                      <button type="button" class="close" data-dismiss="alert">&times;</button>
+                  </p>
+                <br>
+                <div ng-controller="CreateFamiliarCtrl">
+                  <div class="table-responsive">
+                    <table class="table table-bordered table-striped table-hover">
+                      <thead>
+                        <th>C.I.</th>
+                        <th>NOMBRES</th>
+                        <th>APELLIDO PATERNO</th>
+                        <th>APELLIDO MATERNO</th>
+                        <th>AGREGAR</th>
+                      </thead>
+                      <tbody>
+                        <tr ng-repeat="personas in vm.personas">
+                          <td>{{personas.per_ci}}</td>
+                          <td>{{personas.per_nombres}}</td>
+                          <td>{{personas.per_apellido_primero}}</td>
+                          <td>{{personas.per_apellido_segundo}} </td>
+                          <td>
+                            <button class="btn btn-primary" class="col-md-5" data-toggle="modal" data-target="#miCuadroModal1" ng-click="get(personas.per_id, persona_fam.per_id)">
+                            <span class="glyphicon glyphicon-user"></span>  AGREGAR FAMILIAR</button>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                
+
+
+                <!--CUADRO MODAL PARA REVISO DE DATOS   ng-click="submit($parent.persona, d)" -->
+                  <div id="miCuadroModal1" class="modal fade" role="dialog" tabindex="-1">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header bg-green">
+                            <button type="button" class="close" data-dismiss="modal">×</button>
+                            <h4 class="modal-title fg-white"><strong>AGREGAR FAMILIAR</strong></h4>
+                          </div>
+                          <center><h3><span  class="text-center text-primary">AGREGAR A:</span> 
+                          {{personaF.persona.per_nombres+" "+personaF.persona.per_apellido_primero+" "+personaF.persona.per_apellido_segundo}}</h3></center>
+                          <div class="modal-body text-center">
+                            <h3 class="text-center text-primary">CON PARENTESCO DE:</h3>
+                             <div class="row">
+                                <div class="text-center  col-md-offset-4  col-md-4">
+                                  <select class="form-control" ng-model="familiar.fam_parentesco" >
+                                      <option value="MADRE">MADRE</option>
+                                      <option value="PADRE">PADRE</option>
+                                      <option value="TUTOR(A)">TUTOR(A)</option>
+                                      <option value="HIJO(A)">HIJO(A)</option>
+                                      <option value="HERMANO(A)">HERMANO(A)</option>
+                                  </select>
+                                </div>
+                              </div>
+                          </div>
+                        <div class="modal-footer lead text-center">
+                          <button class="btn btn-primary" class="col-md-5" data-dismiss="modal" ng-click="submit(persona_fam.per_id,personaF.persona.per_id,familiar.fam_parentesco)" ><span class="glyphicon glyphicon-user"></span>  AGREGAR </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!--FIN CUADRO MODAL-->
+              </div> <!-- fin msg --> 
+              <div ng-show="msg1">
+                <center>RESULTADOS 0 <br><br></center>
+                  <h4 class="text-center text-primary">I. DATOS GENERALES</h4>
+                  <hr class="bg-green">   
+                <label class="control-label">Los campos marcados con asterisco (<strong class="fg_red">*</strong>) son obligatorios</label>
+                <div ng-controller="FechaFunCtrl">
+                  <form role="form"  name="addPersona" novalidate>
+                        <div class="row">
+                          <div class="col-md-3">
+                            <br>
+                            <div ng-if="thumbnail.dataUrl ==''" style="height:190px !important; overflow:auto;">
+                                <img ng-src="./images/perfil.jpg" align="center" class="img-responsive img-thumbnail"/>
+                            </div>
+                            <div ng-if="thumbnail.dataUrl !=''" style="height:190px !important; overflow:auto;">
+                                <img ng-src="{{thumbnail.dataUrl}}" align="center" class="img-responsive img-thumbnail"/>
+                            </div>
+                            <div class="clearfix">
+                            </div>
+                            <br>
+                            <div class="form-group">
+                              <label>Cargar Imagen</label>
+                              <input type="file" name="fileInput" id ="fileInput" class="filestyle" data-buttonText="Find file"  file-model="vista.ima_nombre" onchange="angular.element(this).scope().photoChanged(this.files)" />
+                              <input type="hidden" name="" ng-model="persona.ima_nombre" value="{{persona.ima_nombre}}">
+                              <br>
+                            </div> 
+                          </div>    
+                          <div class="col-md-9">
+                            <div class="row">
+                              <div class="col-md-6">
+                                <label class="control-label ">CI: <strong class="fg_red">*</strong></label>
+                                <input type="text" class="form-control" name="ci" placeholder="Ej. 9999988" ng-model="vm.per_ci" ng-model-options="{ updateOn: 'blur' }" required  min="100000">
+                                <span class="messages" ng-show="addPersona.$submitted || addPersona.ci.$touched">
+                                  <span ng-show="addPersona.ci.$error.required">El campo es obligatorio.</span>
+                                  <span ng-show="addPersona.ci.$error.min">Número de CI incorrecto.</span>
+                                </span>
+                              </div> 
+                              <div class="col-md-6">
+                                <label class="control-label ">Expedido: <strong class="fg_red">*</strong></label>
+                                <select class="form-control" name="ci_expedido" ng-model="persona.per_ci_expedido" ng-model-options="{ updateOn: 'blur' }" required >
+                                  <option value="LP">La Paz</option>
+                                  <option value="OR">Oruro</option>
+                                  <option value="PT">Potosi</option>
+                                  <option value="PA">Pando</option>
+                                  <option value="BN">Beni</option>
+                                  <option value="SC">Santa Cruz</option>
+                                  <option value="CB">Cochabamba</option>
+                                  <option value="CH">Chuquisaca</option>
+                                  <option value="TJ">Tarija</option>
+                                </select>
+                                <span class="messages" ng-show="addPersona.$submitted || addPersona.ci_expedido.$touched">
+                                  <span ng-show="addPersona.ci_expedido.$error.required">El campo es obligatorio.</span>
+                                </span>
+                              </div> 
+                            </div>
+                            <br>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <label for="nombre" class="control-label">Nombre: <strong class="fg_red">*</strong></label>
+                                <input class="form-control" name="nombres" type="text" placeholder="Nombre" ng-model="persona.per_nombres" ng-model-options="{ updateOn: 'blur' }" required ng-pattern="patternCadena" autofocus>
+                                <span class="messages" ng-show="addPersona.nombres.$touched">
+                                  <span ng-show="addPersona.nombres.$error.required">El campo es obligatorio.</span>
+                                  <span ng-show="addPersona.nombres.$error.pattern">No se admiten símbolos especiales o números.</span>
+                                </span>
+                              </div>
+                              <div class="col-md-4">
+                                <label for="nombre" class="control-label">Apellido paterno: <strong class="fg_red">*</strong></label>
+                                <input class="form-control" name="apellido_primero" type="text" placeholder="Apellido paterno" ng-model="persona.per_apellido_primero" ng-model-options="{ updateOn: 'blur' }" required ng-pattern="patternCadena">
+                                <span class="messages" ng-show="addPersona.$submitted || addPersona.apellido_primero.$touched">
+                                  <span ng-show="addPersona.apellido_primero.$error.required">El campo es obligatorio.</span>
+                                  <span ng-show="addPersona.apellido_primero.$error.pattern">No se admiten símbolos especiales o números.</span>
+                                </span>
+                              </div>
+                              <div class="col-md-4">
+                                <label for="nombre" class="control-label">Apellido materno: <strong class="fg_red">*</strong></label>
+                                <input class="form-control" name="apellido_segundo" type="text" placeholder="Apellido materno" ng-model="persona.per_apellido_segundo" ng-model-options="{ updateOn: 'blur' }" required ng-pattern="patternCadena">
+                                <span class="messages" ng-show="addPersona.$submitted || addPersona.apellido_segundo.$touched">
+                                  <span ng-show="addPersona.apellido_segundo.$error.required">El campo es obligatorio.</span>
+                                  <span ng-show="addPersona.apellido_segundo.$error.pattern">No se admiten símbolos especiales o números.</span>
+                                </span>
+                              </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                              <div class="col-md-6">
+                                <label for="fecha_creacion" class="control-label">Fecha de nacimiento: <strong class="fg_red">*</strong></label>
+                                <div class="row">
+                                  <div class="col-md-4">
+                                    <div class='input-group date'>
+                                      </div>
+                                        <select class="form-control" name="dia" ng-model="fechaNac.diac" ng-change="rest()" ng-options="dia.dia_id as dia.dia for dia in dias"   required>
+                                          <option value="">Dia</option>
+                                        </select>
+                                  </div>
+                                  <div class="col-md-4">
+                                    <select class="form-control" aria-label="MES" title="Mes" name="mes" ng-model="fechaNac.mesc" Rng-change="rest()" required placeholder="MES">
+                                      <option value="">Mes</option>
+                                      <option value="1">Enero</option>
+                                      <option value="2">Febrero</option>
+                                      <option value="3">Marzo</option>
+                                      <option value="4">Abril</option>
+                                      <option value="5">Mayo</option>
+                                      <option value="6">Junio</option>
+                                      <option value="7">Julio</option>
+                                      <option value="8">Agosto</option>
+                                      <option value="9">Septiembre</option>
+                                      <option value="10">Octubre</option>
+                                      <option value="11">Noviembre</option>
+                                      <option value="12">Diciembre</option>
+                                    </select>
+                                  </div>
+                                <div class="col-md-4">
+                                  <select class="form-control" name="anio" aria-label="ANIO" ng-model="fechaNac.anioc" ng-change="rest()" ng-options="anio.anio as anio.anio for anio in anios"   required autofocus>
+                                     <option value="">Año</option>
+                                  </select>
+                                   <input my-valid-date ng-model="fechaNacimiento" name="myDateInput" placeholder="dd-mm-aaaa" type="hidden" class="form-control" ng-model-options="{ updateOn: 'blur' }" ng-pattern="patternFecha" readonly>
+                                   <input type="hidden" ng-model="d">
+                                </div>  
+                                </div> 
+                                   <span class="messages" ng-show="addPersona.myDateInput">
+                                      <span ng-show="addPersona.myDateInput.$error.pattern">La Fecha no es valida  :(.
+                                      </span>
+                                      <div ng-if=" var == 'cero'">
+                                        <span ng-show="addPersona.myDateInput.$error">No es una fecha correcta :(.  
+                                        </span>
+                                      </div>                  
+                                   </span>  
+                              </div>
+                              <div class="col-md-6">
+                                <label class="control-label">Sexo: <strong class="fg_red">*</strong></label>
+                                  <div class="row">
+                                    <div class="formulario">
+                                      <div class="radio">
+                                        <div class="col-md-6">
+                                          <input type="radio" name="genero" id="M" value="M" ng-model="persona.per_genero">
+                                          <label for="M">Masculino</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                          <input type="radio" name="genero" id="F" value="F" ng-model="persona.per_genero">
+                                          <label for="F">Femenino</label>
+                                        </div>
+                                        <span class="messages" ng-show="addPersona.$submitted || addPersona.genero.$touched">
+                                          <span ng-show="addPersona.genero.$error.required">El campo es obligatorio.</span>
+                                        </span>
+                                      </div>
+                                    </div>
+                                 </div>
+                              </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <label class="control-label">Email:</label>
+                                <input type="email" class="form-control" name="email" placeholder="ejemplo@hotmail.com" ng-model="persona.per_email" ng-model-options="{ updateOn: 'blur' }">
+                                <span class="messages" ng-show="addPersona.$submitted || addPersona.email.$touched">
+                                  <span ng-show="addPersona.email.$error.required">El campo es obligatorio.</span>
+                                  <span ng-show="addPersona.email.$error.email">Formato de email incorrecto.</span>
+                                </span>
+                              </div>
+                              <div class="col-md-4">
+                                <label class="control-label">Nro. Celular: </label>
+                                <input type="number" class="form-control" name="numero_celular" placeholder="Ej. 78989898" ng-model="persona.per_numero_celular" ng-model-options="{ updateOn: 'blur' }" min="60000000" max="79999999">
+                                <span class="messages" ng-show="addPersona.$submitted || addPersona.numero_celular.$touched">
+                                  <span ng-show="addPersona.numero_celular.$error.required">El campo es obligatorio.</span>
+                                  <span ng-show="addPersona.numero_celular.$error.min">Número de celular incorrecto.</span>
+                                  <span ng-show="addPersona.numero_celular.$error.max">Número de celular incorrecto.</span>
+                                </span>
+                              </div>
+                              <div class="col-md-4">
+                                <label class="control-label">Permanencia:<strong class="fg_red">*</strong></label>
+                                <select class="form-control" name="tipo_permanencia" ng-model="persona.per_tipo_permanencia" required>
+                                    <option value="RESIDENTE">RESIDENTE</option>
+                                    <option value="VISITANTE RECURRENTE NACIONAL">VISITANTE RECURRENTE NACIONAL</option>
+                                    <option value="VISITANTE EVENTUAL NACIONAL">VISITANTE EVENTUAL NACIONAL</option>
+                                    <option value="VISITANTE RECURRENTE EXTRANJERO">VISITANTE RECURRENTE EXTRANJERO</option>
+                                    <option value="VISITANTE EVENTUAL EXTRANJERO">VISITANTE EVENTUAL EXTRANJERO</option>
+                                </select>
+                                <span class="messages" ng-show="addPersona.$submitted || addPersona.tipo_permanencia.$touched">
+                                  <span ng-show="addPersona.tipo_permanencia.$error.required">El campo es obligatorio.</span>
+                                </span>
+                              </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-6">
+                                  <label class="control-label">PARENTESCO :<strong class="fg_red">*</strong></label>
+                                  <select class="form-control" name="parentesco" ng-model="persona.fam_parentesco" required>
+                                    <option>MADRE</option>
+                                    <option>PADRE</option>
+                                    <option>TUTOR(A)</option>
+                                  </select>
+                                  <span class="messages" ng-show="addPersona.$submitted || addPersona.parentesco.$touched">
+                                    <span ng-show="addPersona.parentesco.$error.required">El campo es obligatorio.</span>
+                                  </span>
+                                </div>
+                            </div>
+                          </div>    
+                        </div>
+                        <br>
+                        <h4 class="text-center text-primary">II. DOMICILIO</h4>
+                        <hr class="bg-green">   
+                        <br>   
+                        <div class="row">
+                          <div class="col-md-3" ng-controller="MunicipioCtrl">
+                            <label class="control-label">Municipio: <strong class="fg_red">*</strong></label>
+                            <select class="form-control" name="municipio" ng-model="persona.mun_id"  ng-options="municipio.mun_id as municipio.mun_nombre for municipio in municipios"  ng-model-options="{ updateOn: 'blur' }" required >
+                            </select>
+                            <span class="messages" ng-show="addPersona.municipio.$touched">
+                              <span ng-show="addPersona.municipio.$error.required">El campo es obligatorio.</span>
+                            </span>
+                          </div>     
+                          <div class="col-md-3">
+                            <label class="control-label">Zona/Comunidad: <strong class="fg_red">*</strong></label>
+                            <input type="" class="form-control" name="zona_comunidad" placeholder="zona comunidad" ng-model="persona.dir_zona_comunidad" ng-model-options="{ updateOn: 'blur' }" required ng-pattern="patternCadenaNumero">
+                            <span class="messages" ng-show="addPersona.zona_comunidad.$touched">
+                              <span ng-show="addPersona.zona_comunidad.$error.required">El campo es obligatorio.</span>
+                              <span ng-show="addPersona.zona_comunidad.$error.pattern">No se admiten símbolos especiales.</span>
+                            </span>
+                          </div>  
+                          <div class="col-md-3">
+                            <label class="control-label">Calle/Avenida: <strong class="fg_red">*</strong></label>
+                            <input type="" class="form-control" name="avenida_calle" placeholder="avenida calle" ng-model="persona.dir_avenida_calle" ng-model-options="{ updateOn: 'blur' }" required ng-pattern="patternCadenaNumero" >
+                            <span class="messages" ng-show="addPersona.avenida_calle.$touched">
+                              <span ng-show="addPersona.avenida_calle.$error.required">El campo es obligatorio.</span>
+                              <span ng-show="addPersona.avenida_calle.$error.pattern">No se admiten símbolos especiales.</span>
+                            </span>
+                          </div>
+                          <div class="col-md-3">
+                            <label class="control-label">Número:<strong class="fg_red">*</strong></label>
+                            <input type="text" class="form-control" name="numero_dir" placeholder="Número" ng-model="persona.dir_numero" pattern="[0-9]{1,8}" required>
+                            <span class="messages" ng-show="addPaciente.$submitted || addPaciente.numero_dir.$touched">
+                                <span ng-show="addPersona.numero_dir.$error.required">El campo es obligatorio.</span>
+                                <span ng-show="addPersona.numero_dir.$error.pattern">El formato introducido es incorrecto.</span>
+                            </span>
+                          </div>  
+                        </div> 
+                        <br> 
+                        <br>     
+                        <div class="row">
+                          <div class="col-md-6 col-md-offset-3 text-center">
+                            <div class="well well-sm">
+                              <div class="checkbox">
+                                <label style="font-size: 1.5em">
+                                  <input type = "checkbox" ng-model = "para_enviar" title="Haga click aqui para habilitar o deshabilitar el envío del formulario"> 
+                                  <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
+                                  <small style="font-size: 0.6em" class="text-primary" title="Haga click en la casilla de verificación del lado para registrar al familiar del paciente">
+                                    <span class="glyphicon glyphicon-hand-left"></span>
+                                    <span class="glyphicon glyphicon-chevron-left"></span>
+                                    ¿DESEA GUARDAR ESTE FORMULARIO?
+                                  </small>
+                                </label>
+                              </div>
+                              <br>
+                              <button ng-show = "para_enviar" class="btn btn-primary" ng-click="submit($parent.persona,d,vm.per_ci);vista.enviar();reset(addPersona)" ng-disabled="addPersona.$invalid" title="Debe llenar todos los campos obligatorios de manera correcta"><span class="glyphicon glyphicon-save"></span> GUARDAR</button>
+                            </div>      
+                          </div>
+                        </div> 
+                  </form> 
+                </div>  <!-- FIN DEL CONTROLADOR FECHA   -->
+              </div>
+          </div>
+          <!--  F I N    B U S C A    P E R S O N A  -->
+      </div>  <!-- FIN div class="well well-sm" -->
+      <script type="text/javascript">
+        $(":file").filestyle({buttonText: " Abrir"});
+         //$('#fileInput').filestyle({buttonName : 'btn-warning'});
+      </script>
+  </div>
+
+<p ng-show="$parent.ajustes.pagina.success" class="alert alert-success" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  {{$parent.ajustes.pagina.success}}
+</p>
+
+<style type="text/css">
+.cont {
+width: 96%;
+max-width: 960px;
+margin: 0 auto;
+}
+img {
+width: 100%;
+height: auto;
+}
+</style>

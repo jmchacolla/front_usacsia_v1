@@ -1,0 +1,93 @@
+<!-- TOP-MENU inicio -->
+<div ng-include="'./templates/menu_inicio.html'"></div>
+
+<!-- CONTEXT-MENU  -->
+	<div ng-include="'./templates/menu_lateral.html'"> </div>
+<!-- CONTENIDO MODULO inicio -->
+<div class="col-md-8 col-sm-8">
+    <div class="row">
+      <div class="col-md-12">
+        <h2 class="text-primary">
+          <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+          {{ajustes.pagina.titulo}}
+        </h2>
+        <hr>
+      </div>
+    </div>
+    <div class="row">
+      	<div class="col-md-12">
+  		<!-- AQUI VAN LAS TABLAS O FORMULARIOS incrustados -->
+  		<!-- INICIO -->
+  	
+	  			
+			<!-- CONTENIDO MODULO inicio -->
+			<form role="form" name="addDepartamento">
+				<div class="row">
+					<div class="col-md-12">
+					<!-- AQUI VAN LAS TABLAS O FORMULARIOS incrustados -->
+					<!-- INICIO -->
+					<div class="well well-sm" style="background-color:#fff;">
+						<div class="row">
+							<div class="col-md-12">
+								<div class="cabecerapanel panel-heading text-center">DATOS DEL DEPARTAMENTO</div>
+							</div>	
+						</div>
+						
+							
+					
+						<div class="row">
+						<div class="col-md-12">
+							<div class="required-field-block">
+								<label for="nombre" class="control-label">Nombre del Departamento: <strong class="fg_red"></strong></label>
+							    <input type="text" placeholder="Nombre del Departamento" ng-model="departamento.dep_nombre" class="form-control"></input>
+							    <div class="required-icon">
+							        <div class="text"></div>
+							    </div>
+							</div>
+						</div>
+						
+					</div>
+				
+					
+					<hr>
+					<div class="row">
+						 <div class="col-md-2 col-md-offset-5 text-center">
+							<button class="btn btn-primary" ng-click="submit($parent.departamento)"><span class="glyphicon glyphicon-save"></span> {{$parent.ajustes.pagina.action}}</button>
+						</div>
+					</div>
+						
+
+					
+						
+					<!-- AQUI VAN LOS TABLAS O FORMULARIOS incrustados -->
+					
+					</div>
+					</div>
+				</div>
+			</form>
+			<!-- CONTENIDO MODULO fin -->
+			
+			
+		<p ng-show="$parent.ajustes.pagina.success" class="alert alert-success">{{$parent.ajustes.pagina.success}}</p>
+		</div> <!-- fin controlador de imagen -->
+
+		<!-- FIN -->
+		<!-- AQUI VAN LOAS TABLAS O FORMULARIOS incrustados -->
+	</div>
+</div>
+
+<!-- CONTENIDO MODULO fin -->
+
+<!-- http://bootsnipp.com/snippets/featured/required-field-styling-with-tooltip -->
+<!--  
+<h1>{{$parent.settings.pageTitle}}</h1>
+<p ng-show="$parent.settings.success" class="alert alert-success">{{$parent.settings.success}}</p>
+
+<div class="required-field-block">
+    <input type="text" placeholder="Nombre del Departamento" ng-model="departamento.dep_nombre" class="form-control"></input>
+    <div class="required-icon">
+        <div class="text">*</div>
+    </div>
+</div>
+<button class="bt
+n btn-primary" ng-click="submit($parent.departamento)">{{$parent.settings.action}}</button> -->

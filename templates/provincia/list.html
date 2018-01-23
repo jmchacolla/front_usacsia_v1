@@ -1,0 +1,72 @@
+<!-- TOP-MENU inicio -->
+<div ng-include="'./templates/menu_inicio.html'"></div>
+<!-- CONTEXT-MENU  -->
+    <div ng-include="'./templates/menu_lateral.html'"> </div>
+    
+<!-- CONTENIDO MODULO inicio -->
+    <div class="col-md-8 col-sm-8">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="text-primary">
+                    <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+                   {{ajustes.pagina.titulo}}
+                </h2>
+                <hr>
+            </div>
+        </div>
+        <!--HERRAMIENTAS PARA LA VISTA-->
+        <div class="row">
+            <div class="col-md-12">
+            <div class="well well-sm">
+               <strong class="pull-left lead">Herramientas: &nbsp;</strong>
+                <form class="form-inline pull-left">
+                <input type="text" class="form-control" placeholder="Filtrar por nombre de provincias" ng-model="pro_nombre">
+                </form>
+            <div class="clearfix"></div>
+                
+            </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+            <!-- AQUI VAN LAS TABLAS O FORMULARIOS incrustados -->
+            <!-- INICIO -->
+            <div class="table-responsive">
+                <div class="text-center" ng-show="loading"><br><img ng-src="./images/image.gif" class="loader-img"></div>
+                <div ng-show="!loading && !msg">No se encontraron resultados</div>
+            
+                <table class="table table-hovertable table-bordered table-striped table-hover" ng-show="!loading && msg" id="tablaES">
+                     <thead>
+                        <th class="text-primary">
+                            <a href="" ng-click="sortType = 'pro_nombre'; sortReverse = !sortReverse">
+                            Nombre Provincia
+                            <span ng-show="sortType == 'pro_nombre' && !sortReverse" class="glyphicon glyphicon-sort-by-alphabet"></span>
+                         <span ng-show="sortType == 'pro_nombre' && sortReverse" class="glyphicon glyphicon-sort-by-alphabet-alt"></span>
+                            </a>
+                        </th>
+                        <th class="text-primary">Código de SICE</th>
+                        <th class="text-primary">Codigo Departamento</th>
+                        
+                        
+                    </thead>
+                    <tbody ng-repeat="provincias in provincias | orderBy:sortType:sortReverse | filter:pro_nombre">
+                    
+                      <tr>
+                        
+                        <td>{{provincias.pro_nombre | uppercase}}</td>
+                        <td>{{provincias.pro_cod_sice}}</td>
+                        <td>{{provincias.dep_id}}</td>
+                      
+                            <!--FIN CUADRO MODAL-->
+                        </td>
+
+                        
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- FIN -->
+            <!-- AQUI VAN LOAS TABLAS O FORMULARIOS incrustados -->
+            </div>
+        </div>
+    </div>

@@ -1,0 +1,491 @@
+$dpc:#00796B;
+$pc:#009688;
+$lpc:#B2DFDB;
+$ti:#FFFFFF;
+$ac:#009688;
+$pt:#212121;
+$st:#757575;
+$dvc:#BDBDBD;
+$negro:#000000;
+$altura-cabecera:80px;
+/*login-------------------------------------------------------------*/
+.card-container.card {
+    max-width: 350px;
+    padding: 20px 40px 40px 40px;
+}
+
+.btn {
+    font-weight: 700;
+    height: 36px;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+    cursor: default;
+}
+
+/*
+ * Card component
+ */
+.card {
+    background-color: #F7F7F7;
+    /* just in case there no content*/
+    padding: 20px 25px 30px;
+    margin: 0 auto 25px;
+    margin-top: 50px;
+    /* shadows and rounded borders */
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    -webkit-box-shadow: 4px 6px 10px -1px rgba(0,0,0,0.59);
+    -moz-box-shadow: 4px 6px 10px -1px rgba(0,0,0,0.59);
+    box-shadow: 4px 6px 10px -1px rgba(0,0,0,0.59);
+}
+/*
+ * Form styles
+ */
+.profile-name-card {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    margin: 0px 0 20px 0;
+    min-height: 1em;
+    color: $pc;
+}
+
+.reauth-email {
+    display: block;
+    color: #404040;
+    line-height: 2;
+    margin-bottom: 10px;
+    font-size: 14px;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.form-signin #inputEmail,
+.form-signin #inputText,
+.form-signin #inputPassword {
+    direction: ltr;
+    height: 44px;
+    font-size: 16px;
+}
+
+.form-signin input[type=email],
+.form-signin input[type=password],
+.form-signin input[type=text],
+.form-signin button {
+    width: 100%;
+    display: block;
+    margin-bottom: 10px;
+    z-index: 1;
+    position: relative;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.form-signin .form-control:focus {
+    border-color: rgb(104, 145, 162);
+    outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgb(104, 145, 162);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgb(104, 145, 162);
+}
+
+.btn.btn-signin {
+    background-color:$dpc;
+    padding: 0px;
+    font-weight: 700;
+    height: 36px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    border: none;
+}
+
+.btn.btn-signin:hover,
+.btn.btn-signin:active,
+.btn.btn-signin:focus {
+    background-color: $pc;
+    color: $ti;
+    -webkit-box-shadow: 6px 7px 5px -2px rgba(0,150,135,0.37);
+    -moz-box-shadow: 6px 7px 5px -2px rgba(0,150,135,0.37);
+    box-shadow: 6px 7px 5px -2px rgba(0,150,135,0.37);
+}
+
+.forgot-password {
+    color: rgb(104, 145, 162);
+}
+
+/*buscador------------------------------------------------------------*/
+.iconos-content, .buscador{
+  text-align: center;
+}
+// -----------------iconos-----------------------------------------------
+
+// -----------------/iconos----------------------------------------------
+
+// ------------------------------------------------------------------------------
+// -----------------menu navegacion----------------------------------------------
+// ------------------------------------------------------------------------------
+// fotoperfil
+.img-perfil{
+
+  padding: 5px;
+  text-align:center;
+  img{
+    width: 90%;
+  }
+}
+
+.nav-side-menu {
+  overflow: auto;
+  background-color: $dpc;
+  position: absolute;
+  top: 0px;
+  width: 200px;
+  color: $ti;
+  // bordes redondeados---------------------------------
+  border-radius: 5px 5px 5px 5px;
+  -moz-border-radius: 5px 5px 5px 5px;
+  -webkit-border-radius: 5px 5px 5px 5px;
+  // sombras -------------------------------------------
+  border: 0px solid #000000;
+  -webkit-box-shadow: 4px 6px 10px -1px rgba(0,0,0,0.59);
+  -moz-box-shadow: 4px 6px 10px -1px rgba(0,0,0,0.59);
+  box-shadow: 4px 6px 10px -1px rgba(0,0,0,0.59);
+}
+.nav-side-menu .brand {
+  background-color: $dpc;
+  line-height: 50px;
+  display: block;
+  text-align: center;
+  font-size: 14px;
+}
+.nav-side-menu .toggle-btn {
+  display: none;
+}
+.nav-side-menu ul,
+.nav-side-menu li {
+  list-style: none;
+  padding: 0px 0px 0px 0px;
+  margin: 0px;
+  line-height: 40px;
+  cursor: pointer;
+      
+    .collapsed{
+       .arrow2{
+                 display: inline-block;
+                 padding-left:10px;
+                 padding-right: 10px;
+                 
+                 padding-top:10px;
+                 float:right;
+            }
+        .arrow{
+              display: none;
+                 padding-left:10px;
+                 padding-right: 10px;
+                 
+                 padding-top:10px;
+                 float:right;
+        }
+     }
+
+}
+.nav-side-menu .toggle-btn {
+	font-size:24px;
+	padding-right:10px;
+}
+.nav-side-menu li :not(collapsed) .arrow2{
+  display: none;
+  padding-left: 10px;
+  padding-right: 10px;
+  
+  padding-top:10px;
+  float: right;
+}
+
+.nav-side-menu ul :not(collapsed) .arrow,
+.nav-side-menu li :not(collapsed) .arrow, .arrow2{
+  display: inline-block;
+  padding-left: 10px;
+  padding-right: 10px;
+  
+  padding-top:10px;
+  float: right;
+}
+.nav-side-menu ul .active,
+.nav-side-menu li .active {
+  border-left: 3px solid $lpc;
+  background-color: $ac;
+}
+.nav-side-menu ul .sub-menu li,
+.nav-side-menu li .sub-menu li {
+  background-color: $dpc;
+  border: none;
+  line-height: 28px;
+  border-bottom: 1px solid $dpc;
+  margin-left: 0px;
+}
+.nav-side-menu ul .sub-menu li:hover,
+.nav-side-menu li .sub-menu li:hover {
+  background-color: $ac;
+}
+.nav-side-menu ul .sub-menu li span,
+.nav-side-menu li .sub-menu li span {
+  display: inline-block;
+  padding-left: 20px;
+  padding-right: 10px;
+
+}
+.nav-side-menu li {
+  padding-left: 0px;
+  border-left: 3px solid $dpc;
+
+}
+.nav-side-menu li a {
+  text-decoration: none;
+  color: #e1ffff;
+}
+.nav-side-menu li a i {
+  padding-left: 10px;
+  width: 20px;
+  padding-right: 35px;
+  font-size: 18px;
+}
+.nav-side-menu li:hover {
+  border-left: 3px solid $lpc;
+  background-color: $ac;
+}
+@media (max-width: 767px) {
+  .nav-side-menu {
+
+    position: relative;
+    width: 98%;
+    margin-bottom: 10px;
+  }
+  .nav-side-menu .toggle-btn {
+    display: block;
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    z-index: 10 !important;
+    padding: 3px;
+    background-color: $pc;
+    color: #fff;
+    width: 40px;
+    text-align: center;
+    margin-right: 10px;
+  }
+  .brand {
+    text-align: left !important;
+    font-size: 22px;
+    padding-left: 20px;
+    line-height: 50px !important;
+  }
+  .img-perfil{
+    display: none;
+  }
+  body{
+		margin: 5px;
+	}
+}
+@media (min-width: 767px) {
+	body{
+		margin: 5px;
+	}
+  .nav-side-menu .menu-list .menu-content {
+    display: block;
+  }
+  //   .img-perfil{
+  //   display: none;
+  // }
+
+}
+@media (min-width: 1024px) { 
+  body {
+		  margin-left: 80px;
+      margin-right : 80px;
+  		padding: 0px;
+	}
+  
+}
+// -------------------------------------------------------------------
+// contenedor contenido-----------------------------------------------
+// -------------------------------------------------------------------
+.contenido{
+  // margin-left: 20px
+    text-align: center;
+}
+// -------------------------------------------------------------------
+// /cabecera----------------------------------------------------------
+// -------------------------------------------------------------------
+@media (min-width: 767px)  { 
+  .cabecera{
+  margin-left:5px;
+  display: none;
+  }
+  .cuerpo{
+    margin-left:5px;
+    width: 100%;
+    padding-left:100px;
+  }
+}//media (min-width: 767px)
+@media (max-width: 767px){
+    .cabecera{
+  margin-left:5px;
+  display: none;
+  }
+}
+@media (min-width: 1024px) { 
+.cabecera{
+  width: 100%;
+  margin-left:20px;
+  display: inline-block;
+  img{
+    width: 100%;
+    height: 50%;
+  }
+}
+  
+}
+
+.cuerpo{
+  margin-left:20px;
+  // text-align: center;
+
+}
+
+.logo{
+width: 300px;
+height: auto;
+}
+hr {
+background-color: $dpc;
+height: 3px;
+color: $dpc;
+}
+.iconos-content{
+  a:hover{
+    text-decoration: none;
+    color: $st; 
+  }
+}
+.icono-btn {
+  position: relative;
+  display: inline-block;
+  width: 90px;
+  height: 80px;
+  padding-top: 16px;
+  margin: 10px;
+  color: $dvc;
+  text-align: center;
+  text-decoration: none;
+
+  i{
+    font-size: 30px;
+
+  }
+}
+.icono-btn .label {
+  position: absolute;
+  top: 3px;
+  right: 5px;
+}
+
+.emergencia{
+  // color: #ffffff;
+  // background-color: #a264e7;
+  
+  animation-name: parpadeo;
+  animation-duration: 1s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+
+  -webkit-animation-name:parpadeo;
+  -webkit-animation-duration: 1s;
+  -webkit-animation-timing-function: linear;
+  -webkit-animation-iteration-count: infinite;
+}
+
+@-moz-keyframes parpadeo{  
+  0% { opacity: 1.0; }
+  50% { opacity: 0.0; }
+  100% { opacity: 1.0; }
+}
+
+@-webkit-keyframes parpadeo {  
+  0% { opacity: 1.0; }
+  50% { opacity: 0.0; }
+   100% { opacity: 1.0; }
+}
+
+@keyframes parpadeo {  
+  0% { opacity: 1.0; }
+   50% { opacity: 0.0; }
+  100% { opacity: 1.0; }
+}
+// -------------------------------------------------------------------
+/*cuerpo -------------------------------------------------------*/
+// -------------------------------------------------------------------
+.tabla-cuerpo{
+  margin-top:20px;
+      // sombras -------------------------------------------
+  border: 0px solid #000000;
+  -webkit-box-shadow: 4px 6px 10px -1px rgba(0,0,0,0.59);
+  -moz-box-shadow: 4px 6px 10px -1px rgba(0,0,0,0.59);
+  box-shadow: 4px 6px 10px -1px rgba(0,0,0,0.59);
+  .table{
+    thead{
+      tr th{
+        background-color:$dpc;
+        color: $lpc;
+      }
+    }
+  }
+}
+// boton
+.btn-resaltar{
+  background-color:$dpc;
+  color:$ti;
+
+}
+.btn-resaltar:hover {
+    background-color:$pc;
+    color:$ti;
+    -webkit-box-shadow: 6px 7px 5px -2px rgba(0,150,135,0.37);
+    -moz-box-shadow: 6px 7px 5px -2px rgba(0,150,135,0.37);
+    box-shadow: 6px 7px 5px -2px rgba(0,150,135,0.37);
+  }
+
+//cabecerapanel
+.cabecerapanel{
+  background-color:$dpc;
+  color:$ti;
+}
+.titulo{
+  color:$pc;
+}
+.form-group{
+  padding-top:5px;
+}
+// -----------------formularios----------------------------
+.form-group{
+  margin-bottom: 20px;
+  div{
+    margin: 5px 0 5px 0;
+    .control-label{
+      text-align: left;
+    }
+  }
+
+}
+.control-label{
+  text-align: left;
+}

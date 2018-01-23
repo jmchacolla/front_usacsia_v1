@@ -1,0 +1,102 @@
+<!-- TOP-MENU inicio -->
+<div ng-include="'./templates/menu_inicio.html'"></div>
+<!-- CONTEXT-MENU -->
+<div ng-include="'./templates/menu_lateral.html'"></div>
+<!-- CONTENIDO MODULO inicio -->
+<div class="col-md-8 col-sm-8" >
+  <div class="row">
+    <div class="col-md-12">
+      <h2 class="text-primary">
+        <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+        {{ajustes.pagina.titulo}}
+      </h2>
+      <hr class="bg-red">
+    </div>
+  </div>
+
+    <div class="well well-sm" style="background-color:#fff;">
+      <div class="row">
+        <div class="col-md-12">
+          <h3 class="text-center text-primary">
+           I. Boleta de pago
+          </h3>
+          <hr class="bg-red">
+        </div>
+            <div class="col-md-12" ng-show="establecimiento.propietario.pjur_id">
+              <div class="col-md-6 col-sm-12">
+                <label class="text-primary">Razón Social del Propietario:</label>
+                {{establecimiento.propietario.pjur_razon_social}}
+              </div>
+              <div class="col-md-6 col-sm-12">
+                <label class="text-primary">C.I./NIT:</label>
+                {{establecimiento.propietario.pjur_nit}}
+              </div>
+            </div>
+            <div class="col-md-12" ng-show="establecimiento.propietario.per_id">
+              <div class="col-md-6 col-sm-12">
+                <label class="text-primary">Nombre completo:</label>
+                {{establecimiento.propietario.per_nombres}} {{establecimiento.propietario.per_apellido_primero}} {{establecimiento.propietario.per_apellido_segundo}}
+              </div>
+              <div class="col-md-6 col-sm-12">
+                <label class="text-primary">C.I./NIT:</label>
+                {{establecimiento.propietario.per_ci}} {{establecimiento.propietario.per_ci_expedido}}
+              </div>
+            </div>
+            <hr>
+
+          <div class="col-md-12">
+            <div class="col-md-6 col-sm-12">
+              <label class="text-primary">Razón Social del Establecimiento:</label>
+              {{establecimiento.establecimiento_sol.ess_razon_social}}
+            </div>
+            <div class="col-md-6 col-sm-12">
+              <label class="text-primary">Número de trámite:</label>
+              {{establecimiento.empresa_tramite.et_numero_tramite}}
+            </div>
+            <div class="col-md-6 col-sm-12">
+              <label class="text-primary">Kardex:</label>
+              {{establecimiento.empresa.emp_kardex}}
+            </div>
+            <div class="col-md-6 col-sm-12">
+              <label class="text-primary">Municipio:</label>
+              {{establecimiento.municipio.mun_nombre}}
+            </div>
+            <div class="col-md-6 col-sm-12">
+              <label class="text-primary">Zona:</label>
+              {{establecimiento.zona.zon_nombre}}
+            </div>
+            <div class="col-md-6 col-sm-12">
+              <label class="text-primary">Avenida/Calle:</label>
+              {{establecimiento.establecimiento_sol.ess_avenida_calle}}
+            </div>
+            <div class="col-md-6 col-sm-12">
+              <label class="text-primary">Número:</label>
+              {{establecimiento.establecimiento_sol.ess_numero}}
+            </div>
+            <div class="col-md-6 col-sm-12">
+              <label for="tra" class="control-label text-primary">Por:</label>
+               INICIO DE TRÁMITE {{tramite.tra_nombre}}
+            </div>
+            <div class="col-md-6 col-sm-12">
+              <label class="text-primary">Unidad de:</label>
+              {{tramite.tra_nombre}}
+            </div>
+            <div class="col-md-6 col-sm-12">
+              <label class="control-label text-primary">Monto a cancelado:</label>
+              Bs. {{establecimiento.empresa_tramite.et_monto | number:2}}
+            </div>
+          </div>
+        <!-- </div> -->
+        <div class="col-md-12">
+        <hr>
+          <div align="center">
+             <button type="button" class="btn btn-default" ng-click="openPdfF1()" >IMPRIMIR PAGO  <span class="glyphicon glyphicon-open-file"></span></button>
+             <button type="button"  class="btn btn-default" ng-click="downloadPdfF1()">Descargar PDF PAGO  <span class="glyphicon glyphicon-download-alt"></span></button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+      
+
+</div>

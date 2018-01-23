@@ -1,0 +1,100 @@
+<!-- TOP-MENU inicio -->
+<div ng-include="'./templates/menu_inicio.html'"></div>
+
+<!-- CONTEXT-MENU  -->
+	<div ng-include="'./templates/menu_lateral.html'"> </div>
+<!-- CONTENIDO MODULO inicio -->
+<div class="col-md-8 col-sm-8">
+    <div class="row">
+      <div class="col-md-12">
+        <h2 class="text-primary">
+          <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+          {{ajustes.pagina.titulo}}
+        </h2>
+        <hr>
+      </div>
+    </div>
+    <div class="row">
+      	<div class="col-md-12">
+  		<!-- AQUI VAN LAS TABLAS O FORMULARIOS incrustados -->
+  		<!-- INICIO -->
+  		<div ng-controller="UploadEstCtrl as vista"> 
+	  		<div ng-controller="FechaEstCtrl">
+	  			
+			<!-- CONTENIDO MODULO inicio -->
+			<form role="form" name="addSuplemento">
+				<div class="row">
+					<div class="col-md-12">
+					<!-- AQUI VAN LAS TABLAS O FORMULARIOS incrustados -->
+					<!-- INICIO -->
+					<div class="well well-sm" style="background-color:#fff;">
+						<div class="row">
+							<div class="col-md-12">
+								<div class="cabecerapanel panel-heading text-center">DATOS DE LA VACUNA</div>
+							</div>	
+						</div>
+						
+							
+					
+						<div class="row">
+						<div class="col-md-6">
+							<div class="required-field-block">
+								<label for="nombre" class="control-label">Nombre de la vacuna: <strong class="fg_red"></strong></label>
+							    <input type="text" placeholder="Nombre de la vacuna" ng-model="vacuna.vac_nombre" class="form-control"></input>
+							    <div class="required-icon">
+							        <div class="text"></div>
+							    </div>
+							</div>
+						</div>
+						<div class="col-md-6">
+							
+							<div class="required-field-block">
+							<label for="nombre" class="control-label">Cantidad de dosis de vacuna: <strong class="fg_red"></strong></label>
+							    <input type="text" placeholder="Cantidad de Dosis" ng-model="vacuna.vac_cant_dosis" class="form-control"></input>
+							    <div class="required-icon">
+							        <div class="text"></div>
+							    </div>
+							</div>
+						</div>
+					</div>
+				
+					<div class="row">
+						<div class="col-md-12">
+							<div class="required-field-block">
+							<label for="nombre" class="control-label">Descripcion de vacuna: <strong class="fg_red"></strong></label>
+							    <textarea class="form-control" style="resize: vertical;min-height:70px;max-height: 150px;" ng-model="vacuna.vac_descripcion">Descripcion de suplemento</textarea>
+							    <div class="required-icon">
+							        <div class="text"></div>
+							    </div>
+							</div>
+						</div>
+					</div>
+					<hr>
+					<div class="row">
+						 <div class="col-md-2 col-md-offset-5 text-center">
+							<button class="btn btn-primary" ng-click="submit($parent.departamento)"><span class="glyphicon glyphicon-save"></span> {{$parent.ajustes.pagina.action}}</button>
+						</div>
+					</div>
+						
+
+					
+						
+					<!-- AQUI VAN LOS TABLAS O FORMULARIOS incrustados -->
+					
+					</div>
+					</div>
+				</div>
+			</form>
+			<!-- CONTENIDO MODULO fin -->
+			
+			</div>
+		</div>
+		<p ng-show="$parent.ajustes.pagina.success" class="alert alert-success">{{$parent.ajustes.pagina.success}}</p>
+		</div> <!-- fin controlador de imagen -->
+
+		<!-- FIN -->
+		<!-- AQUI VAN LOAS TABLAS O FORMULARIOS incrustados -->
+	</div>
+</div>
+
+<!-- CONTENIDO MODULO fin -->

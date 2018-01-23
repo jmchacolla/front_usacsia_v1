@@ -1,0 +1,120 @@
+<!-- TOP-MENU inicio -->
+<div ng-include="'./templates/menu_inicio.html'"></div>
+<!-- CONTEXT-MENU  -->
+    <div ng-include="'./templates/menu_lateral.html'"> </div>
+    
+<!-- CONTENIDO MODULO inicio -->
+    <div class="col-md-8 col-sm-8">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="text-primary">
+                    <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+                   {{ajustes.pagina.titulo}}
+                </h2>
+                <hr>
+            </div>
+        </div>
+        <!--HERRAMIENTAS PARA LA VISTA-->
+        <div class="row">
+            <div class="col-md-12">
+            <div class="well well-sm">
+               <strong class="pull-left lead">Herramientas: &nbsp;</strong>
+                <form class="form-inline pull-left">
+                <input type="text" class="form-control" placeholder="Filtrar por nombre de municipios" ng-model="pro_nombre">
+                </form>
+            <div class="clearfix"></div>
+                
+            </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="text-primary">
+                   Nuevo Municipio &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                   <a href="#/createmunicipio" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> AGREGAR</a>
+                </h3>
+                <hr>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+            <!-- AQUI VAN LAS TABLAS O FORMULARIOS incrustados -->
+            <!-- INICIO -->
+            <div class="table-responsive">
+                <div class="text-center" ng-show="loading"><br><img ng-src="./images/image.gif" class="loader-img"></div>
+                <div ng-show="!loading && !msg">No se encontraron resultados</div>
+            
+                <table class="table table-hovertable table-bordered table-striped table-hover" ng-show="!loading && msg" id="tablaES">
+                     <thead>
+                        <th class="text-primary">
+                            <a href="" ng-click="sortType = 'mun_nombre'; sortReverse = !sortReverse">
+                            Nombre Municipio
+                                <span ng-show="sortType == 'mun_nombre' && !sortReverse" class="glyphicon glyphicon-sort-by-alphabet"></span>
+                                <span ng-show="sortType == 'mun_nombre' && sortReverse" class="glyphicon glyphicon-sort-by-alphabet-alt"></span>
+                            </a>
+                        </th>
+                        <th class="text-primary">Código de SICE Municipio</th>
+                        <th class="text-primary">Codigo de SICE provincia</th>
+                        <th class="text-primary">Provincia</th>
+                        <th class="text-primary">Region</th>
+                        <th class="text-primary">Editar</th>
+                        <th class="text-primary">Borrar</th>
+                        
+                    </thead>
+                    <tbody ng-repeat="municipios in municipios | orderBy:sortType:sortReverse | filter:mun_nombre">
+                    
+                      <tr>
+                        
+                        <td>{{municipios.mun_nombre | uppercase}}</td>
+                        <td>{{municipios.mun_cod_sice}}</td>
+                        <td>{{municipios.pro_cod_sice}}</td>
+                        <td>{{municipios.pro_id}}</td>
+                        <td>{{municipios.reg_id}}</td>
+
+                        <td>
+                                <a href="#/editmunicipio/{{municipios.mun_id}}" class="btn btn-primary">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                </a>                                               
+                        </td>
+                        <td>
+                              <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#miCuadroModal1" ng-click="get_mun_id(municipios.mun_id, municipios.mun_nombre)" title="Eliminar">
+                              <span class="glyphicon glyphicon-trash"></span>
+                              </button>
+                            </div>
+                            <!--CUADRO MODAL-->
+                            <div id="miCuadroModal1" class="modal fade" role="dialog" tabindex="-1">
+                              <div class="modal-dialog">
+                                <div class="modal-content">
+                                  <div class="modal-header bg-green">
+                                    <button type="button" class="close" data-dismiss="modal">×</button>
+                                    <h4 class="modal-title fg-white">ELIMINAR MUNICIPIO</h4>
+                                  </div>
+                                  <div class="modal-body lead text-center">
+                                    ¿Esta seguro que desea eliminar este Municipio?
+                                    <br>
+                                    <div class="well well-sm">
+                                        <strong>{{nombre | uppercase}}</strong>
+                                    </div>
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                                        <span class="glyphicon glyphicon-remove"></span>
+                                        NO</button>
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="remove()"><span class="glyphicon glyphicon-ok"></span> SI</button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <!--FIN CUADRO MODAL-->
+                        </td>
+
+                        
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- FIN -->
+            <!-- AQUI VAN LOAS TABLAS O FORMULARIOS incrustados -->
+            </div>
+        </div>
+    </div>

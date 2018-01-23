@@ -1,0 +1,134 @@
+<!-- TOP-MENU inicio  -->
+<div ng-include="'./templates/menu_inicio.html'"></div>
+
+<!-- CONTEXT-MENU  -->
+	<div ng-include="'./templates/menu_lateral.html'">
+	</div>
+	<!-- CONTENIDO MODULO inicio -->
+	<div class="col-md-8 col-sm-8">
+		<div class="row">
+			<div class="col-md-12">
+				<h2 class="text-primary">
+					<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+					{{ajustes.pagina.titulo}}
+				</h2>
+				<hr>
+			</div>
+		</div>
+		<!--HERRAMIENTAS PARA LA VISTA-->
+		<!--
+		<div class="row">
+			<div class="col-md-12">
+			<div class="well well-sm">
+				<strong class="pull-left lead">Herramientas: &nbsp;</strong>
+				&nbsp;&nbsp;
+				<button class="btn btn-default">Exportar en PDF</button>
+			</div>
+			</div>
+		</div>
+		-->
+		<!--FIN herramientas para la vista-->
+		<div class="row">
+			<div class="col-md-12">
+			<!-- AQUI VAN LAS TABLAS O FORMULARIOS incrustados -->
+			
+			<!-- INICIO -->
+			<div ng-show="loading" class="text-center"><br><img ng-src="./images/image.gif"></div>
+			<div ng-show="!loading && !msg">No se encontraron resultados</div>
+			<div class="well well-sm" style="background-color:#fff;" ng-show="persona!=null" class="animated">
+				<h4 class="text-center text-primary">I. DATOS PERSONALES</h4>
+				<hr class="bg-red">
+			    <div class="row"><!--  ng-repeat="imagen in persona.imagen"-->
+		          	<div class="col-md-3 col-sm-4 col-xs-8 text-center" >
+		            	<img width="100%" max-height="100px" ng-src="{{persona.imagen.ima_enlace}}/{{persona.imagen.ima_nombre}}" class="img-thumbnail center">
+		          	</div>    
+		          	<div class="col-md-9 col-sm-8 col-xs-12">
+		            	<div class="row">
+		              		<div class="col-md-4 col-sm-6 col-xs-6">
+		                		<label class="control-label">Nombres:</label><br>
+		                		{{persona.persona.per_nombres}}
+		              		</div>
+		              		<div class="col-md-4 col-sm-6 col-xs-6">
+		                		<label class="control-label">Apellido paterno:</label><br>
+		                		{{persona.persona.per_apellido_primero}}
+		              		</div>
+		              		<div class="col-md-4 col-sm-6 col-xs-6">
+		                		<label class="control-label">Apellido materno:</label><br>
+		                		{{persona.persona.per_apellido_segundo}}
+		                	</div>
+		            	</div>
+		            	<br>
+		            	<div class="row">
+		              		<div class="col-md-4 col-sm-6 col-xs-6">
+		                		<label class="control-label">Fecha de nacimiento:</label><br>
+		                		{{fecha_nac}}
+		                		
+		              		</div>
+		              		<div class="col-md-4 col-sm-6 col-xs-6">
+		                		<label class="control-label ">CI:</label><br>
+		                		{{persona.persona.per_ci + " "}} {{persona.persona.per_ci_expedido | uppercase}}
+		              		</div>
+		              		<div class="col-md-4 col-sm-6 col-xs-6">
+		                		<label class="control-label ">Genero:</label><br>
+		                		{{persona.persona.per_genero}}
+		              		</div>
+		            	</div>
+		            	<br>
+		            	<div class="row">
+		              		<div class="col-md-4 col-sm-6 col-xs-6 texto">
+		                		<label class="control-label">Email:</label><br>
+		                		{{persona.persona.per_email}}
+		              		</div>
+		              		<div class="col-md-4 col-sm-6 col-xs-6">
+		                		<label class="control-label">Nro. Celular:</label><br>
+		                		{{persona.persona.per_numero_celular}}
+		              		</div>
+		              		<div class="col-md-4 col-sm-6 col-xs-6 texto">
+		                		<label class="control-label">Ocupacion:</label><br>
+		                		{{persona.persona.per_ocupacion}}
+		              		</div>
+		              		<!-- <div class="col-md-4 col-sm-6 col-xs-6">
+		                		<label class="control-label">Tipo Permanencia:</label><br>
+		                		{{persona.persona.per_tipo_permanencia | capitalize}}
+		              		</div> -->
+		            	</div>
+		            	<!-- <div class="row">
+		              		<div class="col-md-4 col-sm-6 col-xs-6 texto">
+		                		<label class="control-label">Ocupacion:</label><br>
+		                		{{persona.persona.per_ocupacion}}
+		              		</div>
+		              		
+		            	</div> -->
+		            	<br>
+		          	</div>    
+		        </div>
+				<h4 class="text-center text-primary">II. DIRECCIÓN</h4>
+				<hr class="bg-red"> 
+	        	<div>  
+			        <div class="row">
+		          		<div class="col-md-3 col-sm-4 col-xs-6">
+		            		<label class="control-label">Zona/Comunidad:</label><br>
+		            		{{persona.zona.zon_nombre}}
+		          		</div>    
+		          		<div class="col-md-3 col-sm-4 col-xs-6">
+		            		<label class="control-label">Calle/Avenida:</label><br>
+		            		{{persona.persona.per_avenida_calle}}
+		          		</div>    
+		          		<div class="col-md-3 col-sm-4 col-xs-6">
+		            		<label class="control-label">Número:</label><br>
+		            		{{persona.persona.per_numero}}
+		          		</div>    
+		          		<!-- <div class="col-md-3 col-sm-4 col-xs-6">
+		            		<label class="control-label">Tipo vivienda:</label><br>
+		            		{{direccion.dir_tipo | capitalize}}
+		          		</div>   -->  
+		        	</div> 
+		        </div>
+		    </div>
+			<!-- FIN -->
+			<!-- AQUI VAN LOAS TABLAS O FORMULARIOS incrustados -->
+			</div>
+		</div>
+	</div>
+
+<!-- CONTENIDO MODULO fin

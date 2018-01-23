@@ -1,0 +1,119 @@
+<!-- TOP-MENU inicio -->
+<div ng-include="'./templates/menu_inicio.html'"></div>
+<!-- CONTEXT-MENU  -->
+<div ng-include="'./templates/menu_lateral.html'"></div>
+<!-- CONTENIDO MODULO inicio -->
+<div class="col-md-8 col-sm-8">
+  <div class="row">
+    <div class="col-md-12">
+      <h2 class="text-primary">
+        <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+        {{ajustes.pagina.titulo}}
+      </h2>
+      <hr>
+    </div>
+  </div>
+  <div class="col-md-12">
+<!--  -->
+          <form name="userForm" novalidate>
+           <!--  <h1 class="h1">{{prueba_laboratorio.mue_num_muestra}}</h1> -->
+            <div class="well well-sm">
+                      <div class="panel">
+                        <h4 class="text-center text-primary">I. DATOS GENERALES DE LA PERSONA</h4>
+                        <hr class="bg-red">
+                        <div class="panel-body">
+                          <div class="row">
+                              <div class="col-md-6 col-sm-6 col-xs-12">
+                                  <label class="control-label ">Nombre:</label>
+                                  <h4> {{prueba_laboratorio.per_nombres+" "+prueba_laboratorio.per_apellido_primero+" "+prueba_laboratorio.per_apellido_segundo}}</h4>
+                            </div>
+                            <div class="col-md-2 col-sm-6">
+                                <label class="control-label ">CI:</label>
+                                 <h4>{{prueba_laboratorio.per_ci+" "+prueba_laboratorio.per_ci_expedido}}</h4>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="control-label ">Numero de Muestra:</label>
+                                <div class="well well-sm">
+                                <center>
+                                  <h1 class="h1">{{prueba_laboratorio.mue_num_muestra}}</h1>
+                                </center>
+                                </div>
+                              </div>
+                          </div>
+                        </div>
+                    </div>
+
+                    <div class="panel">
+                        <h4 class="text-center text-primary">II. EXAMEN MICROSCÓPICO</h4>
+                        <hr class="bg-red">
+                        <div class="panel-body">
+                          <div class="row">
+                              <div class="col-md-4 col-sm-6 col-xs-12">
+                                  <label class="control-label ">Color:</label>
+                                  <h4>{{prueba_laboratorio.pl_color}}</h4>
+                                  <div class="formulario">
+                                    <div class="checkbox">
+                                     <input type="checkbox" disabled name="fue_1" id="r1" ng-model="prueba_laboratorio.pl_moco">
+                                      <label for="r1">Presencia de moco</label>
+                                    </div>
+                                  </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6">
+                                <label class="control-label ">Aspecto:</label>
+                                <h4>  {{prueba_laboratorio.pl_aspecto}}</h4>
+                               <div class="formulario">
+                                 <div class="checkbox">
+                                     <input type="checkbox" disabled name="fue_2" id="r2"  ng-model="prueba_laboratorio.pl_sangre">
+                                     <label for="r2">Presencia de sangre</label>
+                                 </div>
+                               </div>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+
+
+                    <div class="panel">
+                        <div class="panel-body">
+                            <div class="row">
+
+                            <!-- comienzan las tablas -->
+                            <div class="panel">
+                               <h4 class="text-center text-primary">PARÁSITOS ENCONTRADOS</h4>
+<hr class="bg-red">
+
+                                <div class="panel-body">
+                                  <span class="messages" ng-show="tam==0">Debe haber por lo menos un parásito encontrado.</span>
+                                  <table class="table table-hovertable table-bordered table-striped table-hover">
+                                    <thead>
+                                        <th class="text-primary">Parasito</th>
+                                        <th class="text-primary">Clasificación</th> 
+                                    </thead>
+                                    <tbody ng-repeat="parasignado in parasitos | orderBy:sortType:sortReverse">
+                                    <tr>
+                                    <td>{{parasignado.par_nombre | uppercase}}</td>
+                                    <td>{{parasignado.par_clasificacion | uppercase}}</td>
+                                    </tr>
+                                  </table>
+                                </div>
+                            </div>
+                              </div>
+                          <div class="row">
+                            <div class="col-md-12">
+                              <label  class="control-label ">Observaciones:<strong class="fg_red">*</strong></label>
+                                <h4 ng-if="prueba_laboratorio.pl_observaciones!=null">{{prueba_laboratorio.pl_observaciones | uppercase}}</h4>
+                                <h4 ng-if="prueba_laboratorio.pl_observaciones==null">SIN OBSERVACIONES</h4>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                    </div>
+                      <a class="btn btn-primary" href="#/buscar-numero-muestra" title="Detalle"><span class="glyphicon glyphicon-arrow-left"> </span>   VOLVER A LA BÚSQUEDA
+                      </a>
+          </form>
+<!--  -->
+
+
+  </div>
+</div>
+<!-- CONTENIDO MODULO fin -->

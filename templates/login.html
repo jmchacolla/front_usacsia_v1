@@ -1,0 +1,70 @@
+
+<!-- CONTENIDO MODULO inicio -->
+<div class="container" ng-controller="LoginCtrl as login">
+    <div class="well well-sm col-md-6 col-md-offset-3 text-center" style="border-radius:7px;"> 
+		<img src="./images/banner_sesar.png" style="width:100%;">
+		<br><br>
+		<div class="row">
+			<div class="col-md-12">
+				<h3 class="text-primary">
+					Formulario de acceso
+				</h3>
+				<form class="form-signin">
+					<input type="text" id="inputEmail" class="form-control" placeholder="Nombre usuario" required autofocus ng-model="login.loginForm.usu_nick">
+					<br>
+					<input type="password" id="inputPassword" class="form-control" placeholder="Contraseña" required ng-model="login.loginForm.password">
+					<!--<div id="remember" class="checkbox">
+						<label>
+							<input type="checkbox" value="remember-me"> Recordarme
+						</label>
+					</div>-->
+					<br>
+					<button class="btn btn-lg btn-block btn-primary" type="submit" ng-click="login.login()">
+						<span class="glyphicon glyphicon-log-in"></span>
+						Entrar
+					</button>
+				</form>
+			</div>
+			<!-- <div class="col-md-6">
+				<div class="well well-sm bg-white text-justify">
+				<h4 class="text-primary text-center">
+					Instrucciones
+				</h4>
+					Por ejemplo, si su n&uacute;mero de CI es <b>8765432</b> y su fecha de nacimiento es el <b>02 de Mayo de 1985</b>, entonces su usuario
+					y contraseña ser&iacute;an:
+					<table class="table">
+					<tr>
+						<td class="col-md-6 text-right">
+							<b class="text-primary">
+							Usuario:
+							</b>
+						</td>
+						<td class="col-md-6 text-left">
+							<b>
+							876543
+							</b>
+						</td>
+					</tr>
+					<tr>
+						<td class="col-md-6 text-right">
+							<b class="text-primary">
+							Contrase&ntilde;a:
+							</b>
+						</td>
+						<td class="col-md-6 text-left">
+							<b>
+							876543<span class="text-muted">02051985</span>
+							</b>
+						</td>
+					</tr>
+					</table>
+				</div>	
+			</div> -->
+		</div>
+        <a href="#/inicio" class="btn btn-block btn-link">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+            Volver a página inicial
+        </a>
+    </div>
+</div>
+<!-- CONTENIDO MODULO fin -->

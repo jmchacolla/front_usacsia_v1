@@ -1,0 +1,188 @@
+ <div class="row">
+        <div class="col-md-12">
+      <!-- AQUI VAN LAS TABLAS O FORMULARIOS incrustados -->
+      <!-- INICIO -->
+    <form name="userForm" novalidate>
+      <div class="well well-sm" style="background-color:#fff;">
+              <div class="panel">
+                  <div class="text-center text-primary">I. DATOS GENERALES DEL USUARIO</div>
+                  <hr class="bg-red">
+                  <div class="panel-body">
+                    <div class="row">
+                      <div class="col-md-6">
+                          <label class="control-label ">Nombre:</label>
+                          <input disabled type="" class="form-control" id="" ng-model="muestra.per_nombres+' '+muestra.per_apellido_primero+' '+muestra.per_apellido_segundo">
+                      </div>
+                      <div class="col-md-3">
+                        <label class="control-label ">CI:.</label>
+                        <div class="input-group">
+                              <input disabled type="" class="form-control" id="" ng-model="muestra.per_ci+' '+muestra.per_ci_expedido">  
+                          </div>
+                      </div>
+                      <div class="col-md-3">
+                        <label class="control-label ">Fecha:</label>
+                        <div class="input-group">
+                              <label class="form-control">{{CurrentDate | date:'dd/MM/yyyy'}} </label>
+                              <span class="input-group-addon">
+                                  <span class="glyphicon glyphicon-calendar"></span>
+                              </span>
+                          </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="form-group col-md-6">
+                          <label for="sevref" class="control-label ">Tipo de usuario:<strong class="fg_red">*</strong></label>
+                          <input disabled type="" class="form-control" id="" ng-model="muestra.mue_tipo">
+                      </div>   
+                      <div class="form-group col-md-3">
+                          <label class="control-label ">:</label>
+                          <input disabled type="" class="form-control" id="" ng-model="referencia.red.red_nombre">     
+                      </div>
+                      <div class="form-group col-md-3">
+                          <label for="sevref" class="control-label ">Numero de Muestra:<strong class="fg_red"> *</strong></label>
+                          <input disabled type="" class="form-control" id="" ng-model="muestra.mue_num_muestra">
+                      </div>
+                      {{contrareferencia.fe_id_contacto}}
+                    </div>
+                </div>
+              </div>
+
+            <div class="panel">
+                  <div class="text-center text-primary">III. EXAMEN COPROPARASITOLÓGICO SIMPLE</div>
+                 <hr class="bg-red">
+                  <div class="panel-body">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <label for="sevref" class="control-label ">Tipo de muestra:<strong></strong></label> Heces fecales
+                        
+                      </div>
+                      <div class="col-md-6">
+                        <label for="sevref" class="control-label ">Método:<strong></strong></label> Directo
+                      </div>
+                    </div>
+                   
+                </div>
+              </div>
+              <div class="panel">
+                  <div class="text-center text-primary">IV. EXAMEN MICROSCÓPICO</div>
+                  <hr class="bg-red">
+                  <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-8 col-sm-6 col-xs-12">
+                            <label class="control-label ">Color:</label>
+                            <input type="" class="form-control" id="" ng-model="">
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                          <div class="formulario">
+                            <div class="checkbox">
+                            <input type="checkbox" name="fue_1" id="r1" ng-checked="existe('JUSTIFICADA')" ng-click="busca('JUSTIFICADA')">
+                            <label for="r1">Presencia de moco</label>
+                            </div>
+                          </div>
+                        </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-md-8 col-sm-6 col-xs-12">
+                          <label class="control-label ">Aspecto:</label>
+                          <input disabled type="" class="form-control" id="" ng-model="">
+                      </div>
+                    <div class="formulario">
+                      <div class="checkbox">
+                        <div class="col-md-4   col-sm-6">
+                          <input type="checkbox" name="fue_2" id="r2" ng-checked="existe('ADECUADA')" ng-click="busca('ADECUADA')">
+                          <label for="r2">Presencia de sangre</label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  </div>
+              </div>
+
+
+              <div class="panel">
+                  <div class="panel-body">
+                    <div class="row">
+                      <div class="panel col-md-6">
+                         <center>LISTA DE PARÁSITOS</center>
+                          <div class="panel col-md-12">
+                            <div class="checkbox">
+                                <div class="col-md-6">
+                                  <input type="checkbox" ng-model="checked" ng-init="checked=true" id="contacto_ch" ng-click="reset_cont(checked)">
+                                  <label for="contacto_ch">Todos</label><br/>
+                                </div>
+                            </div>
+                            <div ng-if="!checked" class=" col-md-6">
+                              <select class="form-control" ng-model="contrareferencia.fe_id_contacto" ng-options="funcionario.fe_id as funcionario.per_nombres+' '+funcionario.per_apellido_primero+' '+funcionario.per_apellido_segundo+'             '+'-'+'            '+funcionario.fe_cargo for funcionario in funcionarios">
+                                <option></option>
+                              </select>
+                            </div>
+                          </div>
+                          <div class="panel div-scroll col-md-12">
+                        
+                            <table class="table table-hovertable table-bordered table-striped table-hover" ng-show="!loading && msg">
+                               <thead>
+                                  <th class="text-primary">Parasito</th>
+                                  <th class="text-primary">Agregar</th> 
+                              </thead>
+                              <tbody ng-repeat="parasito in parasitos | orderBy:sortType:sortReverse">
+                              <tr>
+                              <td>{{parasito.par_nombre | uppercase}}</td>
+                              <td>
+                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#miCuadroModalEditar" ng-click="get_id(parasito.par_id, parasito.par_nombre,parasito.par_descripcion,parasito.par_clasificacion)" title="Editar">
+                                  <span class="glyphicon glyphicon-plus"></span>
+                                </button>
+                              </td>
+                              </tr>
+                            </table>
+                            <!-- comienzan las tablar -->
+                          </div>
+                      </div>
+                      <!-- comienzan las tablas -->
+                      <div class="panel col-md-6">
+                         <center>PARÁSITOS ENCONTRADOS</center>
+                          <div class="panel div-scroll col-md-12">
+                            <table class="table table-hovertable table-bordered table-striped table-hover" ng-show="!loading && msg">
+                              <thead>
+                                  <th >Parasito</th>
+                                  <th >Quitar</th> 
+                              </thead>
+                              <tbody ng-repeat="parasito in parasitos | orderBy:sortType:sortReverse">
+                              <tr>
+                              <td>{{parasito.par_nombre | uppercase}}</td>
+                              <td>
+                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#miCuadroModalEditar" ng-click="get_id(parasito.par_id, parasito.par_nombre,parasito.par_descripcion,parasito.par_clasificacion)" title="Editar">
+                                  <span class="glyphicon glyphicon-remove"></span>
+                                </button>
+                              </td>
+                              </tr>
+                            </table>
+                          </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <label for="sevref" class="control-label ">Otro:<strong class="fg_red">*</strong></label>
+                        <input disabled type="" class="form-control" id="" ng-model="muestra.mue_tipo">
+                      </div>
+                      <div class="col-md-6">
+                        <label for="sevref" class="control-label ">Observaciones:<strong class="fg_red">*</strong></label>
+                          <textarea class="form-control" style="resize: vertical;min-height:100px;max-height: 150px;" ng-model="pruebalaboratorio.pl_observaciones"></textarea>
+                      </div>
+                    </div>
+
+                  </div>
+              </div>
+              </div>
+              <center>
+                <button type="submit" class="btn btn-primary" ng-disabled="userForm.$invalid" ng-click="save($parent.atiende);reset(userForm)"><span class="glyphicon glyphicon-save"></span>GUARDAR</button>
+                <a href="#/referenciasRec">
+                    <button type="submit" data-toggle="modal"  class="btn btn-default"  ><span class="glyphicon glyphicon-remove"></span> CANCELAR</button>
+                  </a>
+              </center>
+          </div>
+      </form>
+      <p ng-show="ajustes.pagina.success" class="alert alert-success">{{ajustes.pagina.success}}</p>
+    <!-- FIN -->
+    <!-- AQUI VAN LOAS TABLAS O FORMULARIOS incrustados -->
+    </div>
+  </div>

@@ -1,0 +1,115 @@
+
+<!-- TOP-MENU inicio -->
+<div ng-include="'./templates/menu_inicio.html'"></div>
+ 
+
+<!-- CONTEXT-MENU  -->
+    <div ng-include="'./templates/menu_lateral.html'">
+    </div>
+<!-- CONTENIDO MODULO inicio -->
+    <div class="col-md-8 col-sm-8">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="text-primary">
+                    <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+                   {{ajustes.pagina.titulo}} 
+                </h2>
+                <hr>
+            </div>
+        </div>
+        <!--HERRAMIENTAS PARA LA VISTA-->
+        <div class="row">
+            <div class="col-md-12">
+            <div class="well well-sm">
+               <strong class="pull-left lead">Herramientas: &nbsp;</strong>
+                <form class="form-inline pull-left">
+                <input type="text" class="form-control" placeholder="Filtrar por nombre enfermedad" ng-model="enfe_nombre">
+                    
+                </form>
+            <div class="clearfix"></div>
+                
+            </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+            <!-- AQUI VAN LAS TABLAS O FORMULARIOS incrustados -->
+            <!-- INICIO -->
+            <div class="table-responsive" >
+                <div class="text-center" ng-show="loading"><br><img ng-src="./images/image.gif" class="loader-img"></div>
+                <div ng-show="!loading && !msg">No se encontraron resultados</div>
+                <table class="table table-hovertable table-bordered table-striped table-hover" ng-show="!loading && msg">
+                    <thead>
+                        
+                        <th class="text-primary">
+                            <a href="" ng-click="sortType = 'enfe_nombre'; sortReverse = !sortReverse">
+                            Nombre enfermedad
+                            <span ng-show="sortType == 'enfe_nombre' && !sortReverse" class="glyphicon glyphicon-sort-by-alphabet"></span>
+                            <span ng-show="sortType == 'enfe_nombre' && sortReverse" class="glyphicon glyphicon-sort-by-alphabet-alt"></span>
+                            </a>
+                        </th>
+                        <th class="text-primary">Prevención</th>
+                        <th class="text-primary">Ver</th>
+                        <th class="text-primary">Editar</th>
+                        <th class="text-primary">Borrar</th>
+                        
+                    </thead>
+                    
+                    <tbody ng-repeat="enfermedad in enfermedad | filter:enfe_nombre | orderBy:sortType:sortReverse">
+                      <tr>
+                        
+                        <td>{{enfermedad.enfe_nombre}}</td>
+                        <td>{{enfermedad.enfe_prevencion}}</td>
+                        <td>
+                            <a href="#/verenfermedad/{{enfermedad.enfe_id}}" class="btn btn-success">
+                                <span class="glyphicon glyphicon-file"></span>
+                                </a> 
+                        </td>
+                        <td>
+                            <a href="#/editenfermedad/{{enfermedad.enfe_id}}" class="btn btn-primary">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                </a>                   
+                        </td>
+                        <td>
+                            <!-- BOTON PARA CUADROS MODALES -->
+                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#miCuadroModal1" ng-click="get_enfe_id(enfermedad.enfe_id, enfermedad.enfe_nombre)" title="Eliminar">
+                              <span class="glyphicon glyphicon-trash"></span>
+                            </button>
+                            <!--CUADRO MODAL</div>-->
+                            <div id="miCuadroModal1" class="modal fade" role="dialog" tabindex="-1">
+                              <div class="modal-dialog">
+                                <div class="modal-content">
+                                  <div class="modal-header bg-green">
+                                    <button type="button" class="close" data-dismiss="modal">×</button>
+                                    <h4 class="modal-title fg-white">ELIMINAR ENFERMEDAD
+                                    </h4>
+                                  </div>
+                                  <div class="modal-body lead text-center">
+                                    ¿Esta seguro que desea eliminar esta enfermedad?
+                                    <br>
+                                    <div class="well well-sm">
+                                        <strong>{{nombre | uppercase}}</strong>
+                                    </div>
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                                        <span class="glyphicon glyphicon-remove"></span> NO
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="remove()"><span class="glyphicon glyphicon-ok"></span> SI</button>
+                                    </button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <!--FIN CUADRO MODAL-->
+                        </td>
+
+                        
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- FIN -->
+            <!-- AQUI VAN LOAS TABLAS O FORMULARIOS incrustados -->
+            </div>
+        </div>
+    </div>

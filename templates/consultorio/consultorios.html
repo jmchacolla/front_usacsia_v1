@@ -1,0 +1,106 @@
+<!-- TOP-MENU inicio -->
+<div ng-include="'./templates/menu_inicio.html'"></div>
+<!-- CONTEXT-MENU -->
+<div ng-include="'./templates/menu_lateral.html'"></div>
+<!-- CONTENIDO MODULO inicio -->
+<div class="col-md-8 col-sm-8">
+  <div class="row">
+    <div class="col-md-12">
+      <h2 class="text-primary">
+        <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+        {{ajustes.pagina.titulo}}
+      </h2>
+      <hr class="bg-red">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="well well-sm">
+        <strong class="pull-left lead">Herramientas: &nbsp;</strong>
+        <form class="form-inline pull-left">
+          <input type="text" class="form-control" placeholder="Filtrar por ..." ng-model="searchText">
+        </form>
+        &nbsp;&nbsp;
+        <button class="btn btn-default" onclick="generateCon_usa()"><span class="glyphicon glyphicon-save-file"></span> Exportar lista en PDF</button>
+        <div class="clearfix"></div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+      <div class="col-md-12">
+             <button class="btn btn-primary" ng-click="cambio_hab()" ng-if="btn_hab"><span class="glyphicon glyphicon-ok"></span> HABILITAR CONSULTORIOS</button>
+             <button class="btn btn-primary" ng-click="cambio_hab();update_lista()" ng-if="!btn_hab"><span class="glyphicon glyphicon-save"></span> GUARDAR CONFIGURACIÓN</button>
+      </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 ">
+      <!-- AQUI VAN LAS TABLAS O FORMULARIOS incrustados -->
+      <!-- INICIO -->
+      <div class="text-center" ng-show="loading"><br><img ng-src="./images/image.gif" class="loader-img"></div>
+      <div ng-show="!loading && !msg">No se encontraron resultados</div>
+      <div class="table-responsive">
+        <table class="table table-bordered table-striped table-hover" ng-show="!loading && msg" id="table">
+          <thead >
+            <th class="text-primary" >
+              <a href="" ng-click="sortType = 'con_cod'; sortReverse = !sortReverse">Codigo</a>
+              <span ng-show="sortType == 'con_cod' && !sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+              <span ng-show="sortType == 'con_cod' && sortReverse" class="glyphicon glyphicon-chevron-down"></span>
+            </th>
+            <th class="text-primary" >
+              <a href="" ng-click="sortType = 'amb_nombre'; sortReverse = !sortReverse">Nombre 
+              <span ng-show="sortType == 'per_apellido_primero' && !sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+              <span ng-show="sortType == 'per_apellido_primero' && sortReverse" class="glyphicon glyphicon-chevron-down"></span></a>
+            </th>
+            <th class="text-primary" >
+              <a href="" ng-click="sortType = 'amb_descripcion'; sortReverse = !sortReverse">Descripcion 
+              <span ng-show="sortType == 'amb_descripcion' && !sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+              <span ng-show="sortType == 'amb_descripcion' && sortReverse" class="glyphicon glyphicon-chevron-down"></span></a>
+            </th>
+            <th class="text-primary">Habilitar</th>
+            <th class="text-primary" >Ver</th>
+            <th class="text-primary">Editar</th>
+            <th class="text-primary">Eliminar</th>
+          </thead>
+          <tbody>
+            <tr  ng-repeat="consultorio in consultorios  | filter:searchText | orderBy:sortType:sortReverse ">
+              <td>{{consultorio.con_cod}}</td>
+              <td>{{consultorio.amb_nombre}}</td>
+              <td>{{consultorio.amb_descripcion}} </td>  
+              <td>
+                  <input type="checkbox" name="" ng-disabled="btn_hab" ng-checked="consultorio.con_estado" ng-model="consultorio.con_estado" ng-click="editado(consultorio.amb_id,consultorio.con_estado,consultorio)"> 
+              </td>  
+              <td class="text-center">
+                <a href="#/consultorios/ver/{{consultorio.amb_id}}" class="btn btn-success" title="VER DATOS DEL CONSULTORIO"><span class="glyphicon glyphicon-file"></span></a>
+              </td>
+              <td>
+                <a href="#/consultorios/edit/{{consultorio.amb_id}}" class="btn btn-primary" title="EDITAR consultorio"><span class="glyphicon glyphicon-pencil"></span></a>
+              </td>
+              <td>
+              <!-- funcionario.fe_inicio_trabajo, fucionario.fe_fin_trabajo, funcionario.fe_memorandum, -->
+                <button ng-click="get_con_id(consultorio.amb_id, consultorio.amb_nombre)" title="ELIMINAR CONSULTORIO" class="btn btn-danger" data-toggle="modal" data-target="#miCuadroModal1" ><span class="glyphicon glyphicon-trash"></span></button>
+                <div id="miCuadroModal1" class="modal fade" role="dialog" tabindex="-1">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">×</button>
+                        <h4 class="modal-title">ELIMINAR CONSULTORIO</h4>
+                      </div>
+                      <div class="modal-body lead text-center">
+                        ¿Está seguro que desea eliminar este consultorio?
+                        <div class="well well-sm"><strong>{{nombre | uppercase}}</strong></div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> NO</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="remove(consultorio.amb_id)"><span class="glyphicon glyphicon-ok"></span> SI</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

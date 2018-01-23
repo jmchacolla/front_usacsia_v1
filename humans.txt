@@ -1,0 +1,31 @@
+/* TEAM */
+	Desarrollador: 											Profesión
+		Chacolla Cama Jhon Mijael								Licenciado en Informática
+		Chambi Garcia Dorys										Licenciado en Informática
+		Choquehuanca Fernandez Basilia Elizabeth				Licenciado en Informática
+		Copa Huanca Alisson Mery								Licenciado en Informática
+		Fuertes Bustamande Wendy Paola							Licenciado en Informática
+		Garcia Tenorio Rosario									Licenciado en Informática
+		Pinto Quispe Daniel										Licenciado en Informática
+		Tancara Casilla Veronica								Licenciado en Informática
+		Ticona Luna Yocelin Rosario								Licenciado en Informática
+		Yanarico Huanca Jason Jordano							Licenciado en Informática
+	Contacto: 
+	Desde: La Paz, Bolivia
+		
+
+/* SITE */
+	Last update: 2017/01/06
+	Idioma: Spanish
+	Doctype: HTML5
+	Elements: CCS3, Angular, Laravel
+	Protocolos: IPv4, IPv6, HTTP 1.1, SPDY y HTTP/2
+	Servicio de Hosting: http://190.181.60.19/app_front
+	Tipo de alojamiento: Servidor
+	
+/* OTHERS */	
+	Herramientas: Sublime, FileZilla, Photoshop, Firefox
+	Mas informacion tecnica: 
+	Información sobre cómo hacer mi humans.txt:
+	https://norfipc.com/about/como-hacer-humans.txt-para-que-tenerlo-blog-sitio-web.php
+	Información sobre publicación en internet: https://norfipc.com/web/index.html

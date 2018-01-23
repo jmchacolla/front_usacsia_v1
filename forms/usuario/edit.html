@@ -1,0 +1,74 @@
+<!-- TOP-MENU inicio -->
+<div ng-include="'./templates/menu_inicio.html'"></div>
+<!-- CONTEXT-MENU  -->
+	<div ng-include="'./templates/menu_lateral.html'">
+	</div>
+<!-- CONTENIDO MODULO inicio -->
+	<div class="col-md-8 col-sm-8">
+		<div class="row">
+			<div class="col-md-12">
+				<h2 class="text-primary">
+					<span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+					{{ajustes.pagina.titulo}}
+				</h2>
+				<hr>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-12">
+			<!-- AQUI VAN LAS TABLAS O FORMULARIOS incrustados -->
+			
+			<!-- INICIO -->
+			<p ng-show="ajustes.pagina.success && !mensaje" class="alert alert-success" role="alert">
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				{{ajustes.pagina.success}}
+			</p>
+			<p ng-show="!ajustes.pagina.success && mensaje" class="alert alert-danger" role="alert">
+				{{mensaje | uppercase}}
+			</p>
+			<div class="well well-sm" style="background-color:#fff;">
+				<div class="row">
+	              <div class="col-md-6 col-sm-6">
+	                <label class="text-primary">Nombres y Apellidos:</label>
+	                <div>{{usuario.persona.per_nombres + " " + usuario.persona.per_apellido_primero + " " + usuario.persona.per_apellido_segundo}}</div> 
+	              </div>
+	              <div class="col-md-3 col-sm-3">
+	                <label class="text-primary">Nombre de usuario:</label>
+	                <div>{{usuario.usuario.usu_nick}}</div>
+	              </div>
+	            </div>
+	            <hr>
+	            <form name="cambiarContra">
+		            <div class="row">
+		               	<div class="col-md-6 col-sm-6">
+			                <label class="text-primary">Ingrese su anterior contraseña: </label>
+			                <input class="form-control" name="cont" type="password" ng-model="usuario1.password" required>
+			                <span class="messages" ng-show="cambiarContra.$submitted || cambiarContra.cont.$touched">
+			                  <span ng-show="cambiarContra.cont.$error.required">El campo es obligatorio</span>
+			                </span>
+		              	</div>
+		              	<div class="col-md-6 col-sm-6">
+			                <label class="text-primary">Ingrese su nueva contraseña: </label>
+			                <input class="form-control" name="newcont" type="password" ng-model="usuario1.new_password" required>
+			                <span class="messages" ng-show="cambiarContra.$submitted || cambiarContra.newcont.$touched">
+			                  <span ng-show="cambiarContra.newcont.$error.required">El campo es obligatorio</span>
+			                </span>
+		              	</div>
+		            </div>
+		            <br>
+			        <div class="row">
+		          		<div class="col-md-2 col-md-offset-5" class="text-center">
+		            		<button class="btn btn-primary text-center"  ng-disabled="cambiarContra.$invalid" ng-click="submit($parent.usuario)"><span class="glyphicon glyphicon-save"></span> GUARDAR</button>
+		          		</div>
+		       		</div>
+		       	</form>
+	        </div>
+	        
+			<!-- FIN -->
+			<!-- AQUI VAN LOAS TABLAS O FORMULARIOS incrustados -->
+			
+			</div>
+		</div>
+	</div>
+<!-- CONTENIDO MODULO fin -->

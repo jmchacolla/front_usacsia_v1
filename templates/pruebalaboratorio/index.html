@@ -1,0 +1,133 @@
+
+<div ng-include="'./templates/menu_inicio.html'"></div>
+<!-- CONTEXT-MENU  -->
+<div ng-include="'./templates/menu_lateral.html'"></div>
+<!-- CONTENIDO MODULO inicio -->
+	<div class="col-md-8 col-sm-8">
+		<div class="row">
+			<div class="col-md-12">
+				<h2 class="text-primary">
+					<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+					{{ajustes.pagina.titulo}}
+				</h2>
+				<hr>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+			<div class="well well-sm">
+				<!-- <form class="form-inline pull-left">
+					<strong class="pull-left lead">Número de filas:  &nbsp;</strong>
+					<select class="form-control" ng-model="nro_paginas" name="numero" ng-change="numero_filas(nro_paginas)">
+						<option ng-if="pacientes.total" value="{{pacientes.total}}">TODO</option>
+						<option value="10">10</option>
+						<option value="25">25</option>
+						<option value="50">50</option>
+						<option value="100">100</option>
+						<option value="250">250</option>
+						<option value="500">500</option>
+					</select>
+					<strong class="lead">&nbsp;&nbsp; Filtrar filas:  &nbsp;</strong>
+					<input type="text" class="form-control" placeholder="Buscar en esta tabla" ng-model="per_ci">
+				&nbsp;&nbsp;
+					<button class="btn btn-default" onclick="generatePAC_AE()"><span class="glyphicon glyphicon-save-file"></span> Exportar lista en PDF</button>
+				<div class="clearfix"></div>
+				</form> -->
+				<strong class="pull-left lead">Herramientas: &nbsp;</strong>
+		        <form class="form-inline pull-left">
+		          <input type="text" class="form-control" placeholder="Filtrar por ..." ng-model="searchText">
+		        </form>
+		        &nbsp;&nbsp;
+		       <!--  <button class="btn btn-default" onclick="generateFUN_AE()"><span class="glyphicon glyphicon-save-file"></span> Exportar lista en PDF</button>
+		        <div class="clearfix"></div> -->
+				
+				
+			</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12 ">
+			<!-- AQUI VAN LAS TABLAS O FORMULARIOS  -->
+			<!-- INICIO -->
+			<div class="text-center" ng-show="loading"><br><img ng-src="./images/image.gif" class="loader-img"></div>
+			<div ng-show="!loading && !msg">No se encontraron resultados</div>
+			<div class="table-responsive">
+				<!-- <ul class="pager" ng-show="!loading && msg">
+					<h3>
+					  <li class="previous"><a href="" ng-disabled="pacientes.prev_page_url" ng-click="paginar(pacientes.prev_page_url)">&larr; Anterior</a></li>
+					  	<form class="form-inline pull-left">
+					  		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					  		<select class="form-control" ng-model="pacientes.current_page" name="pagina" ng-options="fila for fila in filas" ng-change="cambia_pagina(pacientes.current_page, pacientes.per_page)"></select>
+					  		<label class="btn btn-primary">
+					  			<span class="badge"> <font size="4"> {{pacientes.current_page}}</font></span> <font size="4">de</font> <span class="badge"><font size="4">{{pacientes.last_page}}</font></span>
+							</label>
+					  	</form>
+					  <li class="next"><a href="" ng-disabled="pacientes.next_page_url==null" ng-click="paginar(pacientes.next_page_url)">Siguiente &rarr;</span></a></li>
+					</h3>
+				</ul> -->
+				<table class="table table-bordered table-striped table-hover" ng-show="!loading && msg" id="tablePAC">
+					<thead >
+
+
+						<th class="text-primary" >
+							<a href="" ng-click="sortType = 'pl_id'; sortReverse = !sortReverse">PRUEBA_LABORTORIO_ID</a>
+				            <span ng-show="sortType == 'per_ci' && !sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+				            <span ng-show="sortType == 'per_ci' && sortReverse" class="glyphicon glyphicon-chevron-down"></span>
+						</th>
+						<th class="text-primary" >
+							<a href="" ng-click="sortType = 'pac_hist_clinico'; sortReverse = !sortReverse">APELLIDOS
+							<span ng-show="sortType == 'pac_hist_clinico' && !sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+	                        <span ng-show="sortType == 'pac_hist_clinico' && sortReverse" class="glyphicon glyphicon-chevron-down"></span></a>
+						</th>
+						<th class="text-primary" >
+							<a href="" ng-click="sortType = 'per_apellido_primero'; sortReverse = !sortReverse">NOMBRE
+							<span ng-show="sortType == 'per_apellido_primero' && !sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+	                        <span ng-show="sortType == 'per_apellido_primero' && sortReverse" class="glyphicon glyphicon-chevron-down"></span></a>
+						</th>
+						<th class="text-primary">
+				            <a href="" ng-click="sortType = 'per_nombres'; sortReverse = !sortReverse">ESTADO 
+				            <span ng-show="sortType == 'per_nombres' && !sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+				            <span ng-show="sortType == 'per_nombres' && sortReverse" class="glyphicon glyphicon-chevron-down"></span></a>
+				        </th>
+						<!-- <th class="text-primary" >TIPO ATENCION</th> -->
+						<th class="text-primary" >VER</th>
+					<!-- 	<th ng-if="rol_id == 4 || rol_id == '9'">EDITAR</th>
+						<th ng-if="rol_id == 4 || rol_id == '9'">Programar cita</th>
+						<th ng-if="rol_id == 6">Asignar ficha</th>
+						<th ng-if="rol_id == 3 || rol_id == 6 || rol_id == 10">Editar</th> -->
+						<!--<th ng-if="rol_id == 3 || rol_id == 6 || rol_id == 10">Borrar</th>-->
+					</thead>
+					<tbody ng-repeat="pl in prueba_laboratorio | filter:searchText | orderBy:sortType:sortReverse ">
+					  <tr>
+						<td>{{pl.mue_num_muestra}}</td>
+						<td>{{pl.per_apellido_primero+" "+pl.per_apellido_segundo}}</td>
+						<td>{{pl.per_nombres |uppercase}}</td>
+						<td>{{pl.pl_estado}}</td>
+						<!-- <td>{{pl.pl_tipo}}</td> -->
+						<td>
+							<a href="#/prueba-laboratorio/ver/{{pl.pl_id}}" class="btn btn-success"><span class="glyphicon glyphicon-file"></span></a>
+						</td>
+						<!-- <td ng-if="rol_id == '6'" class="text-center">
+							<a href="#citas/asigna_ficha/{{paciente.pac_id}}" class="btn btn-primary" title="Asignar ficha"><span class="glyphicon glyphicon-calendar"></span> </a>
+						</td>
+						<td ng-if="rol_id == 3 || rol_id == 6 || rol_id == 10">
+							<a href="#/pacientes/edit/{{paciente.pac_id}}" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></a>
+						</td> -->
+						
+						<!-- <td ng-if="rol_id == '4' || rol_id == '9'" class="text-center">
+							<a href="#referencia/create/{{paciente.pac_id}}" class="btn btn-primary"><span class="glyphicon glyphicon-new-window"></span> Referenciar</a>	
+						</td>
+						<td ng-if="rol_id == '4' || rol_id == '9'" class="text-center">
+							<a href="#cita/create/{{paciente.pac_id}}" class="btn btn-primary"><span class="glyphicon glyphicon-calendar"></span> Programar cita</a>	
+						</td> -->
+
+					  </tr>
+					</tbody>
+				</table>
+			</div>
+			<!-- FIN -->
+			<!-- AQUI VAN LOAS TABLAS O FORMULARIOS incrustados -->
+			</div>
+		</div>
+	</div>
+<!-- CONTENIDO MODULO fin

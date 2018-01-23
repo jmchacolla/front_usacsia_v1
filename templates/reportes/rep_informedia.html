@@ -1,0 +1,60 @@
+<!-- TOP-MENU inicio -->
+<div ng-include="'./templates/menu_inicio.html'"></div>
+<!-- CONTEXT-MENU  -->
+  <div ng-include="'./templates/menu_lateral.html'">
+  </div>
+<!-- CONTENIDO MODULO inicio -->
+  <div class="col-md-8 col-sm-8">
+    <div class="row">
+      <div class="col-md-12">
+        <h2 class="text-primary">
+          <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+          {{ajustes.pagina.titulo}}
+     
+        </h2>
+        <hr>
+      </div>
+    </div>
+    <div class="col-md-12">
+    	<div class="panel panel-default">
+		    <h5>&nbsp;Informe diario <b>{{hoy}}</b></h5>
+		</div>
+      <button class="btn btn-default" onclick="generate_informesdiario()"><span class="glyphicon glyphicon-save-file"></span> Exportar reporte en PDF</button>
+      <br>
+   		<div class="table-responsive" >
+   			<table  class="table table-bordered table-hover" id="tableREP">
+   				<thead  class="well well-sm">
+   					<th class="text-primary">C.I.</th>
+   					<th class="text-primary">Expedido</th>
+   					<th class="text-primary">Carnet Sanitario</th>
+   					<th class="text-primary">Nombre completo</th>
+   					<th class="text-primary">Fecha de nacimiento</th>
+            <th class="text-primary">Edad</th>
+            <th class="text-primary">Domicilio</th>
+            <th class="text-primary">Sexo</th>
+            <th class="text-primary">Diagnostico m&eacute;dico</th>
+            <th class="text-primary">M&eacute;dico</th>
+            <th class="text-primary">Resultado laboratorio</th>
+            <th class="text-primary">Responsable</th>
+   				</thead>
+   				<tbody ng-repeat="carnet in carnets">
+   					<tr>
+   						<td>{{carnet.per_ci}}</td>
+   						<td>{{carnet.per_ci_expedido}}</td>
+              <td>{{""}}</td>
+   						<td>{{carnet.per_nombres +" "+carnet.per_apellido_primero+" "+carnet.per_apellido_segundo}}</td>
+   						<td>{{carnet.per_fecha_nacimiento}}</td>
+   						<td>{{carnet.edad}}</td>
+              <td>{{carnet.per_avenida_calle}}</td>
+              <td>{{carnet.per_genero}}</td>
+              <td>{{""}}</td>
+              <td>{{""}}</td>
+              <td>{{""}}</td>
+              <td>{{""}}</td>
+   					</tr>
+   				</tbody>
+   			</table>
+	   	</div>
+
+    </div>
+

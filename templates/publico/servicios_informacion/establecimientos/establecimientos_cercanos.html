@@ -1,0 +1,64 @@
+<div ng-include="'./templates/publico/menu_inicio_publico.html'"></div>
+<!-- CONTENIDO MODULO inicio -->
+<!-- CONTEXT-MENU  -->
+	<!-- CONTENIDO MODULO inicio -->
+	<div class="col-md-12" ng-controller="CercanosCtrl">
+		<div class="row">
+			<div class="col-md-12">
+				<h2 class="text-primary text-center">
+					<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+					{{ajustes.pagina.titulo}}
+				</h2>
+				<hr>
+			</div>
+			<div class="col-md-10 col-md-offset-1">
+				<div class="well well-sm">
+					<p class="text-primary"><strong>CONSIDERACIONES PREVIAS AL USO DE ESTE SERVICIO</strong></p>
+					<ul>
+						<li>
+							La búsqueda de establecimientos de salud cercanos a tu ubicación se realiza solo para establecimientos 
+							registrados en el Departamento de La Paz, Bolivia.
+						</li>
+						<li>
+							El método de búsqueda está basado en la geolocalización, por lo que deberás permitir a tu dispositivo movil
+							o navegador Web encontrar tu ubicación.
+						</li>
+						<li>
+							Luego de permitir a tu dispositivo movil o navegador Web encontrar tu ubicación, haz clic en el botón
+							<strong>Buscar Establecimientos de Salud</strong>
+						</li>
+					</ul>
+				</div>
+				<hr>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-7 col-md-offset-1 col-sm-7 col-sm-offset-1 col-xs-12">
+				<div class="well well-sm text-center">
+						<img class="imagen_buscador" ng-click="initMap()" style="height:100px; display:block; margin:0 auto; clear:both; line-height:100px;" src="./images/icono_buscar_establecimiento.png">
+				</div>
+				<div id="mapa" style="width: 100%; height: 600px;">
+				</div>
+			</div>
+			<div class="col-md-3 col-sm-3 col-xs-12 text-justify">
+					<p class="text-primary"><strong>¿Cómo usar los mapas?</strong></p>
+					<ul>
+						<li>
+							Tu ubicación aproximada queda marcada por el simbolo <img style="height:25px;" src="./images/marcador_default.png"> 
+						</li>
+						<li>
+							Los establecimientos de salud están marcados por el icono <img style="height:25px;" src="./images/marcador_mapa.png">
+						</li>
+						<li>
+							Haz clic en el icono <img style="height:25px;" src="./images/marcador_mapa.png"> para ver un cuadro informativo de un
+							 establecimiento de salud.
+						</li>
+						<li>
+							En el cuadro informativo, pulsa el boton <strong>Ver mas información </strong>, para ver datos en detalle del establecimiento de salud respectivo.
+						</li>
+					</ul>
+			</div>
+		</div>
+	</div>
+<!-- CONTENIDO MODULO fin -->
+<!-- CONTENIDO MODULO fin -->

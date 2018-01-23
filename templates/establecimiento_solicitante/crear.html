@@ -1,0 +1,274 @@
+
+<!-- TOP-MENU inicio -->
+<div ng-include="'./templates/menu_inicio.html'"></div>
+<!-- CONTEXT-MENU  -->
+<div ng-include="'./templates/menu_lateral.html'"></div>
+<!-- CONTENIDO MODULO inicio -->
+<div class="col-md-8 col-sm-8">
+    <div class="row">
+      <div class="col-md-12">
+        <h2 class="text-primary">
+          <span class="glyphicon glyphicon-th-large" aria-hidden="true"></span>
+          {{ajustes.pagina.titulo}} 
+        </h2>
+	    <hr class="bg-red">
+      </div>
+    </div>
+    <div class="row">
+      	<div class="col-md-12">
+  		<!-- AQUI VAN LAS TABLAS O FORMULARIOS incrustados -->
+  		<!-- INICIO -->
+
+  		<div ng-controller="UploadEstCtrl as vista"> 
+	  		<div ng-controller="FechaEstCtrl">
+	  		<label class="control-label">Los campos marcados con asterisco (<strong class="fg_red">*</strong>) son obligatorios</label>	
+			<!-- CONTENIDO MODULO inicio -->
+			<form role="form" name="addEstablecimiento" novalidate>
+				<div class="row">
+					<div class="col-md-12">
+					<!-- AQUI VAN LAS TABLAS O FORMULARIOS incrustados -->
+					<!-- INICIO -->
+					<div class="well well-sm" style="background-color:#fff;">
+						<div class="panel">
+							<h4 class="text-center text-primary">I. DATOS GENERALES</h4>
+							<hr class="bg-red">
+							<div class="row">
+								<div class="col-md-4">
+				                    <div class="well well-sm">
+										<div ng-if="thumbnail.dataUrl == ''">
+											<img ng-src="./images/centro.png" align="center" class="img-responsive img-thumbnail"/>
+										</div>
+										<div ng-if="thumbnail.dataUrl != ''" style="height:190px !important; overflow:auto;">
+											<img ng-src="{{ thumbnail.dataUrl }}" align="center" class="img-responsive img-thumbnail"/>
+										</div>
+										<div class="clearfix">
+										</div>
+										<div class="form-group">
+											<label>Cargar Imagen</label>
+											<input type="file" name="fileInput" id ="fileInput" class="filestyle" data-buttonText="Find file"  file-model="vista.ie_nombre" onchange="angular.element(this).scope().photoChanged(this.files)" />
+											<input type="hidden" name="" ng-model="establecimiento.ie_nombre" value="{{establecimiento.ie_nombre}}">
+											<br>
+										</div> 
+				                    </div>
+								</div>	
+
+								<div class="col-lg-8 col-xs-12">
+							        <label class="control-label">Hora:</label>
+						        	<div class="">
+						            	<p>{{Current_date | date:'Y-m'}}</p>
+						        	</div>
+						        </div>
+
+								<div class="col-md-8">
+									<div class="row">
+										<div class="col-md-8">
+											<label for="nombre" class="control-label">Nombre o razón social: <strong class="fg_red">*</strong></label>
+						                    <input class="form-control" id="nombre" name="nombre" type="Text" placeholder="Nombre del establecimiento de salud" ng-model="establecimiento.ess_razon_social" ng-model-options="{ updateOn: 'blur' }" ng-pattern="patternNombreEstab" required autofocus>
+						                    <span class="messages" ng-show="addEstablecimiento.nombre.$touched">
+				        						<span ng-show="addEstablecimiento.nombre.$error.required">El campo es obligatorio.</span>
+				    							<span ng-show="addEstablecimiento.nombre.$error.pattern">No se admiten símbolos especiales.</span>
+			      							</span>
+										</div>
+									</div>
+									<br>
+									<div class="row">
+										<div class="col-md-8">
+									     	 <label for="nombrelab" class="control-label" title="Privado para establecimientos y publico para asociaciones">Tipo: <strong class="fg_red">*</strong></label>
+									               <select class="form-control " name="tipo" ng-model="establecimiento.ess_tipo"  required>
+									              <option value="">--Elige opcion--</option>
+									              <option value="PUBLICO">PUBLICO</option>
+									              <option value="PRIVADO">PRIVADO</option>
+									              </select>
+									              <span class="messages" ng-show="addEstablecimiento.$submitted || addEstablecimiento.tipo.$touched">
+									                  <span ng-show="addEstablecimiento.tipo.$error.required">El campo es obligatorio.</span>
+									             </span>		
+										</div>
+									
+									</div>  
+									<br>
+								</div>
+							</div>
+						</div>
+						<br>
+						<h4 class="text-center text-primary">II. DIRECCIÓN DEL ESTABLECIMIENTO</h4>
+						<hr class="bg-red">
+						<div class="panel">
+							<div class="row">  
+								<div class="col-md-4" ng-controller="MunicipioCtrl">
+								    <label class="control-label">Municipio: <strong class="fg_red">*</strong></label>
+								    <select class="form-control " name="municipio" ng-model="establecimiento.mun_id"  ng-options="municipio.mun_id as municipio.mun_nombre for municipio in municipios" ng-change="ver_zonas(establecimiento.mun_id)" required>
+								    <option value="">--Elige opcion--</option>
+								    </select>
+								    <span class="messages" ng-show="addPersona.$submitted || addPersona.municipio.$touched">
+								        <span ng-show="addPersona.municipio.$error.required">El campo es obligatorio.</span>
+								   </span>
+								</div> 
+								<div class="col-md-4">
+								  <label class="control-label">Zona/Comunidad: <strong class="fg_red">*</strong></label>
+								    <select ng-show="!zon" class="form-control " name="zona_comunidad" ng-model="establecimiento.zon_id"  ng-options="zona.zon_id as zona.zon_nombre for zona in zonas" required>
+								    </select>
+								 	    <span  class="messages" ng-show="addPersona.$submitted || addPersona.zona_comunidad.$touched">
+								        <span ng-show="addPersona.zona_comunidad.$error.required">El campo es obligatorio.</span>
+								        <span ng-show="addPersona.zona_comunidad.$error.pattern">Formato introducido es incorrecta.</span>
+								    </span>
+								  
+								</div>
+								<div class="col-md-4">
+			                        <label class="control-label">Calle/Avenida: <strong class="fg_red">*</strong></label>
+			                        <input type="" class="form-control" id="calleavenida" name="calleavenida" placeholder="Calle/Avenida" ng-model="establecimiento.ess_avenida_calle" ng-model-options="{ updateOn: 'blur' }" required ng-pattern="patternCadenaNumero">
+			                        <span class="messages" ng-show="addEstablecimiento.calleavenida.$touched">
+								        <span ng-show="addEstablecimiento.calleavenida.$error.required">El campo es obligatorio.</span>
+								        <span ng-show="addEstablecimiento.calleavenida.$error.pattern">No se admiten símbolos especiales.</span>
+								    </span>
+								</div>	  
+								<div class="col-md-2"><!--VALIDAR NUMEROS !!!!!!-->
+			                        <label class="control-label">Número: <strong class="fg_red">*</strong></label>
+			                        <input type="number" class="form-control" id="numero" name="numero" placeholder="Número" ng-model="establecimiento.ess_numero" ng-model-options="{ updateOn: 'blur' }" required min="0">
+			                        <span class="messages" ng-show="addEstablecimiento.numero.$touched">
+								        <span ng-show="addEstablecimiento.numero.$error.required">El campo es obligatorio.</span>
+								    </span>
+								</div>	  
+							</div>
+						
+						<br>
+						<div class="row">
+							<div class="col-md-4">
+								<label class="control-label">Teléfono:</label>
+							  	<div class="input-group">
+		                          	<input type="number" class="form-control" name="telefono" placeholder="Ej: 2262626" ng-model="establecimiento.ess_telefono" ng-model-options="{ updateOn: 'blur' }" min="2000000" max="79999999">
+		                          	<!-- <span class="input-group-btn">
+								     	<button class="btn btn-secondary resaltar" type="button"><span class="glyphicon glyphicon-plus"></span></button>
+								  	</span> -->
+								    <span class="messages" ng-show="addEstablecimiento.telefono.$touched">
+							          	<span ng-show="addEstablecimiento.telefono.$error.required">El campo es obligatorio.</span>
+							          	<span ng-show="addEstablecimiento.telefono.$error.min">Número de teléfono incorrecto, el número no puede ser menor a 2000000.</span>
+							          	<span ng-show="addEstablecimiento.telefono.$error.max">Número de teléfono incorrecto, el número no puede ser mayor a 79999999.</span>
+							        </span>
+							  	</div>
+							</div>	  
+							<div class="col-md-6">
+								<label class="control-label">Email:</label>
+							    <input type="email" name="email" class="form-control" placeholder="Ej. micorreo@hotmail.com" ng-model="establecimiento.ess_correo_electronico" ng-model-options="{ updateOn: 'blur' }">
+		                        <span class="messages" ng-show="addEstablecimiento.$submitted || addEstablecimiento.email.$touched">
+						            <span ng-show="addEstablecimiento.email.$error.email">Formato de email incorrecto.</span>
+						        </span>
+							</div>	  
+						</div>
+						<br>	  
+							<div class="row">
+								<div class="col-md-3">
+			                        <label class="control-label">Latitud:</label>
+			                        <input type="" class="form-control" id="establecimientolatitud" placeholder="Latitud" ng-model="latitud">
+								</div>	  
+								<div class="col-md-3">
+			                        <label class="control-label">Longitud:</label>
+			                        <input type="" class="form-control" id="establecimientolongitud" placeholder="Longitud" ng-model="longitud">
+								</div>	 
+								<br>
+									<button class="btn btn-primary text-center" ng-click="initMap()">GENERAR POSICION</button>
+							</div>
+						</div>	 
+						<div class="panel">
+							<div class="row">
+								<div class="col-md-12">
+									<div id="mapa" style="width: 100%; height: 600px;">
+									</div>
+								</div>
+							</div>
+						</div>
+						<hr>
+						<div class="row">
+							<div class="col-md-6 col-md-offset-3 text-center">
+								<div class="well well-sm">
+									<div class="checkbox">
+										<label style="font-size: 1.5em">
+										<input type = "checkbox" ng-model = "para_enviar" title="Haga click aqui para habilitar o deshabilitar el envío del formulario"> 
+								        <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
+										<small style="font-size: 0.6em" class="text-primary" title="Haga click en la casilla de verificación del lado para registrar el establecimiento de salud">
+											<span class="glyphicon glyphicon-hand-left"></span>
+											<span class="glyphicon glyphicon-chevron-left"></span>
+											¿DESEA GUARDAR ESTE FORMULARIO?
+										</small>
+								        </label>
+									</div>
+							        <br>
+									<button ng-show = "para_enviar" type="submit" class="btn btn-primary" ng-click="submit($parent.establecimiento,latitud,longitud); vista.enviar();reset(addEstablecimiento)" ng-disabled="addEstablecimiento.$invalid" title="Debe llenar todos los campos obligatorios de manera correcta"><span class="glyphicon glyphicon-save"></span> GUARDAR</button>
+								</div>
+							</div>	  
+						</div>	  	
+					</div>	
+					
+					<!-- FIN -->
+					<!-- AQUI VAN LOS TABLAS O FORMULARIOS incrustados -->
+					
+					</div>
+				</div>
+			</form>
+			<!-- CONTENIDO MODULO fin -->
+			
+			</div>
+		</div>
+		<p ng-show="ajustes.pagina.success" class="alert alert-success">{{ajustes.pagina.success}}</p>
+		</div> <!-- fin controlador de imagen -->
+
+		<!-- FIN -->
+		<!-- AQUI VAN LOAS TABLAS O FORMULARIOS incrustados -->
+	</div>
+	<script type="text/javascript">
+    	$(":file").filestyle({buttonText: " Abrir"});
+    	//$('#fileInput').filestyle({buttonName : 'btn-warning'});
+	</script>
+</div>
+
+<!-- CONTENIDO MODULO fin -->
+
+
+<script type="text/javascript">
+
+		/*var map = null;
+		var infoWindow = null;
+		 
+		function openInfoWindow(marker) {
+		    var markerLatLng = marker.getPosition();
+		    infoWindow.setContent([
+		        'La posicion del marcador es',
+		        markerLatLng.lat(),
+		        ', ',
+		        markerLatLng.lng(),
+		        'latitud, longitud'
+		    ].join(''));
+		    infoWindow.open(map, marker);
+
+		}
+		function initialize() {
+			var lat;
+		    var myLatlng = new google.maps.LatLng(-16.5100454,-68.12356620000003);
+		    var myOptions = {
+		      zoom: 16,
+		      center: myLatlng,
+		      mapTypeId: google.maps.MapTypeId.ROADMAP
+		    }
+		 
+		    map = new google.maps.Map(document.getElementById('mapa'), myOptions);
+			infoWindow = new google.maps.InfoWindow();
+		 	var marker = new google.maps.Marker({
+		        position: myLatlng,
+		        draggable: true,
+		        map: map,
+		        title:'Ejemplo marcador arrastrable;'
+		    });
+		 var wen = marker.getPosition();
+		        console.log("weeeen",wen.lat());
+		        console.log("wennn",wen.lng());  
+		    google.maps.event.addListener(marker, 'click', function(){
+		        openInfoWindow(marker);
+		 console.log("POSITIONNNNNN",myLatlng);
+
+		    });
+		}
+									 
+		$(document).ready(function() {
+		    initialize();
+		});*/
+</script>
+

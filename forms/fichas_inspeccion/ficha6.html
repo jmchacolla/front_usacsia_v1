@@ -1,0 +1,292 @@
+<div ng-controller="CrearFicha6Ctrl">
+                  
+      <div class="row" >
+            <div class="col-md-4">
+                <label for="resolucion" class="control-label">Personal:</label>
+            </div>
+            <div class="col-md-4">
+                <label for="resolucion" class="control-label">Hombres:</label>
+                <input class="form-control" name="hombres" type="number" ng-model="ficha6.fi6_hombres">     
+            </div>
+            <div class="col-md-4">
+                <label for="resolucion" class="control-label">Mujeres:</label>
+                <input class="form-control" name="mjeres" type="number" ng-model="ficha6.fi6_mujeres">     
+            </div> 
+            
+      </div>
+      <hr>
+      <h4 class="text-center text-primary">A. SANEAMIENTO AMBIENTAL 56%</h4>
+      <hr class="bg-red"> 
+      <br>
+      <div class="row">
+            <div class="col-md-8">
+               <label class="control-label">1. Ubicación alejada de focos de insalubridad <strong class="fg_red">*</strong></label>
+            </div>
+            <div class="col-md-2">
+                <input class="form-control" name="focos" type="number" ng-model="ficha6.fi6_ubicacion" min="0" max="1"> 
+            </div>
+
+                          <div class="col-md-8">
+                             <label class="control-label">2. Exhibicion de certificado sanitario<strong class="fg_red">*</strong></label>
+                          </div>
+                          <div class="col-md-2">
+                              <input class="form-control" name="cert" type="number" ng-model="ficha6.fi6_exibicion_certificado" min="0" max="2"> 
+                          </div>
+
+                          <div class="col-md-8">
+                             <label class="control-label">3. Capacidad y distribucion de dependencias, sala de proceso, tratamiento de jarabe, lavado y enjuague de botellas, tratamiento de agua, sala de embotellado y laboratorio<strong class="fg_red">*</strong></label>
+                          </div>
+                          <div class="col-md-2">
+                              <input class="form-control" name="dist" type="number" ng-model="ficha6.fi6_capacidad_dependencias" min="0" max="6"> 
+                          </div>
+
+                          <div class="col-md-8">
+                             <label class="control-label">4. Pisos de material sólido, liso impermeable en buen estado<strong class="fg_red">*</strong></label>
+                          </div>
+                          <div class="col-md-2">
+                              <input class="form-control" name="pisos" type="number" ng-model="ficha6.fi6_piso" min="0" max="4"> 
+                          </div>
+
+                          <div class="col-md-8">
+                             <label class="control-label">5. Cielo raso,liso, color claro, lavable en buen estado<strong class="fg_red">*</strong></label>
+                          </div>
+                          <div class="col-md-2">
+                              <input class="form-control" name="cielo" type="number" ng-model="ficha6.fi6_cielo_raso" min="0" max="3"> 
+                          </div>
+
+                          <div class="col-md-8">
+                             <label class="control-label">6. Murallas y zócalos superficie lisa, de material lavable<strong class="fg_red">*</strong></label>
+                          </div>
+                          <div class="col-md-2">
+                              <input class="form-control" name="zocalo" type="number" ng-model="ficha6.fi6_muralla" min="0" max="2"> 
+                          </div>
+
+                          <div class="col-md-8">
+                             <label class="control-label">7. Puertas y ventanas bien distribuidas<strong class="fg_red">*</strong></label>
+                          </div>
+                          <div class="col-md-2">
+                              <input class="form-control" name="puerta" type="number" ng-model="ficha6.fi6_puerta_ventana" min="0" max="2"> 
+                          </div>
+
+                          <div class="col-md-8">
+                             <label class="control-label">8. Ventilación de: humos, olores, gases y vapores; temperatura adecuada, captación y eliminación de aire; tuberias de ventilación en buen estado y de facil limpieza<strong class="fg_red">*</strong></label>
+                          </div>
+                          <div class="col-md-2">
+                              <input class="form-control" name="humo" type="number" ng-model="ficha6.fi6_ventilacion" min="0" max="5"> 
+                          </div>
+
+                          <div class="col-md-8">
+                             <label class="control-label">9. Iluminación suficiente, natural y artificial<strong class="fg_red">*</strong></label>
+                          </div>
+                          <div class="col-md-2">
+                              <input class="form-control" name="suf" type="number" ng-model="ficha6.fi6_iluminacion" min="0" max="2"> 
+                          </div>
+
+                          <div class="col-md-8">
+                             <label class="control-label">10. Abastecimiento de agua potable bien distribuida, estado satisfactorio de llaves y cañerias, utilización de clorinadores para purificar el agua, con calcio y sulfato ferroso (basico)<strong class="fg_red">*</strong></label>
+                          </div>
+                          <div class="col-md-2">
+                              <input class="form-control" name="agua" type="number" ng-model="ficha6.fi6_abastecimiento_agua" min="0" max="6"> 
+                          </div>
+
+                          <div class="col-md-8">
+                             <label class="control-label">11. Purificación de agua, física, química y bacteriológica<strong class="fg_red">*</strong></label>
+                          </div>
+                          <div class="col-md-2">
+                              <input class="form-control" name="pur" type="number" ng-model="ficha6.fi6_purificacion_agua" min="0" max="4"> 
+                          </div>
+
+                          <div class="col-md-8">
+                             <label class="control-label">12. Eliminación de aguas servidas, red de alcantarillado aprobado,desagues. Lavadores apropiados en número suficiente, buen estado de conservación y funcionamiento<strong class="fg_red">*</strong></label>
+                          </div>
+                          <div class="col-md-2">
+                              <input class="form-control" name="eliminacion" type="number" ng-model="ficha6.fi6_eliminacion_agua" min="0" max="5"> 
+                          </div>
+
+                          <div class="col-md-8">
+                             <label class="control-label">13. Servicio higiénicos completos limpios y reglamentarios, artefactos en buen estado, ventilados y con cierre automático<strong class="fg_red">*</strong></label>
+                          </div>
+                          <div class="col-md-2">
+                              <input class="form-control" name="hig" type="number" ng-model="ficha6.fi6_servicios_higienicos" min="0" max="5"> 
+                          </div>
+
+                          <div class="col-md-8">
+                             <label class="control-label">14. Facilidades para el aseo personal lavamanos con bastante agua en número adecuado, jaboncillos, escobillas, tollas de uso personal y duchas<strong class="fg_red">*</strong></label>
+                          </div>
+                          <div class="col-md-2">
+                              <input class="form-control" name="adec" type="number" ng-model="ficha6.fi6_facilidad_aseo" min="0" max="5"> 
+                          </div>
+
+                          <div class="col-md-8">
+                             <label class="control-label">15. Guardarropa con casilleros individuales<strong class="fg_red">*</strong></label>
+                          </div>
+                          <div class="col-md-2">
+                              <input class="form-control" name="casi" type="number" ng-model="ficha6.fi6_guardaropa" min="0" > 
+                          </div>
+
+                          <div class="col-md-8">
+                             <label class="control-label">16. Eliminación de basuras y desperdicios en depósitos adecuados, basureroscon sus respectivas tapas<strong class="fg_red">*</strong></label>
+                          </div>
+                          <div class="col-md-2">
+                              <input class="form-control" name="bas" type="number" ng-model="ficha6.fi6_eliminacion_basura" min="0" > 
+                          </div>
+
+                          <div class="col-md-8">
+                             <label class="control-label">17. Aseo completo en las dependencias, pisos zócalos, paradas y máquinas<strong class="fg_red">*</strong></label>
+                          </div>
+                          <div class="col-md-2">
+                              <input class="form-control" name="dep" type="number" ng-model="ficha6.fi6_aseo_dependencias" min="0" max="3"> 
+                          </div>
+                        
+                        </div> 
+                        <h4 class="text-center text-primary">B. EQUIPO 20%</h4>
+                        <hr class="bg-red"> 
+                        <div class="row">
+                          <div class="col-md-8">
+                             <label class="control-label">1. Maquinaria, artefactos, recipientes, tanques de material adecuado<strong class="fg_red">*</strong></label>
+                          </div>
+                          <div class="col-md-2">
+                              <input class="form-control" name="maquinaria" type="number" ng-model="ficha6.fi6_maquinaria_artefactos" min="0" max="6"> 
+                          </div>
+
+                          <div class="col-md-8">
+                             <label class="control-label">2. Filtros de diseño, construcción de material adecuado<strong class="fg_red">*</strong></label>
+                          </div>
+                          <div class="col-md-2">
+                              <input class="form-control" name="const" type="number" ng-model="ficha6.fi6_fitros" min="0" max="3"> 
+                          </div>
+
+                          <div class="col-md-8">
+                             <label class="control-label">3. Transfugadora, capsuladora, tapadora y llenadora de material adecuado<strong class="fg_red">*</strong></label>
+                          </div>
+                          <div class="col-md-2">
+                              <input class="form-control" name="caps" type="number" ng-model="ficha6.fi6_transfugadora" min="0" max="5"> 
+                          </div>
+
+                        </div>
+                        <h4 class="text-center text-primary">C. TÉCNICAS DE ELABORACIÓN DE PROTECCIÓN Y CONSERVACIÓN DE LOS PRODUCTOS Y MATERIALES PRIMAS 10%</h4>
+                        <hr class="bg-red"> 
+                        <div class="row">
+                          <div class="col-md-8">
+                             <label class="control-label">1. Lavado adecuado de anvases (botellas) con sistemas autorizados, uso de detergente y substancias químicas: gluconato sodio, fosfatotrisódico y soda-caústica<strong class="fg_red">*</strong></label>
+                          </div>
+                          <div class="col-md-2">
+                              <input class="form-control" name="bote" type="number" ng-model="ficha6.fi6_lavado_envases" min="0" max="3"> 
+                          </div>
+
+                          <div class="col-md-8">
+                             <label class="control-label">2. Desinfección de envases con sistemas autorizados, tanques de enjuague con soda-caústica al 2% y 3.5% durante 6 minutos de acuerdo a normas establecidas<strong class="fg_red">*</strong></label>
+                          </div>
+                          <div class="col-md-2">
+                              <input class="form-control" name="envases" type="number" ng-model="ficha6.fi6_desinfeccion_envases" min="0" max="2"> 
+                          </div>
+
+                          <div class="col-md-8">
+                             <label class="control-label">3. Empleo de materias primas autorizadas<strong class="fg_red">*</strong></label>
+                          </div>
+                          <div class="col-md-2">
+                              <input class="form-control" name="empleo" type="number" ng-model="ficha6.fi6_materia_prima" min="0" > 
+                          </div>
+
+                           <div class="col-md-8">
+                             <label class="control-label">4. Eliminación de productos alterados y residuos, refinamiento de productos no adecuados<strong class="fg_red">*</strong></label>
+                          </div>
+                          <div class="col-md-2">
+                              <input class="form-control" name="productos_alt" type="number" ng-model="ficha6.fi6_eliminacion_productos" min="0" max="2"> 
+                          </div>
+
+                          <div class="col-md-8">
+                             <label class="control-label">5. Protección contra la contaminación: polvo, saliva, insectos, roedores, etc. Sistema adecuado de control higiénico de la calidad de productos.<strong class="fg_red">*</strong></label>
+                          </div>
+                          <div class="col-md-2">
+                              <input class="form-control" name="contaminacion" type="number" ng-model="ficha6.fi6_proteccion_contaminacion" min="0" max="2"> 
+                          </div>
+
+                          <div class="col-md-8">
+                             <label class="control-label">6. Depósito de almacenamiento de materia prima en buen estado y ventilado<strong class="fg_red">*</strong></label>
+                          </div>
+                          <div class="col-md-2">
+                              <input class="form-control" name="almacenamiento" type="number" ng-model="ficha6.fi6_deposito" min="0" > 
+                          </div>
+                          
+                        </div>
+                         <h4 class="text-center text-primary">D. MANIPULADORES 10%</h4>
+                        <hr class="bg-red"> 
+                        <div class="row">
+                          <div class="col-md-8">
+                             <label class="control-label">1. Estado de salud sin fiebre, tos, heridas y supuraciones<strong class="fg_red">*</strong></label>
+                          </div>
+                          <div class="col-md-2">
+                              <input class="form-control" name="salud" type="number" ng-model="ficha6.fi6_manipulador_salud" min="0" max="1"> 
+                          </div>
+
+                          <div class="col-md-8">
+                             <label class="control-label">2. Aseo personal: manos limpias, uñas recortadas y ropa limpia<strong class="fg_red">*</strong></label>
+                          </div>
+                          <div class="col-md-2">
+                              <input class="form-control" name="manos" type="number" ng-model="ficha6.fi6_manipulador_aseo" min="0" max="2"> 
+                          </div>
+
+                          <div class="col-md-8">
+                             <label class="control-label">3. Hábitos: No toser, estornudar, no escupir en el suelo, no manejar dinero, no fumardurante el trabajo<strong class="fg_red">*</strong></label>
+                          </div>
+                          <div class="col-md-2">
+                              <input class="form-control" name="toser" type="number" ng-model="ficha6.fi6_manipulador_habitos" min="0" max="2"> 
+                          </div>
+
+                           <div class="col-md-8">
+                             <label class="control-label">4. Documentos Carnés sanitarios (manipuladores)<strong class="fg_red">*</strong></label>
+                          </div>
+                          <div class="col-md-2">
+                              <input class="form-control" name="documentos" type="number" ng-model="ficha6.fi6_manipulador_carne" min="0" max="2"> 
+                          </div>
+
+                                                    
+                        </div>
+                        <h4 class="text-center text-primary">E. SEGURIDAD INDUSTRIAL 10%</h4>
+                        <hr class="bg-red"> 
+                        <div class="row">
+                          <div class="col-md-8">
+                             <label class="control-label">1. Overoles, mandiles, guantes, máscaras, botas, etc.<strong class="fg_red">*</strong></label>
+                          </div>
+                          <div class="col-md-2">
+                              <input class="form-control" name="guantes" type="number" ng-model="ficha6.fi6_overoles" min="0" max="2"> 
+                          </div>
+
+                          <div class="col-md-8">
+                             <label class="control-label">2. Botiquín de primeros auxilios, reglamentarios equipado<strong class="fg_red">*</strong></label>
+                          </div>
+                          <div class="col-md-2">
+                              <input class="form-control" name="botiquin" type="number" ng-model="ficha6.fi6_botiquin" min="0" max="3"> 
+                          </div>
+
+                          <div class="col-md-8">
+                             <label class="control-label">3. Extinguidor de incendios, exhibición de tarjeta de renovación, envases para el uso adecuado en caso de incendios<strong class="fg_red">*</strong></label>
+                          </div>
+                          <div class="col-md-2">
+                              <input class="form-control" name="exting" type="number" ng-model="ficha6.fi6_extinguidor" min="0" max="2" required> 
+                          </div>
+
+                                                    
+                        </div>
+                         <h4 class="text-center text-primary">F. CONTROL DE VECTORES</h4>
+                        <hr class="bg-red"> 
+                        <div class="row">
+                           <div class="col-md-4">
+                            <label for="ob24" class="control-label ">Control de vectores:</label><br>
+                            <textarea name="ob24" ng-model-options="{ updateOn: 'blur' }" rows="6" cols="40" style="resize: vertical;min-height:70px;max-height: 150px;" placeholder="Detalle de la infraestructura" ng-model="ficha6.fi6_control_vectores" ></textarea>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label for="ob24" class="control-label ">Observaciones:</label><br>
+                                <textarea name="ob24" ng-model-options="{ updateOn: 'blur' }" rows="6" cols="40" style="resize: vertical;min-height:70px;max-height: 150px;" placeholder="Detalle de la infraestructura" ng-model="ficha6.fi6_observaciones" ></textarea>
+                            </div>
+                          </div>
+  
+                            <center>
+     
+                  <button type="submit" data-toggle="modal" ng-click="submit($parent.ficha6)"  class="btn btn-primary" ng-disabled="formficha6.$invalid" ><span class="glyphicon glyphicon-save"></span> GUARDAR FICHA</button>
+             
+      </center>
+</div>

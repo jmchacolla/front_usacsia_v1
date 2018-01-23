@@ -1,0 +1,48 @@
+<!-- TOP-MENU inicio -->
+<div ng-include="'./templates/publico/menu_inicio_publico.html'"></div>
+<!-- CONTENIDO MODULO inicio -->
+    <div class="col-md-12 col-sm-12">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="text-primary">
+                    <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
+                    MANUALES PARA EL PERSONAL DE SALUD
+                </h2>
+                <hr>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <tabs>
+                    <pane title="Administrador establecimiento">
+                        <h3 class="text-center text-primary"><strong>ADMINISTRADOR ESTABLECIMIENTO</strong></h3>
+                        <hr>
+                        <div class="col-md-offset-2 col-md-10">
+                        <embed ng-src="./manuales/admin_estab.pdf" width="80%" height="500"></div>
+                    </pane> 
+                    <pane title="Médico">
+                        <h3 class="text-center text-primary"><strong>MÉDICO</strong></h3>
+                        <hr>
+                        <div class="col-md-offset-2 col-md-10">
+                        <embed ng-src="./manuales/medico.pdf" width="80%" height="500"></div>
+                    </pane>
+                    <!--<pane title="Estadístico">
+                        <h3 class="text-center text-primary"><strong>ESTADÍSTICO</strong></h3>
+                        <hr>
+                        <div class="col-md-offset-2 col-md-10">
+                        <embed ng-src="./manuales/estadistico.pdf" width="80%" height="500"></div>
+                    </pane> -->
+                    <pane title="Admisionista">
+                        <h3 class="text-center text-primary"><strong>ADMISIONISTA</strong></h3>
+                        <hr>
+                        <div class="col-md-offset-2 col-md-10">
+                        <embed ng-src="./manuales/admisionista.pdf" width="80%" height="500"></div>
+                    </pane> 
+               </tabs>
+            </div>
+        </div>
+        
+    </div>
+  
+       
+<!-- CONTENIDO MODULO fin -->

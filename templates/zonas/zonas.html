@@ -1,0 +1,165 @@
+<!-- TOP-MENU inicio -->
+<div ng-include="'./templates/menu_inicio.html'"></div>
+<!-- CONTEXT-MENU  -->
+    <div ng-include="'./templates/menu_lateral.html'"> </div>
+    
+<!-- CONTENIDO MODULO inicio -->
+    <div class="col-md-8 col-sm-8">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="text-primary">
+                    <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+                   {{ajustes.pagina.titulo}}
+                </h2>
+                <hr>
+            </div>
+        </div>
+        <!--HERRAMIENTAS PARA LA VISTA-->
+        <div class="row">
+            <div class="col-md-12">
+            <div class="well well-sm">
+               <strong class="pull-left lead">Herramientas: &nbsp;</strong>
+                <form class="form-inline pull-left">
+                <input type="text" class="form-control" placeholder="Filtrar por nombre de municipios" ng-model="searchText">
+                </form>
+            <div class="clearfix"></div>
+                
+            </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <h3 class="text-primary">
+                   Nueva Zona &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                   <a href="#/zona/creara" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> AGREGAR</a>
+                </h3>
+                <hr>
+            </div>
+            <div class="col-md-4" ng-controller="MunicipioCtrl">
+              <label class="control-label">Municipio: <strong class="fg_red">*</strong></label>
+              <select class="form-control " name="municipio" ng-model="persona.mun_id"  ng-options="municipio.mun_id as municipio.mun_nombre for municipio in municipios" ng-change="ver_zonas(persona.mun_id)" required>
+              <option value="">--Elige opcion--</option>
+              </select>
+              <span class="messages" ng-show="addPersona.$submitted || addPersona.municipio.$touched">
+                  <span ng-show="addPersona.municipio.$error.required">El campo es obligatorio.</span>
+             </span>
+        </div>
+        </div>
+        <br>
+        <div class="row" >
+            <div class="col-md-12">
+            <!-- AQUI VAN LAS TABLAS O FORMULARIOS incrustados -->
+            <!-- INICIO -->
+            <div class="table-responsive">
+                <!-- <div class="text-center" ng-show="loading"><br><img ng-src="./images/image.gif" class="loader-img"></div>
+                <div ng-show="!loading && !msg">No se encontraron resultados</div>
+             -->
+                <table class="table table-hovertable table-bordered table-striped table-hover" ng-show="zon">
+                     <thead>
+
+                        <th >Macrodistrito</th>
+                        <th >Distrito</th>
+                        <th >Zona</th> 
+                       <!--  <th >Editar</th> 
+                        <th >Eliminar</th>  -->
+                    </thead>
+                    <tbody ng-repeat="zonas in zonas | orderBy:sortType:sortReverse | filter:searchText">
+                      <tr>
+                        <td>{{zonas.zon_macrodistrito | uppercase}}</td>
+                        <td>{{zonas.zon_distrito | uppercase}}</td>
+                        <td>{{zonas.zon_nombre | uppercase}}</td>
+                        <!-- <td>
+                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#miCuadroModalEditar" ng-click="get_id(parasito.par_id, parasito.par_nombre,parasito.par_descripcion,parasito.par_clasificacion)" title="Editar">
+                              <span class="glyphicon glyphicon-pencil"></span>
+                            </button> -->
+                            <!--CUADRO MODAL EDITAR-->
+                            <!-- <div id="miCuadroModalEditar" class="modal fade" role="dialog" tabindex="-1">
+                              <div class="modal-dialog">
+                                <div class="modal-content">
+                                  <div class="modal-header bg-red">
+                                    <button type="button" class="close" data-dismiss="modal">×</button>
+                                    <h4 class="modal-title fg-white">EDITAR PARASITO</h4>
+                                  </div>
+                                  <div class="modal-body lead text-center">
+                                    <br>
+                                    <div class="well well-sm">
+                                        <strong>{{parasito.par_nombre}}</strong>
+                                        <div class="panel">
+                                            <div class="panel-body">
+                                                <div class="row">
+                                                    <div class="form-group col-md-12">
+                                                        <label for="nomc">Nombre:</label>
+                                                        <input name="nomc" type="" class="form-control" id="" ng-model="nombre">
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="form-group col-md-12">
+                                                        <label for="nomc" class="control-label">Descripción:</label>
+                                                        <textarea class="form-control" style="resize: vertical;min-height:100px;max-height: 150px;" ng-model="descripcion"></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="form-group col-md-12">
+                                                        <label for="nomc" class="control-label">Clasificación:</label>
+                                                        <input name="nomc" type="" class="form-control" id="" ng-model="clasificacion">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="editar(nombre,descripcion,clasificacion)"><span class="glyphicon glyphicon-save"></span> GUARDAR</button>
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">
+                                        <span class="glyphicon glyphicon-remove"></span>
+                                        CANCELAR</button>
+
+                                  </div>
+                                  
+                                </div>
+                              </div>
+                            </div> -->
+                            <!--FIN CUADRO MODAL-->                                        
+                       <!--  </td>
+                        <td>
+                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#miCuadroModalEliminar" ng-click="get_id1(parasito.par_id, parasito.par_nombre)" title="Eliminar">
+                              <span class="glyphicon glyphicon-trash"></span>
+                            </button>
+                             -->
+                            <!--CUADRO MODAL ELIMINAR-->
+                            <!-- <div id="miCuadroModalEliminar" class="modal fade" role="dialog" tabindex="-1">
+                              <div class="modal-dialog">
+                                <div class="modal-content">
+                                  <div class="modal-header bg-red">
+                                    <button type="button" class="close" data-dismiss="modal">×</button>
+                                    <h4 class="modal-title fg-white">ELIMINAR PARÁSITO</h4>
+                                  </div>
+                                  <div class="modal-body lead text-center">
+                                    ¿Esta seguro que desea eliminar este Parásito?
+                                    <br>
+                                    <div class="well well-sm">
+                                        <strong>{{nombre}}</strong>
+                                    </div>
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="remove()"><span class="glyphicon glyphicon-ok"></span> SI</button>
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal">
+                                        <span class="glyphicon glyphicon-remove"></span>
+                                        NO</button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div> -->
+                            <!--FIN CUADRO MODAL-->
+                        <!-- </td> -->
+
+                        
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- FIN -->
+            <!-- AQUI VAN LOAS TABLAS O FORMULARIOS incrustados -->
+            </div>
+        </div>
+    </div>

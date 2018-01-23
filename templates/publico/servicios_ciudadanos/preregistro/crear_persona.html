@@ -1,0 +1,513 @@
+<div ng-include="'./templates/publico/menu_inicio_publico.html'"></div>
+<div ng-controller="apiAppCtrl_Pre as vm">
+<!-- CONTENIDO MODULO inicio -->
+	<div class="col-md-12" ng-controller="FechaFunCtrl">
+		<div class="row">
+			<div class="col-md-12">
+				<h2 class="text-primary text-center">
+					<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+					{{ajustes.pagina.titulo}}
+				</h2>
+				<hr class="bg-green">
+			</div>
+		</div>
+		<div class="row">
+		   	<div class="col-md-12">
+				<!-- AQUI VAN LAS TABLAS O FORMULARIOS incrustados -->
+				<!-- INICIO -->
+				<div class="row" ng-if="!entendido">
+					<div class="col-md-4">
+						<div class="well well-sm text-justify">
+							<h4 class="text-primary text-center">
+							¿Qué es este servicio y cuales son sus beneficios?
+							</h4>
+							<div class="text-center">
+								<img src="./images/registro_ciudadano.png" class="img-responsive img-thumbnail">
+							</div>
+							<br>
+							<div class="clearfix"></div>
+							El Servicio de Registro Departamental de Personas es un servicio que le permite 
+							acceder a un conjunto de Servicios de Salud mejorados mediante la implementación de tecnología.
+							<div class="clearfix"></div>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="well well-sm text-justify">
+							<h4 class="text-primary text-center">
+							¿Cómo funciona este servicio?
+							</h4>
+							<div class="text-center">
+								<img src="./images/proceso_registro.png" class="img-responsive img-thumbnail">
+							</div>
+							<br>
+							<div class="clearfix"></div>
+							El registro de ciudadanos comprende:
+							<ol>
+								<li>
+									<strong>Registro a través de Internet:</strong> 
+									Consiste en llenar con datos personales el formulario de registro
+									departamental de ciudadanos.
+								</li>
+								<li>
+									<strong>Confirmación de datos:</strong>
+									Consiste en ir a confirmar tus datos en un Establecimiento de Salud y habilitarte
+									como paciente.
+								</li>
+							</ol>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="well well-sm text-justify">
+							<h4 class="text-primary text-center">
+							¿Cómo se inicia el registro?
+							</h4>
+							<div class="text-center">
+								<img src="./images/dispositivos.png" class="img-responsive img-thumbnail">
+							</div>
+							<br>
+							<div class="clearfix"></div>
+							Puedes realizar	 el paso <span class="badge">1</span> del registro mediante el formulario electrónico de registro de ciudadanos, desde cualquier dispositivo (computadora, tablet, celular) conectado a Internet.
+							<br><br>
+							<button ng-click="entendi()" class="btn btn-primary btn-block">
+								<span class="glyphicon glyphicon-ok"></span>
+								 Entendido...¡¡QUIERO REGISTRARME!!
+							</button>
+						</div>
+					</div>
+				</div>
+				<div ng-if="pase">
+				  <form name="addPersona" novalidate>
+					 <div class="row">
+						<div class="col-md-10 col-md-offset-1">
+							<blockquote>
+								<h4 class="text-primary">AYUDA</h4>
+								<h3><small> Los campos marcados con asterisco (<strong class="fg_red">*</strong>) son obligatorios.</small></h3>
+							</blockquote>
+						</div>	  
+					 </div>	  
+					 <div class="row">
+					   <div class="col-md-10 col-md-offset-1">
+						 <div class="well well-sm" style="background-color:#fff;">
+						   <div class="row">
+							  <div class="col-md-12">
+								      <h3 class="text-primary text-center">I. DATOS PERSONALES</h3>
+								      <hr class="bg-green">
+									  <div class="row">
+										<div class="col-md-4">
+										  <div class="form-group">
+											<label class="control-label">Tipo de documento: <strong class="fg_red">*</strong></label>
+					                        <select class="form-control " name="tipo_doc" ng-model="persona.per_tipo_documento" ng-change="documento()">
+									            <option value="CI">CEDULA DE IDENTIDAD</option>
+									            <option value="PASAPORTE">PASAPORTE</option> 
+					                        </select>
+					                        <span class="messages" ng-show="addPersona.$submitted || addPersona.tipo_doc.$touched">
+										         <span ng-show="addPersona.tipo_doc.$error.required">El campo es obligatorio.</span>
+										    </span>
+										  </div>
+										</div>
+											<div class="col-md-3">
+											  <div class="form-group">
+												<label class="control-label">Número de documento: <strong class="fg_red">*</strong></label>
+												<input class="form-control " type="text"  name="num_iden" ng-model="vm.per_ci" placeholder="Ej.: 4512452" ng-change="vm.buscaPersona()" ng-pattern="patternCadenaNumero" required>
+												<span class="messages" ng-show="addPersona.$submitted || addPersona.num_iden.$touched">
+										           <span ng-show="addPersona.num_iden.$error.required">El campo es obligatorio.</span>
+										           <span ng-show="addPersona.num_iden.$error.min">Número de CI incorrecto.</span>
+										           <span ng-show="addPersona.num_iden.$error.pattern">El formato introducido es incorrecto.</span>
+										           <span ng-show="pre_reg">ESTE NÚMERO YA SE ENCUENTRA REGISTRADO.</span>
+										        </span>
+											  </div>
+										    </div>
+										<div class="col-md-2" ng-show="exp">
+										    <div class="form-group">
+						                        <label class="control-label ">Expedido en: <strong class="fg_red">*</strong></label>
+						                        <select class="form-control " name="num_id_exp" ng-model="persona.per_ci_expedido" ng-model-options="{ updateOn: 'blur' }" required>
+						                          <option value="LP">La Paz</option>
+						                          <option value="OR">Oruro</option>
+						                          <option value="PT">Potosi</option>
+						                          <option value="PA">Pando</option>
+						                          <option value="BN">Beni</option>
+						                          <option value="SC">Santa Cruz</option>
+						                          <option value="CB">Cochabamba</option>
+						                          <option value="CH">Chuquisaca</option>
+						                          <option value="TJ">Tarija</option>
+						                        </select>
+						                        <span class="messages" ng-show="addPersona.$submitted || addPersona.num_id_exp.$touched">
+										            <span ng-show="addPersona.num_id_exp.$error.required">El campo es obligatorio.</span>
+										        </span>
+					                  	    </div>
+					                  	</div>
+					            	    <div class="col-md-2" ng-show="exp_ext">
+								           <label class="control-label ">Expedido: <strong class="fg_red">*</strong></label>
+								           <input type="" class="form-control " ng-model="persona.per_ci_expedido" name="exp_extranjero" readonly disabled>
+								        </div>
+										<div class="col-md-3" ng-if="paises">
+											<div ng-controller="PaisCtrl">
+									          <label class="cotrol-label">¿De qué país proviene?: <strong class="fg_red">*</strong></label>    
+									            <select class="form-control " name="nacionalidad" ng-model="persona.per_nacion"  ng-options="pais.nac_nombre as pais.nac_nombre for pais in paises" ng-model-options="{ updateOn: 'blur' }" ng-required="required_p">
+									            </select>
+									            <span class="messages" ng-show="addPersona.$submitted || addPersona.nacionalidad.$touched">
+									            <span ng-show="addPersona.nacionalidad.$error.required">El campo es obligatorio.</span>
+									          </span>
+									        </div>
+										</div>
+									  </div>
+									  <div class="row">
+										<div class="col-md-4">
+										    <div class="form-group">
+												<label class="control-label">Nombres: <strong class="fg_red">*</strong></label>
+												<div class="input-group">
+													<input class="form-control " type="text" name="nombres" ng-model="persona.per_nombres" placeholder="Ej.: John" ng-model-options="{ updateOn: 'blur' }" ng-pattern="patternCadena" ng-minlength="3" autofocus required>
+													<span class="glyphicon glyphicon-pencil icono-btn input-group-addon" id="basic-addon1" style="color:#208b81;"></span>
+												</div>
+												<span class="messages" ng-show="addPersona.nombres.$touched">
+										           <span ng-show="addPersona.nombres.$error.required">El campo es obligatorio.</span>
+										           <span ng-show="addPersona.nombres.$error.pattern">No se admiten símbolos especiales o números.</span>
+										           <span ng-show="addPersona.nombres.$error.minlength">Reviso el dato introducido.</span>
+										        </span>
+										    </div>
+										</div>
+										<div class="col-md-4">
+										  <div class="form-group">
+											<label class="control-label">Apellido Paterno: <strong class="fg_red">*</strong></label>
+											<div class="input-group">
+												<input class="form-control  contact_form" type="text" name="apellido_primero" ng-model="persona.per_apellido_primero" placeholder="Ej.: Arandia" ng-model-options="{ updateOn: 'blur' }" ng-pattern="patternCadena" ng-minlength="3" autofocus required>
+												<span class="glyphicon glyphicon-pencil input-group-addon" id="basic-addon1" style="color:#208b81;"></span>
+											</div>
+											<span class="messages" ng-show="addPersona.$submitted || addPersona.apellido_primero.$touched">
+									            <span ng-show="addPersona.apellido_primero.$error.required">El campo es obligatorio.</span>
+									            <span ng-show="addPersona.apellido_primero.$error.pattern">No se admiten símbolos especiales o números.</span>
+									            <span ng-show="addPersona.apellido_primero.$error.minlength">Revise el dato introducido.</span>
+									        </span>
+										  </div>
+										</div>
+										<div class="col-md-4">
+										  <div class="form-group">
+											<label class="control-label">Apellido Materno: <strong class="fg_red">*</strong></label>
+											<div class="input-group">
+												<input class="form-control " type="text" name="apellido_segundo" ng-model="persona.per_apellido_segundo" placeholder="Ej.: Mendoza" ng-model-options="{ updateOn: 'blur' }" ng-pattern="patternCadena" ng-minlength="3" autofocus required>
+												<span class="glyphicon glyphicon-pencil input-group-addon" style="color:#208b81;" ></span>
+											</div>
+											<span class="messages" ng-show="addPersona.$submitted || addPersona.apellido_segundo.$touched">
+									            <span ng-show="addPersona.apellido_segundo.$error.required">El campo es obligatorio.</span>
+									            <span ng-show="addPersona.apellido_segundo.$error.pattern">No se admiten símbolos especiales o números.</span>
+									            <span ng-show="addPersona.apellido_segundo.$error.minlength">Revise el dato introducido.</span>
+									        </span>
+										  </div>
+										</div>
+									  </div>
+									  <div class="row">
+								        <div class="col-md-4">
+								          <label for="fecha_creacion" class="control-label">Fecha de nacimiento: <strong class="fg_red">*</strong></label>
+								          <div class="row">
+								            <div class="col-md-4">
+								              <div class='input-group date'>
+								                </div>
+								                  <select class="form-control" name="dia" ng-model="fechaNac.diac" ng-change="rest()" ng-options="dia.dia_id as dia.dia for dia in dias" required>
+								                    <option value="">Dia</option>
+								                  </select>
+								            </div>
+								            <div class="col-md-4">
+								              <select class="form-control" aria-label="MES" title="Mes" name="mes" ng-model="fechaNac.mesc" ng-change="rest()" required placeholder="MES">
+								                <option value="">Mes</option>
+								                <option value="01">Enero</option>
+								                <option value="02">Febrero</option>
+								                <option value="03">Marzo</option>
+								                <option value="04">Abril</option>
+								                <option value="05">Mayo</option>
+								                <option value="06">Junio</option>
+								                <option value="07">Julio</option>
+								                <option value="08">Agosto</option>
+								                <option value="09">Septiembre</option>
+								                <option value="10">Octubre</option>
+								                <option value="11">Noviembre</option>
+								                <option value="12">Diciembre</option>
+								              </select>
+								            </div>
+								            <div class="col-md-4">
+									            <select class="form-control" name="anio" aria-label="ANIO" ng-model="fechaNac.anioc" ng-change="rest()" ng-options="anio.anio as anio.anio for anio in anios"   required>
+									               <option value="">Año</option>
+									            </select>
+									             <input my-valid-date ng-model="fechaNacimiento" name="myDateInput" placeholder="dd-mm-aaaa" type="hidden" class="form-control" ng-model-options="{ updateOn: 'blur' }" ng-pattern="patternFecha" readonly>
+									             <input type="hidden" ng-model="d">
+									        </div>  
+								          </div> 
+								          <span class="messages" ng-show="addPersona.myDateInput">
+								              <span ng-show="addPersona.myDateInput.$error.pattern">La Fecha no es valida  :(.
+								              </span>
+								              <div ng-if=" var == 'cero'">
+								                <span ng-show="addPersona.myDateInput.$error">No es una fecha correcta :(.  
+								                </span>
+								              </div>                  
+								          </span>
+								          <span class="messages" ng-show="addPersona.dia.$touched || addPersona.mes.$touched || addPersona.anio.$touched">
+								              <span ng-show="addPersona.dia.$error.required || addPersona.mes.$error.required || addPersona.anio.$error.required">Debe ingresar todos los campos de la fecha.
+								              </span>               
+								          </span>   
+								        </div>
+								        <div class="col-md-2">
+								          <label class="control-label">Sexo: <strong class="fg_red">*</strong></label>
+								            <div class="row">
+								              <div class="formulario">
+								                <div class="radio">
+								                  <div class="col-md-6">
+								                    <input type="radio" name="genero" id="M" value="M" ng-model="persona.per_genero">
+								                    <label for="M">M</label>
+								                  </div>
+								                  <div class="col-md-6">
+								                    <input type="radio" name="genero" id="F" value="F" ng-model="persona.per_genero">
+								                    <label for="F">F</label>
+								                  </div>
+								                  <span class="messages" ng-show="addPersona.$submitted || addPersona.genero.$touched">
+								                    <span ng-show="addPersona.genero.$error.required">El campo es obligatorio.</span>
+								                  </span>
+								                </div>
+								              </div>
+								           </div>
+								         </div>
+										<div class="col-md-4">
+										  <div class="form-group">
+											<label class="control-label">Correo Electrónico:</label>
+											<div class="input-group">											
+												<input type="email" class="form-control " name="email" ng-model="persona.per_email" placeholder="Ej.: john_arandia_123@gmail.com" aria-describedby="sizing-addon1" ng-model-options="{ updateOn: 'blur' }">
+												<span class="input-group-addon" id="basic-addon1">@</span>
+											</div>
+											<span class="messages" ng-show="addPersona.$submitted || addPersona.email.$touched">
+									            <span ng-show="addPersona.email.$error.required">El campo es obligatorio.</span>
+									            <span ng-show="addPersona.email.$error.email">Formato de email incorrecto.</span>
+									        </span>
+										  </div>
+										</div>
+										<div class="col-md-2">
+										  <div class="form-group">
+											<label class="control-label">Nro. Celular:</label>
+											<div class="input-group">
+												<input type="number" class="form-control " name="numero_celular" ng-model="persona.per_numero_celular" placeholder="Ej.: 77665544" ng-model-options="{ updateOn: 'blur' }"  min="60000000" max="79999999" >
+												<span class="glyphicon glyphicon-phone input-group-addon" style="color:#208b81;"></span>
+											</div>
+											<span class="messages" ng-show="addPersona.$submitted || addPersona.numero_celular.$touched">
+									            <span ng-show="addPersona.numero_celular.$error.required">El campo es obligatorio.</span>
+									            <span ng-show="addPersona.numero_celular.$error.min">Número de celular incorrecto.</span>
+									            <span ng-show="addPersona.numero_celular.$error.max">Número de celular incorrecto.</span>
+									        </span>
+										  </div>
+										</div>
+									  </div>	
+									  <h3 class="text-center text-primary">II. RESIDENCIA</h3>
+									  <hr class="bg-green">
+										<span> Tome en cuenta que existen algunos <strong>MUNICIPIOS</strong> que tienen registrados sus <strong>ZONAS</strong> para ello usted solo debe seleccionar la zona; en caso de que el <strong>MUNICIPIO</strong> seleccionado no tiene la lista de ZONAS, usted debe registrar el nombre de su <strong>ZONA</strong>.</span>
+									 	<br><br>
+									  <div class="row">
+										<div class="col-md-4" ng-controller="MunicipioCtrl">
+						                  	<label class="control-label">Municipio: <strong class="fg_red">*</strong></label>
+						                  	<select class="form-control " name="municipio" ng-model="persona.mun_id"  ng-options="municipio.mun_id as municipio.mun_nombre for municipio in municipios" ng-change="ver_zonas(persona.mun_id)" required>
+						                  	</select>
+						                  	<span class="messages" ng-show="addPersona.$submitted || addPersona.municipio.$touched">
+										        <span ng-show="addPersona.municipio.$error.required">El campo es obligatorio.</span>
+								           </span>
+						                </div>
+										<div class="col-md-3">
+											<label class="control-label">Zona/Comunidad: <strong class="fg_red">*</strong></label>
+						                  	<select ng-show="!zon" class="form-control " name="zona_comunidad" ng-model="persona.per_zona_comunidad"  ng-options="zona as zona.zon_nombre for zona in zonas" ng-change="ver_estab()" required>
+						                  	</select>
+						                  	<input ng-show = "zon" type="text" class="form-control" name="zona_comunidad1" ng-model="persona.per_zona_comunidad.zon_nombre" ng-pattern="patternCadenaNumero" required>
+						                    <span  class="messages" ng-show="addPersona.$submitted || addPersona.zona_comunidad.$touched">
+										        <span ng-show="addPersona.zona_comunidad.$error.required">El campo es obligatorio.</span>
+										        <span ng-show="addPersona.zona_comunidad.$error.pattern">Formato introducido es incorrecta.</span>
+										    </span>
+										    <span class="messages" ng-show="addPersona.$submitted || addPersona.zona_comunidad1.$touched">
+										        <span ng-show="addPersona.zona_comunidad1.$error.required">El campo es obligatorio.</span>
+										        <span ng-show="addPersona.zona_comunidad1.$error.pattern">Formato introducido es incorrecta.</span>
+										    </span>
+										</div>	  
+										<div class="col-md-3">
+											<label class="control-label">Calle/Avenida: <strong class="fg_red">*</strong></label>
+						                    <input type="text" name="avenida_calle" class="form-control " id="avenida_calle" placeholder="Avenida / Calle" ng-model="persona.per_avenida_calle" ng-model-options="{ updateOn: 'blur' }" ng-pattern="patternCadenaNumero" required> 
+						                     <span class="messages" ng-show="addPersona.$submitted || addPersona.avenida_calle.$touched">
+										        <span ng-show="addPersona.avenida_calle.$error.required">El campo es obligatorio.</span>
+										        <span ng-show="addPersona.avenida_calle.$error.pattern">El formato introducido es incorrecto.</span>
+										    </span>
+										</div>	  
+										<div class="col-md-2">
+											<label class="control-label" data-toggle="tooltip" title="Si no tiene número ingrese 0">Número: <strong class="fg_red">*</strong></label>
+						                    <div class="input-group">
+							                    <input data-toggle="tooltip" title="Si no tiene número ingrese 0" type="text" name="numero_dir" class="form-control " id="numero_dir" placeholder="Numero" ng-model="persona.per_numero" pattern="[0-9]{1,8}" required>
+							                    <span class="input-group-addon" id="basic-addon1">#</span>
+						                    </div>
+						                     <span class="messages" ng-show="addPersona.$submitted || addPersona.numero_dir.$touched">
+										        <span ng-show="addPersona.numero_dir.$error.required">El campo es obligatorio.</span>
+										        <span ng-show="addPersona.numero_dir.$error.pattern">El formato introducido es incorrecto.</span>
+										    </span>
+										</div>	  	  
+									  </div>
+									  <hr class="bg-green">								
+									  <div class="row">
+										<div class="col-md-6">
+											<h4><strong>Términos y condiciones del servicio <strong class="fg_red">*</strong></strong></h4>
+											<div class="well well-sm bg-white text-justify" style="height:90px !important; overflow:auto;">
+												<strong>Te damos la bienvenida a SESAR</strong><br>
+												Te agradecemos que uses los servicios de SESAR (en adelante, los «Servicios»). Los Servicios se proporcionan a través del Servicio Departamental de Salud La Paz. (en adelante, «SEDES La Paz»), cuyo domicilio social está ubicado en Calle Capitán Ravelo 2180, La Paz, Bolivia.<br>
+												El uso de nuestros Servicios implica la aceptación de estas condiciones. Te recomendamos que las leas detenidamente.
+											</div>
+											<div class="checkbox">
+												<label style="font-size: 1em">
+													<input type="checkbox" value="" name="check" ng-model="checkbox"
+														 ng-click="toggle()" required>
+													<span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
+													He leido y acepto los términos y condiciones del servicio.
+												</label>
+							                    <span class="messages" ng-show="addPersona.$submitted || addPersona.check.$touched">
+											        <span ng-show="addPersona.check.$error.required">El campo es obligatorio.</span>
+											    </span>
+											</div>
+										</div>
+						 		 	<div class="col-md-6">
+										<h4><strong>Prueba de seguridad <strong class="fg_red">*</strong></strong></h4>
+										<div
+							                vc-recaptcha
+							                theme="'light'"
+							                key="model.key"
+							                on-create="setWidgetId(widgetId)"
+							                on-success="setResponse(response)"
+							                on-expire="cbExpiration()"
+							            ></div>
+							            <div class="g-recaptcha" data-sitekey="6LfC2xkUAAAAAIzfLxhUiIPsDYKAsNJY7W_8f3i5"></div>
+									</div>
+								  </div>		  
+						      </div>	 
+							  <br>  
+							  <br>		
+							  <div class="row">
+								<div class="col-md-12 text-center" ng-if="visible">
+									<div class="well well-sm">
+										<div class="row">
+										<button  type="submit" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#miCuadroModal1"  ng-disabled="addPersona.$invalid || pre_reg" ><span class="glyphicon glyphicon-ok"></span> Enviar datos</button>
+										<button  type="submit" class="btn btn-default btn-lg" ng-click="cancelar()"><span class="glyphicon glyphicon-floppy-remove"></span> Cancelar registro</button>
+										</div>
+									</div>
+								</div>	  
+							  </div>	  
+							  <!--CUADRO MODAL PARA REVISO DE DATOS   ng-click="submit($parent.persona, d)" -->
+						  	  <div id="miCuadroModal1" class="modal fade" role="dialog" tabindex="-1">
+								  <div class="modal-dialog">
+								  <!-- Modal de resumen de informacion  -->
+									  <div class="modal-content" ng-if="!msg">
+									      <div class="modal-header bg-green">
+									        <button type="button" class="close" data-dismiss="modal">×</button>
+									        <h4 class="modal-title fg-white"><strong>{{mensaje}}</strong></h4>
+									      </div>
+									      <div class="modal-body text-center">					
+									         <small></small>
+									         	<h5 class="text-center text-primary">I. DATOS PERSONALES</h5>
+												<div class="well well-sm text-justify" style="background-color:#DAEAEF;">
+													<table>
+													 <tr>
+													 	<td width="50%">
+														<span class="text-primary"><strong>TIPO DE DOCUMENTO :</strong></span><br>			
+														<span class="text-primary"><strong>NÚMERO DE DOCUMENTO :</strong></span><br>
+														<span class="text-primary"><strong>NOMBRE COMPLETO :</strong></span><br>
+														<span class="text-primary"><strong>FECHA DE NACIMIENTO :</strong></span><br>
+														<span class="text-primary"><strong>SEXO :</strong></span><br>
+														<span class="text-primary"><strong>CORREO ELECTRÓNICO :</strong></span><br>
+														<span class="text-primary"><strong>NÚMERO DE CELULAR :</strong></span><br>
+													   </td>
+													   <td width="50%"> 	
+			   									   	 	<div ng-if="persona.per_tipo_documento == 'CI'">CÉDULA DE IDENTIDAD<br></div>
+			   									   	 	<div ng-if="persona.per_tipo_documento == 'PASAPORTE'">PASAPORTE<br></div>
+													   	{{vm.per_ci }}{{" "+persona.per_ci_expedido}}<br>
+													   	{{persona.per_nombres+" "+persona.per_apellido_primero+" "+persona.per_apellido_segundo}}<br>
+													   	{{d | date: "dd/MM/yyyy"}}<br>
+													   	<div ng-if="persona.per_genero == 'F'">FEMENINO<br></div>
+													   	<div ng-if="persona.per_genero == 'M'">MASCULINO<br></div>
+													   	<span ng-if="persona.per_email==null">---</span><span ng-if="persona.per_email!=null">{{persona.per_email}}</span><br>
+													   	<span ng-if="persona.per_numero_celular==null">---</span>
+													   	<span ng-if="persona.per_numero_celular!=null">{{persona.per_numero_celular}}</span><br>
+													   </td>
+													  </tr>
+													</table>
+												</div>
+												<h5 class="text-center text-primary">II. RESIDENCIA</h5>	
+												<div class="well well-sm text-justify" style="background-color:#DAEAEF;">
+												<table>
+													 <tr>
+													 	<td width="70%">
+													 		<span class="text-primary">ZONA / COMUNIDAD :</span>{{persona.per_zona_comunidad.zon_nombre}}<br>
+															<span class="text-primary"> CALLE / AVENIDA :</span>{{persona.per_avenida_calle}}
+															<span class="text-primary">NÚMERO : </span>{{persona.per_numero}}<br>
+													   </td>
+													  </tr>
+													</table> 
+
+												</div>
+												
+												<label>Se le invita a validar sus datos en los siguientes Establecimientos de Salud: </label>
+		 										<div>
+													<div class="well well-sm text-justify" style="background-color:#ddd;">
+														<div class="row">
+															<div class="col-md-2">
+																<img ng-src="./images/centro.png" align="center" class="img-responsive"/>
+															</div>
+															   <div class="col-md-10">
+														          <span class="control-label1" ng-repeat="estab in establecimientos track by $index">
+														          <span style="background-color:#fff;">
+														          {{estab.es_nombre +" / "}} </span></span>
+														       </div>
+														</div>
+													</div>
+												</div>	 				 
+									      </div>
+									      <div class="modal-footer lead text-center">
+										        <button type="button" class="btn btn-default col-md-4" data-dismiss="modal" ng-click=""><span class="glyphicon glyphicon-remove"></span>CANCELAR</button>
+										      	<button class="btn btn-primary col-md-offset-2 col-md-4"  ng-disabled="addPersona.$invalid || pre_reg" ng-click="submit($parent.persona, d, vm.per_ci, persona.per_zona_comunidad.zon_nombre)">
+													<span class="glyphicon glyphicon-ok"></span>
+													REGISTRAR
+												</button>
+									      </div>
+									  </div>  
+							      <!-- Modal de datos guardados -->
+							          <div class="modal-content" ng-if="msg">
+									      <div class="modal-header bg-green">
+									        <button type="button" class="close" data-dismiss="modal">×</button>
+									        <h4 class="modal-title fg-white"><strong>USTED SE HA REGISTRADO CORRECTAMENTE</strong></h4>
+									      </div>
+									      <div class="modal-body text-center">					
+									         <small></small>
+									         	<h3><span class="text-primary">NOMBRE :</span>
+												{{persona.per_nombres+" "+persona.per_apellido_primero+" "+persona.per_apellido_segundo}} <br>
+												<span class="text-primary">C.I. :</span>
+												{{persona.per_ci}}</h3>
+									      </div>
+									      <div class="alert alert-info" class="text-center"><strong>PUEDES VALIDAR TUS DATOS EN EL ESTABLECIMIENTO DE SALUD MAS CERCANO A TU DOMICILIO PORTANDO TU CEDULA DE IDENTIDAD</strong></div>
+									      <div class="modal-footer lead text-center">
+										      <button class="btn btn-primary "  ng-click="hecho(true)" data-dismiss="modal" >
+											  <span class="glyphicon glyphicon-ok"></span>HECHO</button>
+									      </div>
+									  </div> 
+								  </div>
+							  </div>
+							<!--FIN CUADRO MODAL-->
+					       </div>	  
+						 </div>	  
+					   </div>	
+					   <hr>
+				     </div>	
+				  </form>
+				</div>
+		    </div>
+	    </div>
+    </div>
+</div>
+<!-- CONTENIDO MODULO fin -->
+
+<style type="text/css">
+	.contact_form input:focus:invalid { /* when a field is considered invalid by the browser */
+    background: #fff url(./images/invalid.png) no-repeat 98% center;
+    box-shadow: 0 0 5px #d45252;
+    border-color: #b03535
+}
+</style>
+
+<script>
+$(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();   
+});
+</script>

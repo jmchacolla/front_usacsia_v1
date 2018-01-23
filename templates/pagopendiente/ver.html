@@ -1,0 +1,82 @@
+<!-- TOP-MENU inicio -->
+<div ng-include="'./templates/menu_inicio.html'"></div>
+<!-- CONTEXT-MENU -->
+<div ng-include="'./templates/menu_lateral.html'"></div>
+<!-- CONTENIDO MODULO inicio -->
+<div class="col-md-8 col-sm-8" >
+    <div class="row">
+      <div class="col-md-12">
+        <h2 class="text-primary">
+          <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+          {{ajustes.pagina.titulo}}
+        </h2>
+        <hr class="bg-red">
+      </div>
+    </div>
+    <div class="well well-sm" style="background-color:#fff;">
+      <div class="row">
+        <div class="col-md-12">
+          <h3 class="text-center text-primary">
+           I. Boleta de pago Trámite N°:&nbsp;&nbsp;&nbsp;<strong>{{pagop.et.et_numero_tramite}}</strong>
+          <hr class="bg-red">
+          </h3>
+        </div>
+        <div class="col-md-12">
+          <div ng-show="pagop.propietario.pjur_id">
+            <div class="col-md-6 col-sm-6">
+              <label class="text-primary">Razón Social del Propietario:</label><br>
+              {{pagop.propietario.pjur_razon_social}}
+            </div>
+            <div class="col-md-6 col-sm-6">
+              <label class="text-primary">C.I./NIT:</label><br>
+              {{pagop.propietario.pjur_nit}}
+            </div>
+          </div>
+          <div ng-show="pagop.propietario.per_id">
+            <div class="col-md-6 col-sm-6">
+              <label class="text-primary">Nombre completo:</label><br>
+              {{pagop.propietario.per_nombres}}&nbsp;{{pagop.propietario.per_apellido_primero}}&nbsp;{{pagop.propietario.per_apellido_segundo}}
+            </div>
+            <div class="col-md-6 col-sm-6">
+              <label class="text-primary">C.I./NIT:</label><br>
+              {{pagop.propietario.per_ci}}&nbsp;&nbsp;{{pagop.propietario.per_ci_expedido}}
+            </div>
+          </div>
+          <hr>
+        </div>
+        <div class="col-md-12">
+          <div class="col-md-6 col-sm-6">
+            <label class="text-primary">Razón Social del Establecimiento:</label><br>
+            {{pagop.estsol.ess_razon_social}}
+          </div>
+          <div class="col-md-6 col-sm-6">
+            <label class="text-primary">Kardex:</label><br>
+            {{pagop.empresa.emp_kardex}}
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="col-md-6 col-sm-6">
+            <label class="text-primary">Unidad de:</label><br>
+            {{pagop.tramite.tra_nombre}}
+          </div>
+          <div class="col-md-6 col-sm-6">
+            <label for="tra" class="control-label text-primary">Trámite:</label><br>
+             {{pagop.tramite.tra_nombre}}
+          </div>
+          <div class="col-md-6 col-sm-6" >
+            <label for="pp" class="control-label text-primary">Por concepto de:</label><br>
+            {{pagop.pagop.pp_descripcion | uppercase}}
+          </div>
+          <div class="col-md-6 col-sm-6">
+              <label class="control-label text-primary">Monto a cancelado:</label><br>
+              Bs. &nbsp;&nbsp;{{pagop.pagop.pp_monto_total}}
+          </div>
+        </div>
+        <div  class="col-md-12" align="center" ng-controller="pdf_pagopF_Ctrl">
+            <hr>
+           <button type="button" class="btn btn-default" ng-click="openPdfCESF1()" >IMPRIMIR PAGO  <span class="glyphicon glyphicon-print"></span></button>
+           <button type="button"  class="btn btn-default" ng-click="downloadPdfCESF1()">Descargar PDF PAGO  <span class="glyphicon glyphicon-download-alt"></span></button>
+        </div>
+      </div>
+    </div>
+</div>

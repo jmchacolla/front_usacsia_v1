@@ -1,0 +1,127 @@
+<!-- TOP-MENU inicio -->
+<div ng-include="'./templates/publico/menu_inicio_publico.html'"></div>
+<!-- CONTEXT-MENU -->
+<!-- <div ng-include="'./templates/menu_lateral.html'"></div> -->
+<div class="col-md-2"></div>
+<!-- CONTENIDO MODULO inicio -->
+<div class="col-md-8 col-sm-8">
+  <div class="row">
+    <div class="col-md-12">
+      <h2 class="text-primary">
+        <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+        {{ajustes.pagina.titulo}}
+      </h2>
+      <hr >
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="well well-sm" style="background-color:#fff;">
+
+        <div class="row">
+          <div class="col-md-12">
+            <h3 class="text-center text-primary">
+             I. DATOS PERSONALES
+            </h3>
+            <hr class="bg-red">
+          </div>
+          <div class="col-md-3 col-sm-6">
+            <label class="text-primary">Nombre:</label><br>
+            {{pertramite.persona.per_nombres}}
+          </div>
+          <div class="col-md-3 col-sm-6">
+            <label class="text-primary">Apellido paterno:</label><br>
+            {{pertramite.persona.per_apellido_primero}}
+          </div>
+          <div class="col-md-3 col-sm-6">
+            <label class="text-primary">Apellido materno:</label><br>
+            {{pertramite.persona.per_apellido_segundo}}
+          </div>
+          <div class="col-md-3 col-sm-6">
+            <label class="text-primary">CI:</label><br>
+            {{pertramite.persona.per_ci + " "}} {{pertramite.persona.per_ci_expedido | uppercase}}
+          </div>
+          <div class="col-md-3 col-sm-6">
+            <label class="text-primary">Fecha de Nacimiento:</label><br>
+            {{pertramite.persona.per_fecha_nacimiento}}
+          </div>
+          <!-- <div class="col-md-3 col-sm-6">
+            <label class="text-primary">Genero:</label><br>
+            {{pertramite.persona.per_genero}}
+          </div> -->
+        </div>
+
+        <div class="row">
+          <div class="col-md-12 ">
+              <h3 class="text-center text-primary">
+               II. INFORMACIÓN DEL TRÁMITE
+              </h3>
+             <hr class="bg-red">
+            <div class="col-md-3 col-sm-6">
+              <label class="text-primary">Estado del trámite:</label><br>
+              <span ng-show="pertramite.persona_tramite.pt_estado_tramite=='OBSERVADO'" class="btn btn-danger">
+                &nbsp;&nbsp;<span  class="glyphicon glyphicon-alert"></span> {{pertramite.persona_tramite.pt_estado_tramite}}
+              </span>
+              <span ng-show="pertramite.persona_tramite.pt_estado_tramite=='APROBADO'" class="btn btn-success">
+                &nbsp;&nbsp;<span  class="glyphicon glyphicon-ok"></span> {{pertramite.persona_tramite.pt_estado_tramite}}
+              </span>
+              <span ng-show="pertramite.persona_tramite.pt_estado_tramite=='INICIADO'" class="btn btn-warning">
+                &nbsp;&nbsp;<span  class="glyphicon glyphicon-time"></span> {{pertramite.persona_tramite.pt_estado_tramite}}
+              </span>
+              <span ng-show="pertramite.persona_tramite.pt_estado_tramite=='CONCLUIDO'" class="btn btn-info">
+                &nbsp;&nbsp;<span  class="glyphicon glyphicon-ok-circle"></span> {{pertramite.persona_tramite.pt_estado_tramite}}
+              </span>
+              <span ng-show="!pertramite.persona_tramite.pt_estado_tramite" class="btn btn-info">
+                &nbsp;&nbsp;<span  class="glyphicon glyphicon-ok-circle"></span> SIN REGISTRO
+              </span>
+            </div>
+            <div class="col-md-3 col-sm-6">
+              <label class="text-primary">Consulta médica:</label><br>
+              <span ng-show="pruebam.pm_estado=='OBSERVADO'" class="btn btn-danger">
+                &nbsp;&nbsp;<span  class="glyphicon glyphicon-alert"></span> {{pruebam.pm_estado}}
+              </span>
+              <span ng-show="pruebam.pm_estado=='OK'" class="btn btn-success">
+                &nbsp;&nbsp;<span  class="glyphicon glyphicon-ok"></span> {{pruebam.pm_estado}}
+              </span>
+              <span ng-show="pruebam.pm_estado=='PENDIENTE'" class="btn btn-warning">
+                &nbsp;&nbsp;<span  class="glyphicon glyphicon-time"></span> {{pruebam.pm_estado}}
+              </span>
+              <span ng-show="!pruebam.pm_estado" class="btn btn">
+                &nbsp;&nbsp;<span  class="glyphicon glyphicon-ban-circle"></span> SIN REGISTRO
+              </span>
+            </div>
+
+
+            <div class="col-md-3 col-sm-6">
+              <label class="text-primary">Prueba de laboratorio:</label><br>
+              <span ng-show="plab.prueba_laboratorio.pl_estado=='OBSERVADO'" class="btn btn-danger">
+                &nbsp;&nbsp;<span  class="glyphicon glyphicon-alert"></span> {{plab.prueba_laboratorio.pl_estado}}
+              </span>
+              <span ng-show="plab.prueba_laboratorio.pl_estado=='NO OBSERVADO'" class="btn btn-success">
+                &nbsp;&nbsp;<span  class="glyphicon glyphicon-ok"></span> {{plab.prueba_laboratorio.pl_estado}}
+              </span>
+              <span ng-show="!plab.prueba_laboratorio.pl_estado" class="btn btn">
+                &nbsp;&nbsp;<span  class="glyphicon glyphicon-ban-circle"></span> SIN REGISTRO
+              </span>
+            </div>
+            <div class="col-md-12 col-sm-12" ng-show="receta">
+              <label class="text-primary">Tratamiento:</label><br>
+              <textarea disabled class="col-md-12 col-sm-12" rows="10">{{receta.rec_texto}}</textarea>
+            </div>
+
+          </div>
+          <div class="col-md-12 col-sm-12 ">
+          <hr >
+              <div  ng-if="pertramite.persona_tramite.pt_estado_tramite ==='APROBADO'">
+                  <div ng-controller="pdf_carneCtrl"  align="center">
+                     <button type="button" class="btn btn-default" ng-click="openPdf()" >IMPRIMIR CARNÉ  <span class="glyphicon glyphicon-open-file"></span></button>
+                     <button type="button"  class="btn btn-default" ng-click="downloadPdf()">Descargar PDF   <span class="glyphicon glyphicon-download-alt"></span></button>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+    </div>
+  </div>
+ 
+</div>

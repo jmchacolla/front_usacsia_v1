@@ -1,0 +1,83 @@
+<!-- TOP-MENU inicio -->
+<div ng-include="'./templates/menu_inicio.html'"></div>
+<!-- CONTEXT-MENU  -->
+<div ng-include="'./templates/menu_lateral.html'"></div>
+<!-- CONTENIDO MODULO inicio -->
+	<div class="col-md-8 col-sm-8">
+		<div class="row">
+			<div class="col-md-12">
+				<h2 class="text-primary">
+					<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+					{{ajustes.pagina.titulo}}
+				</h2>
+				<hr>
+			</div>
+		</div>
+		<div class="row">
+			<!-- INICIO -->
+			<div class="col-md-6">
+				<div class="well well-sm" style="background-color:#fff;">
+					<form name="AsignaRol">
+						<h4 class="text-center text-primary"><strong>ASIGNAR ROL</strong></h4>
+						<div class="row">
+			              <div class="col-md-12">
+			                <label class="control-label">Funcionario:</label>
+			                <select class="form-control" name="funcionario" ng-model="vm.aux"  ng-options="funcionario.fun_id as funcionario.per_nombres+' '+funcionario.per_apellido_primero+' '+funcionario.per_apellido_segundo+' - '+funcionario.fun_cargo for funcionario in funcionarios" ng-change="vm.buscaFuncionario()" required>
+		           			</select>
+		           			<span class="messages" ng-show="AsignaRol.$submitted || AsignaRol.funcionario.$touched">
+			                  <span ng-show="AsignaRol.funcionario.$error.required">El campo es obligatorio</span>
+			                </span>
+			              </div>
+			              <div class="col-md-12">
+			                <label class="control-label ">Rol:</label>
+			                <select class="form-control" name="rol" ng-model="vm.usuario.rol_id" ng-options="rol.rol_id as rol.rol_nombre for rol in roles" required>
+		           			</select>
+		           			<span class="messages" ng-show="AsignaRol.$submitted || AsignaRol.rol.$touched">
+				              <span ng-show="AsignaRol.rol.$error.required">El campo es obligatorio</span>
+				            </span>
+			              </div>
+			            </div>
+			            <div class="row">
+			            	<div class="col-md-12">
+				                <label class="control-label ">Nombre de usuario (CI):</label>
+				                <input class="form-control" disabled name="usu-nick" type="Text" placeholder="Ej: 9877878" value="{{vm.funci.persona.per_ci}}">
+				            </div>
+			            	<div class="col-md-12">
+				                <label class="control-label ">Contraseña (CI):</label>
+				                <input class="form-control" disabled name="usu-nick" type="password" value="{{vm.funci.persona.per_fecha_nacimiento}}">
+			              	</div>
+			            </div>
+			            <br>
+			            <div class="row">
+			          		<div class="col-md-2 col-md-offset-3" class="text-center">
+			            		<button class="btn btn-primary text-center"  ng-click="submit($parent.usuario)" ng-disabled="AsignaRol.$invalid"><span class="glyphicon glyphicon-save"></span> ASIGNAR ROL</button>
+			          		</div>
+			       		</div>
+					</form>
+		        </div>
+		    </div>
+	        <div class="col-md-6" ng-controller="UsuariosFunCtrl">
+					<!-- INICIO -->
+					<h4 class="text-center text-primary"><strong>USUARIOS REGISTRADOS</strong></h4>
+					<div class="text-center" ng-show="loading"><br><img ng-src="./images/image.gif" class="loader-img"></div>
+		        	<div ng-show="!loading && !msg">No se encontraron resultados</div>
+					<div class="table-responsive">
+						<table class="table table-bordered table-striped table-hover" ng-show="!loading && msg" >
+							<thead>
+								<th class="text-primary">Nº</th>
+								<th class="text-primary">Funcionario</th>
+								<th class="text-primary">Rol</th>
+							</thead>
+							<tbody ng-repeat="usuario in usuarios | filter:texto">
+								<td>{{$index + 1}}</td>
+								<td>{{usuario.per_nombres + " " + usuario.per_apellido_primero + " " + usuario.per_apellido_segundo}}</td>
+								<td>{{usuario.rol_nombre}}</td>
+							</tbody>
+						</table>
+					</div>
+			</div>
+			<!-- FIN -->
+			<!-- </div>AQUI VAN LOAS TABLAS O FORMULARIOS incrustados -->
+		</div>
+	</div>
+<!-- CONTENIDO MODULO fin

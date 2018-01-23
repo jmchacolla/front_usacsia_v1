@@ -1,0 +1,31 @@
+<br>
+<div class="header" ng-controller="MenuLateralCtrl as menu">
+  <div class="col-md-2 col-md-offset-1 col-sm-2 col-sm-offset-1" style="border:1px solid #CC0000;">
+    <br><div class="text-center img-perfil">
+    <!-- ng-src="{{menu.persona.imagen[0].ima_enlace}}/{{menu.persona.imagen[0].ima_nombre}}" -->
+      <img ng-show="menu.rol !=6" ng-src="{{menu.persona.imagen.ima_enlace}}/{{menu.persona.imagen.ima_nombre}}" alt="{{menu.user.usu_nick | uppercase}}" class="img-thumbnail img-perfil ">
+      <img ng-show="menu.rol ==6" ng-src="{{menu.establecimiento.imagen.ie_enlace}}/{{menu.establecimiento.imagen.ima_nombre}}" alt="{{menu.user.usu_nick | uppercase}}" class="img-thumbnail img-perfil ">
+      <h4 class="text-primary" ng-show="menu.rol !=6">{{menu.persona.persona.per_nombres | uppercase}}<br>
+      <small class="texto">{{menu.roles | capitalize}}</small>
+      </h4>
+      <h4 class="text-primary" ng-show="menu.rol == 6">{{menu.establecimiento.est_sol.ess_razon_social | uppercase}}<br>
+      <small class="texto">{{menu.roles | capitalize}}</small>
+      </h4>
+      <small ng-if="menu.rol != 6 "><b> USACSIA </b></small>
+      <!-- <small ng-if="menu.nombreEst && menu.CONFIG.ROL_CURRENT_USER != 1 && menu.CONFIG.ROL_CURRENT_USER != 7"><b>{{menu.nombreEst}}</b></small> -->
+    </div>
+    <h4 ng-show="menu.rol!= 6" class="text-primary text-center texto">{{ajustes.menu.titulo}}<br> 
+      <small>Menú de contexto</small>
+    </h4>
+    <h4 ng-show="menu.rol== 6" class="text-primary text-center texto">{{bien}}<br> 
+      <small>Menú de contexto</small>
+    </h4>
+    <ul class="nav nav-pills nav-stacked">
+      <li role="presentation" ng-repeat="menu in ajustes.menu.items" class="menu_item {{menu.estilo}}">
+        <a href="{{menu.enlace}}"  class="texto" ng-if="menu.enlace == './manuales/admin_sedes.pdf' || menu.enlace == './manuales/admin_estab.pdf' || menu.enlace == './manuales/medico.pdf' || menu.enlace == './manuales/admisionista.pdf'" target="_blank">{{menu.nombre}}</a>
+        <a href="{{menu.enlace}}"  class="texto" ng-if="menu.enlace != './manuales/admin_sedes.pdf' && menu.enlace != './manuales/admin_estab.pdf' && menu.enlace != './manuales/medico.pdf' && menu.enlace != './manuales/admisionista.pdf'">{{menu.nombre}}</a>
+      </li> 
+    </ul>
+    <hr>
+  </div>
+</div>

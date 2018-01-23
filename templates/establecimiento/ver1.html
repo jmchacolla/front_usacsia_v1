@@ -1,0 +1,170 @@
+	<!-- TOP-MENU inicio -->
+	<div ng-include="'./templates/menu_inicio.html'"></div>
+
+	<!-- CONTEXT-MENU  -->
+	<div ng-include="'./templates/menu_lateral.html'">
+	</div>
+	<!-- CONTENIDO MODULO inicio -->
+	<div class="col-md-8 col-sm-8">
+		<div class="row">
+			<div class="col-md-12" >
+				<h2 class="text-primary">
+					<span class="glyphicon glyphicon-th-large" aria-hidden="true"></span>
+					Establecimiento :<br> <strong>{{establecimiento.usa_nombre}}</strong>
+				</h2>
+				<hr class="bg-red">
+			</div>
+		</div>
+		<!-- Cabecera -->
+	    <div class="row">
+		    <div class="col-md-12">
+		    <!-- FIN -->
+		    	<!-- <tabs> -->
+					<!-- ..............DATOS GENERALES................. -->
+				<!-- 	<pane title="DATOS GENERALES"> -->
+		                <div class="panel">
+							<br>
+							<h4 class="text-center text-primary">I. DATOS GENERALES</h4>
+							<!-- <hr class="bg-red"> -->
+							<div class="panel-body">
+								<div class="form-group">
+									<!-- <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+								        <label class="control-label">Vista principal del establecimiento:</label>
+							        	<div class="">
+							            	<img height="100px" ng-src="./img-est/{{establecimiento.imagenes.ie_nombre}}" alt="{{establecimiento.establecimientos.es_nombre}}" class="img-thumbnail texto">
+							        	</div>
+							        </div> -->
+							      <!--   <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+								        <label class="control-label">Nombre del establecimiento:</label>
+							        	<div class="">
+							            	<p >{{establecimiento.usa_nombre}}</p>
+							        	</div>
+							        </div> -->
+							         <div class="col-md-6">
+								        <label class="text-primary control-label">Geolocalización del establecimiento:
+										<!--Latitud:{{establecimiento.es_latitud}}<br>
+											Longitud:{{establecimiento.es_longitud}}<br>-->
+										</label>				  
+										<ng-map center="{{establecimiento.usa_latitud}},{{establecimiento.usa_longitud}}" zoom="16">
+											<marker position="{{establecimiento.usa_latitud}},{{establecimiento.usa_longitud}}" title="USACSIA"></marker>
+										</ng-map>
+											<br>
+							        </div>
+							        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+								        <label class="control-label">Código:</label>
+							        	<div class="">
+							            	<p >{{establecimiento.usa_codigo}}</p>
+							        	</div>
+							        </div>
+						
+							        <div class="col-lg-3 col-md-6 col-sm-6 col-xs-6">
+								        <label class="control-label">Número Fax:</label>
+							        	<div class="">
+							            	<p ng-if="establecimiento.usa_fax !=null" >{{establecimiento.usa_fax}}</p>
+							            	<p ng-if="establecimiento.usa_fax ==null" >---</p>
+							        	</div>
+							        </div>
+							        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+								        <label class="control-label">Correo electrónico:</label>
+							        	<div class="">
+							        	    <p ng-if="establecimiento.usa_correo_electronico !=''">{{establecimiento.usa_correo_electronico}}</p>
+							        	    <p ng-if="establecimiento.usa_correo_electronico ==''">---</p>
+							        	</div>
+							        </div>
+							        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+								        <label class="control-label">Página institucional:</label>
+							        	<div class="">
+							            	<p ng-if="establecimiento.usa_direccion_web !=''">{{establecimiento.usa_direccion_web}}</p>
+							            	<p ng-if="establecimiento.usa_direccion_web ==''">---</p>
+							        	</div>
+							        </div>
+							      <!--   <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+								        <label class="control-label">Resolución Ministerial:</label>
+							        	<div class="">
+							            	<p >{{establecimiento.establecimientos.es_numero_rm}}</p>
+							        	</div>
+							        </div> 
+							        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+								        <label class="control-label">Horas:</label>
+							        	<div class="">
+							            	<p >{{establecimiento.establecimientos.es_horas}}</p>
+							        	</div>
+							        </div>-->
+							        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+								        <label class="control-label">Horario:</label>
+							        	<div class="">
+							        	    <p >{{establecimiento.usa_inicio_atencion  | date: 'H:mm'}} - {{establecimiento.usa_final_atencion | date: 'H:mm'}}</p>
+							        	</div>
+							        </div>
+							        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+								        <label class="control-label">Fecha de creación:</label>
+							        	<div class="">
+							            	<p >{{establecimiento.usa_fecha_creacion}}</p>
+							        	</div>
+							        </div>
+							        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+								        <label class="control-label">Inicio de actividad:</label>
+							        	<div class="">
+							        	    <p >{{establecimiento.usa_fecha_inicio_actividad}}</p>
+							        	</div>
+							        </div>
+							    </div>
+							</div>
+						</div>
+		           <!--  </pane> -->
+					<!-- ..............DIRECCION................. -->
+		          <!--   <pane title="DIRECCIÓN"> -->
+		            	<div class="panel">
+							<br>
+							<h4 class="text-center text-primary">II. DIRECCION</h4>
+							<hr class="bg-red">
+							<div class="panel-body">
+								<div class="form-group">
+							        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+								        <label class="control-label">Municipio:</label>
+							        	<div class="">
+							            	<p>{{establecimiento.usa_municipio}}</p>
+							        	</div>
+							        </div>
+							        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+								        <label class="control-label">Zona/Localidad/Comunidad:</label>
+							        	<div class="">
+							        	    <p>{{establecimiento.usa_zona_localidad_comuni}}</p>
+							        	</div>
+							        </div>
+							        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+								        <label class="control-label">Av./Calle:</label>
+							        	<div class="">
+							            	<p>{{establecimiento.usa_avenida_calle}}</p>
+							        	</div>
+							        </div>
+							        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+								        <label class="control-label">Número:</label>
+							        	<div class="">
+							            	<p>{{establecimiento.usa_numero}}</p>
+							        	</div>
+							        </div>
+							        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+								        <label class="control-label">Latitud:</label>
+							        	<div class="">
+							              <p ng-if="establecimiento.usa_latitud !=null">{{establecimiento.usa_latitud}}</p>
+							              <p ng-if="establecimiento.usa_latitud ==null">---</p>
+							        	</div>
+							        </div>
+							        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+								        <label class="control-label">Longitud:</label>
+							        	<div class="">
+							            <p ng-if="establecimiento.usa_longitud !=null">{{establecimiento.usa_longitud}}</p>
+							            <p ng-if="establecimiento.usa_longitud ==null">---</p>
+							        	</div>
+							        </div>
+					
+								</div>
+							</div>
+						</div>
+		    
+			<!-- AQUI VAN LOAS TABLAS O FORMULARIOS incrustados -->
+			</div>
+		</div>
+	</div>
+<!-- CONTENIDO MODULO fin -->

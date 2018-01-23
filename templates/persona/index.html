@@ -1,0 +1,164 @@
+<!--TOP-MENU inicio -->
+<div ng-include="'./templates/menu_inicio.html'"></div>
+
+<!-- CONTEXT-MENU  -->
+  <div ng-include="'./templates/menu_lateral.html'">
+  </div>
+<!-- CONTENIDO MODULO inicio -->
+  <div class="col-md-8 col-sm-8">
+    <div class="row">
+      <div class="col-md-12">
+        <h2 class="text-primary">
+          <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+          {{ajustes.pagina.titulo}}
+        </h2>
+        <hr>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+      <div class="well well-sm">
+        <strong class="pull-left lead">Herramientas: &nbsp;</strong>
+        <form class="form-inline pull-left">
+          <input type="text" class="form-control" placeholder="Filtrar por ..." ng-model="per_ci">
+        </form>
+        &nbsp;&nbsp;
+        <!--
+        <button class="btn btn-primary"><span class="glyphicon glyphicon-tasks"></span> Exportar lista en XLS</button>
+        <button class="btn btn-default"><span class="glyphicon glyphicon-save-file"></span> Exportar lista en PDF</button><br><br>
+        </div>--> 
+        <div class="clearfix"></div>
+      </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 ">
+      <!-- AQUI VAN LAS TABLAS O FORMULARIOS incrustados -->
+      <!-- INICIO -->
+      <!-- PAGINACION -->
+      <div class="table-responsive">
+      <table class="table-bordered">
+        <tr>
+          <td> <button class="btn btn-primary" title="Anterior" ng-disabled="datos_paginacion.prev_page_url==null" ng-click="paginar(datos_paginacion.prev_page_url,filas,'','-')">
+          <
+          </button>
+          </td>
+          <th style="background: #f5f5f5;">
+            &nbsp;Pag.&nbsp;
+          </th>
+          <td>
+            <select class="form-control" ng-selectd="1" ng-change="paginar('',filas,datos_paginacion.current_page)" ng-model="datos_paginacion.current_page" ng-options="pagina for pagina in paginas">       <option value="1" ng-selected="'true'">1</option>
+            </select>
+          </td>
+          <th style="background: #f5f5f5;">
+            &nbsp;de {{datos_paginacion.last_page}}&nbsp;
+          </th>
+          <td><button class="btn btn-primary" title="Siguiente" ng-disabled="datos_paginacion.next_page_url==null" ng-click="paginar(datos_paginacion.next_page_url,filas,'','+')"><strong>
+            >
+          </strong>
+          </button>
+          </td>
+           <th style="background: #f5f5f5;">
+            &nbsp;Nro. de filas&nbsp;
+          </th>
+          <td>
+            <select class="form-control" ng-model="filas" ng-change="paginar('',filas,datos_paginacion.current_page)">
+              <option value="25" ng-selected="'true'">25</option>
+              <option value="50">50</option>       
+              <option value="100">100</option>
+            </select>
+          </td> 
+        </tr>
+      </table>
+    </div>
+    <!-- PAGINACION -->
+     
+      
+      
+      <div class="text-center" ng-show="loading"><br><img ng-src="./images/image.gif" class="loader-img"></div>
+      <div ng-show="!loading && !msg">No se encontraron resultados</div>
+      <div class="table-responsive">
+        <table class="table table-bordered table-striped table-hover" ng-show="!loading && msg">
+          <thead >
+            <th class="text-primary">
+            
+              <a href="" ng-click="sortType = 'per_indice'; sortReverse = !sortReverse">Nº</a>
+              <span ng-show="sortType == 'per_indice' && !sortReverse" class="glyphicon glyphicon-sort-by-order"></span>
+              <span ng-show="sortType == 'per_indice' && sortReverse" class="glyphicon glyphicon-sort-by-order-alt"></span>
+            </th>
+            <th class="text-primary" >
+              <a href="" ng-click="sortType = 'per_ci'; sortReverse = !sortReverse">C.I.</a>
+              <span ng-show="sortType == 'per_ci' && !sortReverse" class="glyphicon glyphicon-sort-by-order"></span>
+              <span ng-show="sortType == 'per_ci' && sortReverse" class="glyphicon glyphicon-sort-by-order-alt"></span>
+            </th>
+            <th class="text-primary" >
+              <a href="" ng-click="sortType = 'per_apellido_primero'; sortReverse = !sortReverse">Apellidos 
+              <span ng-show="sortType == 'per_apellido_primero' && !sortReverse" class="glyphicon glyphicon-sort-by-alphabet"></span>
+              <span ng-show="sortType == 'per_apellido_primero' && sortReverse" class="glyphicon glyphicon-sort-by-alphabet-alt"></span></a>
+            </th>
+            <th class="text-primary">
+              <a href="" ng-click="sortType = 'per_nombres'; sortReverse = !sortReverse">Nombres 
+              <span ng-show="sortType == 'per_nombres' && !sortReverse" class="glyphicon glyphicon-sort-by-alphabet"></span>
+              <span ng-show="sortType == 'per_nombres' && sortReverse" class="glyphicon glyphicon-sort-by-alphabet-alt"></span></a>
+            </th>
+            <th class="text-primary">Celular</th>
+            <!-- <th class="text-primary">E-mail</th> -->
+            <th class="text-primary">Ver</th>
+            <th class="text-primary">Editar</th>
+            <th class="text-primary">Borrar</th>
+          </thead>
+          <tbody ng-repeat="persona in personas | orderBy:sortType:sortReverse | filter:per_ci">
+            <tr>
+              <td>{{persona.per_indice}}</td>
+              <td>{{persona.per_ci + ""}} {{persona.per_ci_expedido | uppercase}}</td>
+              <td>{{persona.per_apellido_primero + " " + persona.per_apellido_segundo}}</td>
+              <td>{{persona.per_nombres}}</td>
+              <td>{{persona.per_numero_celular}}</td>
+             <!--  <td>{{persona.per_email | maxLength : 20}}</td> -->
+              <td>
+                <a href="#/personas/ver/{{persona.per_id}}" class="btn btn-success"><span class="glyphicon glyphicon-file" title="Ver"></span></a><!-- ver -->
+              </td>
+              <td>
+                <a class="btn btn-primary" href="#/personas/edit/{{persona.per_id}}">
+                <span class="glyphicon glyphicon-pencil"></span></a><!-- editar -->
+              </td>
+              <td >
+                <button class="btn btn-danger" data-toggle="modal" data-target="#miCuadroModal1" ng-click="get_per_id(persona.per_id, persona.per_apellido_primero, persona.per_apellido_segundo, persona.per_nombres)" title="Eliminar"><span class="glyphicon glyphicon-trash"></span></button> <!--archivar -->
+                <div id="miCuadroModal1" class="modal fade" role="dialog" tabindex="-1">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header bg-red">
+                        <button type="button" class="close" data-dismiss="modal">×</button>
+                        <h4 class="modal-title fg-white">ELIMINAR REGISTROS DE CIUDADANO</h4>
+                      </div>
+                      <div class="modal-body lead text-center">
+                        Está seguro que desea eliminar los registros de esta persona?
+                        <br>
+                        <div class="well well-sm">
+                          <strong>{{nombre_completo | uppercase}}</strong>
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">
+                          <span class="glyphicon glyphicon-remove"></span>NO
+                        </button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="remove(persona.per_id)">
+                          <span class="glyphicon glyphicon-ok"></span>SI
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- FIN -->
+      <!-- AQUI VAN LOAS TABLAS O FORMULARIOS incrustados -->
+      
+      </div>
+    </div>
+  </div>
+
+<!-- CONTENIDO MODULO fin

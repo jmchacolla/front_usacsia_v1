@@ -1,0 +1,123 @@
+<!-- TOP-MENU inicio -->
+<div ng-include="'./templates/menu_inicio.html'"></div>
+<!-- CONTEXT-MENU  -->
+<div ng-include="'./templates/menu_lateral.html'"></div>
+<!-- CONTENIDO MODULO inicio -->
+	<div class="col-md-8 col-sm-8">
+		<div class="row">
+			<div class="col-md-12">
+				<h2 class="text-primary">
+					<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+					{{ajustes.pagina.titulo}}
+				</h2>
+				<hr>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+			<div class="well well-sm">
+				El nombre de usuarios de los funcionario es su carnet de identidad
+			</div>
+			</div>
+		</div>
+		<!--HERRAMIENTAS PARA LA VISTA-->
+		<div class="row">
+			<div class="col-md-12">
+			<div class="well well-sm">
+				<strong class="pull-left lead">Herramientas: &nbsp;</strong>
+				<form class="form-inline pull-left">
+					<input type="text" class="form-control" placeholder="Buscar por ..." ng-model="texto">
+				</form>
+				&nbsp;&nbsp;
+				<div class="clearfix"></div>
+			</div>
+			</div>
+		</div>
+		<!--FIN herramientas para la vista-->
+		<div class="row">
+			<div class="col-md-12">
+			<!-- AQUI VAN LAS TABLAS O FORMULARIOS incrustados -->
+			<!-- INICIO -->
+			<div class="text-center" ng-show="loading"><br><img ng-src="./images/image.gif" class="loader-img"></div>
+        	<div ng-show="!loading && !msg">No se encontraron resultados</div>
+			<div class="table-responsive">
+				<table class="table table-bordered table-striped table-hover" ng-show="!loading && msg" >
+					<thead>
+						<th class="text-primary">Nº</th>
+						<th class="text-primary">Funcionario</th>
+						<th class="text-primary">Rol</th>
+						<th class="text-primary">Cambiar Rol</th>
+						<th class="text-primary">Restablecer Contraseña</th>
+					</thead>
+					<tbody ng-repeat="usuario in usuarios | filter:texto">
+						<td>{{$index + 1}}</td>
+						<td>{{usuario.per_nombres + " " + usuario.per_apellido_primero + " " + usuario.per_apellido_segundo}}</td>
+						<td>{{usuario.rol_nombre}}</td>
+						<td>
+							<!-- BOTON PARA CUADROS MODALES -->
+							<button ng-click="get_usu_id(usuario.ru_id,usuario.per_nombres,usuario.per_apellido_primero,usuario.per_apellido_segundo,usuario.rol_nombre)" class="btn btn-primary" title="Cambiar Rol" data-toggle="modal" data-target="#miCuadroModal"><span class="glyphicon glyphicon-pencil"></span></button>
+							<!--CUADRO MODAL-->
+		                    <div id="miCuadroModal" class="modal fade" role="dialog" tabindex="-1">
+		                      <div class="modal-dialog">
+		                        <div class="modal-content">
+		                          <div class="modal-header bg-red">
+		                            <button type="button" class="close" data-dismiss="modal">×</button>
+		                            <h4 class="modal-title fg-white">CAMBIAR ROL</h4>
+		                          </div>
+		                          <div class="modal-body lead text-center">
+		                            <div class="well well-sm">
+		                            	<strong>{{nick}}</strong><br>{{rol}}
+		                            	<br>
+		                            	<form name="cambiarRol">
+		                            		Seleccione nuevo rol para el usuario : 
+		                            		<select name="rol" class="form-control" ng-model="usu.rol_id" ng-options="rol.rol_id as rol.rol_nombre for rol in roles" required>
+	           								</select>
+	           								<span class="messages" ng-show="cambiarRol.$submitted || cambiarRol.rol.$touched">
+							                  <span ng-show="cambiarRol.rol.$error.required">El campo es obligatorio</span>
+							                </span>
+		                            	</form>
+		                            	 
+		                            </div>
+		                          </div>
+		                          <div class="modal-footer">
+		                          	¿Está seguro que desea cambiar el rol del usuario? 
+		                            <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> NO</button>
+		                            <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="cambiar_rol(usu.rol_id)" ng-disabled="cambiarRol.$invalid"><span class="glyphicon glyphicon-ok"></span> SI</button>
+		                          </div>
+		                        </div>
+		                      </div>
+		                    </div>
+						</td>
+						<td>
+							<button ng-click="get_usu_id(usuario.ru_id,usuario.per_nombres,usuario.per_apellido_primero,usuario.per_apellido_segundo,usuario.rol_nombre,usuario.rol_id,usuario.id,usuario.per_id)" title="RESTABLECER CONTRASEÑA" class="btn btn-warning" data-toggle="modal" data-target="#miCuadroModal1" ><span class="glyphicon glyphicon-edit"></span></button>
+							<CUADRO MODAL>
+		                    <div id="miCuadroModal1" class="modal fade" role="dialog" tabindex="-1">
+		                      <div class="modal-dialog">
+		                        <div class="modal-content">
+		                          <div class="modal-header bg-green">
+		                            <button type="button" class="close" data-dismiss="modal">×</button>
+		                            <h4 class="modal-title fg-white">RESTABLECER CONTRASEÑA</h4>
+		                          </div>
+		                          <div class="modal-body lead text-center">
+		                            ¿Está seguro que desea restablecer la contraseña del usuario?
+		                            <div class="well well-sm"><strong>{{nick}}</strong> - {{rol}}
+		                            </div>
+		                          </div>
+		                          <div class="modal-footer">
+		                            <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="restablecer_contrasenia(usu_id,per_id)"><span class="glyphicon glyphicon-ok"></span> SI</button>
+		                            <button type="button" class="btn btn-danger" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> NO</button>
+		                          </div>
+		                        </div>
+		                      </div>
+		                    </div>
+						</td-->
+					</tbody>
+				</table>
+			</div>
+			<!-- FIN -->
+			<!-- AQUI VAN LOAS TABLAS O FORMULARIOS incrustados -->
+			
+			</div>
+		</div>
+	</div>
+<!-- CONTENIDO MODULO fin -->

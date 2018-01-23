@@ -1,0 +1,411 @@
+<div ng-controller="CrearFichaHornoCtrl">
+    <div class="col-md-12">
+        <h4 class=" text-center">
+            <strong>
+                FICHA DE CLASIFICACIÓN PARA HORNOS DE PANIFICACIÓN
+            </strong>
+        </h4>
+    </div>
+    <hr>
+    <br>
+    <h4 class="text-center text-primary">A. SANEAMIENTO AMBIENTAL 60%</h4>
+    <hr class="bg-red"> 
+    <div class="row">
+        <div class="col-md-9">
+           <label class="control-label">1.  Ubicación (alejado de focos de insalubridad) no comunicado con viviendas<strong class="fg_red">*</strong></label>
+        </div>
+        <div class="col-md-3 form-group"  style="margin-bottom: 0px">                            
+            <div class="input-group">
+                <input class="form-control" name="focos" type="number" ng-model="ficha4.fi4_ubicacion" min="0" max="3"> 
+                <span class="input-group-addon">
+                    <span>/3</span>
+                </span>
+            </div>
+        </div>
+
+        <div class="col-md-9">
+           <label class="control-label">2.   Exhibición del certificado sanitario.<strong class="fg_red">*</strong></label>
+        </div>
+        <div class="col-md-3 form-group"  style="margin-bottom: 0px">                            
+            <div class="input-group">
+                <input class="form-control" name="focos" type="number" ng-model="ficha4.fi4_certificado" min="0" max="2"> 
+                <span class="input-group-addon">
+                    <span>/2</span>
+                </span>
+            </div>
+        </div>
+        <div class="col-md-9">
+           <label class="control-label">3.  Capacidad y distribución de dependencias<strong class="fg_red">*</strong></label>
+        </div>
+        <div class="col-md-3 form-group"  style="margin-bottom: 0px">                            
+            <div class="input-group">
+                <input class="form-control" name="focos" type="number" ng-model="ficha4.fi4_dependencias" min="0" max="3"> 
+                <span class="input-group-addon">
+                    <span>/3</span>
+                </span>
+            </div>
+        </div>
+        <div class="col-md-9">
+
+         
+           <label class="control-label">4.  Pisos de material sólido, liso e impermeable<strong class="fg_red">*</strong></label>
+        </div>
+        <div class="col-md-3 form-group"  style="margin-bottom: 0px">                            
+            <div class="input-group">
+                <input class="form-control" name="focos" type="number" ng-model="ficha4.fi4_pisos" min="0" max="6"> 
+                <span class="input-group-addon">
+                    <span>/6</span>
+                </span>
+            </div>
+        </div>
+        <div class="col-md-9">
+           <label class="control-label">5.  Cielo raso, liso pintado de color lavable<strong class="fg_red">*</strong></label>
+        </div>
+        <div class="col-md-3 form-group"  style="margin-bottom: 0px">                            
+            <div class="input-group">
+                <input class="form-control" name="focos" type="number" ng-model="ficha4.fi4_cielo" min="0" max="6"> 
+                <span class="input-group-addon">
+                    <span>/6</span>
+                </span>
+            </div>
+        </div>
+
+        <div class="col-md-9">
+           <label class="control-label">6.  Murallas, revestidos de material lavable, zócalos de <input type="" name="" ng-model="ficha4.fi4_murallas"> de altura <input type="" name="" ng-model="ficha4.fi4_muralla_altura"> mts.<strong class="fg_red">*</strong></label>
+        </div>
+        <div class="col-md-3 form-group"  style="margin-bottom: 0px">                            
+            <div class="input-group">
+                <input class="form-control" name="focos" type="number" ng-model="ficha4.fi4_muralla_puntaje" min="0" max="3"> 
+                <span class="input-group-addon">
+                    <span>/3</span>
+                </span>
+            </div>
+        </div>
+        <div class="col-md-9">
+           <label class="control-label">7.  Puertas y ventanas bien construidas<strong class="fg_red">*</strong></label>
+        </div>
+        <div class="col-md-3 form-group">                            
+            <div class="input-group"  style="margin-bottom: 0px">
+                <input class="form-control" name="focos" type="number" ng-model="ficha4.fi4_puerta_ventana" min="0" max="5"> 
+                <span class="input-group-addon">
+                    <span>/5</span>
+                </span>
+            </div>
+        </div>
+
+        <div class="col-md-9">
+           <label class="control-label">8.  Iluminación, natural y artificial.<strong class="fg_red">*</strong></label>
+        </div>
+        <div class="col-md-3 form-group"  style="margin-bottom: 0px">                            
+            <div class="input-group">
+                <input class="form-control" name="focos" type="number" ng-model="ficha4.fi4_iluminacion" min="0" max="2"> 
+                <span class="input-group-addon">
+                    <span>/2</span>
+                </span>
+            </div>
+        </div>
+        <div class="col-md-9">
+           <label class="control-label">9.  Ventilación adecuada, ausencia de humos, olores y gases.<strong class="fg_red">*</strong></label>
+        </div>
+        <div class="col-md-3 form-group"  style="margin-bottom: 0px">                            
+            <div class="input-group">
+                <input class="form-control" name="focos" type="number" ng-model="ficha4.fi4_ventilacion" min="0" max="5"> 
+                <span class="input-group-addon">
+                    <span>/5</span>
+                </span>
+            </div>
+        </div>
+        <div class="col-md-9">
+           <label class="control-label">10. Abastecimientos de agua potable bien distribuida, cañería en buen estado<strong class="fg_red">*</strong></label>
+        </div>
+        <div class="col-md-3 form-group"  style="margin-bottom: 0px">                            
+            <div class="input-group">
+                <input class="form-control" name="focos" type="number" ng-model="ficha4.fi4_abastecimiento" min="0" max="6"> 
+                <span class="input-group-addon">
+                    <span>/6</span>
+                </span>
+            </div>
+        </div>
+        <div class="col-md-9">
+           <label class="control-label">11. Servicios higiénicos completos, inodoro, lavamanos de porcelana<strong class="fg_red">*</strong></label>
+        </div>
+        <div class="col-md-3 form-group"  style="margin-bottom: 0px">                            
+            <div class="input-group">
+                <input class="form-control" name="focos" type="number" ng-model="ficha4.fi4_servicio_higienico" min="0" max="6"> 
+                <span class="input-group-addon">
+                    <span>/6</span>
+                </span>
+            </div>
+        </div>
+
+        <div class="col-md-12">
+           <p><strong>  12. Facilidad para el aseo personal  </strong></p>
+            <div class="col-md-9">
+               a.    Lavamanos de porcelana con agua corriente<strong class="fg_red">*</strong>
+            </div>
+            <div class="col-md-3 form-group"  style="margin-bottom: 0px">                            
+                <div class="input-group">
+                    <input class="form-control" name="focos" type="number" ng-model="ficha4.fi4_lavamanos" min="0" max="3"> 
+                    <span class="input-group-addon">
+                        <span>/3</span>
+                    </span>
+                </div>
+            </div>
+
+            <div class="col-md-9">
+               b.   Jaboncillo, toalla, escobillas.<strong class="fg_red">*</strong>
+            </div>
+            <div class="col-md-3 form-group"  style="margin-bottom: 0px">                            
+                <div class="input-group">
+                    <input class="form-control" name="focos" type="number" ng-model="ficha4.fi4_jabocillo" min="0" max="2"> 
+                    <span class="input-group-addon">
+                        <span>/2</span>
+                    </span>
+                </div>
+            </div>
+
+            <div class="col-md-9">
+               c.   Duchas.  <strong class="fg_red">*</strong>
+            </div>
+            <div class="col-md-3 form-group"  style="margin-bottom: 0px">                            
+                <div class="input-group">
+                    <input class="form-control" name="focos" type="number" ng-model="ficha4.fi4_ducha" min="0" max="4"> 
+                    <span class="input-group-addon">
+                        <span>/4</span>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12">
+           <p><strong>13. Eliminación de aguas servidas</strong></label>
+        
+            <div class="col-md-9">
+               a.   Desagües, sumideros.<strong class="fg_red">*</strong>
+            </div>
+            <div class="col-md-3 form-group"  style="margin-bottom: 0px">                            
+                <div class="input-group">
+                    <input class="form-control" name="focos" type="number" ng-model="ficha4.fi4_desagues" min="0" max="5"> 
+                    <span class="input-group-addon">
+                        <span>/5</span>
+                    </span>
+                </div>
+            </div>
+
+            <div class="col-md-9">
+               b.   Cámara de inspección degradadores.<strong class="fg_red">*</strong>
+            </div>
+            <div class="col-md-3 form-group"  style="margin-bottom: 0px">                            
+                <div class="input-group">
+                    <input class="form-control" name="focos" type="number" ng-model="ficha4.fi4_desgrasadores" min="0" max="3"> 
+                    <span class="input-group-addon">
+                        <span>/3</span>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12">
+           <p><strong>  14. Eliminación de basura y desperdicios.</strong></p>
+        
+            <div class="col-md-9">
+               a.   Basureros con sus respectivas tapas<strong class="fg_red">*</strong>
+            </div>
+            <div class="col-md-3 form-group"  style="margin-bottom: 0px">                            
+                <div class="input-group">
+                    <input class="form-control" name="focos" type="number" ng-model="ficha4.fi4_basurero" min="0" max="2"> 
+                    <span class="input-group-addon">
+                        <span>/2</span>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        
+        <div class="col-md-9">
+           <label class="control-label">15. Protección contra insectos, insecticidas, mallas milimétricas (certificado de fumigación)<strong class="fg_red">*</strong></label>
+        </div>
+        <div class="col-md-3 form-group"  style="margin-bottom: 0px">                            
+            <div class="input-group">
+                <input class="form-control" name="focos" type="number" ng-model="ficha4.fi4_insectos" min="0" max="2"> 
+                <span class="input-group-addon">
+                    <span>/2</span>
+                </span>
+            </div>
+        </div>
+        <div class="col-md-9">
+           <label class="control-label">   16. Protección contra roedores (Certificado de desratización)<strong class="fg_red">*</strong></label>
+        </div>
+        <div class="col-md-3 form-group" style="margin-bottom: 0px">                            
+            <div class="input-group">
+                <input class="form-control" name="focos" type="number" ng-model="ficha4.fi4_roedores" min="0" max="2"> 
+                <span class="input-group-addon">
+                    <span>/2</span>
+                </span>
+            </div>
+        </div>
+
+    </div>
+    <!-- del row -->
+
+        <!-- falta puntuacion para muralla -->
+
+         
+     
+        <!-- ......................................................................... -->
+        <h4 class="text-center text-primary">C. EQUIPO</h4>
+        <hr class="bg-red"> 
+        <div class="row">
+
+            <div class="col-md-9">
+               <label class="control-label">1.  Artesas con sus respectivas tapas.<strong class="fg_red">*</strong></label>
+            </div>
+            <div class="col-md-3 form-group"  style="margin-bottom: 0px">                            
+                <div class="input-group">
+                    <input class="form-control" name="focos" type="number" ng-model="ficha4.fi4_artezas" min="0" max="3"> 
+                    <span class="input-group-addon">
+                        <span>/3</span>
+                    </span>
+                </div>
+            </div>
+            <div class="col-md-9">
+               <label class="control-label">2.  Enfriaderos.<strong class="fg_red">*</strong></label>
+            </div>
+            <div class="col-md-3 form-group">                            
+                <div class="input-group"  style="margin-bottom: 0px;">
+                    <input class="form-control" name="focos" type="number" ng-model="ficha4.fi4_enfriadores" min="0" max="3"> 
+                    <span class="input-group-addon">
+                        <span>/3</span>
+                    </span>
+                </div>
+            </div>
+            <div class="col-md-9">
+               <label class="control-label">3.  Clavijeras.<strong class="fg_red">*</strong></label>
+            </div>
+            <div class="col-md-3 form-group"  style="margin-bottom: 0px">                            
+                <div class="input-group">
+                    <input class="form-control" name="focos" ng-model="ficha4.fi4_clavijeras" type="number" min="0" max="3"> 
+                    <span class="input-group-addon">
+                        <span>/3</span>
+                    </span>
+                </div>
+            </div>
+      
+            <div class="col-md-9">
+               <label class="control-label">4.  Mesones, paños, balanzas y recipientes.<strong class="fg_red">*</strong></label>
+            </div>
+            <div class="col-md-3 form-group"  style="margin-bottom: 0px">                            
+                <div class="input-group">
+                    <input class="form-control" name="focos" type="number" ng-model="ficha4.fi4_mesones" min="0" max="4"> 
+                    <span class="input-group-addon">
+                        <span>/4</span>
+                    </span>
+                </div>
+            </div>
+            <div class="col-md-9">
+               <label class="control-label">5.  Maquinaria de material adecuado en buen estado<strong class="fg_red">*</strong></label>
+            </div>
+            <div class="col-md-3 form-group"  style="margin-bottom: 0px">                            
+                <div class="input-group">
+                    <input class="form-control" name="focos" type="number" ng-model="ficha4.fi4_maquinarias" min="0" max="3"> 
+                    <span class="input-group-addon">
+                        <span>/3</span>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <h4 class="text-center text-primary">C.   PROTECCIÓN Y CONSERVACIÓN DE LOS PRODUCTOS Y MATERIAS PRIMAS 10%</h4>
+        <hr class="bg-red">
+        <div class="row">   
+
+            <div class="col-md-9">
+               <label class="control-label">1.  Lavado adecuado de envases, recipientes y utensilios.<strong class="fg_red">*</strong></label>
+            </div>
+            <div class="col-md-3 form-group"  style="margin-bottom: 0px">                            
+                <div class="input-group">
+                    <input class="form-control" name="focos" type="number" ng-model="ficha4.fi4_lavado_envases" min="0" max="3"> 
+                    <span class="input-group-addon">
+                        <span>/3</span>
+                    </span>
+                </div>
+            </div>
+
+            <div class="col-md-9">
+               <label class="control-label">2.  Depósitos de buenas condiciones, plataformas o tarimas adecuadas<strong class="fg_red">*</strong></label>
+            </div>
+            <div class="col-md-3 form-group"  style="margin-bottom: 0px">                            
+                <div class="input-group">
+                    <input class="form-control" name="focos" type="number" ng-model="ficha4.fi4_depositos" min="0" max="4"> 
+                    <span class="input-group-addon">
+                        <span>/4</span>
+                    </span>
+                </div>
+            </div>
+
+        </div>
+
+        <h4 class="text-center text-primary">D.   MANIPULADORES</h4>
+        <hr class="bg-red">
+        <div class="row">   
+            <div class="col-md-12">
+                <p><strong> 1.  Estado de salud</strong></p>
+                <div class="col-md-9">
+                   a.   No debe tener heridas, supuraciones, fiebre, tos<strong class="fg_red">*</strong>
+                </div>
+                <div class="col-md-3 form-group"  style="margin-bottom: 0px">                            
+                    <div class="input-group">
+                        <input class="form-control" name="focos" type="number" ng-model="ficha4.fi4_heridas" min="0" max="2"> 
+                        <span class="input-group-addon">
+                            <span>/2</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <p><strong> 2. Hábitos</strong></p>
+                <div class="col-md-9">
+                   a.  No manipular dinero en horas de trabajo<strong class="fg_red">*</strong>
+                </div>
+                <div class="col-md-3 form-group"  style="margin-bottom: 0px">                            
+                    <div class="input-group">
+                        <input class="form-control" name="focos" type="number" ng-model="ficha4.fi4_dinero" min="0" max="3"> 
+                        <span class="input-group-addon">
+                            <span>/3</span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-9">
+               <label class="control-label">4.  Botiquín de primeros auxilios y extinguidores de incendios<strong class="fg_red">*</strong></label>
+            </div>
+            <div class="col-md-3 form-group"  style="margin-bottom: 0px">                            
+                <div class="input-group">
+                    <input class="form-control" name="focos" type="number" ng-model="ficha4.fi6_ubicacion" min="0" max="5"> 
+                    <span class="input-group-addon">
+                        <span>/5</span>
+                    </span>
+                </div>
+            </div>
+        <!-- fi4_estado "", -->
+         
+             <div class="panel-body">
+                <div class="col-md-8">
+                        <label for="nombre" class="control-label">Recomendaciones: <strong class="fg_red">*</strong></label>
+                        <label><input  type="checkbox" ng-model="documento.dt_observado">&nbsp;Si</label>
+                        <textarea style="resize: vertical;min-height:70px;max-height: 150px;" ng-show="documento.dt_observado" class="form-control" type="text" ng-model="ficha4.fi4__recomendaciones" ng-required="documento.dt_observado" ng-pattern="patternCadena" name="obs">
+                        </textarea>
+                        <span class="messages" ng-show="(docForm.$submitted || docForm.obs.$touched) && documento.dt_observado">
+                            <span ng-show="docForm.obs.$error.required">El campo es obligatorio.</span>
+                        </span>
+                </div>
+            </div>
+
+        </div>
+
+        <center>
+            <button type="submit" data-toggle="modal" ng-click="submit()"  class="btn btn-primary" ng-disabled="formficha4.$invalid" ><span class="glyphicon glyphicon-save"></span> GUARDAR FICHA</button>
+        </center>
+    
+</div>

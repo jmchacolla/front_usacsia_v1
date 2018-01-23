@@ -1,0 +1,91 @@
+<!-- TOP-MENU inicio -->
+<div ng-include="'./templates/menu_inicio.html'"></div>
+<!-- CONTEXT-MENU  -->
+<div ng-include="'./templates/menu_lateral.html'"></div>
+<!-- CONTENIDO MODULO inicio -->
+<div class="col-md-8 col-sm-8">
+  <div class="row">
+    <div class="col-md-12">
+      <h2 class="text-primary">
+        <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+        {{ajustes.pagina.titulo}}
+      </h2>
+      <hr>
+    </div>
+  </div>
+  <div class="col-md-12">
+    
+      <div ng-controller="apiAppCtrl_numeromuestra">
+        <p>
+          <h4 class="text-primary">Instrucciones</h4>
+          Para el registro de la prueba de laboratorio:</b>
+          <ul>
+            <li>Debe ingresar el n&uacute;mero de muestra en el respectivo buscador</li>
+            <li>Luego pulse en <b>Buscar</b></li>
+            <li>En el conjunto de resultados, puede <b>Registrar</b> el resultado obtenido</li> 
+          </ul>
+          Si el n&uacute;mero de muestra ingresado no fue registrado, no se mostrar&aacute;n resultados</b>
+        </p>
+        <!-- Inicio Controller apiAppCtrl -->
+         <div class="well well-sm">
+          <form name="busqForm" novalidate>
+           <div class="row">
+             <div class="col-md-6 col-md-offset-2">
+                <input ng-disabled='negcreado' name="nummuestra" class="form-control input-lg" ng-model="numero_muestra" type="text" placeholder="Escriba el Nro. de Muestra" required autofocus>
+             </div>
+             <div class="col-md-4">
+             <button ng-disabled="negcreado" class="btn btn-primary btn-lg" ng-disabled="busqForm.$invalid" ng-click="buscaNumeroMuestra()"><span class="glyphicon glyphicon-search"></span><strong> BUSCAR</strong></button>
+             </div>
+           </div>  
+          </form>
+         </div>
+         <div><center><h3>RESULTADOS<span class="text-primary">  {{ tamanio }} </span></h3></center></div>
+         <div ng-if="ver">
+            <div class="lead text-center">
+              <hr class="bg-red">
+            </div>
+                  <div class="well well-sm">
+                    <div class="panel">
+                      <h4 class="text-center text-primary">I. DATOS GENERALES DEL USUARIO</h4>
+                      <hr class="bg-red">
+                      <div class="panel-body">
+                        <div class="row">
+                          <div class="col-md-4">
+                            <label class="control-label ">Nombre:</label>
+                            <h4>{{muestra.per_nombres+" "+muestra.per_apellido_primero+" "+muestra.per_apellido_segundo}}</h4>
+                            <label class="control-label ">CI:.</label>
+                            <h4>{{muestra.per_ci+" "+muestra.per_ci_expedido}}</h4>
+                          </div>
+                          <div class="col-md-4">
+                            <label class="control-label ">Tipo de usuario:</label>
+                            <h4>{{muestra.mue_tipo}}</h4>
+                          </div>
+                          <div class="col-md-4">
+                              <label class="control-label ">Numero de Muestra:</label>
+                              <div class="well well-sm">
+                              <center>
+                                <h1 class="h1">{{muestra.mue_num_muestra}}</h1>
+                              </center>
+                              </div>
+                          </div>
+                        </div>
+                      </div>
+                      <center>
+                        <button ng-if="!negcreado" type="submit" class="btn btn-success" ng-click="saveplnegativo(muestra.mue_id)"><span class="glyphicon glyphicon-minus"></span> NEGATIVO</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                          <button ng-if="!negcreado" type="submit" ng-click="savepl(muestra.mue_id)" class="btn btn-danger"><span class="glyphicon glyphicon-plus"></span> POSITIVO</button>
+                        <button ng-if="negcreado" type="submit" class="btn btn-danger" ng-click="recarga()"><span class="glyphicon glyphicon-search"></span>VOLVER A BUSCAR</button>
+                        <button ng-if="negcreado" type="submit" class="btn btn-default" ng-click="cancelar()"><span class="glyphicon glyphicon-floppy-remove"></span>CANCELAR</button>
+                    </center>
+                    </div>
+                  </div>
+         </div> <!-- div del message -->
+         <!--  <div class="row panel-group tabla-cuerpo">  -->
+         </div>  
+     <!-- fin ng-show -->
+
+      <!-- fin datos del funcionario -->
+  </div>  
+  </div>
+</div>
+
+

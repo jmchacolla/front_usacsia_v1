@@ -1,0 +1,95 @@
+
+<div ng-if="rol" ng-include="'./templates/menu_inicio.html'"></div>
+<!-- CONTEXT-MENU  -->
+<div ng-if="rol" ng-include="'./templates/menu_lateral.html'"></div>
+<div ng-if="!rol" ng-include="'./templates/menu_inicio_rol.html'"></div>
+<!-- CONTENIDO MODULO inicio -->
+	<div class="{{clase}}">
+		<div class="row">
+			<div class="col-md-12">
+				<h2 class="text-primary">
+					<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+					{{ajustes.pagina.titulo}}
+				</h2>
+				<hr>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+			<!-- AQUI VAN LAS TABLAS O FORMULARIOS incrustados -->
+			<!-- INICIO -->
+			<div class="well well-sm" style="background-color:#fff;">
+					<form action="">
+					<div class="row"><!-- ng-repeat="imagen in persona.imagen" {{imagen.ima_enlace}}/{{imagen.ima_nombre}}-->
+						<div class="col-md-3 col-sm-4" >
+							<img class="img-thumbnail" style="width:100%;" align="center" ng-src="{{src}}"  alt="...">
+						</div>
+						<div class="col-md-9 col-sm-8">
+							<div class="row">
+								<h4 class="text-primary text-center">I. DATOS PERSONALES</h4>
+								<div class="col-md-4 col-sm-6">
+									<label class="text-primary">Apellido paterno:</label><br>
+									{{persona.persona.per_apellido_primero}}
+								</div>
+								<div class="col-md-4 col-sm-6">
+									<label class="text-primary">Apellido materno:</label><br>
+									{{persona.persona.per_apellido_segundo}}
+								</div>
+								<div class="col-md-4 col-sm-6">
+									<label class="text-primary">Nombres:</label><br>
+									{{persona.persona.per_nombres}}
+								</div>
+							</div>
+							<div class="row">
+								
+								<div class="col-md-4 col-sm-6">
+									<label class="text-primary">Usuario:</label><br>
+									{{usuario}}
+								</div>
+								<div class="col-md-4 col-sm-6 texto">
+									<label class="text-primary">Email:</label><br>
+									{{persona.persona.per_email}}
+								</div>
+								<div class="col-md-4 col-sm-6">
+									<label class="text-primary">Celular:</label><br>
+									{{persona.persona.per_numero_celular}}
+								</div>
+							</div>
+							
+						</div>
+					</div>
+					<br>
+					<div class="row" ng-repeat="direccion in persona.direccion">
+						<h4 class="text-primary text-center">II. DIRECCIÓN</h4>
+						<div class="col-md-3 col-sm-4">
+							<label class="text-primary">Zona/Comunidad:</label><br>
+							{{direccion.dir_zona_comunidad}}
+						</div>
+						<div class="col-md-3 col-sm-4">
+							<label class="text-primary">Calle/Avenida:</label><br>
+							{{direccion.dir_avenida_calle}}
+						</div>
+						<div class="col-md-3 col-sm-4">
+							<label class="text-primary">Numero:</label><br>
+							{{direccion.dir_numero}}
+						</div>
+						<div class="col-md-3 col-sm-4">
+	            		<label class="text-primary">Tipo vivienda:</label><br>
+	            		{{direccion.dir_tipo | uppercase}}
+		          		</div> 
+					</div>
+					<div class="row" ng-show="rol === 2 || rol === 3 || rol === 4 || rol === 5 || rol === 6">
+						<div class="col-md-4">
+							 <label class="text-primary"> Cargo:</label><br>
+							 {{funcionario.funcionario_establecimiento.fe_cargo}}
+						</div>
+					</div>
+					<hr>
+					</form>
+				</div>
+			<!-- FIN -->
+			<!-- AQUI VAN LOAS TABLAS O FORMULARIOS incrustados -->
+			</div>
+		</div>
+	</div>
+<!-- CONTENIDO MODULO fin

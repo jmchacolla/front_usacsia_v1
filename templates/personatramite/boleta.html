@@ -1,0 +1,62 @@
+<!-- TOP-MENU inicio -->
+<div ng-include="'./templates/menu_inicio.html'"></div>
+<!-- CONTEXT-MENU -->
+<div ng-include="'./templates/menu_lateral.html'"></div>
+<!-- CONTENIDO MODULO inicio -->
+<div class="col-md-8 col-sm-8" >
+  <div class="row">
+    <div class="col-md-12">
+      <h2 class="text-primary">
+        <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+        {{ajustes.pagina.titulo}}
+      </h2>
+      <hr class="bg-red">
+    </div>
+  </div>
+
+    <div class="well well-sm" style="background-color:#fff;">
+      <div class="col-md-12">
+        <h3 class="text-center text-primary">
+         I. Boleta de pago
+        </h3>
+        <hr class="bg-red">
+      </div>
+      <div>
+        <div class="col-md-12 col-sm-6">
+          <label class="text-primary">Unidad de:</label>
+          {{pertramite.tramite.tra_nombre}}
+        </div>
+        <div class="col-md-12 col-sm-6">
+          <label class="text-primary">Monto cancelado:</label>
+          Bs. {{pertramite.persona_tramite.pt_monto|number:2}}
+        </div>
+        <div class="col-md-12 col-sm-6">
+          <label class="text-primary">Hemos recibido del Señor(es):</label>
+          {{pertramite.persona.per_nombres}} {{pertramite.persona.per_apellido_primero}} {{pertramite.persona.per_apellido_segundo}}
+        </div>
+       <!--  <div class="col-md-12 col-sm-6">
+          <label class="text-primary">La suma de:</label>
+          {{monto}}
+          <label class="text-primary">Bolivianos</label>
+        </div> -->
+        <div class="col-md-12 col-sm-6">
+          <label class="text-primary">Por concepto de:</label>
+          {{pertramite.tramite.tra_nombre}}
+        </div>
+        <div class="col-md-12 col-sm-6" text-align="center">
+          <label class="text-primary">LA PAZ - </label>
+          {{day}}
+        </div>
+      </div>
+      <div ng-controller="pdf_pago_Ctrl" align="center" class="row">
+         <div class="col-md-12">
+           <button type="button" class="btn btn-default" ng-click="openPdf1()" >IMPRIMIR PAGO  <span class="glyphicon glyphicon-print"></span></button>
+           <button type="button"  class="btn btn-default" ng-click="downloadPdf1()">Descargar PDF PAGO  <span class="glyphicon glyphicon-download-alt"></span></button>
+         </div>
+      </div>
+
+    </div>
+
+      
+
+</div>

@@ -1,0 +1,58 @@
+@tabs-color: #ddd;
+
+tabs {
+    .nav-tabs {
+        overflow: auto;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        border-bottom: 0.5em solid @tabs-color;
+        >li {
+            flex-shrink: 1;
+            flex-grow: 0;
+            margin: 0 0.5em 0 0;
+            padding: 0;
+            display: inline-block;
+            border-bottom: none;
+            &.pull-right {
+                margin: 0 0 0 auto;
+            }
+            >a {
+                line-height: 2;
+                color: rgba(0,0,0,0.4);
+                background: lighten(@tabs-color, 5%);
+                padding: 0 1em;
+                display: block;
+                border-radius: 0.25em 0.25em 0 0;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                text-decoration: none;
+            }
+            &:hover {
+                >a {
+                    text-decoration: none;
+                    color: rgba(0,0,0,0.5);
+                    background: lighten(@tabs-color, 3%);
+                }
+            }
+            &.active {
+                >a {
+                    background: @tabs-color;
+                    color: rgba(0,0,0,0.8);
+                }
+            }
+        }
+    }
+    
+    .tab-content {
+        >pane >.tab-pane {
+            display: none;
+            &.active {
+                display: block;
+            }
+        }
+    }
+}

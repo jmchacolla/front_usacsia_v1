@@ -1,0 +1,104 @@
+<!--TOP-MENU inicio -->
+<div ng-include="'./templates/menu_inicio.html'"></div>
+<!-- CONTEXT-MENU  -->
+	<div ng-include="'./templates/menu_lateral.html'">
+	</div>
+<!-- CONTENIDO MODULO inicio -->
+<div class="col-md-8 col-sm-8">
+    <div class="row">
+      <div class="col-md-12">
+        <h2 class="text-primary">
+          <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+          {{ajustes.pagina.titulo}}
+        </h2>
+        <hr class="bg-red">
+      </div>
+    </div>
+    
+    <label class="control-label">Los campos marcados con asterisco<strong class="fg_red"> *</strong> son obligatorios</label>
+    <!--FIN herramientas para la vista-->
+    <div class="row">
+      	<div class="col-md-12">
+  		<!-- AQUI VAN LAS TABLAS O FORMULARIOS incrustados -->
+  		<!-- INICIO -->
+		<form name="userForm" novalidate>
+			<div class="well well-sm" style="background-color:#fff;">
+	            <div class="panel">
+	              	<div class="text-center text-primary">I. DATOS DEL PARÁSITO</div>
+	              	<hr class="bg-red">
+	              	<div class="panel-body">
+	              		<div class="row">
+			                <div class="col-md-6">
+			                  	<label class="control-label ">Nombre:</label>
+			                    <input type="" class="form-control" id="" ng-model="parasito.par_nombre">
+			                </div>
+		                </div>
+		                <div class="row">
+			                <div class="col-md-6">
+				               	<label class="control-label ">Descripción:</label>
+				               	<textarea class="form-control" style="resize: vertical;min-height:100px;max-height: 150px;" ng-model="parasito.par_descripcion"></textarea>
+				               	
+			               	</div>
+		                </div>
+		                <div class="row">
+			               	<div class="form-group col-md-6">
+			                  	<label for="sevref" class="control-label ">Clasificacion:<strong class="fg_red"> *</strong></label>
+			                    <input  type="" class="form-control" id="" ng-model="parasito.par_clasificacion">
+			                </div>   
+	 					</div>
+	             	</div>
+	            </div>
+	            <div ng-if="!verb">
+		            <center>
+		            	<a href="#/referenciasRec">
+		                  <button type="submit" data-toggle="modal"  class="btn btn-default"  ><span class="glyphicon glyphicon-remove"></span> CANCELAR</button>
+		                </a>
+		            	<button type="submit" class="btn btn-primary" ng-disabled="userForm.$invalid" ng-click="save($parent.parasito);verbutton()"><span class="glyphicon glyphicon-save"></span>GUARDAR</button>
+		            </center>
+		        </div>
+	            <div ng-if="verb">
+		            <center>
+		            	<button type="submit" class="btn btn-primary" ng-disabled="userForm.$invalid" ng-click="vertratamientos(userForm)"><span class="glyphicon glyphicon-save"></span>AGREGAR TRATAMIENTO</button>
+		            </center>
+	        	</div>
+	       	</div>
+	       	<!-- ver habilitado por false -->
+	       	<div ng-if="ver" ng-controller="CrearParasitoTratamientoCtrl">
+		       	<div class="well well-sm" style="background-color:#fff;" >
+		            <div class="panel">
+		              	<div class="text-center text-primary">I. DATOS DEL TRATAMIENTO</div>
+		              	<hr class="bg-red">
+		              	<div class="panel-body">
+		              		<div class="row">
+				                <div class="col-md-4">
+				                  	<label class="control-label ">Nombre:</label>
+				                    <input type="" class="form-control" id="" ng-model="parasitoTratamiento.trat_nombre">
+				                </div>
+				                <div class="col-md-4">
+					               	<label class="control-label ">Dosis:</label>
+					               	<input type="" class="form-control" id="" ng-model="parasitoTratamiento.trat_dosis">
+				               	</div>
+				               	<div class="form-group col-md-4">
+				                  	<label for="sevref" class="control-label ">Descripción:<strong class="fg_red"> *</strong></label>
+				                    <input  type="" class="form-control" id="" ng-model="parasitoTratamiento.trat_clasificacion">
+				                </div>
+			                </div>
+		             	</div>
+		            </div>
+		            <center>
+		            	<button type="submit" class="btn btn-primary" ng-disabled="userForm.$invalid" ng-click="savep($parent.parasitoTratamiento)"><span class="glyphicon glyphicon-save"></span>GUARDAR</button>
+		                  <button type="submit" ng-click="vertratamientos(userForm)" data-toggle="modal"  class="btn btn-default"  ><span class="glyphicon glyphicon-remove"></span> CANCELAR</button>
+		            </center>
+		       	</div>
+		    </div>
+   		</form>
+
+
+
+   		<p ng-show="ajustes.pagina.success" class="alert alert-success">{{ajustes.pagina.success}}</p>
+		<!-- FIN -->
+		<!-- AQUI VAN LOAS TABLAS O FORMULARIOS incrustados -->
+		</div>
+	</div>
+</div>
+<!-- CONTENIDO MODULO fin

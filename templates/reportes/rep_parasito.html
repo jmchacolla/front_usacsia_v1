@@ -1,0 +1,181 @@
+<!-- TOP-MENU inicio -->
+<div ng-include="'./templates/menu_inicio.html'"></div>
+<!-- CONTEXT-MENU  -->
+  <div ng-include="'./templates/menu_lateral.html'">
+  </div>
+<!-- CONTENIDO MODULO inicio -->
+  <div class="col-md-8 col-sm-8">
+    <div class="row">
+      <div class="col-md-12">
+        <h2 class="text-primary">
+          <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+          {{ajustes.pagina.titulo}}
+     
+        </h2>
+        <hr>
+      </div>
+    </div>
+    <div class="col-md-12">
+    	<div class="panel panel-default">
+		    <h5>&nbsp;Reportes de los resultados de coproparasitologico.</h5>
+		</div>
+		
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-md-6">
+						<h4>Fecha inicial :</h4>   
+						<div class="input-group" class="form-inline pull-left">
+							<input  my-valid-date type="text" name="myDateInput1" class="form-control" id="fecha_ini1" placeholder="dd-mm-yyyy" ng-model="fecha_ini1"  required >
+							<span class="input-group-addon">
+				               	<span class="glyphicon glyphicon-calendar"></span>
+				           	</span>       	
+						</div>
+						<span class="messages" ng-show="getreporte.myDateInput1.$touched">
+							 <span ng-show="!getreporte.myDateInput1.$valid">La fecha es incorrecta....!!</span>    
+			            </span>
+		            </div>
+		            <div class="col-md-6">
+						<h4>Fecha final :</h4>
+						<div class="input-group" class="form-inline pull-left">
+							<input  my-valid-date type="text" name="myDateInput2" class="form-control" id="fecha_fin1" placeholder="dd-mm-yyyy" ng-model="fecha_fin1"  required >
+							<span class="input-group-addon">
+				               	<span class="glyphicon glyphicon-calendar"></span>
+				           	</span>       	
+						</div>
+						<span class="messages" ng-show="getreporte.myDateInput2.$touched">
+							 	<span ng-show="!getreporte.myDateInput2.$valid">La fecha es incorrecta....!!</span>    
+			            </span>
+		            </div>
+	            </div>
+				<br>
+				<div class="col-md-6 col-md-offset-3 text-center">
+					<button class="btn btn-success" ng-click="get_rep(fecha_ini1, fecha_fin1)" ng-disabled="getreporte.$invalid" title="Ver Reportes"><span class="glyphicon glyphicon-chevron-down"></span> VER REPORTES </button>
+				</div>
+			</div>
+		</div>
+
+	   	<hr>
+	   	<!-- para un servicio -->
+	   	<div class="row" ng-show="show">
+	   		<div class="well well-sm" ><span class="text-center text-primary"><center><h4>{{"Resultados del " + fecha_ini1 + "  al "+ fecha_fin1}}</h4></center></span></div>
+	   		<h5 ><center>Ex&aacute;men coproparasitol&oacute;gico</center></h5>
+		   		<div class="col-md-6 col-md-offset-3">
+			   		<div class="table-responsive" >
+			   			<table  class="table table-bordered table-hover">
+			   				<thead  class="well well-sm">
+			   					<tr>
+			   						<th class="text-primary" rowspan="2" style="text-align:center;">Fecha</th>
+		                        	<th class="text-primary" style="text-align:center;">Pacientes regulares</th> 
+			   					</tr>
+			   					<tr>
+			   						<th class="text-primary" style="text-align:center;">USACSIA</th>
+			   					</tr>            
+		                     </thead>
+		                     <tbody ng-repeat="paciente in pacientes">
+		                        <tr>
+		                          <td style="text-align:center;">{{paciente.fecha}}</td>
+		                          <td style="text-align:center;">{{paciente.usacsia}}</td>
+		                        </tr>
+		                     </tbody>
+			   			</table>
+			   			<table  class="table table-bordered table-striped table-hover">
+		                     <tbody>
+		                        <tr>
+		                          <td>{{"TOTAL"}}</td>
+		                          <td>{{cont}}</td>
+		                        </tr>
+		                     </tbody>
+			   			</table>
+				   </div>
+			   </div>
+	   	</div>
+	   	<!-- parasitos -->
+	   	<div class="row" ng-show="show">
+	   		<center class="text-center text-primary"><h3>CUADRO N°1</h3></center>
+	   		<h5 ><center>Frecuencia de Par&aacute;sitos observados en pacientes</center></h5>
+	   		<div class="col-md-6 col-md-offset-3">
+		   		<div class="table-responsive" >
+		   			<table  class="table table-bordered table-hover">
+		   				<thead  class="well well-sm">
+                            <th class="text-primary">Total</th>
+                            <th class="text-primary">Nombre del parasito</th>
+                            <th class="text-primary">Cantidad</th>             
+                         </thead>
+                         <tbody ng-repeat="parasito in parasitos">
+                            <tr>
+                              <td>{{"USACSIA"}}</td>
+                              <td>{{parasito.nom_par}}</td>
+                              <td>{{parasito.cantidad}}</td>
+                            </tr>
+
+                         </tbody>
+		   			</table>
+		   			<table  class="table table-bordered table-striped table-hover">
+	                     <tbody>
+	                        <tr>
+	                          <td>{{"TOTAL"}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+	                          <td>{{cont}}</td>
+	                        </tr>
+	                     </tbody>
+		   			</table>
+		   		</div>
+	   		</div>
+	   	</div>
+	   	<!-- seccion de reportes de observados -->
+	   	<div class="row" ng-show="show">
+	   		<center class="text-center text-primary"><h3>CUADRO N°2</h3></center>
+	   		<h5><center>Resultados obtenidos al examen coproparasitol&oacute;gico en pacientes atendidos</center></h5>
+	   		<div class="col-md-6 col-md-offset-3">
+		   		<div class="table-responsive" >
+		   			
+		   			<table  class="table table-bordered table-hover">
+		   				<thead  class="well well-sm">
+                            <th class="text-primary">Pacientes</th>
+                            <th class="text-primary">Resultados Negativos</th>
+                            <th class="text-primary">Resultados Positivos</th>  
+                            <th class="text-primary">Total</th>           
+                         </thead>
+                         <tbody >
+                            <tr>
+                              <td>{{"USACSIA"}}</td>
+                              <td>{{nro_noobservados}}</td>
+                              <td>{{nro_observados}}</td>
+                              <td>{{nro_noobservados + nro_observados}}</td>
+                            </tr>
+                         </tbody>
+		   			</table>
+		   		</div>
+	   		</div>
+	   	</div>
+    </div>
+
+    <!-- script para la fecha  -->
+	<script type="text/javascript">
+		 $.datepicker.regional['es'] = {
+		 closeText: 'Cerrar',
+		 prevText: '< Ant',
+		 nextText: 'Sig >',
+		 currentText: 'Hoy',
+		 monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+		 monthNamesShort: ['Ene','Feb','Mar','Abr', 'May','Jun','Jul','Ago','Sep', 'Oct','Nov','Dic'],
+		 dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+		 dayNamesShort: ['Dom','Lun','Mar','Mié','Juv','Vie','Sáb'],
+		 dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sá'],
+		 weekHeader: 'Sm',
+		 dateFormat: 'dd-mm-yy',
+		 firstDay: 1,
+		 isRTL: false,
+		 showMonthAfterYear: false,
+		 yearSuffix: ''
+		 };
+
+		 $.datepicker.setDefaults($.datepicker.regional['es']);
+		    $( function() {
+		      $("#fecha_ini1" ).datepicker();
+		    } );
+		    $( function() {
+		      $("#fecha_fin1" ).datepicker();
+		    } );
+	</script>
+	<!-- fin scrip para la fecha -->

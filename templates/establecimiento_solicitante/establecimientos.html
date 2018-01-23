@@ -1,0 +1,134 @@
+<!-- TOP-MENU inicio -->
+<div ng-include="'./templates/menu_inicio.html'"></div>
+
+<!-- CONTEXT-MENU  -->
+<div ng-include="'./templates/menu_lateral.html'"></div>
+<!-- CONTENIDO MODULO inicio -->
+<div class="col-md-8 col-sm-8">
+  <div class="row">
+    <div class="col-md-12">
+      <h2 class="text-primary">
+        <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+        {{ajustes.pagina.titulo}}
+      </h2>
+      <hr class="bg-red">
+    </div>
+  </div>
+  <!--HERRAMIENTAS PARA LA VISTA-->
+  <div class="row">
+    <div class="col-md-12">
+      <div class="well well-sm">
+        <strong class="pull-left lead">Herramientas: &nbsp;</strong>
+        <form class="form-inline pull-left">
+          <input type="text" class="form-control" placeholder="Filtrar por ..." ng-model="ess_razon_social">
+        </form>
+        &nbsp;&nbsp;
+        <!--<button class="btn btn-primary"><span class="glyphicon glyphicon-tasks"></span> Exportar lista en XLS</button>-->
+       <!--  <button class="btn btn-default" onclick="generateEST()"><span class="glyphicon glyphicon-save-file"></span> Exportar lista en PDF</button> -->
+        <div class="clearfix"></div>
+      </div>
+    </div>
+  </div>
+  <!--FIN herramientas para la vista-->
+  <div class="row">
+    <div class="col-md-12 ">
+    <!-- AQUI VAN LAS TABLAS O FORMULARIOS incrustados -->
+    <!-- INICIO -->
+    <div class="text-center" ng-show="loading"><br><img ng-src="./images/image.gif" class="loader-img"></div>
+    <div ng-show="!loading && !msg">No se encontraron resultados</div>
+    <div class="table-responsive">
+      <table class="table table-hovertable table-bordered table-striped table-hover" ng-show="!loading && msg" id="tablaES">
+        <thead >
+          <!--<th >Nº</th>-->
+          <!-- <th >Código</th> -->
+          <th class="text-primary text-center" >
+            <a href="" ng-click="sortType = 'usa_nombre'; sortReverse = !sortReverse">
+              Nombre
+              <span ng-show="sortType == 'usa_nombre' && !sortReverse" class="glyphicon glyphicon-sort-by-alphabet-alt"></span>
+              <span ng-show="sortType == 'usa_nombre' && sortReverse" class="glyphicon glyphicon-sort-by-alphabet"></span>
+            </a>
+          </th>
+          <th class="text-primary text-center" >Tipo</th>
+          <th class="text-primary text-center" >STAND</th>
+          <!--<th >Red</th>
+          <th class="text-primary text-center" >Municipio</th> -->
+          <th class="text-primary text-center" >Ver</th>
+          <!-- <th class="text-primary text-center">Editar</th> -->
+          <!-- <th class="text-primary text-center">Borrar</th> -->
+        </thead>
+        <tbody ng-repeat="establecimiento in establecimientos | orderBy:sortType:sortReverse | filter:ess_razon_social | startFromGrid: currentPage * pageSize | limitTo: pageSize ">
+          <tr>
+            <!--<td>{{$index + 1}}</td>-->
+          <!-- <td>{{establecimiento.es_codigo}}</td> <a href="#/establecimientos/ver/{{establecimiento.es_id}}">-->
+          <td> {{establecimiento.ess_razon_social}}</a></td>
+          <td>{{establecimiento.ess_tipo}}</td>
+          <td>{{establecimiento.ess_stand}}</td>
+          <!--<td>{{establecimiento.es_inicio_atencion + " - " + establecimiento.es_final_atencion}}</td>
+          <td>{{establecimiento.red_nombre}}</td> 
+          <td>{{establecimiento.usa_municipio}}</td>-->
+          <!--Ver Establecimiento-->
+
+          <td>
+            <a class="btn btn-success" href="#/estasblecimiento_solicitante/ver/{{establecimiento.ess_id}}" title="Ver Establecimiento" ><span class="glyphicon glyphicon-file "></span></a>
+          </td>
+
+          <!--Editar establecimiento-->
+          <!-- <td>
+            <a ng-href="#/establecimientos/edit/{{establecimiento.usa_id}}" class="btn btn-primary" title="Editar Establecimiento" ><span class="glyphicon glyphicon-pencil "></span></a>
+          </td> -->
+          <!-- BOTON PARA CUADROS MODALES -->
+          <!-- <td>
+              <button class="btn btn-danger" title="Eliminar Establecimiento" data-toggle="modal" data-target="#miCuadroModal1" ng-click="get_es_id(establecimiento.ess_id, establecimiento.ess_razon_social)"><span class="glyphicon glyphicon-trash "></span></button> -->
+              <!--CUADRO MODAL-->
+              <!-- <div id="miCuadroModal1" class="modal fade" role="dialog" tabindex="-1">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header bg-red">
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                    <h4 class="modal-title fg-white">ELIMINAR ESTABLECIMIENTO </h4>
+                  </div>
+                  <div class="modal-body lead text-center">
+                    ¿Esta seguro que desea eliminar este establecimiento?
+                    <br>
+                    <div class="well well-sm">
+                  <strong>{{nombre | uppercase}}</strong>
+                </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="remove(establecimiento.usa_id)">
+                  <span class="glyphicon glyphicon-ok"></span>
+                  SI
+                </button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">
+                  <span class="glyphicon glyphicon-remove"></span>
+                  NO
+                </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </td> -->
+            <!--FIN CUADRO MODAL-->
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+    <div class="text-center" ng-show="!loading && msg">
+    <!-- Navegar hacia atrás -->
+      <button class="btn btn-lg btn-primary" type='button' ng-disabled='currentPage == 0' ng-click='currentPage = currentPage - 1'>&laquo; Anterior</button>
+      <!-- Navegar a una página especifica-->
+      <button class="btn btn-lg btn-default" type='button' ng-disabled='currentPage == page.no - 1' ng-click='setPage(page.no)' ng-repeat='page in pages'>{{page.no}}</button>
+      <!-- Navegar hacia adelante -->
+      <button class="btn btn-lg btn-default" type='button' ng-disabled='currentPage >= data.length/pageSize - 1' ng-click='currentPage = currentPage + 1'>Siguiente &raquo;</button>
+    </div>
+    <hr>
+    
+    <!-- FIN 
+      <button ng-click="getEstablecimientos(9)">gettt</button>
+    -->
+    <!-- AQUI VAN LOAS TABLAS O FORMULARIOS incrustados -->
+    </div>
+  </div>
+</div>
+<!-- CONTENIDO MODULO fin -->

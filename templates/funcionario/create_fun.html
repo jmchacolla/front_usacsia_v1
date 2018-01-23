@@ -1,0 +1,155 @@
+<!-- TOP-MENU inicio -->
+<div ng-include="'./templates/menu_inicio.html'"></div>
+<!-- CONTEXT-MENU  -->
+   <div ng-include="'./templates/menu_lateral.html'" ></div>
+        <div class="col-md-8 col-sm-8">
+        <div class="row">
+          <div class="col-md-12">
+            <h2 class="text-primary">
+              <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+              {{ajustes.pagina.titulo}}
+            </h2>
+            <hr>
+          </div>
+        </div>
+
+    <div ng-controller="apiAppCtrl_fun">  
+       <div class="form-group">
+         <div class="panel">
+           <h4 class="text-center text-primary">I. DATOS GENERALES</h4>
+           <hr class="bg-red">
+           <div class="row">
+              <div class="col-md-6">
+                 <label class="control-label ">C.I.:</label>
+                 {{personas_encontrada.persona.per_ci+" "+personas_encontrada.persona.per_ci_expedido}}
+              </div>
+              <div class="col-md-6">
+                 <label class="control-label ">Fecha de Nacimiento:</label>
+                 {{fecha_nacimiento}}
+              </div>
+           </div>
+           <div class="row">
+             <div class="col-md-6">
+              <label class="control-label ">Nombre Completo:</label>
+              {{personas_encontrada.persona.per_nombres+"  "+personas_encontrada.persona.per_apellido_primero+"  "+personas_encontrada.persona.per_apellido_segundo}}
+             </div>
+             <div class="col-md-6">
+               <label class="control-label ">Sexo:</label>
+               {{genero}}
+             </div>                   
+           </div>
+           <div class="row">
+              <div class="col-md-4">
+               <label class="control-label ">Domicilio:</label>
+               {{personas_encontrada.zona.zon_nombre+"  "+personas_encontrada.persona.per__avenida_calle+"  "+personas_encontrada.persona.per_numero}}
+              </div>
+           </div> 
+           <div class="clearfix"></div>
+
+           <!-- datos del funcionario -->
+           <div class="panel" ng-controller="FechaFunCtrl">
+                <form name="addFuncionario" novalidate>
+                  <h4 class="text-center text-primary">II. AGREGAR INFORMACIÓN DEL FUNCIONARIO</h4>
+                  <hr class="bg-red">
+                  <label class="control-label">Los campos marcados con asterisco (<strong class="fg_red">*</strong>) son obligatorios</label> 
+                  <br>  
+                  <div class="row"> 
+                    <div class="col-md-3" ng-if="fun_id_params==null">
+                      <label class="control-label">Profesión: <strong class="fg_red">*</strong></label>
+                       <input type="" class="form-control" name="profesion" placeholder="Ej. Medico" ng-model="funcionarios.fun_profesion" ng-model-options="{ updateOn: 'blur' }" required>
+                      <!-- <select class="form-control" name="profesion" ng-model="funcionarios.fun_profesion" >
+                        <option value="MEDICO">MÉDICO</option>
+                        <option value="ENFERMERA">ENFERMERO(A)</option>
+                        <option value="OTRO">OTRO</option>
+                      </select> -->
+                      <span class="messages" ng-show="addFuncionario.profesion.$touched">
+                        <span ng-show="addFuncionario.profesion.$error.required">El campo es obligatorio.</span>
+                      </span>
+                    </div> 
+                    <div class="col-md-6">
+                      
+                        <label class="control-label">Cargo: <strong class="fg_red">*</strong></label>
+                         <!-- <input type="" class="form-control" name="cargo" placeholder="Ej. Tecnico" ng-model="funcionarios.fun_cargo" ng-model-options="{ updateOn: 'blur' }" required> -->
+                        <select class="form-control" name="ci_expedido" ng-model="funcionarios.fun_cargo" ng-model-options="{ updateOn: 'blur' }" required>
+                            <option value="JEFE DE USACSIA">JEFE DE USACSIA</option>
+                            <option value="RECEPCIONISTA">RECEPCIÓNISTA</option>
+                            <option value="RECEPCION LABORATORIO">RECEPCION LABORATORIO</option>
+                            <option value="CAJERO">CAJERO</option>
+                            <option value="RESPONSABLE CARNET SANITARIO">RESPONSABLE CARNET SANITARIO</option>
+                            <option value="MEDICO">MEDICO</option>
+                            <option value="ENFERMERA/O">ENFERMERA/O</option>
+                            <option value="RESPONSABLE DE LABORATORIO">RESPONSABLE DE LABORATORIO</option>
+                            <option value="TECNICO LABORATORIO">TECNICO LABORATORIO</option>
+                            <option value="RESPONSABLE CERTIFICADO SANITARIO">RESPONSABLE CERTIFICADO SANITARIO</option>
+                            <option value="INSPECTOR">INSPECTOR</option>
+                            <option value="REVISOR">REVISOR</option>
+                            <option value="JEFE DE UNIDAD ADMINISTRATIVA FINANCIERA">JEFE DE UNIDAD ADMINISTRATIVA FINANCIERA</option>
+                            <option value="RESPONSABLE DE TESORERIA">RESPONSABLE DE TESORERIA</option>
+                      </select>
+                        <span class="messages" ng-show="addFuncionario.cargo.$touched">
+                          <span ng-show="addFuncionario.cargo.$error.required">El campo es obligatorio.</span>
+                        </span>
+                     
+                    </div> 
+<!--                     <div class="col-md-3">
+                      <label class="control-label">Estado Laboral: <strong class="fg_red">*</strong></label>
+                      <select class="form-control" name="estado_laboral" ng-model="funcionarios.fe_estado_laboral" >
+                        <option value="PERMANENTE">PERMANENTE</option>
+                        <option value="CONTRATO">CONTRATO</option>
+                        <option value="POR CONTRATAR">POR CONTRATAR</option>
+                      </select>
+                      <span class="messages" ng-show="addFuncionario.estado_laboral.$touched">
+                        <span ng-show="addFuncionario.estado_laboral.$error.required">El campo es obligatorio.</span>
+                      </span>
+                    </div> -->
+                  </div>  
+                  <br>
+                  <div class="row">
+                    
+                  </div>
+                  <br>    
+                 <!--  <div class="row" ng-if="funcionarios.fe_estado_laboral != 'POR CONTRATAR'"> 
+                      <div class="col-md-4">
+                        <label class="control-label">Nro. Item/Contrato: <strong class="fg_red">*</strong></label>
+                        <input type="" class="form-control" name="memo" placeholder="Nro. Item/Contrato" ng-model="funcionarios.fe_memorandum" ng-model-options="{ updateOn: 'blur' }" required>
+                        <span class="messages" ng-show="addFuncionario.memo.$touched">
+                          <span ng-show="addFuncionario.numero.$error.required">El campo es obligatorio.</span>
+                          <span ng-show="addFuncionario.numero.$error.pattern">Solo se acepta números.</span>
+                        </span>
+                      </div>
+                  </div>  -->
+                 
+                  <hr>
+                  <p ng-show="$parent.ajustes.pagina.success" class="alert alert-success fade in">{{$parent.ajustes.pagina.success}}
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                  </p>
+                  <div class="row">         
+                    <center>
+                      <div class="col-md-6 col-md-offset-3 text-center">   
+                        <div class="well well-sm">
+                          <div class="checkbox">
+                            <label style="font-size: 1.5em">
+                              <input type = "checkbox" ng-model = "para_enviar" title="Haga click aqui para habilitar o deshabilitar el envío del formulario"> 
+                              <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
+                              <small style="font-size: 0.6em" class="text-primary" title="Haga click en la casilla de verificación del lado para registrar al funcionario">
+                                <span class="glyphicon glyphicon-hand-left"></span>
+                                <span class="glyphicon glyphicon-chevron-left"></span>
+                                ¿DESEA GUARDAR ESTE FORMULARIO?
+                              </small>
+                            </label>
+                          </div>
+                          <br><br>
+                          <button ng-show = "para_enviar" type="submit" class="btn btn-primary" ng-click="submit($parent.funcionarios,personas_encontrada.persona.per_id);reset(addFuncionario)" ng-disabled="addPersona.$invalid" title="Debe llenar todos los campos obligatorios de manera correcta"><span class="glyphicon glyphicon-save"></span> GUARDAR</button>
+                        </div>                  
+                      </div>
+                    </center>
+                  </div>
+                </form>
+           </div>
+         </div>  
+       </div>    
+    <!-- fin datos del funcionario -->
+</div>  
+
+
+

@@ -1,0 +1,145 @@
+<!-- TOP-MENU inicio -->
+<div ng-include="'./templates/menu_inicio.html'"></div>
+<!-- CONTEXT-MENU  -->
+  <div ng-include="'./templates/menu_lateral.html'">
+  </div>
+<!-- CONTENIDO MODULO inicio -->
+  <div class="col-md-8 col-sm-8">
+    <div class="row">
+      <div class="col-md-12">
+        <h2 class="text-primary">
+          <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+          {{ajustes.pagina.titulo}}
+        </h2>
+        <hr>
+      </div>
+    </div>
+    <div class="col-md-12">
+    	<div class="panel panel-default">
+		    <h5>&nbsp;Reportes de historias clinicas y signos vitales.</h5>
+		</div>
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-md-6">
+						<h4>Fecha inicial :</h4>   
+						<div class="input-group" class="form-inline pull-left">
+							<input  my-valid-date type="text" name="myDateInput1" class="form-control" id="fecha_ini1" placeholder="dd-mm-yyyy" ng-model="fechas.fecha1"  required >
+							<span class="input-group-addon">
+				               	<span class="glyphicon glyphicon-calendar"></span>
+				           	</span>       	
+						</div>
+						<span class="messages" ng-show="getreporte.myDateInput1.$touched">
+							 <span ng-show="!getreporte.myDateInput1.$valid">La fecha es incorrecta....!!</span>    
+			            </span>
+		            </div>
+		            <div class="col-md-6">
+						<h4>Fecha final :</h4>
+						<div class="input-group" class="form-inline pull-left">
+							<input  my-valid-date type="text" name="myDateInput2" class="form-control" id="fecha_fin1" placeholder="dd-mm-yyyy" ng-model="fechas.fecha2"  required >
+							<span class="input-group-addon">
+				               	<span class="glyphicon glyphicon-calendar"></span>
+				           	</span>       	
+						</div>
+						<span class="messages" ng-show="getreporte.myDateInput2.$touched">
+							 	<span ng-show="!getreporte.myDateInput2.$valid">La fecha es incorrecta....!!</span>    
+			            </span>
+		            </div>
+	            </div>
+				<br>
+				<div class="col-md-6 col-md-offset-3 text-center">
+					<button class="btn btn-success" ng-click="get_rep(fechas.fecha1, fechas.fecha2)" ng-disabled="getreporte.$invalid" title="Ver Reportes"><span class="glyphicon glyphicon-chevron-down"></span> VER REPORTES </button>
+				</div>
+			</div>
+		</div>
+
+	   	<hr>
+	   	<!-- para un servicio -->
+	   	<div class="row" ng-show="show">
+	   		<div class="well well-sm" ><span class="text-center text-primary"><center><h4>{{"Resultados del " + fechas.fecha1 + "  al   "+ fechas.fecha2}}</h4></center></span></div>
+
+	   		<button class="btn btn-default" onclick="generate_signos()"><span class="glyphicon glyphicon-save-file"></span> Exportar reporte en PDF</button>
+	   		<br>
+	   		<h4 ><center>Apertura de historias cl&iacute;nicas y control de signos vitales</center></h4>
+	   		<div class="table-responsive" >
+		   			<table  class="table table-bordered table-hover" id="tableREPS">
+		   				<thead  class="well well-sm">
+                            <th class="text-primary">Fecha</th>
+                            <th class="text-primary">Consulta</th>
+                            <th class="text-primary">Reconsulta</th>
+                            <th class="text-primary">Nuevos</th>   
+                            <th class="text-primary">P/A</th>  
+                            <th class="text-primary">Sanos</th>  
+                            <th class="text-primary">Observados</th>  
+                            <th class="text-primary">Obesidad</th> 
+                            <th class="text-primary">Caries Dental</th>    
+                            <th class="text-primary">Verrugas</th>  
+                            <th class="text-primary">Blastt</th>  
+                            <th class="text-primary">Iras</th>  
+                            <th class="text-primary">Delgadez</th>     
+                            <th class="text-primary">Higiene control de uñas</th>  
+                            <th class="text-primary">Caspa</th> 
+                            <th class="text-primary">Otros</th>        
+                         </thead>
+                         <tbody ng-repeat="ficha in fichas">
+                            <tr>
+                              <td>{{ficha.fecha}}</td>
+                              <td>{{ficha.total}}</td>
+                              <td>{{ficha.reconsultas}}</td>
+                              <td>{{ficha.nuevos}}</td>
+                              <td>{{""}}</td>
+                              <td>{{ficha.sanos}}</td>
+                              <td>{{ficha.observados}}</td>
+                              <td>{{""}}</td>
+                              <td>{{ficha.caries}}</td>
+                              <td>{{ficha.verruga}}</td>
+                              <td>{{""}}</td>
+                              <td>{{""}}</td>
+                              <td>{{""}}</td>
+                              <td>{{ficha.unas}}</td>
+                              <td></td>
+                              <td></td>
+                            </tr>
+                         </tbody>
+		   			</table>
+<!-- 		   			<table  class="table table-bordered table-striped table-hover">
+	                     <tbody ng-repeat="ficha in fichas">
+	                        <tr>
+	                          <td>{{"TOTAL"}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+	                          <td>{{cont}}</td>
+	                        </tr>
+	                     </tbody>
+		   			</table> -->
+	   	</div>
+
+
+    </div>
+<!-- script para la fecha  -->
+	<script type="text/javascript">
+		 $.datepicker.regional['es'] = {
+		 closeText: 'Cerrar',
+		 prevText: '< Ant',
+		 nextText: 'Sig >',
+		 currentText: 'Hoy',
+		 monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+		 monthNamesShort: ['Ene','Feb','Mar','Abr', 'May','Jun','Jul','Ago','Sep', 'Oct','Nov','Dic'],
+		 dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+		 dayNamesShort: ['Dom','Lun','Mar','Mié','Juv','Vie','Sáb'],
+		 dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sá'],
+		 weekHeader: 'Sm',
+		 dateFormat: 'dd-mm-yy',
+		 firstDay: 1,
+		 isRTL: false,
+		 showMonthAfterYear: false,
+		 yearSuffix: ''
+		 };
+
+		 $.datepicker.setDefaults($.datepicker.regional['es']);
+		    $( function() {
+		      $("#fecha_ini1" ).datepicker();
+		    } );
+		    $( function() {
+		      $("#fecha_fin1" ).datepicker();
+		    } );
+	</script>
+	<!-- fin scrip para la fecha -->

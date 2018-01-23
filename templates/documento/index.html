@@ -1,0 +1,69 @@
+<!-- TOP-MENU inicio -->
+<div ng-include="'./templates/menu_inicio.html'"></div>
+<!-- CONTEXT-MENU  -->
+<div ng-include="'./templates/menu_lateral.html'"></div>
+<!-- CONTENIDO MODULO inicio -->
+<div class="col-md-8 col-sm-8">
+  <div class="row">
+    <div class="col-md-12">
+      <h2 class="text-primary">
+        <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+        {{ajustes.pagina.titulo}}
+      </h2>
+      <hr>
+    </div>
+  </div>
+  <div class="col-md-12">
+    <!-- BUSCAPJURIDICACTRL--> 
+    <div>
+      <div>
+       
+        <div class="row">
+            <div class="col-md-12">
+                <div class="well well-sm">
+                    <strong class="pull-left lead">Herramientas: &nbsp;</strong>
+                    <form class="form-inline pull-left">
+                        <input type="text" class="form-control" placeholder="Filtrar por ..." ng-model="searchText">
+                    </form>
+                    <div class="clearfix"></div>
+                    <!--<button class="btn btn-primary"><span class="glyphicon glyphicon-tasks"></span> Exportar lista en XLS</button>-->
+                </div>
+            </div>
+        </div>
+        <div class="panel">
+          <div class="panel-body ">
+            <div ng-show="loading" class="text-center"><br><img ng-src="./images/image.gif" class="loader-img"></div>
+            <div class="table-responsive">
+                <table class="table table-bordered  table-hover">
+                    <thead>
+                          <th class="text-primary">Documento</th>
+                          <th class="text-primary">Importancia para trámites individuales</th>
+                          <th class="text-primary">Importancia para trémites empresas</th>
+                          <th class="text-primary">Editar</th>
+                    </thead>
+                    <tbody ng-repeat="documento in documentos">
+                    <tr>
+                    <td>{{documento.doc_nombre}}</td>
+                    <td>{{documento.doc_importancia}}</td>
+                    <td>{{documento.doc_importancia_e}}</td>
+                    <td >
+                        <a class="btn btn-primary" title="Editar">
+                            <span class="glyphicon glyphicon-pencil"></span>
+                        </a>
+                    </td>                  
+                    </tr>
+                    </tbody>
+                </table>
+              </div>
+          </div>
+        </div>
+
+      </div>
+    </div> <!-- /BUSCAPJURIDICACTRL-->
+     <!-- fin ng-show -->
+      <!-- fin datos del funcionario -->
+    </div>  
+  </div>
+</div>
+
+

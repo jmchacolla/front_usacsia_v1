@@ -1,0 +1,30 @@
+<div class="well well-sm">
+  <div class="panel">
+      <h4 class="text-center text-primary">I. DATOS GENERALES</h4>
+      <hr class="bg-red">
+      <br>
+      <div class="row">
+          <div class="col-md-12">
+                  <div class="col-md-8">
+                    <label for="rs" class="control-label">Razón Social: <strong class="fg_red">*</strong></label>
+                    <input class="form-control" name="rs" type="text" placeholder="Razón Social" ng-model="pjur.pjur_razon_social" ng-model-options="{ updateOn: 'blur' }" required ng-pattern="patternCadena" autofocus>
+                    <!-- <span class="messages" ng-show="pjurForm.rs.$touched">
+                      <span ng-show="pjurForm.rs.$error.required">El campo es obligatorio.</span>
+                      <span ng-show="pjurForm.rs.$error.pattern">No se admiten símbolos especiales o números.</span>
+                    </span> -->
+                  </div>
+                  <div class="col-md-4">
+                    <label for="nit" class="control-label">NIT: <strong class="fg_red">*</strong></label>
+                    <input class="form-control" name="nit" type="text" placeholder="NIT" ng-model="pjur.pjur_nit" ng-model-options="{ updateOn: 'blur' }" required ng-pattern="patternCadena">
+                    <!-- <span class="messages" ng-show="pjurForm.$submitted || pjurForm.nit.$touched">
+                      <span ng-show="pjurForm.nit.$error.required">El campo es obligatorio.</span>
+                      <span ng-show="pjurForm.nit.$error.pattern">No se admiten símbolos especiales o números.</span>
+                    </span> -->
+                  </div>
+          </div>  
+      </div>
+      <br/>
+      <button class="btn btn-success" ng-click="save_pjuridica()"><span class="glyphicon glyphicon-save"></span> GUARDAR</button>
+  </div>     
+</div>
+

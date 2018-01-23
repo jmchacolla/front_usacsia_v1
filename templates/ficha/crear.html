@@ -1,0 +1,90 @@
+<!-- TOP-MENU inicio -->
+<div ng-include="'./templates/menu_inicio.html'"></div>
+<!-- CONTEXT-MENU  -->
+<div ng-include="'./templates/menu_lateral.html'"></div>
+<!-- CONTENIDO MODULO inicio -->
+<div class="col-md-8 col-sm-8">
+  <div class="row">
+    <div class="col-md-12">
+      <h2 class="text-primary">
+        <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+        {{ajustes.pagina.titulo}}
+      </h2>
+      <hr>
+    </div>
+  </div>
+  <div class="col-md-12">
+    
+      <div ng-controller="apiAppCtrl_persona_ficha">
+        <p>
+          <h4 class="text-primary">Instrucciones</h4>
+          Para la asignacion del n&uacute;mero de ficha:</b>
+          <ul>
+            <li>Debe ingresar el n&uacute;mero de carnet del usuario en el respectivo buscador.</li>
+            <li>Luego pulse en <b>Buscar</b></li>
+          </ul>
+        </p>
+        <!-- Inicio Controller apiAppCtrl -->
+       
+         <div class="well well-sm">
+           <div class="row">
+            <form name="busqForm" novalidate>
+             <div class="col-md-6 col-md-offset-2">
+                <input name="perci" ng-disabled="num_ficha_traido_del_crear!=0" class="form-control input-lg" ng-model="per_ci" type="text" placeholder="Escriba el Nro. de C.I." required autofocus>
+             </div>
+             <div class="col-md-4">
+             <button ng-disabled="busqForm.$invalid && num_ficha_traido_del_crear!=0" class="btn btn-primary btn-lg" ng-click="buscaPersona()"><span class="glyphicon glyphicon-search"></span><strong> BUSCAR</strong></button>
+             </div>
+            </form>
+           </div>  
+         </div>
+          &nbsp;&nbsp;
+         <div><center><h3>RESULTADOS<span class="text-primary">  {{ tamanio }} </span></h3></center></div>
+         <div ng-show="ver">
+            <div class="lead text-center">
+              <hr>
+            </div>
+            <div class="well well-sm">
+                <div class="panel">
+                    <div class="panel-body">
+                      <div class="row">
+                        <div class="col-md-8">
+                          <div class="row">
+                              <div class="col-md-12 col-sm-12">
+                                 <label class="control-label text-primary">Nombre:</label>
+                                 <h2 class="h4">{{" "+persona_tramite.per_nombres+" "+persona_tramite.per_apellido_primero+" "+persona_tramite.per_apellido_segundo}}</h2>
+                              </div>                     
+                          </div>
+                          <div class="row">
+                              <div class="col-md-12 col-sm-12">
+                                 <label class="text-center text-primary">CI:</label><h4>{{" "+persona_tramite.per_ci+" "+persona_tramite.per_ci_expedido}}</h4>
+                              </div>                      
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <label class="control-label text-primary">Número de Ficha:</label>
+                          <div class="well well-sm">
+                            <center>
+                              <h1 ng-if="num_ficha_traido_del_crear!=0" class="h1">{{num_con_traido_del_crear+"-"+ num_ficha_traido_del_crear}}</h1>
+                              <h1 ng-if="num_ficha_traido_del_crear==0">{{"--"}}</h1>
+                            </center>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <center>
+                    <button ng-if="num_ficha_traido_del_crear==0" type="submit" class="btn btn-success"  ng-click="savef(persona_tramite.pt_id)"><span class="glyphicon glyphicon-ok"></span> ASIGNAR NÚMERO DE FICHA</button>
+                    <button ng-if="num_ficha_traido_del_crear!=0" type="submit" class="btn btn-danger" ng-click="recarga()"><span class="glyphicon glyphicon-ok"></span>VOLVER A BUSCAR</button>
+                  </center>
+                </div>
+            </div>
+          </div> <!-- div del message -->
+         <!--  <div class="row panel-group tabla-cuerpo">  -->
+      </div>
+     <!-- fin ng-show -->
+      <!-- fin datos del funcionario -->
+    </div>  
+  </div>
+</div>
+
+

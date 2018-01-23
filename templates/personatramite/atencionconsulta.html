@@ -1,0 +1,135 @@
+<div ng-include="'./templates/menu_inicio.html'"></div>
+
+<!-- CONTEXT-MENU  -->
+  <div ng-include="'./templates/menu_lateral.html'">
+  </div>
+<!-- CONTENIDO MODULO inicio -->
+  <div class="col-md-8 col-sm-8">
+    <div class="row">
+      <div class="col-md-12">
+        <h2 class="text-primary">
+          <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+          {{ajustes.pagina.titulo}}
+        </h2>
+        <hr>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+      <div class="well well-sm">
+        <strong class="pull-left lead">Herramientas: &nbsp;</strong>
+        <form class="form-inline pull-left">
+          <input type="text" class="form-control" placeholder="Filtrar por ..." ng-model="searchText">
+        </form>
+        &nbsp;&nbsp;
+        <!--
+        <button class="btn btn-primary"><span class="glyphicon glyphicon-tasks"></span> Exportar lista en XLS</button>
+        <button class="btn btn-default"><span class="glyphicon glyphicon-save-file"></span> Exportar lista en PDF</button><br><br>
+        </div>--> 
+        <div class="clearfix"></div>
+      </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 ">
+      <!-- AQUI VAN LAS TABLAS O FORMULARIOS incrustados -->
+      <!-- INICIO -->
+
+      <!-- para filtrar por un rango de fechas -->
+      <!-- <div class="row">
+        <div class="col-md-2">
+          <label class="control-label">Seleccione red: </label>
+        </div>
+        <div class="col-md-4">
+          <select class="form-control" ng-model="vm.aux" ng-options="red.red_id as red.red_nombre for red in reds" ng-change="vm.buscaRed()">
+          </select>
+        </div>
+      </div> -->
+
+      <div class="text-center" ng-show="loading"><br><img ng-src="./images/image.gif" class="loader-img"></div>
+      <div ng-show="!loading && !msg">No se encontraron resultados</div>
+      
+              <div class="table-responsive">
+                
+                <table class="table table-bordered table-striped table-hover" ng-show="!loading && msg">
+                  <thead >
+                    <th class="text-primary">
+                      <a href="" ng-click="sortType = 'per_ci'; sortReverse = !sortReverse">Nro. Ficha
+                      <span ng-show="sortType == 'per_ci' && !sortReverse" class="glyphicon glyphicon-sort-by-order"></span>
+                      <span ng-show="sortType == 'per_ci' && sortReverse" class="glyphicon glyphicon-sort-by-order-alt"></span></a>
+                    </th>
+                    <th class="text-primary">
+                      <a href="" ng-click="sortType = 'per_apellido_primero'; sortReverse = !sortReverse">Apellidos 
+                      <span ng-show="sortType == 'per_apellido_primero' && !sortReverse" class="glyphicon glyphicon-sort-by-alphabet"></span>
+                      <span ng-show="sortType == 'per_apellido_primero' && sortReverse" class="glyphicon glyphicon-sort-by-alphabet-alt"></span></a>
+                    </th>
+                    <th class="text-primary">
+                      <a href="" ng-click="sortType = 'per_nombres'; sortReverse = !sortReverse">Nombres 
+                      <span ng-show="sortType == 'per_nombres' && !sortReverse" class="glyphicon glyphicon-sort-by-alphabet"></span>
+                      <span ng-show="sortType == 'per_nombres' && sortReverse" class="glyphicon glyphicon-sort-by-alphabet-alt"></span></a>
+                    </th>
+                    <!-- <th >tramite</th> -->
+                    <th class="text-primary">
+                      <a href="" ng-click="sortType = 'fic_edad'; sortReverse = !sortReverse">Edad 
+                      <span ng-show="sortType == 'fic_edad' && !sortReverse" class="glyphicon glyphicon-sort-by-alphabet"></span>
+                      <span ng-show="sortType == 'fic_edad' && sortReverse" class="glyphicon glyphicon-sort-by-alphabet-alt"></span></a>
+                    </th>
+                    <th class="text-primary text-center">Genero</th>
+                    <th class="text-primary text-center">Ocupación</th>
+                    <th class="text-primary text-center">Tipo</th>
+                    <th class="text-primary text-center">Estado</th>
+                  </thead>
+        <!-- |  -->
+                  <tbody ng-repeat="ficha in fichas |orderBy:sortType:sortReverse | filter:searchText ">
+                    <tr>
+                      <td class="text-center">{{ficha.fic_numero}}</td>
+                      <td>{{ficha.per_apellido_primero + " " + ficha.per_apellido_segundo}}</td>
+                      <td>{{ficha.per_nombres}}</td>
+                      <td>{{ficha.per_edad}}</td>
+                      <td>{{ficha.per_genero}}</td>
+                      <td>{{ficha.per_ocupacion}}</td>
+                      <td>{{ficha.fic_tipo}}</td>
+                      <td class="text-center">
+                        <button class="btn btn-danger" data-toggle="modal" data-target="#miCuadroModal1" ng-click="get_per_id(ficha.pt_id, ficha.per_apellido_primero, ficha.per_apellido_segundo, ficha.per_nombres, ficha.fic_id)" title="Atender"><span class="glyphicon glyphicon-pencil"></span>Atender</button> <!--archivar -->
+                        <div id="miCuadroModal1" class="modal fade" role="dialog" tabindex="-1">
+
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-header bg-red">
+                                <button type="button" class="close" data-dismiss="modal">×</button>
+                                <h4 class="modal-title fg-white">ATENCIÓN AL PACIENTE</h4>
+                              </div>
+                              <div class="modal-body lead text-center">
+                                Se hará la atención del paciente:
+                                <br>
+                                <div class="well well-sm">
+                                  <strong>{{nombre_completo | uppercase}}</strong>
+                                </div>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">
+                                  <span class="glyphicon glyphicon-remove"></span>NO
+                                </button>
+                                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="atender(ficha.fic_id, ficha.pm_id)">
+                                  <span class="glyphicon glyphicon-ok"></span>SI
+                                </button>
+                              </div>
+                            </div>
+
+
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+      <!-- FIN -->
+      <!-- AQUI VAN LOAS TABLAS O FORMULARIOS incrustados -->
+      
+      </div>
+    </div>
+  </div>
+
+<!-- CONTENIDO MODULO fin

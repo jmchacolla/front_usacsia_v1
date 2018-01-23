@@ -1,0 +1,77 @@
+<!-- TOP-MENU inicio -->
+<div ng-include="'./templates/menu_inicio.html'"></div>
+<!-- CONTEXT-MENU -->
+<div ng-include="'./templates/menu_lateral.html'"></div>
+<!-- CONTENIDO MODULO inicio -->
+<div class="col-md-8 col-sm-8">
+  <div class="row">
+    <div class="col-md-12">
+      <h2 class="text-primary">
+        <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+        {{ajustes.pagina.titulo}}
+      </h2>
+      <hr >
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="well well-sm" style="background-color:#fff;">
+
+        <div class="row">
+            <div class="col-md-4 col-sm-6">
+              <label class="text-primary">Nombre:</label><br>
+              {{persona.per_nombres}}
+            </div>
+            <div class="col-md-4 col-sm-6">
+              <label class="text-primary">Apellido paterno:</label><br>
+              {{persona.per_apellido_primero}}
+            </div>
+            <div class="col-md-4 col-sm-6">
+              <label class="text-primary">Apellido materno:</label><br>
+              {{persona.per_apellido_segundo}}
+            </div>
+            <div class="col-md-4 col-sm-6">
+              <label class="text-primary">CI:</label><br>
+              {{persona.per_ci + " "}} {{persona.per_ci_expedido | uppercase}}
+            </div>
+            <div class="col-md-4 col-sm-6">
+              <label class="text-primary">Fecha de Nacimiento:</label><br>
+              {{persona.per_fecha_nacimiento}}
+            </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 ">
+            <!-- AQUI VAN LAS TABLAS O FORMULARIOS incrustados -->
+            <!-- INICIO -->
+            <div class="text-center" ng-show="loading"><br><img ng-src="./images/image.gif" class="loader-img"></div>
+            <!-- <div ng-show="!loading && !msg">No se encontraron resultados</div> -->
+            <div class="table-responsive">
+                <table class="table table-hovertable table-bordered table-striped table-hover"  id="tablaES">
+                     <thead>
+                        <th class="text-primary text-center">Fecha</th>
+                        <th class="text-primary text-center">Diagnóstico</th>
+                        <th class="text-primary text-center">Ver detalle</th> 
+                    </thead>
+                    <tbody ng-repeat="prueba in pruebas | orderBy:sortType:sortReverse">
+                      <tr>
+                        <td>{{prueba.pm_fecha | uppercase}}</td>
+                        <td>{{prueba.pm_diagnostico}}</td>
+                        <td class="text-center">
+                            <a class="btn btn-success" href="#/prueba-medica/ver/{{prueba.pm_id}}">
+                            <span class="glyphicon glyphicon-file"></span></a>
+                        </td>
+                      </tr>
+                    </tbody>
+                </table>
+            </div>
+
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+ 
+</div>

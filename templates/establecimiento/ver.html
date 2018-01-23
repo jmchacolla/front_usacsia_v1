@@ -1,0 +1,425 @@
+	<!-- TOP-MENU inicio -->
+	<div ng-include="'./templates/menu_inicio.html'"></div>
+
+	<!-- CONTEXT-MENU  -->
+	<div ng-include="'./templates/menu_lateral.html'">
+	</div>
+	<!-- CONTENIDO MODULO inicio -->
+	<div class="col-md-8 col-sm-8">
+		<div class="row">
+			<div class="col-md-12" >
+				<h2 class="text-primary">
+					<span class="glyphicon glyphicon-th-large" aria-hidden="true"></span>
+					Establecimiento : <strong>{{establecimiento.establecimientos.es_nombre}}</strong>
+				</h2>
+				<hr class="bg-green">
+			</div>
+		</div>
+		<!-- Cabecera -->
+	    <div class="row">
+		    <div class="col-md-12">
+		    <!-- FIN -->
+		    	<!-- <tabs> -->
+					<!-- ..............DATOS GENERALES................. -->
+				<!-- 	<pane title="DATOS GENERALES"> -->
+		                <div class="panel">
+							<br>
+							<h4 class="text-center text-primary">I. DATOS GENERALES</h4>
+							<hr class="bg-green">
+							<div class="panel-body">
+								<div class="form-group">
+									<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+								        <label class="control-label">Vista principal del establecimiento:</label>
+							        	<div class="">
+							            	<img height="100px" ng-src="./img-est/{{establecimiento.imagenes.ie_nombre}}" alt="{{establecimiento.establecimientos.es_nombre}}" class="img-thumbnail texto">
+							        	</div>
+							        </div>
+							        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+								        <label class="control-label">Nombre del establecimiento:</label>
+							        	<div class="">
+							            	<p >{{establecimiento.usa_nombre}}</p>
+							        	</div>
+							        </div>
+							        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+								        <label class="control-label">Código:</label>
+							        	<div class="">
+							            	<p >{{establecimiento.usa_codigo}}</p>
+							        	</div>
+							        </div>
+							       <!--  <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+								        <label class="control-label">NIT:</label>
+							        	<div class="">
+							            	<p >{{establecimiento.establecimientos.es_nit}}</p>
+							        	</div>
+							        </div> 
+							        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+								        <label class="control-label">Resolución Ministerial:</label>
+							        	<div class="">
+							            	<p >{{establecimiento.establecimientos.es_numero_rm}}</p>
+							        	</div>
+							        </div>
+							        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+								        <label class="control-label">Institución de dependencia:</label>
+							        	<div class="">
+							            	<p >{{establecimiento.institucion.ins_nombre}}</p>
+							        	</div>
+							        </div>
+							        <div class="col-lg-3 col-md-6 col-sm-6 col-xs-6">
+								        <label class="control-label">Número Telefónico:</label>
+							        	<div class="">
+							            	<p ng-if="establecimiento.telefonos[0].te_numero !=null" >{{establecimiento.telefonos[0].te_numero}}</p>
+							            	<p ng-if="establecimiento.telefonos[0].te_numero ==null" >---</p>
+							        	</div>
+							        </div>-->
+							        <div class="col-lg-3 col-md-6 col-sm-6 col-xs-6">
+								        <label class="control-label">Número Fax:</label>
+							        	<div class="">
+							            	<p ng-if="establecimiento.usa_fax !=null" >{{establecimiento.usa_fax}}</p>
+							            	<p ng-if="establecimiento.usa_fax ==null" >---</p>
+							        	</div>
+							        </div>
+							        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+								        <label class="control-label">Correo electrónico:</label>
+							        	<div class="">
+							        	    <p ng-if="establecimiento.usa_correo_electronico !=''">{{establecimiento.usa_correo_electronico}}</p>
+							        	    <p ng-if="establecimiento.usa_correo_electronico ==''">---</p>
+							        	</div>
+							        </div>
+							        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+								        <label class="control-label">Página institucional:</label>
+							        	<div class="">
+							            	<p ng-if="establecimiento.usa_direccion_web !=''">{{establecimiento.usa_direccion_web}}</p>
+							            	<p ng-if="establecimiento.usa_direccion_web ==''">---</p>
+							        	</div>
+							        </div>
+							      <!--   <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+								        <label class="control-label">Resolución Ministerial:</label>
+							        	<div class="">
+							            	<p >{{establecimiento.establecimientos.es_numero_rm}}</p>
+							        	</div>
+							        </div> 
+							        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+								        <label class="control-label">Horas:</label>
+							        	<div class="">
+							            	<p >{{establecimiento.establecimientos.es_horas}}</p>
+							        	</div>
+							        </div>-->
+							        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+								        <label class="control-label">Horario:</label>
+							        	<div class="">
+							        	    <p >{{establecimiento.usa_inicio_atencion  | date: 'H:mm'}} - {{establecimiento.usa_final_atencion | date: 'H:mm'}}</p>
+							        	</div>
+							        </div>
+							        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+								        <label class="control-label">Fecha de creación:</label>
+							        	<div class="">
+							            	<p >{{establecimiento.usa_fecha_creacion}}</p>
+							        	</div>
+							        </div>
+							        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+								        <label class="control-label">Inicio de actividad:</label>
+							        	<div class="">
+							        	    <p >{{establecimiento.usa_fecha_inicio_actividad}}</p>
+							        	</div>
+							        </div>
+							       <!--  <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+								        <label class="control-label">Red:</label>
+							        	<div class="">
+							            	<p >{{establecimiento.reds.red_nombre}}</p>
+							        	</div>
+							        </div> 
+							        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+								        <label class="control-label">Tipo:</label>
+							        	<div class="">
+							            	<p >{{establecimiento.tipos.tip_nombre}}</p>
+							        	</div>
+							        </div>
+							        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+								        <label class="control-label">Nivel:</label>
+							        	<div class="">
+							            	<p >{{establecimiento.establecimientos.es_nivel}}</p>
+							        	</div>
+							        </div>-->
+							    </div>
+							</div>
+						</div>
+		           <!--  </pane> -->
+					<!-- ..............DIRECCION................. -->
+		          <!--   <pane title="DIRECCIÓN"> -->
+		            	<div class="panel">
+							<br>
+							<h4 class="text-center text-primary">II. DIRECCION</h4>
+							<hr class="bg-green">
+							<div class="panel-body">
+								<div class="form-group">
+							        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+								        <label class="control-label">Municipio:</label>
+							        	<div class="">
+							            	<p>{{establecimiento.usa_municipio}}</p>
+							        	</div>
+							        </div>
+							        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+								        <label class="control-label">Zona/Localidad/Comunidad:</label>
+							        	<div class="">
+							        	    <p>{{establecimiento.usa_zona_localidad_comuni}}</p>
+							        	</div>
+							        </div>
+							        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+								        <label class="control-label">Av./Calle:</label>
+							        	<div class="">
+							            	<p>{{establecimiento.usa_avenida_calle}}</p>
+							        	</div>
+							        </div>
+							        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+								        <label class="control-label">Número:</label>
+							        	<div class="">
+							            	<p>{{establecimiento.usa_numero}}</p>
+							        	</div>
+							        </div>
+							        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+								        <label class="control-label">Latitud:</label>
+							        	<div class="">
+							              <p ng-if="establecimiento.usa_latitud !=null">{{establecimiento.usa_latitud}}</p>
+							              <p ng-if="establecimiento.usa_latitud ==null">---</p>
+							        	</div>
+							        </div>
+							        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+								        <label class="control-label">Longitud:</label>
+							        	<div class="">
+							            <p ng-if="establecimiento.usa_longitud !=null">{{establecimiento.usa_longitud}}</p>
+							            <p ng-if="establecimiento.usa_longitud ==null">---</p>
+							        	</div>
+							        </div>
+							        <!--
+							        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+								        <label class="control-label">Altitud:</label>
+								        <div class="">
+								            <p ng-if="establecimiento.establecimientos.es_altitud !=null">{{establecimiento.establecimientos.es_altitud}}</p>
+								            <p ng-if="establecimiento.establecimientos.es_altitud ==null">---</p>
+								        </div>
+									</div>-->
+								</div>
+							</div>
+						</div>
+		      <!--       </pane> -->
+	 				<!-- ..............SERVICIOS................. -->
+		          <!--   <pane title="SERVICIOS">
+		            	<div class="panel">
+							<br>
+							<h4 class="text-center text-primary">III. SERVICIOS</h4>
+							<hr class="bg-green">
+							<div class="panel-body">
+								<div class="row">
+									<div class="col-md-12">
+										<div class="well well-sm">
+											<strong class="pull-left lead">Herramientas: &nbsp;</strong>
+											<form class="form-inline pull-left">
+												<input type="text" class="form-control" placeholder="Filtrar por ..." ng-model="se_nombre">
+											</form>
+											&nbsp;&nbsp;
+											<!--<button class="btn btn-primary"><span class="glyphicon glyphicon-tasks"></span> Exportar lista en XLS</button>-->
+										<!-- 	<button class="btn btn-default" onclick="generateSER_AE()"><span class="glyphicon glyphicon-save-file"></span> Exportar lista en PDF</button>
+											<div class="clearfix"></div>
+										</div>
+									</div>
+								</div>
+								<div class="form-group " ng-controller="EstablecimientoPrestaCtrl">
+							        <div ng-show="loading" class="text-center"><br><img ng-src="./images/image.gif"  class="loader-img"></div>
+      	            				<div ng-show="!loading && !msg">No se encontraron resultados</div>
+      	            				<div class="table-responsive">
+								        <table class="table table-bordered table-striped table-hover" ng-show="!loading && msg" id="tableSER">
+											<thead >
+												<th >
+													<a href="" ng-click="sortType = 'ser_nombre'; sortReverse = !sortReverse">
+							                    	Nombre Servicio
+							                    	<span ng-show="sortType == 'ser_nombre' && !sortReverse" class="glyphicon glyphicon-sort-by-alphabet"></span>
+							                        <span ng-show="sortType == 'ser_nombre' && sortReverse" class="glyphicon glyphicon-sort-by-alphabet-alt"></span>
+							                        </a>
+												</th>
+												<th >Tipo Servicio</th>
+												<th >Reserva</th>
+											</thead>
+											<tbody ng-repeat="presta in servicio_especialidad | orderBy:sortType:sortReverse | filter:se_nombre">
+											  <tr>
+												<td>{{presta.ser_nombre}}</td>
+												<td>{{presta.ser_tipo}}</td>
+												<td>
+													<div class="formulario">
+													<div class="checkbox">
+														<input class="checkbox" disabled type="checkbox" ng-model="presta.se_necesita_ref">
+														<label ng-if="presta.se_necesita_ref">SI</label>
+														<label ng-if="!presta.se_necesita_ref">NO</label>
+													</div>
+													</div>
+												</td>
+											  </tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+		            </pane>  -->
+					<!-- ...............CONSULTORIOS.............. -->
+		          <!--   <pane title="CONSULTORIOS">
+						<div class="panel">
+							<br>
+							<h4 class="text-center text-primary">IV. CONSULTORIOS</h4>
+							<hr class="bg-green">
+							<div class="panel-body">
+								<div class="row">
+									<div class="col-md-12">
+										<div class="well well-sm">
+											<strong class="pull-left lead">Herramientas: &nbsp;</strong>
+											<form class="form-inline pull-left">
+												<input type="text" class="form-control" placeholder="Filtrar por ..." ng-model="con_nombre">
+											</form>
+											&nbsp;&nbsp;
+											<button class="btn btn-default" onclick="generateCON()"><span class="glyphicon glyphicon-save-file"></span> Exportar lista en PDF</button>
+											<div class="clearfix"></div>
+										</div>
+									</div>
+								</div>
+								<div class="form-group " ng-controller="ListaConsultorioCtrl">
+									<div ng-show="loading" class="text-center"><br><img ng-src="./images/image.gif"  class="loader-img"></div>
+      								<div ng-show="!loading && !msg">No se encontraron resultados</div>
+      								<div class="table-responsive">
+								        <table class="table table-bordered table-striped table-hover" ng-show="!loading && msg" id="tableCON">
+						                  <thead >
+						                    <th >Nro.</th>
+						                    <th >
+						                    	<a href="" ng-click="sortType = 'con_nombre'; sortReverse = !sortReverse">Nombre</a>
+	            								<span ng-show="sortType == 'con_nombre' && !sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+	            								<span ng-show="sortType == 'con_nombre' && sortReverse" class="glyphicon glyphicon-chevron-down"></span>
+						                   	</th>
+						                  </thead>
+						                  <tbody ng-repeat="consultorio in consultorios |  orderBy:sortType:sortReverse | filter:searchText" >
+						                    <tr>
+												<td>{{$index + 1}}</td>
+												<td>{{consultorio.con_nombre}}</td>
+										  	</tr>
+						                  </tbody>
+						                </table>
+						            </div>
+								</div>
+							</div>
+						</div>
+		            </pane> -->
+					<!-- ...............FUNCIONARIOS.............. ............................-->
+		           <!--  <pane title="FUNCIONARIOS">
+						<div class="panel">
+							<br>
+							<h4 class="text-center text-primary">V. FUNCIONARIOS</h4>
+							<hr class="bg-green">
+							<div class="panel-body"> -->
+								<!--  ...............herramientas................ -->
+								<!-- <div class="row">
+									<div class="col-md-12">
+									<div class="well well-sm">
+										<strong class="pull-left lead">Herramientas: &nbsp;</strong>
+										<div class="form-inline pull-left">
+											<input type="text" class="form-control" placeholder="Filtrar por ..." ng-model="per_ci">
+										</div>
+										&nbsp;&nbsp;
+										<button class="btn btn-default" onclick="generateFUN_AE()"><span class="glyphicon glyphicon-save-file"></span> Exportar lista en PDF</button>
+										<button class="btn btn-default" ng-click="cuenta_funcionarios()"><span class="glyphicon glyphicon-user"></span> Asignar administrador</button>
+									</div>
+									</div>
+								</div> -->
+								<!--  .............../herramientas................ -->
+								<!--  ...............contenido FuncionarioEstCtrl................ -->
+								<!-- <div class="form-group " ng-controller="FuncionarioCtrl">
+									<div ng-show="loading" class="text-center"><br><img ng-src="./images/image.gif"  class="loader-img"></div>
+      								<div ng-show="!loading && !msg">No se encontraron resultados</div>
+								    <div class="table-responsive">
+								        <table  class="table table-bordered table-striped table-hover" ng-show="!loading && msg" id="table">
+						                  <thead >
+						                    <th >
+						                    	<a href="" ng-click="sortType = 'per_ci'; sortReverse = !sortReverse">
+						                    	C.I.
+						                    	<span ng-show="sortType == 'per_ci' && !sortReverse" class="glyphicon glyphicon-sort-by-order"></span>
+						                        <span ng-show="sortType == 'per_ci' && sortReverse" class="glyphicon glyphicon-sort-by-order-alt"></span>
+						                        </a>
+						                    </th>
+						                    <th >
+												<a href="" ng-click="sortType = 'per_apellido_primero'; sortReverse = !sortReverse">
+						                    	Apellidos
+						                    	<span ng-show="sortType == 'per_apellido_primero' && !sortReverse" class="glyphicon glyphicon-sort-by-alphabet"></span>
+						                        <span ng-show="sortType == 'per_apellido_primero' && sortReverse" class="glyphicon glyphicon-sort-by-alphabet-alt"></span>
+						                        </a>
+						                    </th>
+						                    <th >
+						                    	<a href="" ng-click="sortType = 'per_nombres'; sortReverse = !sortReverse">
+						                    	Nombres
+						                    	<span ng-show="sortType == 'per_nombres' && !sortReverse" class="glyphicon glyphicon-sort-by-alphabet"></span>
+						                        <span ng-show="sortType == 'per_nombres' && sortReverse" class="glyphicon glyphicon-sort-by-alphabet-alt"></span>
+						                        </a>
+						                    </th>
+						                    <th >
+												<a href="" ng-click="sortType = 'fe_cargo'; sortReverse = !sortReverse">
+						                    	Cargo
+						                    	<span ng-show="sortType == 'fe_cargo' && !sortReverse" class="glyphicon glyphicon-sort-by-alphabet"></span>
+						                        <span ng-show="sortType == 'fe_cargo' && sortReverse" class="glyphicon glyphicon-sort-by-alphabet-alt"></span>
+						                        </a>
+						                    </th>
+						                    <th >Ver</th>
+						                  </thead>
+						                  <tbody>
+						                    <tr  ng-repeat="funcionario in funcionarios | orderBy:sortType:sortReverse | filter: per_ci">
+						                      <td>{{funcionario.per_ci}}</td>
+						                      <td>{{funcionario.per_apellido_primero + " " + funcionario.per_apellido_segundo}}</td>
+						                      <td>{{funcionario.per_nombres | uppercase}} </td>  
+						                      <td>{{funcionario.fe_cargo}}</td>
+						                      <td >
+						                       <a class="btn btn-success" href="#/funcionarios/ver/{{funcionario.fe_id}}"><span class="glyphicon glyphicon-file"></span></a>
+						                      </td>
+						                    </tr>
+						                  </tbody>
+						                </table>
+						            </div>
+								</div>
+							</div>
+						</div>
+		            </pane> -->
+		            <!--<pane title="HORARIO DE ATENCIÓN">
+						<div class="panel">
+							<div class="panel-body">
+								<div class="form-group" ng-controller="AtiendeCtrl">
+							        <table class="table table-bordered table-striped table-hover">
+					                  <thead >
+					                    <th>Nro.</th>
+					                    <th>Hora inicio</th>
+					                    <th>Hora fin</th>
+					                    <th>Cargo y Nombres</th>
+					                    <th>Consultorio</th>
+					                    <th>Especialidad</th>
+					                    <th ng-show="user.rol_id === 2">Operaciones</th>
+					                  </thead>
+					                  <tbody ng-repeat="atiende in atiendes | filter:searchText" >
+					                    <tr>
+										<td>{{$index + 1}}</td>
+										<td>{{atiende.ad_hora_inicio | date:'hh:mm:ss'}}</td>
+										<td>{{atiende.ad_hora_fin | date:'hh:mm:ss'}}</td>
+										<td>{{atiende.fun_cargo + " - "}} {{atiende.per_nombres}}</td>
+										<td>{{atiende.con_cod}}</td>
+										<td>{{atiende.se_nombre}}</td>
+										<td ng-show="user.rol_id === 2">
+											<a href="#/consultorio/{{consultorio.con_id}}"><button class="btn btn-xs glyphicon glyphicon-file btn-success "></button></a>
+											<a href="#/editcon/{{consultorio.con_id}}"><button class="btn btn-xs glyphicon glyphicon-pencil btn-primary"></button></a>
+											<button class="btn btn-xs glyphicon glyphicon-trash btn-danger"></button>
+										</td>
+									  </tr>
+					                   
+					                  </tbody>
+					                </table>
+								</div>
+							</div>
+						</div>
+		            </pane>-->
+
+		   <!--      </tabs> -->
+			<!-- AQUI VAN LOAS TABLAS O FORMULARIOS incrustados -->
+			</div>
+		</div>
+	</div>
+<!-- CONTENIDO MODULO fin -->

@@ -1,0 +1,135 @@
+<!-- TOP-MENU inicio -->
+<div ng-include="'./templates/menu_inicio.html'"></div>
+<!-- CONTEXT-MENU  -->
+<div ng-include="'./templates/menu_lateral.html'"></div>
+<!-- CONTENIDO MODULO inicio -->
+    <div class="col-md-8 col-sm-8">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="text-primary">
+                    <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+                   {{ajustes.pagina.titulo}} 
+                </h2>
+                <hr>
+            </div>
+        </div>
+        <!--HERRAMIENTAS PARA LA VISTA-->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="well well-sm">
+                    <form class="form-inline pull-left">
+                        <strong class="pull-left lead">Número de filas: &nbsp;</strong>
+                        <select class="form-control" ng-model="nro_paginas" name="numero" ng-change="numero_filas(nro_paginas)">
+                            <option ng-if="citas.total" value="{{citas.total}}">TODO</option>
+                            <option value="10">10</option>
+                            <option value="25">25</option>
+                            <option value="50">50</option>
+                        </select>
+                        <strong class="lead">&nbsp;&nbsp; Filtrar filas:  &nbsp;</strong>
+                        <input type="text" class="form-control" placeholder="Buscar en esta tabla" ng-model="texto">
+                    </form>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+            <!-- AQUI VAN LAS TABLAS O FORMULARIOS -->
+            <!-- INICIO -->
+            <div class="table-responsive">
+                <div class="text-center" ng-show="loading"><br><img ng-src="./images/image.gif" class="loader-img"></div>
+                <div ng-show="!loading && !msg && erroor">Usted no realizó ninguna reserva</div>
+                <div ng-show="!loading && !msg && !erroor" class="alert alert-danger" role="alert">Error inesperado, por favor vuelva a intentar :(</div>
+
+                <ul class="pager" ng-show="!loading && msg">
+                    <h3>
+                      <li class="previous"><a href="" ng-disabled="citas.prev_page_url" ng-click="paginar(citas.prev_page_url)">&larr; Anterior</a></li>
+                        <form class="form-inline pull-left">
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <select class="form-control" ng-model="citas.current_page" name="pagina" ng-options="fila for fila in filas" ng-change="cambia_pagina(citas.current_page, citas.per_page)"></select>
+                            <label class="btn btn-primary">
+                                <span class="badge"> <font size="4"> {{citas.current_page}}</font></span> <font size="4">de</font> <span class="badge"><font size="4">{{citas.last_page}}</font></span>
+                            </label>
+                        </form>
+                      <li class="next"><a href="" ng-disabled="citas.next_page_url==null" ng-click="paginar(citas.next_page_url)">Siguiente &rarr;</span></a></li>
+                    </h3>
+                </ul>
+                <table class="table table-hovertable table-bordered table-striped table-hover" ng-show="!loading && msg">
+                    <thead>
+                        <th ng-if="pac_id_fam!=null">Familiar</th>                   
+                        <th >
+                            <a href="" ng-click="sortType = 'cit_fecha_consulta'; sortReverse = !sortReverse">
+                            Fecha
+                            <span ng-show="sortType == 'cit_fecha_consulta' && !sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+                            <span ng-show="sortType == 'cit_fecha_consulta' && sortReverse" class="glyphicon glyphicon-chevron-down"></span>
+                            </a>
+                        </th>
+                        <th >Hora</th>
+                        <th >Nº ficha</th>
+                        <th >Consultorio</th>
+                        <th >Servicio</th>
+                        <th >Tipo</th>
+                        <th >Ver</th>                       
+                    </thead>
+                    <tbody ng-repeat="cita in citas.data | filter:texto | orderBy:sortType:sortReverse">
+                      <tr>
+                        <td ng-if="pac_id_fam!=null">{{cita.per_nombres + " " + cita.per_apellido_primero + " " + cita.per_apellido_segundo}}</td>
+                        <td>{{cita.cit_fecha_consulta}}</td>
+                        <td>{{cita.cit_hora_consulta | date:'H:mm'}}</td>
+                        <td>SSR-{{cita.cit_nro_ficha}}</td>
+                        <td>{{cita.con_nombre}}</td>
+                        <td>{{cita.ser_nombre}}</td>
+                        <td>{{cita.cit_tipo | uppercase}}</td>
+                        <td>
+                            <!-- BOTON PARA CUADROS MODALES -->
+                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#miCuadroModal1" ng-click="ver_cita(cita.cit_id, cita.con_nombre, cita.ser_nombre, cita.cit_fecha_consulta, cita.cit_hora_consulta, cita.cit_estado_confirmacion, cita.cit_tipo)" title="Ver reserva">
+                              <span class="glyphicon glyphicon-file"></span>
+                            </button>
+                            <!--CUADRO MODAL</div>-->
+                            <div id="miCuadroModal1" class="modal fade" role="dialog" tabindex="-1">
+                              <div class="modal-dialog">
+                                <div class="modal-content">
+                                  <div class="modal-header bg-green">
+                                    <button type="button" class="close" data-dismiss="modal">×</button>
+                                    <h4 class="modal-title fg-white">CITA M&Eacute;DICA</h4>
+                                  </div>
+                                  <div class="modal-body lead">
+                                    <div class="well well-sm">
+                                        <h1 class="text-center">Ficha Nº <strong>SSR-{{datos_cita.cit_nro_ficha}}</strong></h1>
+                                        <span class="text-primary">Establecimiento de Salud: </span> {{nombre_establecimiento}}<br>
+                                        <span class="text-primary">Servicio: </span> {{ser_nombre}}<br>
+                                        <span class="text-primary">Consultorio: </span> {{con_nombre}}<br>
+                                        <span class="text-primary">Fecha: </span> {{fecha}}<br>
+                                        <span class="text-primary">Hora: </span> {{hora | date:'H:mm'}}<br>
+                                    </div>
+                                    Recuerde que debe asistir <strong>media hora</strong> antes de su consulta, caso contrario perdera su cita.
+                                  </div>
+                                  <div class="modal-footer">
+                                  <!-- AGREGADO <div class="row"></div>-->
+                                      
+                                        <button ng-if="tipo == 'PROGRAMADA' && estado_confirmacion"  type="button" class="btn btn-success" disabled="">
+                                             CITA M&Eacute;DICA CONFIRMADA
+                                        </button>
+                                        <button ng-if="tipo == 'PROGRAMADA' && !estado_confirmacion " type="button" class="btn btn-success" data-dismiss="modal" ng-click="vercita(id_cita)">
+                                            <span class="glyphicon glyphicon-new-window"></span> Confirmar cita programada
+                                        </button>
+                                        <button type="button" class="btn btn-primary" data-dismiss="modal">
+                                            <span class="glyphicon glyphicon-remove"></span> Cerrar
+                                        </button>
+                                      
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <!--FIN CUADRO MODAL-->
+                        </td>
+                        
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- FIN -->
+            <!-- AQUI VAN LOAS TABLAS O FORMULARIOS incrustados -->
+            </div>
+        </div>
+    </div>

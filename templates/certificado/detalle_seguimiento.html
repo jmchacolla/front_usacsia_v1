@@ -1,0 +1,127 @@
+<!-- TOP-MENU inicio -->
+<div ng-include="'./templates/menu_inicio.html'"></div>
+<!-- CONTEXT-MENU  -->
+<div ng-include="'./templates/menu_lateral.html'"></div>
+<!-- CONTENIDO MODULO inicio -->
+<div class="col-md-8 col-sm-8">
+  <div class="row">
+    <div class="col-md-12">
+      <h2 class="text-primary">
+        <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+        {{ajustes.pagina.titulo}}
+      </h2>
+      <hr>
+    </div>
+  </div>
+  <div class="col-md-12">
+    <!-- BUSCAPJURIDICACTRL--> 
+    <div>
+      <div>
+        &nbsp;&nbsp;
+            <!-- PROPIETARIO EMPRESA-->
+            <div class="row">
+                <div class="col-md-12">
+                  <h3 class="text-center text-primary">
+                   I. Datos del establecimiento
+                  <hr class="bg-red">
+                  </h3>
+                </div>
+                <div class="col-md-12">
+                  <div ng-show="empresatramite.propietario.pjur_id">
+                    <div class="col-md-6 col-sm-6">
+                      <label class="text-primary">Propietario:</label>
+                      {{empresatramite.propietario.pjur_razon_social}}
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                      <label class="text-primary">C.I./NIT:</label>
+                      {{empresatramite.propietario.pjur_nit}}
+                    </div>
+                  </div>
+                  <div ng-show="empresatramite.propietario.per_id">
+                    <div class="col-md-6 col-sm-6">
+                      <label class="text-primary">Propietario:</label>
+                      {{propietario}} 
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                      <label class="text-primary">C.I./NIT:</label>
+                      {{documento}}
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="col-md-6 col-sm-6">
+                    <label class="text-primary">Razón Social del Establecimiento:</label>
+                    {{empresatramite.establecimiento_sol.ess_razon_social}}
+                  </div>
+                  <div class="col-md-6 col-sm-6">
+                    <label class="text-primary">Kardex:</label>
+                    {{empresatramite.empresa.emp_kardex}}
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="col-md-6 col-sm-6">
+                    <label for="tra" class="control-label text-primary">Trámite:</label>
+                     {{empresatramite.tramite.tra_nombre}}
+                  </div>
+                  <div class="col-md-6 col-sm-6">
+                    <label for="tra" class="control-label text-primary">Número de trámite:</label>
+                     {{empresatramite.empresa_tramite.et_numero_tramite}}
+                  </div>
+                </div>
+        <br>
+        <div class="col-md-12">
+        <h3 class="text-center text-primary">
+           II. Detalle del trámite por etapa
+          <hr class="bg-red">
+        </h3>
+        <!-- con botones -->
+        <div class="btn-group " style="" role="group" aria-label="...">
+            <button type="button" class="btn btn-default col-md-6 text-center" ng-repeat="tce in tramitecerestado"><label>{{tce.eta_nombre}}</label></button>
+        </div>
+
+
+          <div class="table-responsive">
+              <table class="table table-hovertable table-bordered table-striped table-hover"  >
+                <thead>
+                      <th class="text-primary">Etapa</th>
+                      <th class="text-primary">Estado</th>   
+                </thead>
+                  <tbody ng-repeat="tce in tramitecerestado | orderBy:sortType:sortReverse">
+                      <tr>
+                        <td>{{tce.eta_nombre}}</td>
+                        <td>{{tce.te_estado}}</td>
+                      </tr>
+                  </tbody>
+                </table>
+          </div>
+        
+        <!-- <div class="col-md-12"> -->
+          
+      <!--   </div> -->
+        
+        </div>
+        </div><!--  -->
+
+
+
+            <div><center><h3>RESULTADOS<span class="text-primary"> {{ resultadoemp }} </span></h3></center></div>
+            <!-- SI NO EXISTE LA EMPRESA -->
+            <div class="col-md-12">
+                <div ng-show="noexistemp" class="text-center" ng-controller="CrearPJuridicaCtrl">
+                    <!-- AQUI VAN LAS TABLAS O FORMULARIOS incrustados -->
+                    <!-- INICIO -->
+                    <label class="control-label">Los campos marcados con asterisco (<strong class="fg_red">*</strong>) son obligatorios</label>
+                    <form name="pjurForm" novalidate ng-include="'forms/pjuridica/crear.html'"></form>
+                    <!-- FIN -->
+                    <!-- AQUI VAN LOAS TABLAS O FORMULARIOS incrustados -->
+                </div>
+            </div>
+            <!-- /PROPIETARIO EMPRESA -->
+      </div>
+    </div> <!-- /BUSCAPJURIDICACTRL-->
+     <!-- fin ng-show -->
+      <!-- fin datos del funcionario -->
+  </div>  
+</div>
+
+

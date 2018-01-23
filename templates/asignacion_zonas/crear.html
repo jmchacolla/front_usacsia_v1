@@ -1,0 +1,93 @@
+<!-- CONTEXT-MENU  -->
+<div ng-include="'./templates/menu_inicio.html'"></div>
+<div ng-include="'./templates/menu_lateral.html'"></div>
+<!-- CONTENIDO MODULO inicio -->	
+<div class="col-md-8 col-sm-8">
+	<div class="row">
+		<div class="col-md-12">
+			<h2 class="text-primary">
+				<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
+				{{ajustes.pagina.titulo}}
+			</h2>
+			<hr class="bg-red">
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<!-- INICIO -->
+			<div class="well well-sm" style="background-color:#fff;">
+				<form name="userForm" novalidate>
+					<div class="row">
+						
+						 <div class="col-md-4" >
+				              <label class="control-label">1) Seleccione un Inspector: <strong class="fg_red">*</strong></label>
+				              	<select class="form-control" name="funcionario" ng-model="asignacion.fun_id"  ng-options="funcionario.fun_id as funcionario.per_nombres+' '+funcionario.per_apellido_primero+' '+funcionario.per_apellido_segundo for funcionario in funcionarios" required>
+		           				</select>
+				                <span class="messages" ng-show="addPersona.$submitted || addPersona.municipio.$touched">
+				                  <span ng-show="addPersona.municipio.$error.required">El campo es obligatorio.</span>
+				             </span>
+				          </div>
+				          <div class="col-md-4" >
+				              <label class="control-label">2) Seleccione un distrito: <strong class="fg_red">*</strong></label>
+				              	<select class="form-control" name="dist" ng-model="distrito.zon_macrodistrito"  ng-options="distrito.zon_macrodistrito for distrito in distritos" ng-change="ver_zonas(distrito.zon_macrodistrito)" required>
+		           				</select>
+				                <span class="messages" ng-show="addPersona.$submitted || addPersona.dist.$touched">
+				                  <span ng-show="addPersona.dist.$error.required">El campo es obligatorio.</span>
+				             </span>
+				          </div> 
+				          <div class="col-md-4">
+				            <label class="control-label">3) Seleccione una Zona: <strong class="fg_red">*</strong></label>
+				              <select ng-show="!zon" class="form-control " name="zona_comunidad" ng-model="asignacion.zon_id"  ng-options="zona.zon_id as zona.zon_nombre for zona in zonas" required>
+				              </select>
+				            
+				              <span  class="messages" ng-show="addPersona.$submitted || addPersona.zona_comunidad.$touched">
+				                  <span ng-show="addPersona.zona_comunidad.$error.required">El campo es obligatorio.</span>
+				                  <span ng-show="addPersona.zona_comunidad.$error.pattern">Formato introducido es incorrecta.</span>
+				              </span>
+				              <span class="messages" ng-show="addPersona.$submitted || addPersona.zona_comunidad1.$touched">
+				                  <span ng-show="addPersona.zona_comunidad1.$error.required">El campo es obligatorio.</span>
+				                  <span ng-show="addPersona.zona_comunidad1.$error.pattern">Formato introducido es incorrecta.</span>
+				              </span>
+				          </div>
+
+
+
+
+			      	</div>
+			      	<br>
+					
+			      	<div class="row">
+						<div class="col-md-4 col-md-offset-4 text-center">
+							<button  type="submit" class="btn btn-primary" ng-disabled="userForm.$invalid "  ng-click="submit($parent.asignacion); ver_horarios()"><span class="glyphicon glyphicon-chevron-right"></span> Continuar</button>
+						</div>	  
+					</div>
+
+				</form>
+			
+			<!-- FIN -->
+		</div>
+		<div class="col-md-12" ng-controller="ListaAsigCtrl">
+		<button class="btn btn-default" onclick="generateaszon()"><span class="glyphicon glyphicon-save-file"></span> Exportar lista en PDF</button>
+        		<div class="clearfix"></div>
+					<!-- INICIO -->
+					<h4 class="text-center text-primary"><strong>Inspectores Asignados</strong></h4>
+					<div class="text-center" ng-show="loading"><br><img ng-src="./images/image.gif" class="loader-img"></div>
+		        	<div ng-show="!loading && !msg">No se encontraron resultados</div>
+					<div class="table-responsive" >
+						<table class="table table-bordered table-striped table-hover" ng-show="!loading && msg" id="tableZon" >
+							<thead>
+								<th>Nº</th>
+								<th>Funcionario</th>
+								<th>Zona</th>
+							</thead>
+							<tbody ng-repeat="zona_inspeccion in zona_inspeccion | filter:texto">
+								<td>{{$index + 1}}</td>
+								<td>{{zona_inspeccion.per_nombres + " " + zona_inspeccion.per_apellido_primero + " " + zona_inspeccion.per_apellido_segundo}}</td>
+								<td>{{zona_inspeccion.zon_nombre}}</td>
+							</tbody>
+						</table>
+					</div>
+					
+		</div>
+	</div>
+</div>

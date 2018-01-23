@@ -1,0 +1,151 @@
+<!-- TOP-MENU inicio -->
+<div ng-include="'./templates/menu_inicio.html'"></div>
+<!-- CONTEXT-MENU  -->
+<div ng-include="'./templates/menu_lateral.html'"></div>
+  <!-- CONTENIDO MODULO inicio -->
+  <div class="col-md-8 col-sm-8">
+    <div class="row">
+      <div class="col-md-12">
+        <h2 class="text-primary">
+          <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+          {{ajustes.pagina.titulo}}{{numero}}
+        </h2>
+        <hr>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="well well-sm" style="background-color:#fff;">
+
+          <div class="row">
+            <div class="col-md-12">
+              <h3 class="text-center text-primary">I. INFORMACIÓN MÉDICA</h3>
+              <hr class="bg-red">
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-4 col-sm-4">
+              <label class="text-primary">Nombre completo:</label><br>
+              {{prueba_medica.paciente.per_nombres}}
+              {{prueba_medica.paciente.per_apellido_primero}}
+              {{prueba_medica.paciente.per_apellido_segundo}}
+            </div>
+            <div class="col-md-4 col-sm-4">
+              <label class="text-primary">C.I.: </label><br>
+              {{prueba_medica.paciente.per_ci}}&nbsp;&nbsp;{{prueba_medica.paciente.per_ci_expedido}}
+            </div>
+            <div class="col-md-4 col-sm-4">
+              <label class="text-primary">Fecha de nacimiento: </label><br>
+              {{prueba_medica.paciente.per_fecha_nacimiento}}
+            </div>
+            <div class="col-md-4 col-sm-4">
+              <label class="text-primary">Genero:</label><br>
+              {{prueba_medica.paciente.per_genero}}
+            </div>
+            <div class="col-md-4 col-sm-4">
+              <label class="text-primary">Ocupación:</label><br>
+              {{prueba_medica.paciente.per_ocupacion}}
+            </div>
+          </div>
+
+          <h3 class="text-center text-primary">II. MEDICO RESPONSABLE</h3>
+          <hr class="bg-red">
+          <div class="row">
+            <div class="col-md-4 col-sm-4">
+              <label class="text-primary">Nombre completo:</label><br>
+              {{prueba_medica.funcionario.per_nombres}}
+              {{prueba_medica.funcionario.per_apellido_primero}}
+              {{prueba_medica.funcionario.per_apellido_segundo}}
+            </div>
+            <div class="col-md-4 col-sm-4">
+              <label class="text-primary">C.I.: </label><br>
+              {{prueba_medica.funcionario.per_ci}}&nbsp;&nbsp;{{prueba_medica.funcionario.per_ci_expedido}}
+            </div>
+            <div class="col-md-4 col-sm-4">
+              <label class="text-primary">Ocupación:</label><br>
+              {{prueba_medica.funcionario.fun_cargo}}
+            </div>
+          </div>
+
+          <h3 class="text-center text-primary">III. DATOS DE PRUEBA CLÍNICA</h3>
+          <hr class="bg-red">
+          <div class="row">
+            <div class="col-md-12 col-sm-12 ">
+              <label class="text-primary">Diagnóstico:</label>
+              <div class="well">
+                {{prueba_medica.prueba_medica.pm_diagnostico}}
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-4">
+              <label class="text-primary">Fecha:</label>
+              {{prueba_medica.prueba_medica.pm_fecha}}
+            </div>
+            <div class="col-md-4 col-sm-4">
+              <label class="text-primary">F.C.(lpm):</label>
+              {{prueba_medica.prueba_medica.pm_fc}}
+            </div>
+            <div class="col-md-4 col-sm-4">
+              <label for="fc" class="text-primary">F.C.(lpm):</label>
+              <span>{{prueba_medica.prueba_medica.pm_fc}}</span>
+            </div>
+            <div class="col-md-4 col-sm-4">
+              <label for="fr" class="text-primary">F.R.(rpm): </label>
+              <span>{{prueba_medica.prueba_medica.pm_fr}}</span>
+            </div>
+            <div class="col-md-4 col-sm-4">
+              <label for="pa1" class="text-primary">P.A.S(mmHg): </label>
+              <span>{{prueba_medica.prueba_medica.pm_pa_sistolica}}</span>
+            </div>
+            <div class="col-md-4 col-sm-4">
+              <label for="pa" class="text-primary">P.A.D(mmHg): </label>
+              <span>{{prueba_medica.prueba_medica.pm_pa_diastolica}}</span>
+            </div>
+            <div class="col-md-4 col-sm-4">
+              <label for="temp" class="text-primary">TEMP(°C):</label>
+              <span>{{prueba_medica.prueba_medica.pm_temperatura}}</span>
+            </div>
+            <div class="col-md-4 col-sm-4">
+              <label for="peso" class="text-primary">PESO(kg):</label>
+              <span>{{prueba_medica.prueba_medica.pm_peso}}</span>
+            </div>
+            <div class="col-md-4 col-sm-4">
+              <label for="talla" class="text-primary">TALLA(m):</label>
+              <span>{{prueba_medica.prueba_medica.pm_talla}}</span>
+            </div>
+            <div class="col-md-4 col-sm-4">
+              <label for="imc" class="text-primary">IMC(kg/m<sup>2</sup>):</label>
+              <span>{{prueba_medica.prueba_medica.pm_imc}}</span>
+            </div>
+          </div>
+          <div class="table-responsive">
+            <table class="table table-hovertable table-bordered table-striped table-hover"  id="tablaES">
+                <thead>
+                    <th >Observasión</th>
+                    <th >Resultado</th> 
+                </thead>
+                <tbody ng-repeat="prueba in prueba_medica.pruebas | orderBy:sortType:sortReverse">
+                  <tr>
+                    <td>{{prueba.enfe_nombre}}</td>
+                    <td>
+                      <div ng-if="prueba.pre_resultado==true">
+                        <a class="btn btn-primary btn-xs">
+                          <span class="glyphicon glyphicon-plus">Positivo</span>
+                        </a>
+                      </div>
+                      <div ng-if="prueba.pre_resultado==false">
+                        <a class="btn btn-success btn-xs">
+                          <span class="glyphicon glyphicon-minus">Negativo</span>
+                        </a>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!-- CONTENIDO MODULO fin -->

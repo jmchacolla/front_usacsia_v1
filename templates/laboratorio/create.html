@@ -1,0 +1,151 @@
+ <!-- TOP-MENU inicio -->
+<div ng-include="'./templates/menu_inicio.html'"></div>
+<div ng-include="'./templates/menu_lateral.html'">
+</div>
+<form role="form" name="addLaboratorio" novalidate class="form-signin">
+	<!-- CONTEXT-MENU  ng-include="'forms/consultorio/consultorio.html'" -->
+
+ 
+<!-- CONTENIDO MODULO -->
+	<div class="col-md-8 col-sm-8">
+		<div class="row">
+			<div class="col-md-12">
+				<h2 class="text-primary">
+					<span class="glyphicon glyphicon-th-large" aria-hidden="true"></span>
+					{{ajustes.pagina.titulo}}
+				</h2>
+				<hr class="bg-red">
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-12">
+			  <!-- AQUI VAN LAS TABLAS O FORMULARIOS incrustados -->
+			  <!-- INICIO -->
+        <label class="control-label">Los campos marcados con asterisco (<strong class="fg_red">*</strong>) son obligatorios</label>
+
+        <div class="well well-sm" style="background-color:#fff;">
+        <h4 class="text-primary">
+              DATOS LABORATORIO
+        </h4>
+        <hr class="bg-red">
+          <div class="row">
+            <div class="col-md-6">
+        				<div class="form-group">
+        				  <label for="nombrelab" class="control-label">Nombre del laboratorio: <strong class="fg_red">*</strong></label>
+        				  <input class="form-control" name="nombrelab" type="text" placeholder="Nombre del laboratorio" ng-model="laboratorios.amb_nombre" ng-model-options="{ updateOn: 'blur' }" required ng-pattern="patternCadenaNumero" autofocus>
+        				  <span class="messages" ng-show="addLaboratorio.nombrelab.$touched">
+        					<span ng-show="addLaboratorio.nombrelab.$error.required">El campo es obligatorio.</span>
+        					<span ng-show="addLaboratorio.nombrelab.$error.pattern">No se admiten símbolos especiales.</span>
+        				  </span>
+        				</div>
+            </div>    
+            <div class="col-md-6">
+        				<div class="form-group">
+        				  <label for="codigo" class="control-label">Código: <strong class="fg_red">*</strong></label>
+        				  <input type="" class="form-control" name="codigo" placeholder="Código" ng-model="laboratorios.lab_cod" ng-model-options="{ updateOn: 'blur' }" required ng-pattern="patternCadenaNumero" >
+        				  <span class="messages" ng-show="addLaboratorio.codigo.$touched">
+        					<span ng-show="addLaboratorio.codigo.$error.required">El campo es obligatorio.</span>
+        					<span ng-show="addLaboratorio.codigo.$error.pattern">No se admiten símbolos especiales.</span>
+        				  </span>
+        				</div>
+            </div>
+          </div>
+          <div class="row">
+           <!--  <div class="col-md-6">
+              <label for="tipolab" class="control-label">Tipo: <strong class="fg_red">*</strong></label>
+              <select class="form-control" name="tipolab" ng-model="laboratorios.amb_tipo" ng-model-options="{ updateOn: 'blur' }" required >
+                <option>CONSULTORIO</option>
+                <option>LABORATORIO</option>
+              
+              </select>
+              <span class="messages" ng-show="addLaboratorio.tipolab.$touched">
+                <span ng-show="addLaboratorio.tipolab.$error.required">El campo es obligatorio.</span>
+                <span ng-show="addLaboratorio.tipolab.$error.pattern">No se admiten símbolos especiales o números.</span>
+              </span>
+            </div>  -->
+            <div class="col-md-6">
+              <label for="comentarios" class="control-label">Descripción: <strong class="fg_red">*</strong></label>
+              <textarea class="form-control" name="comentarios" rows="6" cols="35" placeholder="Descripción" style="resize: vertical;min-height:70px;max-height: 150px;" ng-model="laboratorios.amb_descripcion" ng-model-options="{ updateOn: 'blur' }" required ng-pattern="patternCadenaNumero" ></textarea>
+              <span class="messages" ng-show="addLaboratorio.comentarios.$touched"><br>
+                <span ng-show="addLaboratorio.comentarios.$error.required">El campo es obligatorio.</span>
+                <span ng-show="addLaboratorio.comentarios.$error.pattern">No se admiten símbolos especiales o números.</span>
+              </span>
+            </div> 
+         <!-- <div class="col-md-6" ng-if="ajustes.pagina.action == 'GUARDAR'">
+              <label class="control-label">Seleccione un servicio: <strong class="fg_red">*</strong></label>
+              <select name="serv" class="form-control" ng-model="servicios_consultorios.se_id" ng-options="presta.se_id as presta.ser_nombre for presta in prestas" required>
+              </select>
+              <span class="messages" ng-show="addConsultorio.serv.$touched">
+                <span ng-show="addConsultorio.serv.$error.required">El campo es obligatorio.</span>
+              </span>
+              </div> -->
+
+             
+          </div> 
+          <h4 class="text-primary">
+              DATOS RESPONSABLE
+          </h4>
+          <hr class="bg-red">
+          <div class="row"><!-- ng-controller="FuncionarioCtrl" -->
+            <div class="col-md-6"  >
+                
+                  <label for="nombrelab" class="control-label">Responsable: <strong class="fg_red">*</strong></label>
+                   <select class="form-control " name="responsable" ng-model="laboratorios.fun_id"  ng-options="funcionario.fun_id as funcionario.per_nombres+' '+funcionario.per_apellido_primero+' '+funcionario.per_apellido_segundo+' - '+funcionario.fun_cargo for funcionario in funcionarios" required>
+                  <option value="">--Elige opcion--</option>
+                  </select>
+                  <span class="messages" ng-show="addLaboratorio.$submitted || addLaboratorio.responsable.$touched">
+                      <span ng-show="addLaboratorio.responsable.$error.required">El campo es obligatorio.</span>
+                 </span>
+
+
+                  <!-- <input class="form-control" name="nombrelab" type="text" placeholder="Nombre del laboratorio" ng-model="laboratorios.amb_nombre" ng-model-options="{ updateOn: 'blur' }" required ng-pattern="patternCadenaNumero" autofocus>
+                  <span class="messages" ng-show="addLaboratorio.nombrelab.$touched">
+                  <span ng-show="addLaboratorio.nombrelab.$error.required">El campo es obligatorio.</span>
+                  <span ng-show="addLaboratorio.nombrelab.$error.pattern">No se admiten símbolos especiales.</span>
+                  </span> -->
+                
+            </div>    
+          
+          </div>
+
+
+
+
+
+          <hr>
+          <div class="row">
+            <div class="col-md-6 col-md-offset-3 text-center">
+              <div class="well well-sm">
+                <div class="checkbox">
+                  <label style="font-size: 1.5em">
+                    <input type = "checkbox" ng-model = "para_enviar" title="Haga click aqui para habilitar o deshabilitar el envío del formulario"> 
+                    <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
+                    <small style="font-size: 0.6em" class="text-primary" title="Haga click en la casilla de verificación del lado para registrar el consultorio">
+                      <span class="glyphicon glyphicon-hand-left"></span>
+                      <span class="glyphicon glyphicon-chevron-left"></span>
+                      ¿DESEA GUARDAR<!-- {{$parent.ajustes.pagina.action}} --> ESTE FORMULARIO?
+                    </small>
+                  </label>
+                </div>
+                <br>
+                <button ng-show = "para_enviar" class="btn btn-primary" ng-click="submit($parent.consultorios);reset(addLaboratorio)" ng-disabled="addLaboratorio.$invalid" title="Debe llenar todos los campos obligatorios de manera correcta">GUARDAR
+                  <span class="glyphicon glyphicon-save"></span> {{$parent.ajustes.pagina.action}}
+                </button>
+                <p ng-show="$parent.ajustes.pagina.success" class="alert alert-success"><!-- {{$parent.ajustes.pagina.success}}  -->
+              
+                <button type="button" class="close" data-dismiss="alert">&times; </button>
+              </div>
+            </div>    
+            
+          </div>
+          
+          </p>
+        </div>  
+			</div>              
+    </div>
+    <!-- fin cuerpo -->
+  </div>
+  
+<!-- CONTENIDO MODULO fin -->
+</form> 

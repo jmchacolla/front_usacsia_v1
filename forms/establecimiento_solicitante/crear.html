@@ -1,0 +1,89 @@
+<div class="well well-sm">
+  <div class="panel">
+      <h4 class="text-center text-primary">I. DATOS GENERALES</h4>
+      <hr class="bg-red">
+      <br>
+      <div class="row">
+          <div class="col-md-3">
+              <div class="well well-sm">
+                  <div ng-if="thumbnail.dataUrl == ''">
+                      <img ng-src="./images/perfil.jpg" align="center" class="img-responsive img-thumbnail"/>
+                  </div>
+                  <div ng-if="thumbnail.dataUrl != ''" style="height:190px !important; overflow:auto;">
+                    <img ng-src="{{ thumbnail.dataUrl }}" align="center" class="img-responsive img-thumbnail"/>
+                  </div>
+                  <div class="clearfix">
+                  </div>
+                  <div class="form-group">
+                    <label>Cargar Imagen</label>
+                    <input type="file" name="fileInput" id ="fileInput" class="filestyle" data-buttonText="Find file"  file-model="vista.ima_nombre" onchange="angular.element(this).scope().photoChanged(this.files)" />
+                    <input type="hidden" name="" ng-model="persona.ima_nombre" value="{{persona.ima_nombre}}">
+                    {{vista.ima_enlace}}
+                    <br>
+                  </div> 
+              </div>
+          </div>    
+          <div class="col-md-9">
+              <div class="row">
+                  <div class="col-md-6">
+                      <label class="control-label">Tipo de Documento</label>
+                      <select class="form-control" name="tipo_doc" ng-model="persona.per_tipo_documento" ng-model-options="{ updateOn: 'blur' }" required>
+                          <option value="CI">CARNET DE IDENTIDAD</option>
+                          <option value="PASAPORTE">PASAPORTE</option>        
+                      </select>
+                      <span class="messages" ng-show="addPersona.$submitted || addPersona.tipo_doc.$touched">
+                         <span ng-show="addPersona.tipo_doc.$error.required">El campo es obligatorio.</span>
+                      </span>
+                  </div>
+                  <div class="col-md-6" ng-show="nac">
+                      <div ng-controller="PaisCtrl">
+                          <label class="cotrol-label">Pais</label>    
+                          <select class="form-control" name="nacionalidad" ng-model="persona.per_pais"  ng-options="pais.nac_id as pais.nac_nombre for pais in paises" ng-model-options="{ updateOn: 'blur' }" ng-required="required_p">
+                          </select>
+                          <span class="messages" ng-show="addPersona.$submitted || addPersona.nacionalidad.$touched">
+                              <span ng-show="addPersona.nacionalidad.$error.required">El campo es obligatorio.</span>
+                        </span>
+                      </div>
+                  </div>
+              </div>
+              <br>
+              <div class="row">
+                  <div class="col-md-4">
+                    <label for="nombre" class="control-label">Nombre: <strong class="fg_red">*</strong></label>
+                    <input class="form-control" name="nombres" type="text" placeholder="Nombre" ng-model="persona.per_nombres" ng-model-options="{ updateOn: 'blur' }" required ng-pattern="patternCadena" autofocus>
+                    <span class="messages" ng-show="addPersona.nombres.$touched">
+                      <span ng-show="addPersona.nombres.$error.required">El campo es obligatorio.</span>
+                      <span ng-show="addPersona.nombres.$error.pattern">No se admiten símbolos especiales o números.</span>
+                    </span>
+                  </div>
+                  <div class="col-md-4">
+                    <label for="nombre" class="control-label">Apellido paterno: <strong class="fg_red">*</strong></label>
+                    <input class="form-control" name="apellido_primero" type="text" placeholder="Apellido paterno" ng-model="persona.per_apellido_primero" ng-model-options="{ updateOn: 'blur' }" required ng-pattern="patternCadena">
+                    <span class="messages" ng-show="addPersona.$submitted || addPersona.apellido_primero.$touched">
+                      <span ng-show="addPersona.apellido_primero.$error.required">El campo es obligatorio.</span>
+                      <span ng-show="addPersona.apellido_primero.$error.pattern">No se admiten símbolos especiales o números.</span>
+                    </span>
+                  </div>
+                  <div class="col-md-4">
+                    <label for="nombre" class="control-label">Apellido materno: <strong class="fg_red">*</strong></label>
+                    <input class="form-control" name="apellido_segundo" type="text" placeholder="Apellido materno" ng-model="persona.per_apellido_segundo" ng-model-options="{ updateOn: 'blur' }" required ng-pattern="patternCadena">
+                    <span class="messages" ng-show="addPersona.$submitted || addPersona.apellido_segundo.$touched">
+                      <span ng-show="addPersona.apellido_segundo.$error.required">El campo es obligatorio.</span>
+                      <span ng-show="addPersona.apellido_segundo.$error.pattern">No se admiten símbolos especiales o números.</span>
+                    </span>
+                  </div>
+              </div>
+              <br>
+              <br>
+          </div>  
+      </div> <!-- fin class row  -->
+      <br>
+      <h4 class="text-center text-primary">II. DIRECCIÓN</h4>
+      <hr class="bg-red">
+      <br> 
+  </div>     
+</div>
+<p ng-show="$parent.ajustes.pagina.success" class="alert alert-success" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  {{$parent.ajustes.pagina.success}}
+</p>

@@ -1,0 +1,160 @@
+<!-- TOP-MENU inicio -->
+<div ng-include="'./templates/menu_inicio.html'"></div>
+<!-- CONTEXT-MENU  -->
+  <div ng-include="'./templates/menu_lateral.html'">
+  </div>
+  <div class="col-md-8 col-sm-8">
+       	<div class="row">
+          <div class="col-md-12">
+            <h2 class="text-primary">
+              <span class="glyphicon glyphicon-th-large" aria-hidden="true"></span>
+              {{ajustes.pagina.titulo}}
+            </h2>
+            <hr class="bg-red">
+          </div>
+       	</div>
+       <!-- Contenido de la vista -->
+       	<form name="addFicha">
+	        <div class="well well-sm" style="background-color:#fff;">
+				<div class="alert alert-info" role="alert">
+					<h4>Debe seleccionar el servicio para asignar la ficha.</h4>
+				</div>
+				<div class="row">
+					<div class="col-md-8 col-md-offset-2">
+					  <div class="form-group">
+						<label class="control-label">Seleccione el servicio para asignar la ficha:</label>
+						  <select class="form-control" ng-model="datosSer" name="servicio" ng-options="servicio as servicio.ser_nombre for servicio in servicios"  required>
+						  </select>
+						  <span class="messages" ng-show="addFicha.servicio.$touched">
+				            <span ng-show="addFicha.servicio.$error.required">Debe seleccionar un servicio.</span>
+				          </span>
+					  </div>
+					</div>	  
+				</div>
+				<div class="row">
+					<div class="col-md-4 col-md-offset-4 text-center" >
+						<button type="submit" class="btn btn-success" ng-click="get_fun(datosSer)" ng-disabled="addFicha.$invalid" title="Pulse para ver la lista de medicos"><span class="glyphicon 	glyphicon glyphicon-menu-down"></span> <strong>Listar  Médico(s)</strong></button>
+					</div>	  
+				</div>
+				<div class="row"><br></div>
+				<div class="row" >
+					<div class="col-md-8 col-md-offset-2" ng-show="est && !buscar">
+						<div class="text-center" ng-show="loading"><br><img ng-src="./images/image.gif" class="loader-img"></div>
+						<div ng-show="!loading && !msg" class="alert alert-dansger" role="alert">No se encontraron resultados</div>
+							<div class="table-responsive">
+								<table class="table table-bordered table-striped table-hover" ng-show="!loading && msg">
+									<thead >
+										<th class="text-primary">Médico</th>
+										<th class="text-primary">Turno</th>
+										<th class="text-primary">Ver Fichas</th>
+									</thead>
+									<tbody ng-repeat="funcionario in funcionarios">
+										<tr>
+											<td>
+												{{funcionario.per_nombres+" "+funcionario.per_apellido_primero+" "+funcionario.per_apellido_segundo}}
+											</td>
+											<td>
+												{{funcionario.ct_turno}}
+											</td>
+											<td>
+												<button type="submit" class="btn btn-primary" ng-click="get_horarios(funcionario)" title=""><span class="glyphicon glyphicon-search"></span> Buscar fichas</button>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>	  
+					</div>
+				</div>
+			</div>
+		</form>
+		<div  ng-show="fichas">
+			<div class="row" >
+			<div class="text-center" ng-show="loading1"><br><img ng-src="./images/image.gif" class="loader-img"></div>
+      		<div ng-show="!loading1 && !msg1" class="alert alert-danger" role="alert">No existe fichas m&eacute;dicas registradas :(</div>
+      			<center><h1>Nro. Fichas: <span class="label label-danger"><strong>{{nro_fichas}}</strong></span></h1></center>
+				<center><p><h3><span class="text-primary text-center" >Disponibles para el servicio de :</span> {{datosSer.ser_nombre}}</h3></p></center>
+				<center><h3><span class="text-primary text-center">M&eacute;dico:</span> {{funcionario.per_nombres+" "+funcionario.per_apellido_primero+" "+funcionario.per_apellido_segundo}}</h3></center>
+				<center>
+					<h4>
+	      			Turno {{turno}}
+					</h4>
+					<hr class="bg-gray">
+				</center>	
+			</div>
+			<div class="well well-sm " style="background-color:#EAF2F8;" ng-show="fichas">
+				<div class="row" >
+					<!-- fichas del turno maniana -->
+					<div class="col-md-6 col-md-offset-3 text-center" >	
+						<div class="well well-sm text-center " style="background-color:#fff;" ng-repeat="horario in horariosd">
+							<strong>
+								<p>
+								<h4><span class="text-primary">Ficha # </span>SSR-{{horario.ad_numero_ficha}} 
+									<span class="text-primary">&nbsp;|&nbsp;</span>
+									<span class="text-primary glyphicon glyphicon-time">:  </span>{{horario.ad_hora_inicio  | date: 'H:mm'}}
+									&nbsp;&nbsp;
+									<button class="btn btn-primary" name="reserva" value="" data-toggle="modal" data-target="#miCuadroModal1" ng-click="get_inf(horario)">
+										<span ><i class="glyphicon glyphicon-saved"></i></span>
+										<strong><em>Asignar ficha</em></strong>
+									</button>
+								</h4>
+								</p>
+							</strong>
+						</div>
+					</div>
+					<!--CUADRO MODAL-->
+				  	<div id="miCuadroModal1" class="modal fade" role="dialog" tabindex="-1">
+					  <div class="modal-dialog">
+					    <div class="modal-content">
+					      <div class="modal-header bg-green">
+					        <button type="button" class="close" data-dismiss="modal">×</button>
+					        <h3 class="modal-title fg-white"><span ><i class="glyphicon glyphicon-calendar"></i></span>  Asignar ficha</h3>
+					      </div>
+					      <div class="modal-body lead">
+					        <h2><strong><small>¿Desea asignar la ficha seleccionada?</small></strong></h2>
+					        <center><h2><span class="text-primary">Ficha Nº SSR-</span>{{horariog.ad_numero_ficha}}</h2></center>
+					        <div class="well well-sm text-justify" style="background-color:#ddd;">
+					        	<span class="text-primary">Paciente: </span>{{paciente.per_nombres+" "+paciente.per_apellido_primero+" "+paciente.per_apellido_segundo}} <br>
+					        	<span class="text-primary">Servicio: </span>{{nomser}} <br>
+					        	<span class="text-primary">Consultorio: </span>{{consultorio}} <br>	
+					        	<span class="text-primary">Fecha de consulta: </span>{{horariog.ad_fecha_atiende}} <br>			 
+								<span class="text-primary">Hora estimada de atención: </span> {{horariog.ad_hora_inicio | date:'H:mm'}}<br>
+								
+							</div>		
+					      </div>
+					      <div class="modal-footer lead text-center">
+							<button class="btn btn-default col-sm-4" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> CANCELAR</button>
+					        <button class="btn btn-primary col-md-offset-2 col-md-4 col-sm-4" data-dismiss="modal" ng-click="submit()"><span class="glyphicon glyphicon-ok"></span><strong>ASIGNAR FICHA</strong></button> &nbsp;
+					      </div>
+					 	</div>
+					  </div>
+					</div>
+				</div>
+			</div>
+		</div>
+   </div>
+
+<!-- script para la fecha  -->
+<script type="text/javascript">
+ $.datepicker.regional['es'] = {
+ closeText: 'Cerrar',
+ prevText: '< Ant',
+ nextText: 'Sig >',
+ currentText: 'Hoy',
+ monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+ monthNamesShort: ['Ene','Feb','Mar','Abr', 'May','Jun','Jul','Ago','Sep', 'Oct','Nov','Dic'],
+ dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+ dayNamesShort: ['Dom','Lun','Mar','Mié','Juv','Vie','Sáb'],
+ dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sá'],
+ weekHeader: 'Sm',
+ dateFormat: 'yy-mm-dd',
+ firstDay: 1,
+ isRTL: false,
+ showMonthAfterYear: false,
+ yearSuffix: ''
+ };
+
+ $.datepicker.setDefaults($.datepicker.regional['es']);
+    $( function() {
+      $( "#fecha_cita" ).datepicker();
+    } );
+</script>

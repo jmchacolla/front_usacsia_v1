@@ -1,0 +1,202 @@
+<!-- TOP-MENU inicio -->
+<div ng-include="'./templates/menu_inicio.html'"></div>
+<!-- CONTEXT-MENU  -->
+<div ng-include="'./templates/menu_lateral.html'"></div>
+<!-- CONTENIDO MODULO inicio -->
+<div class="col-md-8 col-sm-8">
+	<div class="row">
+		<div class="col-md-12">
+			<h2 class="text-primary">
+				<span class="glyphicon glyphicon-th-large" aria-hidden="true"></span>
+				{{ajustes.pagina.titulo+" "+tramite.et_numero_tramite}}
+			</h2>
+			<hr class="bg-red">
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<!-- AQUI VAN LAS TABLAS O FORMULARIOS incrustados -->
+			<!-- INICIO -->
+			<label class="control-label">Los campos marcados con asterisco (<strong class="fg_red">*</strong>) son obligatorios</label>	
+			<!-- CONTENIDO MODULO inicio -->
+			<div class="row">
+				<div class="col-md-12">
+					<tabs>
+						<pane title="DOCUMENTOS">
+							<br>
+							<div class="well well-sm" style="background-color:#fff;">
+								<div class="row">
+									<div class="col-md-12">
+										<form name="docForm" novalidate>
+											<div class="panel panel-default" ng-class="{'panel-success':documento.doc_importancia!='OBLIGATORIO', 'panel-warning':documento.doc_importancia=='OBLIGATORIO' }"  ng-repeat="documento in documentos">
+												<div class="panel-heading"  >
+													<h4 class="panel-title">
+														<a data-toggle="collapse" href="/documento-tramite/crear2/#{{documento.doc_id}}">
+															<div class="row">
+																<div class="col-md-6">
+																	{{documento.doc_nombre}}
+																</div>
+																<div class="col-md-3">
+																	{{documento.doc_importancia}}
+																</div>
+																<div class="col-md-3">
+																	<p ng-if="documento.dt_observado">OBSERVADO</p>
+																	<p ng-if="!documento.dt_observado">APROBADO</p>
+																</div>	
+															</div>
+														</a>
+													</h4>
+												</div>
+												<div id="{{documento.doc_id}}" class="panel-collapse collapse">
+													<div class="panel-body">
+														<div class="col-md-8">
+
+															<div class="well well-sm">
+																<div ng-if=" documento.dt_url== ''">
+																	<img ng-src="./images/imagen-default.jpg" align="center" class="img-responsive img-thumbnail"/>
+																</div>
+																<div ng-if="documento.dt_url!= ''" style="height:190px !important; overflow:auto;">
+																	<img ng-src="{{documento.dt_url+'/'+documento.dt_nombre}}" align="center" class="img-responsive img-thumbnail"/>
+																</div>
+															</div>
+															<div>
+																<label for="nombre" class="control-label">Observacion: <strong class="fg_red">*</strong></label>
+																<label><input  ng-click="editado(documento.dt_id,documento.dt_observado,documento.dt_observacion)" type="checkbox" ng-model="documento.dt_observado">&nbsp;Si</label>
+																<textarea ng-change="editado(documento.dt_id,documento.dt_observado,documento.dt_observacion)" style="resize: vertical;min-height:70px;max-height: 150px;" ng-show="documento.dt_observado" class="form-control" type="text" ng-model="documento.dt_observacion" ng-required="documento.dt_observado" ng-pattern="patternCadena" name="obs">
+																</textarea>
+																<span class="messages" ng-show="(docForm.$submitted || docForm.obs.$touched) && documento.dt_observado">
+																	<span ng-show="docForm.obs.$error.required">El campo es obligatorio.</span>
+																</span>
+
+															</div>
+
+														</div>
+													</div>
+												</div>
+												
+												<p ng-show="docForm.$invalid && docForm.$submitted" class="alert alert-danger">Asegúrese de llenar correctamente todos los campos</p>
+											</div>
+											<div class="col-md-6 col-md-offset-3 text-center">
+													<button ng-if="docForm.$invalid" type="submit" class="btn btn-primary" title="Debe llenar todos los campos obligatorios de manera correcta"><span class="glyphicon glyphicon-save"></span> GUARDAR</button>
+													<button ng-if="docForm.$valid" type="submit" class="btn btn-primary" ng-click="update_lista()" title="Guardar"><span class="glyphicon glyphicon-save"></span> GUARDAR</button>
+												</div>
+										</form>
+									</div>
+								</div>	
+							</div>
+						</pane>
+						<!-- .............. EMPLEADOS ................. -->
+						<pane title="LISTA DE EMPLEADOS" ng-click="llamar_lista()">
+							<div class="panel">
+								<br>
+								<div>
+									<div class="table-responsive">
+										<table class="table table-bordered  table-hover" ng-show="!loading && msg">
+											<thead>
+												<th class="text-primary text-center" colspan="6">ESTADO DE TRÁMITE DE CARNÉ SANITARIO DE EMPLEADOS</th>
+											</thead>
+											<thead>
+												<th class="text-center text-primary">Sin tr&aacute;mite C.S.</th>
+												<th class="text-center text-primary">Iniciados</th>
+												<th class="text-center text-primary">Observados</th>
+												<th class="text-center text-primary">Vencidos</th>
+												<th class="text-center text-primary">Concluidos</th>
+												<th class="text-center text-primary">Aprobados</th>
+												<th class="text-center text-primary">Total</th>
+											</thead>
+											<tbody>
+												<tr>
+													<td class="text-center">{{st}}</td>
+													<td class="text-center">{{i}}</td>
+													<td class="text-center">{{o}}</td>
+													<td class="text-center">{{v}}</td>
+													<td class="text-center">{{c}}</td>
+													<td class="text-center">{{a}}</td>
+													<td class="text-center">{{t}}</td>
+												</tr>
+												<tr ng-if="llega_obs">
+													<td class="text-center warning"  colspan="3" >{{'ÚLTIMA REVISIÓN:'+' '+te.updated}}</td>
+													<td class="text-center warning"  colspan="3">{{llega_obs}}</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+								<hr>
+
+								<div>
+									<div class="text-center" ng-show="loading" ><br><img ng-src="./images/image.gif" class="loader-img"></div>
+									<div ng-show="!loading && !msg">No se encontraron resultados</div>
+									<div class="table-responsive">
+										<table class="table table-bordered  table-hover" ng-show="!loading && msg" id="tableCON">
+											<thead>
+												<th class="text-primary">Nº</th>
+												<th class="text-primary">C.I.</th>
+												<th class="text-primary">Empleado</th>
+												<th class="text-primary">Fecha de inicio</th>
+												<th class="text-primary" >Cargo</th>
+												<th class="text-primary" >Estado Trámite</th>
+											</thead>
+											<tbody ng-repeat="pe in personas_x_establecimiento | orderBy:sortType:sortReverse | filter:searchText" >
+												<tr>
+													<td>{{$index + 1}}</td>
+													<td>{{pe.per_ci+" "+pe.per_ci_expedido}}</td>
+													<td>{{pe.per_nombres+"&nbsp;"+pe.per_apellido_primero+" "+pe.per_apellido_segundo}}</td>
+													<td>{{pe.ep_inicio_trabajo}}</td>
+													<td>{{pe.ep_cargo}}</td>
+													<td>{{pe.pt_estado_tramite}}</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+									<form name="reqempForm">
+										<div class="row">
+											<div class="col-md-6">
+												<div class="well well-sm">
+													<div class="checkbox">
+														<label style="font-size: 1.5em">
+															<input type = "checkbox" ng-model = "btn_observado" > 
+															<span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
+															<small style="font-size: 0.6em" class="text-primary" title="Haga click para escribir su Observación">
+																<span class="glyphicon glyphicon-hand-left"></span>
+																<span class="glyphicon glyphicon-chevron-left"></span>
+																¿TIENE ALGUNA OBSERVACIÓN?
+															</small>
+														</label>
+													</div>
+												</div>   
+											</div>
+											<div class="col-md-6">
+												<div class="well well-sm text-center" >
+													<div style="margin: 8px 0px;">
+														<button type="submit" ng-show = "!btn_observado" class="btn btn-primary" ng-click="actualizar_empleados(1)"><span class="glyphicon glyphicon-ok"></span> APROBAR </button>
+														<button type="submit" ng-show = "btn_observado && reqempForm.$valid" class="btn btn-primary" ng-click="actualizar_empleados(2)"><span class="glyphicon glyphicon-ok"></span> GUARDAR OBSERVACI&Oacute;N </button>
+														<button type="submit" ng-show = "btn_observado && reqempForm.$invalid" class="btn btn-primary"><span class="glyphicon glyphicon-ok"></span> GUARDAR OBSERVACI&Oacute;N </button>
+													</div>
+												</div>
+											</div>										           
+										</div>
+										<div class="row" ng-show="btn_observado">
+											<label for="nombre" class="control-label">Observacion: <strong class="fg_red">*</strong></label>
+											<textarea style="resize: vertical;min-height:70px;max-height: 150px;" ng-show="btn_observado" class="form-control" type="text" ng-model="te.te_observacion" ng-required="btn_observado" name="t_obs">
+											</textarea>
+											<span class="messages" ng-show="(reqempForm.$submitted || reqempForm.t_obs.$touched) && btn_observado">
+												<span ng-show="reqempForm.t_obs.$error.required">El campo es obligatorio.</span>
+											</span>
+										</div>
+									</form>
+								</div>
+							</div>
+						</pane>
+					</tabs>
+				</div>
+			</div>
+		</div>
+		<!-- FIN -->
+		<!-- AQUI VAN LOAS TABLAS O FORMULARIOS incrustados -->
+	</div>
+	<script type="text/javascript">
+	$(":file").filestyle({buttonText: " Abrir"});
+    	//$('#fileInput').filestyle({buttonName : 'btn-warning'});
+    </script>
+</div>

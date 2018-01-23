@@ -1,0 +1,136 @@
+<!-- TOP-MENU inicio -->
+<div ng-include="'./templates/menu_inicio.html'"></div>
+<!-- CONTEXT-MENU  -->
+<div ng-include="'./templates/menu_lateral.html'"></div>
+<!-- CONTENIDO MODULO inicio -->
+<div class="col-md-8 col-sm-8">
+	<div class="row">
+		<div class="col-md-12">
+			<h2 class="text-primary">
+				<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+				{{ajustes.pagina.titulo}}
+			</h2>
+			<hr>
+		</div>
+	</div>
+	<div class="col-md-12" ng-controller="FechaFunCtrl">
+		<div ng-controller="CreateFuncionarioPersonaCtrl">
+			<!-- <div ng-include="'forms/funcionario/create.html'"> -->
+			 <div ng-controller="apiAppCtrl_fun">
+        <p>
+          <h4 class="text-primary">Instrucciones</h4>
+          Para el registro del funcionario .</b>
+          <ul>
+            <li>Debe ingresar el n&uacute;mero de cedula de identidad en el respectivo buscador</li>
+            <li>Luego pulse en <b>Buscar</b></li>
+            <li>En el conjunto de resultados, pulse en <b>Registrar</b>, seg&uacute;n corresponda, en la fila del funcionario buscado.</li>
+          </ul>
+          En caso de NO obtener resultados, haga clic en <b>Registrar Funcionario Nuevo</b>
+        </p>
+        <!-- Inicio Controller apiAppCtrl -->
+       
+       <div class="well well-sm">
+         <div class="row">
+           <div class="col-md-6 col-md-offset-2">
+              <input class="form-control input-lg" ng-model="per_ci" type="text" placeholder="Escriba el Nro. de C.I.">
+           </div>
+           <div class="col-md-4">
+           <button class="btn btn-primary btn-lg" ng-click="buscaPersona()"><span class="glyphicon glyphicon-search"></span><strong> BUSCAR</strong></button>  
+           </div>
+
+         </div>  
+       </div>
+        &nbsp;&nbsp;
+       <div><center><h3>RESULTADOS:<span class="text-primary">  {{ tamanio }} </span></h3></center></div>
+       <div ng-show="mos">
+          <div class="lead text-center">
+            <a class="btn btn-primary btn-lg" href="#/funcionarios/createFun">
+              <span class="glyphicon glyphicon-plus"></span>
+              REGISTRAR FUNCIONARIO NUEVO  
+            </a>
+           <!--  <a class="btn btn-primary btn-lg" href="#/funcionarios/createFun" ng-if="rol_id==1">
+              <span class="glyphicon glyphicon-plus"></span>
+              REGISTRAR FUNCIONARIO NUEVO 
+            </a>  ng-repeat="personas in personas"-->
+          </div>
+      </div>
+    <div class="row panel-group tabla-cuerpo">  
+       <div class="form-group" ng-show="ver">
+           <!--  <div><center>  RESULTADOS {{ tamanio }}</center></div> -->
+             <table class="table table-bordered table-striped table-hover">
+               <thead >
+                  <th class="text-primary">C.I.</th> 
+                  <th class="text-primary">NOMBRES</th>
+                  <th class="text-primary">APELLIDO PATERNO</th>
+                  <th class="text-primary">APELLIDO MATERNO</th>                          
+                  <th class="text-primary">REGISTRAR</th>
+               </thead>
+               <tbody >
+                  <tr>
+                    <td>{{personas.per_ci}}</td>
+                    <td>{{personas.per_nombres}}</td>
+                    <td>{{personas.per_apellido_primero}}</td>
+                    <td>{{personas.per_apellido_segundo}}</td>
+                    <td>
+                    <button type="" class="btn btn-primary" ng-click="agregar_fun(personas.per_id, personas.per_ci, personas.per_nombres,personas.per_apellido_primero,personas.per_apellido_segundo,'0')" title="Registrar Funcionario" data-toggle="modal" data-target="#miCuadroModal"> <span class="glyphicon glyphicon-plus-sign" ></span> AGREGAR</button> 
+                    </td>
+                  </tr>
+               </tbody>
+             </table>
+             <!--CUADRO MODAL-->
+             <div id="miCuadroModal" class="modal fade" role="dialog" tabindex="-1">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header bg-red">
+                      <button type="button" class="close" data-dismiss="modal">×</button>
+                      <h3 class="modal-title fg-white">REGISTRAR FUNCIONARIO NUEVO</h3>
+                    </div>
+                    <form role="form" name="addCod" novalidate>
+                    <div class="modal-body"><!--  -->
+                      <div ng-show="valor == '0' && !fe_estado">
+                        <div class="well well-sm">
+                          <strong>REGISTRAR A:</strong> 
+                          <span>{{nom+" "+ap1+"  "+ap2}}</span>
+                          <strong>CON NÚMERO DE C.I.:</strong>
+                          <span>{{ci}}</span><br>
+                        </div>
+                      </div> 
+                       <div ng-show="fe_estado">
+                        <div class="well well-sm">
+                          <strong>HABILITAR A:</strong> 
+                          <span>{{nom+" "+ap1+"  "+ap2}}</span>
+                          <strong>CON NÚMERO DE C.I.:</strong>
+                          <span>{{ci}}</span><br>
+                        </div>
+                      </div> 
+                    </div>
+                    <div class="modal-footer" ng-show="valor == '0' && !fe_estado" >
+                      <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> CANCELAR</button>
+
+                      <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="reg(personas.per_id,fun_id,null)"><span class="glyphicon glyphicon-ok"></span> REGISTRAR</button>
+                      
+                    </div>
+                    <div ng-show="fe_estado" class="modal-footer">
+                      <button type="button" class="btn btn-success" data-dismiss="modal" ng-click="reg(persona.per_id,fun_id,fe_id)"><span class="glyphicon glyphicon-ok"></span> HABILITAR</button>
+                      <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> CANCELAR</button>
+                    </div>
+                 
+                    </form>
+                  </div>
+                </div>
+             </div>
+             <!--FIN CUADRO MODAL-->
+       </div>  
+   <!-- fin ng-show -->
+
+    <!-- fin datos del funcionario -->
+</div>  
+
+
+
+	
+			<!-- </div> -->
+		</div>	
+	</div>
+</div>
+<!-- CONTENIDO MODULO fin -->

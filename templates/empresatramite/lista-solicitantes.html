@@ -1,0 +1,86 @@
+<!-- TOP-MENU INICIO -->
+<div ng-include="'./templates/menu_inicio.html'"></div>
+<!-- CONTEXT-MENU  -->
+  <div ng-include="'./templates/menu_lateral.html'"></div>
+<!-- CONTENIDO -->
+<div class="col-md-8 col-sm-8">
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="text-primary">
+                <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+               {{ajustes.pagina.titulo}}
+            </h2>
+            <hr>
+        </div>
+    </div>
+    <!--HERRAMIENTAS PARA LA VISTA-->
+    <div class="row">
+        <div class="col-md-12">
+        <div class="well well-sm">
+           <strong class="pull-left lead">Herramientas: &nbsp;</strong>
+            <form class="form-inline pull-left">
+            <input type="text" class="form-control" placeholder="Filtrar por nombre departamento" ng-model="dep_nombre">
+            </form>
+        <div class="clearfix"></div>
+            
+        </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+        <!-- AQUI VAN LAS TABLAS O FORMULARIOS incrustados -->
+        <!-- INICIO -->
+        <div class="table-responsive">
+            <div class="text-center" ng-show="loading"><br><img ng-src="./images/image.gif" class="loader-img"></div>
+            <div ng-show="!loading && !msg">No se encontraron resultados</div>
+            <table class="table table-hovertable table-bordered table-striped table-hover" ng-show="!loading && msg" id="tablaES">
+                <thead>
+                    
+                    <th >
+                        <a href="" ng-click="sortType = 'dep_nombre'; sortReverse = !sortReverse">
+                        Razón Social
+                        <span ng-show="sortType == 'dep_nombre' && !sortReverse" class="glyphicon glyphicon-sort-by-alphabet"></span>
+                     <span ng-show="sortType == 'dep_nombre' && sortReverse" class="glyphicon glyphicon-sort-by-alphabet-alt"></span>
+                        </a>
+                    </th>
+                    <th >
+                        <a href="" ng-click="sortType = 'dep_nombre'; sortReverse = !sortReverse">
+                        Telefono
+                        <span ng-show="sortType == 'dep_nombre' && !sortReverse" class="glyphicon glyphicon-sort-by-alphabet"></span>
+                     <span ng-show="sortType == 'dep_nombre' && sortReverse" class="glyphicon glyphicon-sort-by-alphabet-alt"></span>
+                        </a>
+                    </th>
+                    <th >
+                        <a href="" ng-click="sortType = 'dep_nombre'; sortReverse = !sortReverse">
+                        Fecha de aprobación
+                        <span ng-show="sortType == 'dep_nombre' && !sortReverse" class="glyphicon glyphicon-sort-by-alphabet"></span>
+                     <span ng-show="sortType == 'dep_nombre' && sortReverse" class="glyphicon glyphicon-sort-by-alphabet-alt"></span>
+                        </a>
+                    </th>
+                    <th class="text-primary" ng-show="user.rol_id==1 || user.rol_id == '14'">Ver Empresa</th>
+                    <!-- <th class="text-primary" ng-show="user.rol_id==1 || user.rol_id == '14'">Ver trámite</th> -->
+                    <th class="text-primary" ng-show="user.rol_id==1 || user.rol_id == '15'">Revisar requisitos</th>
+
+                   
+                    
+                </thead>
+                <tbody ng-repeat="establecimiento in establecimientos | orderBy:sortType:sortReverse | filter:ess_razon_social">
+                  <tr>
+                    <td>{{establecimiento.ess_razon_social}}</td>
+                    <td>{{establecimiento.ess_telefono}}</td>
+                    <td>{{establecimiento.te_fecha}}</td>
+                    <td ng-show="user.rol_id==1 || user.rol_id == '14'" class="text-center"><a class="btn btn-success" href="#/empresa/ver/{{establecimiento.et_id}}" title="VER ESTABLECIMIENTO" ><span class="glyphicon glyphicon-file"></span></a></td>
+                   <!--  <td ng-show="user.rol_id==1 || user.rol_id == '14'" class="text-center"><a class="btn btn-success" href="#/seguimiento-tramite-ces/{{establecimiento.et_id}}" title="VER TRÁMITE" ><span class="glyphicon glyphicon-file"></span></a></td> -->
+                    <td ng-show="user.rol_id==1 || user.rol_id == '15'" class="text-center"><a class="btn btn-info" href="#/documento-tramite/revisar/{{establecimiento.et_id}}" title="REVISAR REQUISITOS" ><span class="glyphicon glyphicon-file"></span></a></td>
+                                     
+                   
+                </tr>
+
+                </tbody>
+            </table>
+        </div>
+        <!-- FIN -->
+        <!-- AQUI VAN LOAS TABLAS O FORMULARIOS incrustados -->
+        </div>
+    </div>
+</div>

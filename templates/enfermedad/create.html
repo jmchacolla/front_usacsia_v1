@@ -1,0 +1,124 @@
+<!-- TOP-MENU inicio -->
+<div ng-include="'./templates/menu_inicio.html'"></div>
+
+<!-- CONTEXT-MENU  -->
+<div ng-include="'./templates/menu_lateral.html'"></div>
+<!-- CONTENIDO MODULO inicio -->
+<div class="col-md-8 col-sm-8">
+  
+    <div class="row">
+      <div class="col-md-12">
+        <h2 class="text-primary">
+          <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>
+          {{ajustes.pagina.titulo}}
+        </h2>
+        <hr>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+  		<!-- AQUI VAN LAS TABLAS O FORMULARIOS incrustados -->
+  		<!-- INICIO -->
+  		<!-- CONTENIDO MODULO inicio -->
+			<form role="form" name="addEnfermedad">
+				<div class="row">
+					<div class="col-md-12">
+					<!-- AQUI VAN LAS TABLAS O FORMULARIOS incrustados -->
+					<!-- INICIO -->
+  					<div class="well well-sm" style="background-color:#fff;">
+  						<div class="well well-sm">
+                Los campos marcados con asterisco (*) son obligatorios.
+              </div>
+              <p ng-show="ajustes.pagina.success" class="alert alert-success">{{ajustes.pagina.success}}</p>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="required-field-block">
+                    <label for="nombre" class="control-label">Nombre de la enfermedad: <strong class="fg_red">*</strong></label>
+                    <input type="text" name="nombre" placeholder="Nombre de la enfermedad" ng-model="enfermedad.enf_nombre" class="form-control" ng-model-options="{ updateOn: 'blur' }" required ng-pattern="patternCadenaNumero"></input>
+                    <span class="messages" ng-show="addEnfermedad.nombre.$touched">
+                      <span ng-show="addEnfermedad.nombre.$error.required">El campo es obligatorio.</span>
+                      <span ng-show="addEnfermedad.nombre.$error.pattern">No se admiten símbolos especiales.</span>
+                    </span>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="required-field-block">
+                    <label for="nombre" class="control-label">Causas de la enfermedad: <strong class="fg_red">*</strong></label>
+                    <input type="text" name="causas" placeholder="Causas de la enfermedad" ng-model="enfermedad.enf_causas" class="form-control" ng-model-options="{ updateOn: 'blur' }" required ng-pattern="patternCadenaNumero2"></input>
+                    <span class="messages" ng-show="addEnfermedad.causas.$touched">
+                      <span ng-show="addEnfermedad.causas.$error.required">El campo es obligatorio.</span>
+                      <span ng-show="addEnfermedad.causas.$error.pattern">No se admiten símbolos especiales.</span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="required-field-block">
+                    <label for="nombre" class="control-label">Consecuencias de la enfermedad: <strong class="fg_red">*</strong></label>
+                    <input type="text" name="consecuencias" placeholder="Consecuencias de la enfermedad" ng-model="enfermedad.enf_consecuencia" class="form-control" ng-model-options="{ updateOn: 'blur' }" required ng-pattern="patternCadenaNumero2">
+                    <span class="messages" ng-show="addEnfermedad.consecuencias.$touched">
+                      <span ng-show="addEnfermedad.consecuencias.$error.required">El campo es obligatorio.</span>
+                      <span ng-show="addEnfermedad.consecuencias.$error.pattern">No se admiten símbolos especiales.</span>
+                    </span>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="required-field-block">
+                    <label for="nombre" class="control-label">Prevención de la enfermedad: <strong class="fg_red">*</strong></label>
+                    <input type="text" name="prevencion" placeholder="Prevención de la enfermedad" ng-model="enfermedad.enf_prevencion" class="form-control" ng-model-options="{ updateOn: 'blur' }" required ng-pattern="patternCadenaNumero2"></input>
+                    <span class="messages" ng-show="addEnfermedad.prevencion.$touched">
+                      <span ng-show="addEnfermedad.prevencion.$error.required">El campo es obligatorio.</span>
+                      <span ng-show="addEnfermedad.prevencion.$error.pattern">No se admiten símbolos especiales.</span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="required-field-block">
+                    <label for="nombre" class="control-label">Descripción de la enfermedad: <strong class="fg_red">*</strong></label>
+                      <textarea name="descripcion" class="form-control" style="resize: vertical;min-height:70px;max-height: 150px;" ng-model="enfermedad.enf_descripcion" placeholder="Descripción de la enfermedad" ng-model-options="{ updateOn: 'blur' }" required ng-pattern="patternCadena2"></textarea>
+                      <span class="messages" ng-show="addEnfermedad.descripcion.$touched">
+                      <span ng-show="addEnfermedad.descripcion.$error.required">El campo es obligatorio.</span>
+                      <span ng-show="addEnfermedad.descripcion.$error.pattern">No se admiten símbolos especiales.</span>
+                    </span>
+          
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-md-6 col-md-offset-3 text-center">
+                  <div class="well well-sm">
+                    <div class="checkbox">
+                      <label style="font-size: 1.5em">
+                        <input type = "checkbox" ng-model = "para_enviar" title="Haga click aqui para habilitar o deshabilitar el envío del formulario"> 
+                        <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
+                        <small style="font-size: 0.6em" class="text-primary" title="Haga click en la casilla de verificación del lado para registrar la enfermedad">
+                          <span class="glyphicon glyphicon-hand-left"></span>
+                          <span class="glyphicon glyphicon-chevron-left"></span>
+                          ¿DESEA GUARDAR ESTE FORMULARIO?
+                        </small>
+                      </label>
+                    </div>
+                    <br>
+                    <button ng-show = "para_enviar" class="btn btn-primary" ng-click="submit($parent.enfermedad);reset(addEnfermedad)" ng-disabled="addEnfermedad.$invalid" title="Debe llenar todos los campos obligatorios de manera correcta"><span class="glyphicon glyphicon-save"></span> {{ajustes.pagina.action}}</button>
+                  </div>
+                </div>    
+              </div>
+  					</div>
+					</div>
+				</div>
+			</form>
+			<!-- CONTENIDO MODULO fin -->
+			
+		<p ng-show="ajustes.pagina.success" class="alert alert-success">{{ajustes.pagina.success}}</p>
+		</div> <!-- fin controlador de imagen -->
+
+		<!-- FIN -->
+		<!-- AQUI VAN LOAS TABLAS O FORMULARIOS incrustados -->
+	</div>
+</div>
+
+<!-- CONTENIDO MODULO fin -->

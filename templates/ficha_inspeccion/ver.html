@@ -1,0 +1,242 @@
+<!-- TOP-MENU inicio -->
+<div ng-include="'./templates/menu_inicio.html'"></div>
+<!-- CONTEXT-MENU  -->
+<div ng-include="'./templates/menu_lateral.html'"></div>
+<!-- CONTENIDO MODULO inicio -->
+	<div class="col-md-8 col-sm-8">
+		<div class="row">
+			<div class="col-md-12" >
+				<h2 class="text-primary">
+					<span class="glyphicon glyphicon-th-large" aria-hidden="true"></span>
+					<strong class="fg-gray">{{ajustes.pagina.titulo}}</strong>
+				</h2>
+				<hr class="bg-red">
+			</div>
+		</div>
+		<!-- Cabecera -->
+		<div class="well well-sm" style="background-color:#fff;" >
+		<h4 class="text-center text-primary">DATOS DE EMPRESA</h4>
+        <hr class="bg-red">
+		<div class="row">
+		
+		    <div class="col-md-12">
+			<!-- AQUI VAN LOAS TABLAS O FORMULARIOS incrustados -->
+				<div class="row">
+					<div class="col-md-6">
+				        <label class="text-primary control-label">Empresa:</label>
+		            	<p class="lead">{{ficha_inspeccion.establecimiento_solicitante.ess_razon_social}}</p>
+		            	<label class="text-primary control-label">Rubro:</label>
+			            	<p class="lead" >{{rubro.re_nombre}}</p>
+			            
+		            	
+					</div>
+				    <div class="col-md-6">
+						<label class="text-primary control-label">Tipo:</label>
+			            	<p class="lead">
+							{{ficha_inspeccion.establecimiento_solicitante.ess_tipo}} 
+							</p>
+			        	<label class="text-primary control-label">Propietario:</label>
+			            	<p class="lead" >{{propietario}}</p>
+		            </div>
+		        </div>
+				<h4 class="text-center text-primary">DIRECCIÓN</h4>
+        		<hr class="bg-red">
+				<div class="row">
+				<div class="col-md-6">
+				        
+			            <label class="text-primary control-label">Zona:</label>
+		            	<p class="lead">{{emp_tra.zona.zon_nombre}}</p>
+			            
+						<label class="text-primary control-label">Número:</label>
+			            	<p class="lead">{{emp_tra.establecimiento_sol.ess_numero}}</p>
+			    </div>
+			    <div class="col-md-6">
+					<label class="text-primary control-label">Avenida/Calle:</label>
+		            <p class="lead">{{emp_tra.establecimiento_sol.ess_avenida_calle}}</p>
+		            <label class="text-primary control-label">Stand:</label>
+	            	<p class="lead" ng-if="emp_tra.establecimiento_sol.ess_stand !=''">{{emp_tra.establecimiento_sol.ess_stand}}</p>
+	            	<p class="lead" ng-if="emp_tra.establecimiento_sol.ess_stand ==''">---</p>
+	            </div>
+
+				</div>
+				<h4 class="text-center text-primary">DATOS DE INSPECCIÓN</h4>
+        		<hr class="bg-red">
+				<div class="row">
+					<div class="col-md-6 col-sm-6 col-xs-12">
+				        <label class="text-primary control-label">Estado inspección:</label>
+			            	<p class="lead">{{ficha_inspeccion.ficha_inspeccion.fi_estado}}</p>
+		            	 
+			        </div>
+			        <div class="col-md-6 col-sm-6 col-xs-12">
+				        
+		            	 <label class="text-primary control-label">Recomendaciones:</label>
+		            	 <p class="lead" ng-if="ficha_inspeccion.ficha_inspeccion.fi_observacion !=''">{{ficha_inspeccion.ficha_inspeccion.fi_observacion}}</p>
+	            		<p class="lead" ng-if="ficha_inspeccion.ficha_inspeccion.fi_observacion ==''">SIN RECOMENDACIÓN</p>
+			        </div>
+			        <div class="col-md-6 col-sm-6 col-xs-12">
+			        <label class="text-primary control-label">Alejados de focos de insalubridad:</label>
+			            	<p class="lead" ng-if="ficha_inspeccion.ficha_inspeccion.fi_foco_insalubridad!=false || ficha_inspeccion.ficha_inspeccion.fi_foco_insalubridad !='0'">NO</p>
+			            	<p class="lead" ng-if="ficha_inspeccion.ficha_inspeccion.fi_foco_insalubridad==false || ficha_inspeccion.ficha_inspeccion.fi_foco_insalubridad =='0'">SI</p>
+					</div>
+					<div class="form-group col-md-6 col-sm-6 col-xs-12">
+					<label class="text-primary control-label">Exhibe certificado sanitario:</label>
+			            	<p class="lead" ng-if="ficha_inspeccion.ficha_inspeccion.fi_exibe_certificado!=false || ficha_inspeccion.ficha_inspeccion.fi_exibe_certificado !='0'">NO</p>
+			            	<p class="lead" ng-if="ficha_inspeccion.ficha_inspeccion.fi_exibe_certificado==false || ficha_inspeccion.ficha_inspeccion.fi_exibe_certificado =='0'">SI</p>
+					</div>
+					<div class="form-group col-md-6 col-sm-6 col-xs-12">
+					<label class="text-primary control-label">Exhibe carné sanitario:</label>
+			            	<p class="lead" ng-if="ficha_inspeccion.ficha_inspeccion.fi_exibe_carne!=false || ficha_inspeccion.ficha_inspeccion.fi_exibe_carne !='0'">NO</p>
+			            	<p class="lead" ng-if="ficha_inspeccion.ficha_inspeccion.fi_exibe_carne==false || ficha_inspeccion.ficha_inspeccion.fi_exibe_carne =='0'">SI</p>
+					</div>
+					<div class="form-group col-md-6 col-sm-6 col-xs-12">
+					<label class="text-primary control-label">Tiene Extinguidor:</label>
+			            	<p class="lead" ng-if="ficha_inspeccion.ficha_inspeccion.fi_extinguidor!=false || ficha_inspeccion.ficha_inspeccion.fi_extinguidor !='0'">NO TIENE</p>
+			            	<p class="lead" ng-if="ficha_inspeccion.ficha_inspeccion.fi_extinguidor==false || ficha_inspeccion.ficha_inspeccion.fi_extinguidor =='0'">TIENE</p>
+					</div>
+					<div class="form-group col-md-6 col-sm-6 col-xs-12">
+					<label class="text-primary control-label">Tiene Botiquin:</label>
+			            	<p class="lead" ng-if="ficha_inspeccion.ficha_inspeccion.fi_botiquin!=false || ficha_inspeccion.ficha_inspeccion.fi_botiquin !='0'">NO TIENE</p>
+			            	<p class="lead" ng-if="ficha_inspeccion.ficha_inspeccion.fi_botiquin==false || ficha_inspeccion.ficha_inspeccion.fi_botiquin =='0'">TIENE</p>
+					</div>
+				</div>
+				<div class="row" ng-if="user.rol_id == '16' ">
+					<div class="col-md-12">
+					<center>
+						<button  class="btn btn-xm btn-warning glyphicon glyphicon-check" data-toggle="modal" ng-click="rec(cate.fc_id,cate.cat_id)" data-target="#miCuadroModal1" title="Sancionar categoria" > SANCIONAR</button>
+			                <!--CUADRO MODAL-->
+			                <div id="miCuadroModal1" class="modal fade" role="dialog" tabindex="-1">
+			                  <div class="modal-dialog">
+			                    <div class="modal-content">
+			                     <div class="modal-header bg-red">
+				                    <button type="button" class="close" data-dismiss="modal">×</button>
+				                    <h4 class="modal-title fg-white">Sanción de categoria</h4>
+			                  	 </div>
+			                 	 <div class="modal-body lead text-center">
+			                     <!-- ¿Sancionar categoria?: -->
+			                     	<br>
+					                 <!-- <div class="well well-sm">
+					                  <strong>{{nombre | uppercase}}</strong>
+					                </div> -->
+			                		<label for="sc" class="control-label">Sancion: <strong class="fg_red">*</strong></label>
+                            			<select class="form-control " name="sc"  ng-model="cat.cat_id" ng-options="cat.cat_id as cat.cat_descripcion+'   -'+cat.cat_monto for cat in subcla" required>
+                            		</select>
+			                    </div>
+			                      <div class="modal-footer">
+			                        <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="submit(cat.cat_id)"><span class="glyphicon glyphicon-ok"></span> Si </button>
+			                        <button type="button" class="btn btn-danger" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> No</button>
+			                      </div>
+			                    </div>
+			                  </div>
+			                </div>
+			                <!--FIN CUADRO MODAL-->
+			        </center>
+					</div>	
+				</div>
+				<br>
+				<h4 class="text-center text-primary">CATEGORIA(S) DE EMPRESA</h4>
+        		<hr class="bg-red">
+				 
+				<div class="table-responsive">
+			        <table class="table table-hovertable table-bordered table-striped table-hover"  id="tablaES">
+			            <thead>
+
+		                    <th class="text-primary">Descripción</th>
+		                    <th >Código</th>
+		                    <th >Monto (Bs)</th>
+		                    <!-- <th>Ver sanción</th> -->
+		                    <!-- <th ng-if="user.rol_id == '1' || user.rol_id == '16' ">Sanción</th>  -->
+
+			            </thead>
+			            <tbody ng-repeat="cate in ficha_inspeccion.ficha_categoria | orderBy:sortType:sortReverse">
+			                <tr>
+			                    <td>{{cate.cat_descripcion}}</td>
+			                    <td>{{cate.cat_codigo}}</td>
+			                    <td>{{cate.cat_monto}}</td>
+								<!-- <td class="text-center">
+				                <a href="#/sancion/ver/{{cate.fc_id}}/{{cate.cat_descripcion}}" class="btn btn-success" title="VER SANCIONES"><span class="glyphicon glyphicon-file"></span></a>
+				                </td> -->
+			                    <!-- <td ng-if="user.rol_id == '1' || user.rol_id == '16' "> -->
+					                <!-- BOTON PARA CUADROS MODALES -->
+					                <!-- <button  class="btn btn-xm btn-warning glyphicon glyphicon-check" data-toggle="modal" ng-click="rec(cate.fc_id,cate.cat_id)" data-target="#miCuadroModal1" title="Sancionar categoria" ></button> -->
+					                <!--CUADRO MODAL-->
+					                <!-- <div id="miCuadroModal1" class="modal fade" role="dialog" tabindex="-1">
+					                  <div class="modal-dialog">
+					                    <div class="modal-content">
+					                     <div class="modal-header bg-red">
+						                    <button type="button" class="close" data-dismiss="modal">×</button>
+						                    <h4 class="modal-title fg-white">Sanción de categoria</h4>
+					                  	 </div>
+					                 	 <div class="modal-body lead text-center">
+					                     Categoria de empresa:
+					                     	<br>
+							                 <div class="well well-sm">
+							                  <strong>{{nombre | uppercase}}</strong>
+							                </div>
+					                		<label for="sc" class="control-label">Sancion: <strong class="fg_red">*</strong></label>
+                                    			<select class="form-control " name="sc"  ng-model="cat.cat_id" ng-options="cat.cat_id as cat.cat_descripcion+'   -'+cat.cat_monto for cat in subcla" required>
+                                    		</select>
+					                    </div>
+
+					                      <div class="modal-footer">
+					                        <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="submit(cat.cat_id)"><span class="glyphicon glyphicon-ok"></span> GUARDAR </button>
+
+					                      <div class="modal-footer"><!-- ,checkedI 
+					                        <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> CANCELAR</button>-->
+
+					                  <!-- 
+					                        <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="submit(cat.cat_id)"><span class="glyphicon glyphicon-ok"></span> GUARDAR </button>
+					                      </div>
+					                    </div>
+					                  </div>
+					                </div>  -->
+					                <!--FIN CUADRO MODAL-->
+					              <!-- </td> -->
+			                  </tr>
+			                </tbody>
+			            </table>
+			          </div>
+	
+				<br>
+				<div class="table-responsive" ng-show="ver">
+				<h4 class="text-center text-primary">SANCIONES</h4>
+        		<hr class="bg-red">
+			        <table class="table table-hovertable table-bordered table-striped table-hover"  id="tablaES">
+			            <thead>
+		                    <th >Sanción</th>
+		                    <th >Monto (Bs)</th>
+		                    </thead>
+			            <tbody ng-repeat="cate in fichasancion | orderBy:sortType:sortReverse">
+			                <tr>
+			                    <td>{{cate.cat_descripcion}}</td>
+			                    <td>{{cate.cat_monto}}</td>
+							 </tr>
+			                </tbody>
+			            </table>
+			    </div>
+	
+				
+				
+				<!-- <div class="row" ng-if="user.rol_id == '1' || user.rol_id == '16' ">
+                                <div class="col-md-4">
+                                  <div class="formulario">
+                                     <div class="checkbox">
+                                            <input class="checkbox" type="checkbox" name="acomp" id="M" value="M" ng-model="checkedI" ng-init="checked=false" ng-click="reset_acomp(checkedI)">
+                                            <label for="M">¿Sancionar?</label>
+                                      </div>
+                                  </div>
+                                </div>
+                                <div ng-if="checkedI" class=" col-md-6">
+                                    <select class="form-control " name="sc"  ng-model="cat.cat_id" ng-options="cat.cat_id as cat.cat_descripcion+'   -'+cat.cat_monto for cat in subcla">
+                                </div>
+                                 <div ng-if="checkedI" class=" col-md-6">
+                                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="submit(cat.cat_id)"><span class="glyphicon glyphicon-ok"></span> GUARDAR </button>
+                                </div>
+                                
+                </div> -->
+				
+			<!-- FIN FORMULARIO O TABLA-->
+			</div>
+		</div>
+	</div>
+	</div>
+<!-- CONTENIDO MODULO fin -->

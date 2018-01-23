@@ -1,0 +1,57 @@
+<!-- TOP-MENU inicio  -->
+<div ng-include="'./templates/menu_inicio.html'"></div>
+
+<!-- CONTEXT-MENU  -->
+	<div ng-include="'./templates/menu_lateral.html'">
+	</div>
+	<!-- CONTENIDO MODULO inicio -->
+	<div class="col-md-8 col-sm-8">
+		<div class="row">
+			<div class="col-md-12">
+				<h2 class="text-primary">
+					<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+					{{ajustes.pagina.titulo}}
+				</h2>
+				<hr>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-12">
+			<!-- AQUI VAN LAS TABLAS O FORMULARIOS incrustados -->
+	<!-- INICIO -->
+			<div ng-show="loading" class="text-center"><br><img ng-src="./images/image.gif"></div>
+			<div ng-show="!loading && !msg">No se encontraron resultados</div>
+			<div class="well well-sm" style="background-color:#fff;" class="animated">
+				<h4 class="text-center text-primary">I. DATOS ZONA</h4>
+				<hr class="bg-red">
+			    <div class="row"><!--  ng-repeat="imagen in persona.imagen"-->
+  
+		          	<div class="col-md-9 col-sm-8 col-xs-12">
+		            	<div class="row">
+		              		<div class="col-md-4 col-sm-6 col-xs-6">
+		                		<label class="control-label">Macrodistrito:</label><br>
+		                		{{zona.zon_macrodistrito}}
+		              		</div>
+		              		<div class="col-md-4 col-sm-6 col-xs-6">
+		                		<label class="control-label">Distrito:</label><br>
+		                		{{zona.zon_distrito}}
+		              		</div>
+		              		<div class="col-md-4 col-sm-6 col-xs-6">
+		                		<label class="control-label">Nombre:</label><br>
+		                		{{zona.zon_nombre}}
+		                	</div>
+		            	</div>
+		            	<br>
+
+		          	</div>    
+		        </div>
+		
+		    </div>
+			<!-- FIN -->
+			<!-- AQUI VAN LOAS TABLAS O FORMULARIOS incrustados -->
+			</div>
+		</div>
+	</div>
+
+<!-- CONTENIDO MODULO fin

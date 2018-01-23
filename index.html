@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="es" ng-app="adminApp">
+<head>
+	<meta charset="UTF-8">
+	<title>USACSIA</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--PARA CACHEO-->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+	<meta http-equiv="Pragma" content="no-cache" />
+	<meta http-equiv="Expires" content="0" />
+
+	<!--PARA QUITAR EL CARACTER '#' DE LAS RUTAS DE ANGULAR<base href="/proto_sedes/version4.5/">
+    -->
+	<link rel="stylesheet" href="./bower_components/bootstrap/dist/css/bootstrap.css">
+	<!-- ESTILOS PROPIOS -->
+	 <!-- <link rel="stylesheet" href="./css/estilos.css"> -->
+	<!-- <link rel="stylesheet" type="text/css" href="./css/estilospersonas.css"> -->
+	<!-- <link rel="stylesheet" type="text/css" href="./css/tema_usacsia.css"> -->
+	<link rel="stylesheet" type="text/css" href="./css/theme5.css">
+	<link rel="stylesheet" type="text/css" href="./css/estilos_radio.css">
+
+	<link rel="shortcut icon" href="./images/logo.png" />
+
+	<!--ESTILOS PARA CLOCK PICKER -->
+	<link rel="stylesheet" type="text/css" href="./bower_components/dist/bootstrap-clockpicker.min.css">
+	<!--ESTILOS PARA DATE PICKER-->
+	<link rel="stylesheet" href="./bower_components/datepicker/jquery-ui.css" />
+	
+	<!-- ANGULAR-TOASTR -->
+	<link rel="stylesheet" href="./bower_components/angular-toastr/dist/angular-toastr.css" />
+	<!-- <link href="https://fonts.googleapis.com/css?family=Overpass" rel="stylesheet">	 -->
+	<!-- <link href="https://fonts.googleapis.com/css?family=Overpass" rel="stylesheet">	 -->
+	<style type="text/css">
+		blockquote{
+			border:1px solid #ccc;
+			border-left:5px solid #a62632;
+		}
+		.thumb-establecimiento{
+			background: transparent url(./images/centro-thumb.png) center no-repeat; width:100%; height:150px;
+		}
+
+/*		.bg-textura{
+			background: #666666 url(./images/bg_textura.png) bottom no-repeat;
+			background-position: 0em, 100em;
+			padding-top: 10px;
+			padding-left: 10px;
+			padding-right: 10px;
+		}*/
+		.bg-white{
+			background-color:#ffffff;
+			border-bottom:1px solid #ccc;
+		}
+		.bg-gray{
+			background-color:#333;
+			border-bottom:1px solid #333;
+		}
+		.bg-red{
+			background-color:#cc0000;
+			border-bottom:1px solid #aa0000;
+		}
+		.bg-green{
+			background-color:#26a69a;
+			border-bottom:1px solid #26a69a;
+		}
+		.bg-gray{
+			background-color:#9A9BA0;
+			border-bottom:1px solid #9A9BA0;
+		}
+		.bg-white{
+			background-color:#fff;
+		}
+		.bg-green{
+			background-color:#26a69a;
+			border-bottom:1px solid #26a69a;
+		}
+		.fg-white{color:#fff;}
+		.no-border{border:0 !important;}
+		.fg-gray{color:#aaa;}
+		.fg_red{color:#f00;}
+		.pie_pagina{
+			background: #ffffff;
+			background: -moz-linear-gradient(top, #ffffff 0%, #f0f0f0 69%, #d9d9d9 78%, #a8a8a8 89%, #696969 100%);
+			background: -webkit-gradient(left top, left bottom, color-stop(0%, #ffffff), color-stop(69%, #f0f0f0), color-stop(78%, #d9d9d9), color-stop(89%, #a8a8a8), color-stop(100%, #696969));
+			background: -webkit-linear-gradient(top, #ffffff 0%, #f0f0f0 69%, #d9d9d9 78%, #a8a8a8 89%, #696969 100%);
+			background: -o-linear-gradient(top, #ffffff 0%, #f0f0f0 69%, #d9d9d9 78%, #a8a8a8 89%, #696969 100%);
+			background: -ms-linear-gradient(top, #ffffff 0%, #f0f0f0 69%, #d9d9d9 78%, #a8a8a8 89%, #696969 100%);
+			background: linear-gradient(to bottom, #ffffff 0%, #f0f0f0 69%, #d9d9d9 78%, #a8a8a8 89%, #696969 100%);
+			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#696969', GradientType=0 );
+		}
+		.animate-show-hide.ng-hide {
+		  opacity: 0;
+		}
+		.messages {
+			color: #FA787E;
+			display:block;
+			clear:both;
+			font-style:italic;
+		}
+		html {
+		  position: relative;
+		  min-height: 100%;
+		}
+		.footer {
+		  position: absolute;
+		  bottom: 0;
+		  width: 100%;
+		  /* Set the fixed height of the footer here */
+		  height: 50px;
+		  background-color: #777;
+		  color:#fff;
+		  padding-top:15px;
+		}
+		body { 
+			padding-top: 50px; 
+			font-family: 'Overpass', sans-serif;		
+			margin-bottom: 50px;
+		}
+		.menu_item{
+			background-color:#eee;
+
+			-webkit-border-radius: 4px;
+			-moz-border-radius: 4px;
+			border-radius: 4px;
+		}
+		.menu_item:hover{
+			background-color:#ddd;
+		}
+		.imagen_buscador:hover{
+			border:1px solid #ccc;
+			background-color:#eee;
+			-webkit-border-radius: 9px;
+			-moz-border-radius: 9px;
+			border-radius: 9px;
+		}
+		/*PARA CHECKBOX Y RADIO BUTTON*/
+		.checkbox label:after, 
+			.radio label:after {
+				content: '';
+				display: table;
+				clear: both;
+			}
+			.checkbox .cr,
+			.radio .cr {
+				position: relative;
+				display: inline-block;
+				border: 1px solid #a9a9a9;
+				border-radius: .25em;
+				width: 1.3em;
+				height: 1.3em;
+				float: left;
+				margin-right: .5em;
+			}
+			.radio .cr {
+				border-radius: 50%;
+			}
+			.checkbox .cr .cr-icon,
+			.radio .cr .cr-icon {
+				position: absolute;
+				font-size: .8em;
+				line-height: 0;
+				top: 50%;
+				left: 20%;
+			}
+			.radio .cr .cr-icon {
+				margin-left: 0.04em;
+			}
+			.checkbox label input[type="checkbox"],
+			.radio label input[type="radio"] {
+				display: none;
+			}
+			.checkbox label input[type="checkbox"] + .cr > .cr-icon,
+			.radio label input[type="radio"] + .cr > .cr-icon {
+				transform: scale(3) rotateZ(-20deg);
+				opacity: 0;
+				transition: all .3s ease-in;
+			}
+			.checkbox label input[type="checkbox"]:checked + .cr > .cr-icon,
+			.radio label input[type="radio"]:checked + .cr > .cr-icon {
+				transform: scale(1) rotateZ(0deg);
+				opacity: 1;
+			}
+			.checkbox label input[type="checkbox"]:disabled + .cr,
+			.radio label input[type="radio"]:disabled + .cr {
+				opacity: .5;
+			}
+		/*FIN CHECKBOX Y RADIO BUTTON*/
+		/*PARA NOTIFICACIONES*/
+		.icono-btn {
+		}
+		.icono-btn i {font-size: 20px;}
+		.icono-btn .label {
+		  position: absolute;
+		  top: 7px;
+		  right: 5px; }
+		.emergencia {
+		  animation-name: parpadeo;
+		  animation-duration: 1s;
+		  animation-timing-function: linear;
+		  animation-iteration-count: infinite;
+		  -webkit-animation-name: parpadeo;
+		  -webkit-animation-duration: 1s;
+		  -webkit-animation-timing-function: linear;
+		  -webkit-animation-iteration-count: infinite; }
+
+		@-moz-keyframes parpadeo {
+		  0% {
+		    opacity: 1.0; }
+		  50% {
+		    opacity: 0.0; }
+		  100% {
+		    opacity: 1.0; } }
+		@-webkit-keyframes parpadeo {
+		  0% {
+		    opacity: 1.0; }
+		  50% {
+		    opacity: 0.0; }
+		  100% {
+		    opacity: 1.0; } }
+		@keyframes parpadeo {
+		  0% {
+		    opacity: 1.0; }
+		  50% {
+		    opacity: 0.0; }
+		  100% {
+		    opacity: 1.0; } }
+    	/*FIN NOTIFICACIONES*/
+		.loader-img{
+			width:90px !important;
+		}
+	</style>
+	<link rel="shortcut icon" href="./images/logo.png" />
+</head>
+<body>
+<div ng-view></div>
+
+	<div style="clear:both;" class="clearfix"></div>
+	<footer class="footer">
+	  <div class="row">
+		<div class="col-md-10 col-md-offset-1 text-center">
+			&copy; 2017 Servicio Departamental de Salud La Paz. Todos los derechos reservados.
+		</div>
+	  </div>
+    </footer>
+
+	<script type="text/javascript" src="./bower_components/jquery/dist/jquery.min.js"></script>
+	<script type="text/javascript" src="./bower_components/bootstrap/dist/js/bootstrap.js"></script>
+	
+	<!-- SCRIPTS PARA ANGULAR -->
+	<script type="text/javascript" src="./bower_components/angular/angular.min.js" ></script>
+	<script type="text/javascript" src="./bower_components/angular-route/angular-route.min.js" ></script>
+	<script type="text/javascript" src="./bower_components/angular-resource/angular-resource.min.js" ></script>
+	<!-- SATELLIZER -->
+	<script type="text/javascript" src="./bower_components/satellizer/dist/satellizer.min.js" ></script>
+	<!-- ANGULAR-TOASTR -->
+	<script type="text/javascript" src="./bower_components/angular-toastr/dist/angular-toastr.tpls.js"></script>
+	<!--PARA TABS-->
+	<script type="text/javascript" src="./bower_components/tabs/tabs.js"></script>
+	<!--PARA CREAR PDFS-->
+	<script type="text/javascript" src="./bower_components/angular-ui-grid/ui-grid.js"></script>
+	<!--PARA IMPRIMIR EN PDF-->
+	<script type="text/javascript" src="./bower_components/pdfmake/build/pdfmake.js"></script>
+	<script type="text/javascript" src="./bower_components/pdfmake/build/vfs_fonts.js"></script>
+	<script type="text/javascript" src="./bower_components/angular-ui-grid/ui-grid.js"></script>
+	<script type="text/javascript" src="./templates/pdf.js"></script>
+      	
+	<!--PARA DATEPICKER-->
+	<script type="text/javascript" src="./bower_components/datepicker/jquery-ui.min.js"></script>
+	<!--PARA DAR ESTILO A INPUT FILE-->
+	<script type="text/javascript" src="./bower_components/file-style/bootstrap-filestyle.js"></script>
+	<!--MOMENT-->
+	<script type="text/javascript" src="./bower_components/datepicker/date/moment.js"></script>
+	<script type="text/javascript" src="./bower_components/datepicker/date/angular-moment.min.js"></script>
+
+	<!--PARA PAGINACION
+	<script type="text/javascript" src="./bower_components/angular-pagination/angular-pagination.js"></script>-->
+	<!--PARA PDF 2-->
+	<script type="text/javascript" src="./bower_components/jspdf-pdf/jspdf.debug.js"></script>
+    <script type="text/javascript" src="./bower_components/jspdf-pdf/jspdf.plugin.autotable.js"></script>
+    <!--PARA FILTRADO-->
+    <script src="./bower_components/angular-filter/dist/angular-filter.min.js"></script>
+    <!--PARA RE-CAPTCHA-->
+    <script src="./bower_components/angular-recaptcha/release/angular-recaptcha.min.js"></script>
+    <!-- PARA CODIGO QR -->
+    <script type="text/javascript" src="./bower_components/angular-qr/qrcode.js"></script>
+    <script type="text/javascript" src="./bower_components/angular-qr/qrcode_UTF8.js"></script>
+    <!-- MOMENT MANEJO DE DATE EN FRONT -->
+    <script type="text/javascript" src="./bower_components/moment/moment.js"></script>
+    <script type="text/javascript" src="./bower_components/angular-moment/angular-moment.js"></script>
+
+	<!-- SCRIPTS PARA LA APLICACION -->
+	<script src="./scripts/app.js"></script>
+	<!-- <script src="./scripts/controllers/alertaController.js"></script> -->
+	<!-- <script src="./scripts/controllers/asignacionHorarioController.js"></script>
+	<script src="./scripts/controllers/cargoController.js"></script>
+	<script src="./scripts/controllers/citaprogramadaController.js"></script> -->
+	<script src="./scripts/controllers/consultorioController.js"></script>
+	<!-- <script src="./scripts/controllers/contrareferenciaController.js"></script>
+	<script src="./scripts/controllers/departamentoController.js"></script>
+	<script src="./scripts/controllers/dosisvacunaController.js"></script>
+	<script src="./scripts/controllers/enfermedadController.js"></script> -->
+	<script src="./scripts/controllers/establecimientoController.js"></script>
+	<script src="./scripts/controllers/funcionarioController.js"></script>
+	<script src="./scripts/controllers/imgController.js"></script>
+	<!-- <script src="./scripts/controllers/institucionController.js"></script> -->
+	<script src="./scripts/controllers/laboratorioController.js"></script>
+	<script src="./scripts/controllers/municipioController.js"></script>
+	<!-- <script src="./scripts/controllers/pacienteController.js"></script> -->
+	<script src="./scripts/controllers/paisController.js"></script>
+	<script src="./scripts/controllers/pdfController.js"></script>
+	<!-- <script src="./scripts/controllers/personaController.js"></script> -->
+	<!-- <script src="./scripts/controllers/portalController.js"></script>
+	<script src="./scripts/controllers/provinciaController.js"></script> -->
+	<script src="./scripts/controllers/preregistroController.js"></script>
+	<!-- <script src="./scripts/controllers/redController.js"></script>
+	<script src="./scripts/controllers/regionController.js"></script>
+	<script src="./scripts/controllers/referenciaController.js"></script>
+	<script src="./scripts/controllers/reservaController.js"></script>
+	<script src="./scripts/controllers/seguroController.js"></script>
+	<script src="./scripts/controllers/rolController.js"></script>
+	<script src="./scripts/controllers/servicioController.js"></script>
+	<script src="./scripts/controllers/subsectorController.js"></script>
+	<script src="./scripts/controllers/tipoController.js"></script> -->
+	<script src="./scripts/controllers/usuarioController.js"></script>
+	<!-- <script src="./scripts/controllers/vacunaController.js"></script> -->
+	<script src="./scripts/controllers/filtros.js"></script>
+	<script src="./scripts/controllers/roles.js"></script>
+<!-- 	<script src="./scripts/view1.js"></script> -->
+
+<!-- WENDY -->
+	<script src="./scripts/controllers/persona2Controller.js"></script>
+	<script src="./scripts/controllers/establecimientosolicitanteController.js"></script>
+	<script src="./scripts/controllers/fichaInspeccionController.js"></script>
+	<script src="./scripts/controllers/asignacionZonaController.js"></script>
+	<script src="./scripts/controllers/zonaController.js"></script>
+	
+	
+	
+
+	<!-- USACSIA -->
+	<!-- VERO -->
+	
+	<script src="./scripts/controllers/pruebaLaboratorioController.js"></script>
+	<script src="./scripts/controllers/personaTramiteController.js"></script>
+	<script src="./scripts/controllers/parasitoController.js"></script>
+	<script src="./scripts/controllers/parasitoTratamientoController.js"></script>
+	<script src="./scripts/controllers/tratamientoController.js"></script>
+	<script src="./scripts/controllers/muestraController.js"></script>
+	<script src="./scripts/controllers/fichaController.js"></script>
+	<script src="./scripts/controllers/documentoTramiteController.js"></script>
+	<script src="./scripts/controllers/firmaController.js"></script>
+	<script src="./scripts/controllers/pjuridicaController.js"></script>
+	<script src="./scripts/controllers/documentoController.js"></script>
+	<script src="./scripts/controllers/empresafuncionarioController.js"></script>
+	<script src="./scripts/controllers/inspectoresInspeccionesController.js"></script>
+
+	
+	<!-- JHON -->
+	<script src="./scripts/controllers/pruebaMedicaController.js"></script>
+	<script src="./scripts/controllers/pruebaEnfermedadController.js"></script>
+	<script src="./scripts/controllers/carneController.js"></script>
+	<script src="./scripts/controllers/seguimientoController.js"></script>
+	<script src="./scripts/controllers/arancelController.js"></script>
+	<script src="./scripts/controllers/empresatramiteController.js"></script>
+	<script src="./scripts/controllers/pagopendienteController.js"></script>
+	<script src="./scripts/controllers/certificadoController.js"></script>
+	<script src="./scripts/controllers/plantillaPDFController.js"></script>
+
+	<!-- USACSIA -->
+
+
+	<!-- REPORTES -->
+	<script src="./scripts/controllers/reportesController.js"></script>
+
+
+
+	<!-- SCRIPTS PARA EL LOGIN -->
+	<script src="./scripts/controllers/loginController.js"></script>
+	<script src="./scripts/controllers/menuController.js"></script>
+    <script src="./scripts/services/authService.js"></script>
+
+    <!-- SERVICIOS -->
+	<script src="./scripts/services/Services.js"></script>
+
+	<!--PARA CLOCK PICKER-->
+	<script type="text/javascript" src="./bower_components/dist/bootstrap-clockpicker.min.js"></script>
+	<script type="text/javascript">
+		$('.clockpicker').clockpicker()
+			.find('input').change(function(){
+				console.log('llamo 2');
+				console.log(this.value);
+			});
+			var input = $('#single-input').clockpicker({
+				placement: 'bottom',
+				align: 'left',
+				autoclose: true,
+				'default': 'now'
+			});
+
+		$('.clockpicker-with-callbacks').clockpicker({
+				donetext: 'Done',
+			init: function() { 
+				console.log("colorpicker initiated");
+			},
+			beforeShow: function() {
+				console.log("before show");
+			},
+			afterShow: function() {
+				console.log("after show");
+			},
+			beforeHide: function() {
+				console.log("before hide");
+			},
+			afterHide: function() {
+				console.log("after hide");
+			},
+			beforeHourSelect: function() {
+				console.log("before hour selected");
+			},
+			afterHourSelect: function() {
+				console.log("after hour selected");
+			},
+			beforeDone: function() {
+				console.log("before done");
+			},
+			afterDone: function() {
+				console.log("after done");
+			}
+		})
+		.find('input').change(function(){
+			console.log(this.value);
+		});
+
+		// Manually toggle to the minutes view
+		$('#check-minutes').click(function(e){
+			// Have to stop propagation here
+			e.stopPropagation();
+			input.clockpicker('show')
+					.clockpicker('toggleView', 'minutes');
+		});
+		if (/mobile/i.test(navigator.userAgent)) {
+			$('input').prop('readOnly', true);
+		}
+		  
+	</script>
+	
+	<!--APIS PARA GOOGLE MAPS-->
+	<script async defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBb0GECW-YHPKJx5FtAAaiwQrRjMg_tFQ4">
+    </script>
+	<!--LIBRERIA PARA MAPAS DE ANGULAR -->
+	<script src="./bower_components/ng-map.js"></script>
+</body>
+</html>

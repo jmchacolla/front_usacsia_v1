@@ -1,0 +1,112 @@
+<!-- TOP-MENU inicio -->
+<div ng-include="'./templates/menu_inicio.html'"></div>
+
+<!-- CONTEXT-MENU  -->
+  <div ng-include="'./templates/menu_lateral.html'">
+  </div>
+<!-- CONTENIDO MODULO inicio -->
+  <div class="col-md-8 col-sm-8">
+    <div class="row">
+      <div class="col-md-12">
+        <h2 class="text-primary">
+          <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+          {{ajustes.pagina.titulo}}
+        </h2>
+        <hr>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+      <div class="well well-sm">
+        <strong class="pull-left lead">Herramientas: &nbsp;</strong>
+        <form class="form-inline pull-left">
+          <input type="text" class="form-control" placeholder="Filtrar por ..." ng-model="es_nombre">
+        </form>
+        &nbsp;&nbsp;
+        <div class="clearfix"></div>
+      </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+      <!-- AQUI VAN LAS TABLAS O FORMULARIOS incrustados -->
+      <!-- INICIO -->
+      <div class="row" ng-controller="RedCtrl">
+        <div class="col-md-2">
+          <label class="control-label">Seleccione red: </label>
+        </div>
+        <div class="col-md-4">
+          <select class="form-control" ng-model="vm.aux" ng-options="red.red_id as red.red_nombre for red in reds" ng-change="vm.buscaRed()">
+          </select>
+        </div>
+      </div>
+      <br>
+      <div ng-show="!loading && !msg">No se encontraron resultados <br></div>
+        <table class="table table-bordered table-striped table-hover"  ng-show="msg">
+          <thead >
+            <th class="text-primary">
+              <a href="" ng-click="sortType = 'es_nombre'; sortReverse = !sortReverse">
+              Nombre
+              <span ng-show="sortType == 'es_nombre' && !sortReverse" class="glyphicon glyphicon-sort-by-alphabet"></span>
+              <span ng-show="sortType == 'es_nombre' && sortReverse" class="glyphicon glyphicon-sort-by-alphabet-alt"></span>
+              </a>
+            </th>
+            <th class="text-primary">Nivel</th>
+            <th class="text-primary">Hras.Atención</th>
+            <th class="text-primary">Dirección</th>
+            <th class="text-primary">Ver</th>
+            <th class="text-primary">Editar</th>
+            <th class="text-primary">Borrar</th>
+          </thead>
+          <tbody ng-repeat="rede in vm.redes | orderBy:sortType:sortReverse | filter:es_nombre">
+            <tr>
+              <td><a href="#/establecimientos/ver/{{rede.es_id}}">{{rede.es_nombre}}</a></td>
+              <td>{{rede.es_nivel}}</td>
+              <td>{{rede.es_horas}}</td>
+              <td>{{rede.es_zona_localidad_comuni + ", " + rede.es_avenida_calle + " #" + rede.es_numero}}</td>
+              <td class="text-center">
+                <a class="btn btn-success" href="#/establecimientos/ver/{{rede.es_id}}" title="Ver establecimiento"><span class="glyphicon glyphicon-file"></span></a>
+              </td>
+              <td>
+                <a ng-href="#/establecimientos/edit/{{rede.es_id}}" class="btn btn-primary" title="Editar" ><span class="glyphicon glyphicon-pencil "></span>
+                </a>
+              </td>
+              <td>
+                <!-- BOTON PARA CUADROS MODALES -->
+              <button class="btn btn-danger" title="Eliminar" data-toggle="modal" data-target="#miCuadroModal1" ng-click="get_es_id(rede.es_id, rede.es_nombre)"><span class="glyphicon glyphicon-trash "></span></button>
+              <!--CUADRO MODAL-->
+              <div id="miCuadroModal1" class="modal fade" role="dialog" tabindex="-1">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header bg-green">
+                      <button type="button" class="close" data-dismiss="modal">×</button>
+                      <h4 class="modal-title fg-white">ElIMINAR ESTABLECIMIENTO DE SALUD</h4>
+                    </div>
+                    <div class="modal-body lead text-center">
+                      ¿Esta seguro que desea eliminar este establecimiento de salud?
+                      <br>
+                      <div class="well well-sm">
+						<strong>{{nombre | uppercase}}</strong>
+					  </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="remove(establecimiento.es_id)">
+						<span class="glyphicon glyphicon-ok"></span>
+						SI
+					  </button>
+                      <button type="button" class="btn btn-danger" data-dismiss="modal">
+						<span class="glyphicon glyphicon-remove"></span>
+						NO
+					  </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!--FIN CUADRO MODAL-->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>

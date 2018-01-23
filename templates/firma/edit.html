@@ -1,0 +1,78 @@
+<!-- TOP-MENU inicio -->
+<div ng-include="'./templates/menu_inicio.html'"></div>
+<!-- CONTEXT-MENU  -->
+<div ng-include="'./templates/menu_lateral.html'"></div>
+<!-- CONTENIDO MODULO inicio -->
+<div class="col-md-8 col-sm-8">
+    <div class="row">
+      <div class="col-md-12">
+        <h2 class="text-primary">
+          <span class="glyphicon glyphicon-th-large" aria-hidden="true"></span>
+          {{ajustes.pagina.titulo}}
+        </h2>
+	    <hr class="bg-red">
+      </div>
+    </div>
+    <div class="row">
+      	<div class="col-md-12">
+  		<!-- AQUI VAN LAS TABLAS O FORMULARIOS incrustados -->
+  		<!-- INICIO -->
+	  		<label class="control-label">Los campos marcados con asterisco (<strong class="fg_red">*</strong>) son obligatorios</label>	
+			<!-- CONTENIDO MODULO inicio -->
+				<form role="form" name="docForm" novalidate>
+					<div class="row" ng-controller="UploadFirmaCtrl as vm">
+						<div class="col-md-12">
+						<!-- AQUI VAN LAS TABLAS O FORMULARIOS incrustados -->
+						<!-- INICIO -->
+							<div class="well well-sm" style="background-color:#fff;">
+								<div class="panel">
+								<div class="row">
+									<div class="col-md-4">
+					                    <div class="well well-sm">
+					                    	<h4 class="text-center text-primary"> </h4>
+											<div ng-if="thumbnail.dataUrl == ''">
+												<img ng-src="./images/imagen-default.jpg" align="center" class="img-responsive img-thumbnail"/>
+											</div>
+											<div ng-if="thumbnail.dataUrl != ''" style="height:190px !important; overflow:auto;">
+												<img ng-src="{{ thumbnail.dataUrl }}" align="center" class="img-responsive img-thumbnail"/>
+											</div>
+											
+											<div class="form-group">
+												<label>Cargar Imagen</label>
+												<input type="file" name="fileInput" id ="fileInput" class="filestyle" data-buttonText="Find file" file-model="vm.ima_nombre" onchange="angular.element(this).scope().photoChanged(this.files)" required/>
+												<input type="hidden" name="" ng-model="firma.fir_nombre" value="{{vm.ima_nombre}}">
+												<br>
+											</div> 
+					                    </div>
+					                </div>
+
+					                <div class="col-md-8">
+				                    	<h4 class="text-center text-primary">DESCRIPCIÓN GENERAL</h4>
+				                    	<hr class="bg-red">
+				                   		<p class="alert alert-success">ESTA ES LA FIRMA QUE SE UTILIZARÁ PARA DAR VALIDEZ AL DOCUMENTO DE CARNÉ SANITARIO. PORFAVOR CARGUE UNA IMAGEN</p>				
+					                </div>
+					                <!-- solo dejar este -->
+								</div>
+								</div>
+								<center>
+					                    <button ng-disabled="docForm1.$invalid" type="submit" class="btn btn-primary" ng-click="vm.enviar();submitf()" title="Debe llenar todos los campos obligatorios de manera correcta"><span class="glyphicon glyphicon-save"></span> GUARDAR</button>
+					            </center>
+							</div>
+						<!-- FIN -->
+						<!-- AQUI VAN LOS TABLAS O FORMULARIOS incrustados -->
+						</div>
+					</div>
+				</form>
+				<!-- CONTENIDO MODULO fin -->
+		</div> <!-- fin controlador de imagen -->
+
+		<!-- FIN -->
+		<!-- AQUI VAN LOAS TABLAS O FORMULARIOS incrustados -->
+	</div>
+	<script type="text/javascript">
+    	$(":file").filestyle({buttonText: " Abrir"});
+    	//$('#fileInput').filestyle({buttonName : 'btn-warning'});
+	</script>
+</div>
+<script type="text/javascript">
+</script>

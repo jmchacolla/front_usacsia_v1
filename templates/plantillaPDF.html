@@ -1,0 +1,19 @@
+<div ng-include="'./templates/menu_inicio.html'"></div>
+<!-- CONTEXT-MENU  -->
+  <div ng-include="'./templates/menu_lateral.html'"></div>
+<!-- CONTENIDO MODULO inicio -->
+<div class="col-md-8 col-sm-8">
+    <div class="row">
+       <div class="col-md-12">
+         <h2 class="text-primary">
+           <span class="glyphicon glyphicon-th-large" aria-hidden="true"></span>
+           {{ajustes.pagina.titulo}}
+         </h2>
+         <hr class="bg-red">
+       </div>
+    </div>
+    <div ng-controller="PlantillaPDFCtrl"  align="center">
+       <button type="button" class="btn btn-default" ng-click="openPlantillapdf()" >IMPRIMIR PAGO  <span class="glyphicon glyphicon-open-file"></span></button>
+       <button type="button"  class="btn btn-default" ng-click="dowPlantillapdf()">Descargar PDF PAGO  <span class="glyphicon glyphicon-download-alt"></span></button>
+    </div>
+</div>

@@ -1,0 +1,91 @@
+<!--TOP-MENU inicio -->
+<div ng-include="'./templates/menu_inicio.html'"></div>
+<!-- CONTEXT-MENU  -->
+	<div ng-include="'./templates/menu_lateral.html'">
+	</div>
+<!-- CONTENIDO MODULO inicio -->
+<div class="col-md-8 col-sm-8">
+    <div class="row">
+      <div class="col-md-12">
+        <h2 class="text-primary">
+          <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+          {{ajustes.pagina.titulo}}
+        </h2>
+        <hr class="bg-red">
+      </div>
+    </div>
+    
+    <label class="control-label">Los campos marcados con asterisco<strong class="fg_red"> *</strong> son obligatorios</label>
+    <!--FIN herramientas para la vista-->
+    <div class="row">
+      	<div class="col-md-12">
+  		<!-- AQUI VAN LAS TABLAS O FORMULARIOS incrustados -->
+  		<!-- INICIO -->
+		<form name="userForm" novalidate>
+			<div class="well well-sm" style="background-color:#fff;">
+	            <div class="panel">
+	              	<div class="text-center text-primary">I. DATOS DE LA ZONA</div>
+	              	<hr class="bg-red">
+	              	<div class="panel-body">
+	              	 <div class="col-md-4" ng-controller="MunicipioCtrl">
+				              <label class="control-label">Municipio: <strong class="fg_red">*</strong></label>
+				              <select class="form-control " name="municipio" ng-model="zona.mun_id"  ng-options="municipio.mun_id as municipio.mun_nombre for municipio in municipios"  required>
+				              <option value="">--Elige opción--</option>
+				              </select>
+				              <span class="messages" ng-show="userForm.$submitted || userForm.municipio.$touched">
+				                  <span ng-show="userForm.municipio.$error.required">El campo es obligatorio.</span>
+				             </span>
+				       </div> 
+	              	<!-- 	<div class="row"> -->
+			                <div class="col-md-6">
+			                  	<label class="control-label ">Macrodistrito:</label>
+			                    <input type="" class="form-control"  name="macro" ng-model="zona.zon_macrodistrito" required="">
+			                </div>
+			                <span class="messages" ng-show="userForm.$submitted || userForm.macro.$touched">
+				                  <span ng-show="userForm.macro.$error.required">El campo es obligatorio.</span>
+				             </span>
+		              <!--   </div> -->
+		                <!-- <div class="row"> -->
+			                <div class="col-md-6">
+				               	<label class="control-label ">Distrito:</label>
+			                    <input type="" class="form-control" name="dist" ng-model="zona.zon_distrito">
+				               	
+			               	</div>
+			               	<span class="messages" ng-show="userForm.$submitted || userForm.dist.$touched">
+				                  <span ng-show="userForm.dist.$error.required">El campo es obligatorio.</span>
+				             </span>
+		             <!--    </div> -->
+		            <!--     <div class="row"> -->
+			               	<div class="form-group col-md-6">
+			                  	<label for="sevref" class="control-label ">Nombre de Zona:<strong class="fg_red"> *</strong></label>
+			                    <input  type="" class="form-control" name="zon" ng-model="zona.zon_nombre">
+			                </div>
+			                <span class="messages" ng-show="userForm.$submitted || userForm.zon.$touched">
+				                  <span ng-show="userForm.zon.$error.required">El campo es obligatorio.</span>
+				             </span>  
+	 				<!-- 	</div> -->
+	             	</div>
+	            </div>
+	            <div ng-if="!verb">
+		            <center>
+		            	<button type="submit" class="btn btn-primary" ng-disabled="userForm.$invalid" ng-click="save($parent.zona)"><span class="glyphicon glyphicon-save"></span>GUARDAR</button>
+		            	<a href="#/">
+		                  <button type="submit" data-toggle="modal"  class="btn btn-default"  ><span class="glyphicon glyphicon-remove"></span> CANCELAR</button>
+		                </a>
+		            </center>
+		        </div>
+	          
+	       	</div>
+	       	<!-- ver habilitado por false -->
+	       
+   		</form>
+
+
+
+   		<p ng-show="ajustes.pagina.success" class="alert alert-success">{{ajustes.pagina.success}}</p>
+		<!-- FIN -->
+		<!-- AQUI VAN LOAS TABLAS O FORMULARIOS incrustados -->
+		</div>
+	</div>
+</div>
+<!-- CONTENIDO MODULO fin

@@ -1,0 +1,134 @@
+<!-- TOP-MENU inicio -->
+<div ng-include="'./templates/menu_inicio.html'"></div>
+<form role="form" name="editConsultorio" >
+	<!-- CONTEXT-MENU ng-include="'forms/consultorio/consultorio.html'" -->
+<div ng-include="'./templates/menu_lateral.html'">
+</div>
+ 
+<!-- CONTENIDO MODULO -->
+	<div class="col-md-8 col-sm-8">
+		<div class="row">
+			<div class="col-md-12">
+				<h2 class="text-primary">
+					<span class="glyphicon glyphicon-th-large" aria-hidden="true"></span>
+					{{ajustes.pagina.titulo}}
+				</h2>
+				<hr class="bg-red">
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-12">
+			  <!-- AQUI VAN LAS TABLAS O FORMULARIOS incrustados -->
+			  <!-- INICIO -->
+        <label class="control-label">Los campos marcados con asterisco (<strong class="fg_red">*</strong>) son obligatorios</label>
+
+        <div class="well well-sm" style="background-color:#fff;">
+          <div class="row">
+            <div class="col-md-6">
+				<div class="form-group">
+				  <label for="nombrecons" class="control-label text-primary">Nombre del consultorio: <strong class="fg_red">*</strong></label>
+				  <input class="form-control" name="nombrecons" type="text" placeholder="Nombre del consultorio" ng-model="consultorios.amb_nombre" ng-model-options="{ updateOn: 'blur' }" required ng-pattern="patternCadenaNumero" autofocus>
+				  <span class="messages" ng-show="editConsultorio.nombrecons.$touched">
+					<span ng-show="editConsultorio.nombrecons.$error.required">El campo es obligatorio.</span>
+					<span ng-show="editConsultorio.nombrecons.$error.pattern">No se admiten símbolos especiales.</span>
+				  </span>
+				</div>
+            </div>    
+            <div class="col-md-6">
+				<div class="form-group">
+				  <label for="codigo" class="control-label text-primary">Código: <strong class="fg_red">*</strong></label>
+				  <input type="" class="form-control" name="codigo" placeholder="Código" ng-model="consultorios.con_cod" ng-model-options="{ updateOn: 'blur' }" required ng-pattern="patternCadenaNumero" >
+				  <span class="messages" ng-show="editConsultorio.codigo.$touched">
+					<span ng-show="editConsultorio.codigo.$error.required">El campo es obligatorio.</span>
+					<span ng-show="editConsultorio.codigo.$error.pattern">No se admiten símbolos especiales.</span>
+				  </span>
+				</div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <label for="tipocons" class="control-label text-primary">Tipo: <strong class="fg_red">*</strong></label>
+              <select class="form-control" name="tipocons" ng-model="consultorios.amb_tipo" ng-model-options="{ updateOn: 'blur' }" required >
+                <option>CONSULTORIO</option>
+                <option>LABORATORIO</option>
+                <!-- <option>SALA</option>
+                <option>ENFERMERÍA</option>
+                <option>OTRO</option> -->
+              </select>
+              <span class="messages" ng-show="editConsultorio.tipocons.$touched">
+                <span ng-show="editConsultorio.tipocons.$error.required">El campo es obligatorio.</span>
+                <span ng-show="editConsultorio.tipocons.$error.pattern">No se admiten símbolos especiales o números.</span>
+              </span>
+            </div> 
+    <!--         <div class="col-md-6" ng-if="ajustes.pagina.action == 'GUARDAR'">
+              <label class="control-label">Seleccione un servicio: <strong class="fg_red">*</strong></label>
+              <select name="serv" class="form-control" ng-model="servicios_consultorios.se_id" ng-options="presta.se_id as presta.ser_nombre for presta in prestas" required>
+              </select>
+              <span class="messages" ng-show="editConsultorio.serv.$touched">
+                <span ng-show="editConsultorio.serv.$error.required">El campo es obligatorio.</span>
+              </span>
+            </div>
+ -->
+            <div class="col-md-6">
+              <label for="nombrecons" class="control-label text-primary">Descripción: <strong class="fg_red">*</strong></label>
+              <textarea class="form-control" name="comentarios" rows="6" cols="35" placeholder="Descripción" style="resize: vertical;min-height:70px;max-height: 150px;" ng-model="consultorios.amb_descripcion" ng-model-options="{ updateOn: 'blur' }" required ng-pattern="patternCadenaNumero" ></textarea>
+              <span class="messages" ng-show="editConsultorio.comentarios.$touched"><br>
+                <span ng-show="editConsultorio.comentarios.$error.required">El campo es obligatorio.</span>
+                <span ng-show="editConsultorio.comentarios.$error.pattern">No se admiten símbolos especiales o números.</span>
+              </span>
+            </div>  
+          </div> 
+          <hr>
+          <h4 class="text-primary text-center">ASIGNAR PERSONAL</h4>
+          <hr class="bg-red">
+          <div class="row">
+            <div class="col-md-6">
+              <label class="text-primary">Seleccione un Médico:</label><br>
+              <select class="form-control" name="medico" ng-model="horario.fun_id"  ng-options="medico.fun_id as (medico.fun_cargo+' '+medico.per_nombres+' '+medico.per_apellido_primero) for medico in medicos" >
+              <option value="">--Elige opcion--</option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <label class="text-primary">Seleccione personal de enfermería:</label><br>
+              <select class="form-control" name="enfermera" ng-model="horario2.fun_id"  ng-options="enfermera.fun_id as (enfermera.fun_cargo+' '+enfermera.per_nombres+' '+enfermera.per_apellido_primero) for enfermera in enfermeras" >
+              <option value="">--Elige opcion--</option>
+              </select>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-md-6 col-md-offset-3 text-center">
+              <div class="well well-sm">
+                <div class="checkbox">
+                  <label style="font-size: 1.5em">
+                    <input type = "checkbox" ng-model = "para_enviar" title="Haga click aqui para habilitar o deshabilitar el envío del formulario"> 
+                    <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
+                    <small style="font-size: 0.6em" class="text-primary" title="Haga click en la casilla de verificación del lado para registrar el consultorio">
+                      <span class="glyphicon glyphicon-hand-left"></span>
+                      <span class="glyphicon glyphicon-chevron-left"></span>
+                      ¿DESEA {{$parent.ajustes.pagina.action}}EDITAR ESTE FORMULARIO?
+                    </small>
+                  </label>
+                </div>
+                <br>
+                <button ng-show = "para_enviar" class="btn btn-primary" ng-click="submit($parent.consultorios)" ng-disabled="editConsultorio.$invalid" title="Debe llenar todos los campos obligatorios de manera correcta"> EDITAR
+                  <span class="glyphicon glyphicon-save"></span> {{$parent.ajustes.pagina.action}}
+                </button>
+                <p ng-show="$parent.ajustes.pagina.success" class="alert alert-success">{{$parent.ajustes.pagina.success}}
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+              </div>
+            </div>    
+            
+          </div>
+          
+          </p>
+        </div>  
+			</div>              
+    </div>
+    <!-- fin cuerpo -->
+  </div>
+  
+<!-- CONTENIDO MODULO fin -->
+
+</form> 

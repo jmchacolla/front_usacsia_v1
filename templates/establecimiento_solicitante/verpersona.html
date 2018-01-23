@@ -1,0 +1,138 @@
+<!-- TOP-MENU inicio -->
+<div ng-include="'./templates/menu_inicio.html'"></div>
+<!-- CONTEXT-MENU  -->
+<div ng-include="'./templates/menu_lateral.html'"></div>
+<!-- CONTENIDO MODULO inicio -->
+<div class="col-md-8 col-sm-8">
+  <div class="row">
+    <div class="col-md-12">
+      <h2 class="text-primary">
+        <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+        {{ajustes.pagina.titulo}}
+      </h2>
+      <hr>
+    </div>
+  </div>
+  <div class="col-md-12">
+    
+      <div ng-controller="BuscaPersonaRegistradaCtrl">
+        <p>
+          <h4 class="text-primary">Instrucciones</h4>
+          Para la registrar un establecimiento:</b>
+          <ul>
+            <li>Debe ingresar en el buscador; el n&uacute;mero de carnet del usuario que solicita el registro de su establecimiento.</li>
+            <li>Luego pulse en <b>Buscar</b></li>
+          </ul>
+        </p>
+        
+        <!-- Inicio Controller apiAppCtrl -->
+         <div class="well well-sm">
+           <div class="row">
+            <form name="busqForm" novalidate>
+             <div class="col-md-6 col-md-offset-2">
+                <input ng-disabled="persona!=null" name="perci" class="form-control input-lg" ng-model="per_ci" type="text" placeholder="Escriba el Nro. de C.I." required autofocus>
+             </div>
+             <div class="col-md-4">
+                <button ng-disabled="persona!=null" class="btn btn-primary btn-lg" ng-click="buscaPersona()"><span class="glyphicon glyphicon-search"></span><strong> BUSCAR</strong></button>
+             </div>
+            </form>
+           </div>  
+         </div>
+          &nbsp;&nbsp;
+          <!-- VER SI EXISTE LA PERSONA -->
+          <div ng-controller="VerPersonaCtrl">
+            
+            <div ng-show="loading" class="text-center"><br><img ng-src="./images/image.gif"></div>
+            <div class="well well-sm" style="background-color:#fff;" class="animated">
+            <h4 class="text-center text-primary">I. DATOS PERSONALES</h4>
+            <hr class="bg-red">
+              <div class="row"><!--  ng-repeat="imagen in persona.persona.imagen"-->
+                    <div class="col-md-3 col-sm-4 col-xs-8 text-center" >
+                      <img width="100%" max-height="100px" ng-src="{{persona.imagen.ima_enlace}}/{{persona.imagen.ima_nombre}}" class="img-thumbnail center">
+                    </div>    
+                    <div class="col-md-9 col-sm-8 col-xs-12">
+                      <div class="row">
+                          <div class="col-md-4 col-sm-6 col-xs-6">
+                            <label class="control-label">Nombres:</label><br>
+                            {{persona.persona.per_nombres}}
+                          </div>
+                          <div class="col-md-4 col-sm-6 col-xs-6">
+                            <label class="control-label">Apellido paterno:</label><br>
+                            {{persona.persona.per_apellido_primero}}
+                          </div>
+                          <div class="col-md-4 col-sm-6 col-xs-6">
+                            <label class="control-label">Apellido materno:</label><br>
+                            {{persona.persona.per_apellido_segundo}}
+                          </div>
+                      </div>
+                      <br>
+                      <div class="row">
+                          <div class="col-md-4 col-sm-6 col-xs-6">
+                            <label class="control-label">Fecha de nacimiento:</label><br>
+                            {{persona.persona.per_fecha_nacimiento}}
+                            
+                          </div>
+                          <div class="col-md-4 col-sm-6 col-xs-6">
+                            <label class="control-label ">CI:</label><br>
+                            {{persona.persona.per_ci + " "}} {{persona.persona.per_ci_expedido | uppercase}}
+                          </div>
+                          <div class="col-md-4 col-sm-6 col-xs-6">
+                            <label class="control-label ">Genero:</label><br>
+                            {{persona.persona.per_genero}}
+                          </div>
+                      </div>
+                      <br>
+                      <div class="row">
+                          <div class="col-md-4 col-sm-6 col-xs-6 texto">
+                            <label class="control-label">Email:</label><br>
+                            {{persona.persona.per_email}}
+                          </div>
+                          <div class="col-md-4 col-sm-6 col-xs-6">
+                            <label class="control-label">Nro. Celular:</label><br>
+                            {{persona.persona.per_numero_celular}}
+                          </div>
+                          <div class="col-md-4 col-sm-6 col-xs-6 texto">
+                            <label class="control-label">Ocupacion:</label><br>
+                            {{persona.persona.per_ocupacion}}
+                          </div>
+                      </div>
+                      <br>
+                    </div>    
+                </div>
+            <h4 class="text-center text-primary">II. DIRECCIÓN</h4>
+            <hr class="bg-red"> 
+                <div>  
+                  <div class="row">
+                      <div class="col-md-3 col-sm-4 col-xs-6">
+                        <label class="control-label">Zona/Comunidad:</label><br>
+                        {{persona.zona.zon_nombre}}
+                      </div>    
+                      <div class="col-md-3 col-sm-4 col-xs-6">
+                        <label class="control-label">Calle/Avenida:</label><br>
+                        {{persona.persona.per_avenida_calle}}
+                      </div>    
+                      <div class="col-md-3 col-sm-4 col-xs-6">
+                        <label class="control-label">Número:</label><br>
+                        {{persona.persona.per_numero}}
+                      </div>    
+                    </div>
+                  </div> 
+                </div>
+                <center>
+                  <a href="#/establecimientosol/persona"><button class="btn btn-danger" ><span class="glyphicon glyphicon-search"></span> VOLVER A BUSCAR</button></a>    
+                  <a href="#/establecimientosol/crear/{{pnatural.pro_id}}"><button class="btn btn-danger" ><span class="glyphicon glyphicon-home"></span> REGISTRAR ESTABLECIMIENTO</button></a>    
+                </center>
+          </div>
+        </div>  
+          <!-- FIN -->
+
+
+         <!--  <div class="row panel-group tabla-cuerpo">  -->
+      </div>  
+     <!-- fin ng-show -->
+      <!-- fin datos del funcionario -->
+    </div>  
+  </div>
+</div>
+
+

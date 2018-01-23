@@ -1,0 +1,161 @@
+	<!-- TOP-MENU inicio -->
+	<div ng-include="'./templates/menu_inicio.html'"></div>
+
+	<!-- CONTEXT-MENU  -->
+	<div ng-include="'./templates/menu_lateral.html'">
+	</div>
+	<!-- CONTENIDO MODULO inicio -->
+	<div class="col-md-8 col-sm-8">
+		<div class="row">
+			<div class="col-md-12" >
+				<h2 class="text-primary">
+					<span class="glyphicon glyphicon-th-large" aria-hidden="true"></span>
+					Empresa : <strong>{{establecimiento.est_sol.ess_razon_social}}</strong>
+				</h2>
+				<hr class="bg-red">
+			</div>
+		</div>
+		<!-- Cabecera -->
+	    <div class="row" >
+		    <div class="col-md-12">
+		    <!-- FIN -->
+		    	<!-- <tabs> -->
+					<!-- ..............DATOS GENERALES................. -->
+				<!-- 	<pane title="DATOS GENERALES"> -->
+		                <div class="panel">
+							<br>
+							<h4 class="text-center text-primary">I. DATOS GENERALES</h4>
+							<!-- <hr class="bg-red"> -->
+							<div class="panel-body">
+								<div class="form-group">
+									<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+								        <label class="control-label">Vista principal de la empresa:</label>
+							        	<div class="">
+							            	<img height="100px" ng-src="./{{establecimiento.imagen.ie_enlace}}/{{establecimiento.imagen.ima_nombre}}" alt="{{establecimiento.establecimiento_sol.ess_razon_social}}" class="img-thumbnail texto">
+							        	</div>
+							        </div>
+							         <!-- <div class="col-md-6" ng-show="establecimiento.est_sol.ess_latitud !=0">
+								        <label class="text-primary control-label">Geolocalización del establecimiento:
+										</label>				  
+										<ng-map center="{{establecimiento.est_sol.ess_latitud}},{{establecimiento.est_sol.ess_longitud}}" zoom="16">
+											<marker position="{{establecimiento.est_sol.ess_latitud}},{{establecimiento.est_sol.ess_longitud}}" title="Geolocalización"></marker>
+										</ng-map>
+											<br>
+							        </div> -->
+							        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+								        <label class="control-label">Nombre de la empresa:</label>
+							        	<div class="">
+							            	<p >{{establecimiento.est_sol.ess_razon_social}}</p>
+							        	</div>
+							        </div>
+							        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+								        <label class="control-label">Nit:</label>
+							        	<div class="">
+							        	<p ng-if="establecimiento.empresa.emp_nit !=''" >{{establecimiento.empresa.emp_nit}}</p>
+							            	<p ng-if="establecimiento.empresa.emp_nit =='' || establecimiento.empresa.emp_nit ==null" >---</p>
+							   
+							        	</div>
+							        </div>
+							        <div class="col-lg-3 col-md-6 col-sm-3 col-xs-6">
+								        <label class="control-label">Licencia:</label>
+							        	<div class="">
+							            	<p ng-if="establecimiento.empresa.emp_licencia !=null" >{{establecimiento.empresa.emp_licencia}}</p>
+							            	<p ng-if="establecimiento.empresa.emp_licencia ==null" >---</p>
+							        	</div>
+							        </div>
+							        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+								        <label class="control-label">Propietario:</label>
+							        	<div class="">
+							        	    <p >{{propietario}}</p>
+							        	    
+							        	</div>
+							        </div>
+							        <div class="col-lg-6 col-md-6 col-sm-3 col-xs-12">
+								        <label class="control-label">Horario de atención:</label>
+							        	<div class="">
+							        	    <p >{{establecimiento.est_sol.ess_hora_ini +' - '+establecimiento.est_sol.ess_hora_fin}}</p>
+							        	    
+							        	</div>
+							        </div>
+							        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+								        <label class="control-label">Departamento:</label>
+							        	<div class="">
+							        	    <p >{{establecimiento.departamento.dep_nombre | uppercase}}</p>
+							        	    
+							        	</div>
+							        </div>
+							        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+								        <label class="control-label">Municipio:</label>
+							        	<div class="">
+							        	    <p >{{establecimiento.municipio.mun_nombre}}</p>
+							        	    
+							        	</div>
+							        </div>
+							        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+								        <label class="control-label">Dirección:</label>
+							        	<div class="">
+							        	    <p >{{direccion}}</p>
+							        	    
+							        	</div>
+							        </div>
+							        
+							    </div>
+							</div>
+						</div>
+		           <!--  </pane> -->
+					<!-- ..............DIRECCION................. -->
+		          <!--   <pane title="DIRECCIÓN"> -->
+		            	<!-- <div class="panel">
+							<br>
+							<h4 class="text-center text-primary">II. DIRECCION</h4>
+							<hr class="bg-red">
+							<div class="panel-body">
+								<div class="form-group">
+							        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+								        <label class="control-label">Municipio:</label>
+							        	<div class="">
+							            	<p>{{establecimiento.municipio.mun_nombre}}</p>
+							        	</div>
+							        </div>
+							        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+								        <label class="control-label">Zona/Localidad/Comunidad:</label>
+							        	<div class="">
+							        	    <p>{{establecimiento.zona.zon_nombre}}</p>
+							        	</div>
+							        </div>
+							        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+								        <label class="control-label">Av./Calle:</label>
+							        	<div class="">
+							            	<p>{{establecimiento.est_sol.ess_avenida_calle}}</p>
+							        	</div>
+							        </div>
+							        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+								        <label class="control-label">Número:</label>
+							        	<div class="">
+							            	<p>{{establecimiento.est_sol.ess_numero}}</p>
+							        	</div>
+							        </div>
+							        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+								        <label class="control-label">Latitud:</label>
+							        	<div class="">
+							              <p ng-if="establecimiento.est_sol.ess_latitud !=null">{{establecimiento.est_sol.ess_latitud}}</p>
+							              <p ng-if="establecimiento.est_sol.ess_latitud ==null">---</p>
+							        	</div>
+							        </div>
+							        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+								        <label class="control-label">Longitud:</label>
+							        	<div class="">
+							            <p ng-if="establecimiento.est_sol.ess_longitud !=null">{{establecimiento.est_sol.ess_longitud}}</p>
+							            <p ng-if="establecimiento.est_sol.ess_longitud ==null">---</p>
+							        	</div>
+							        </div>
+					
+								</div>
+							</div>
+						</div> -->
+		    
+			<!-- AQUI VAN LOAS TABLAS O FORMULARIOS incrustados -->
+			</div>
+		</div>
+	</div>
+<!-- CONTENIDO MODULO fin -->

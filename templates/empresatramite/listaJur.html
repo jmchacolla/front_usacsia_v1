@@ -1,0 +1,96 @@
+<!-- TOP-MENU inicio -->
+<div ng-include="'./templates/menu_inicio.html'"></div>
+<!-- CONTEXT-MENU -->
+<div ng-include="'./templates/menu_lateral.html'"></div>
+<!-- CONTENIDO MODULO inicio -->
+<div class="col-md-8 col-sm-8">
+  <div class="row">
+    <div class="col-md-12">
+      <h2 class="text-primary">
+        <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+        {{ajustes.pagina.titulo}}
+      </h2>
+      <hr class="bg-red">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="well well-sm">
+        <strong class="pull-left lead">Herramientas: &nbsp;</strong>
+        <form class="form-inline pull-left">
+          <input type="text" class="form-control" placeholder="Filtrar por ..." ng-model="per_ci">
+        </form>
+        &nbsp;&nbsp;
+        <button class="btn btn-default" onclick="generateFUN_AE()"><span class="glyphicon glyphicon-save-file"></span> Exportar lista en PDF</button>
+        <div class="clearfix"></div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 ">
+      <!-- AQUI VAN LAS TABLAS O FORMULARIOS incrustados -->
+      <!-- INICIO -->
+      <div class="text-center" ng-show="loading"><br><img ng-src="./images/image.gif" class="loader-img"></div>
+      <div ng-show="!loading && !msg">No se encontraron resultados</div>
+      <div class="table-responsive">
+        <table class="table table-bordered table-striped table-hover" ng-show="!loading && msg" id="table">
+          <thead >
+
+            <th class="text-primary" >
+              <a href="" ng-click="sortType = 'pjur_razon_social'; sortReverse = !sortReverse">Propietario 
+              <span ng-show="sortType == 'pjur_razon_social' && !sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+              <span ng-show="sortType == 'pjur_razon_social' && sortReverse" class="glyphicon glyphicon-chevron-down"></span></a>
+            </th>
+            <th class="text-primary" >
+              <a href="" ng-click="sortType = 'ess_razon_social'; sortReverse = !sortReverse">Establecimiento 
+              <span ng-show="sortType == 'ess_razon_social' && !sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+              <span ng-show="sortType == 'ess_razon_social' && sortReverse" class="glyphicon glyphicon-chevron-down"></span></a>
+            </th>
+          
+            <th class="text-primary" >Ver</th>
+            <th class="text-primary">Ficha</th>
+           <!--  <th>Dar de baja</th> -->
+          </thead>
+          <tbody>
+            <tr  ng-repeat="et in empresa_tramite  | orderBy:sortType:sortReverse | filter:per_ci">
+             
+              <td>{{et.pjur_razon_social}}</td>
+              <td>{{et.ess_razon_social}}</td>
+              <td class="text-center">
+
+           <!--      <a href="#/inspecciones/{{et.et_id}}" class="btn btn-success" title="VER"><span class="glyphicon glyphicon-file"></span></a> -->
+
+                <a href="#/inspecciones/{{et.et_id}}" class="btn btn-success" title="VER INSPECCIONES"><span class="glyphicon glyphicon-file"></span></a>
+
+              </td>
+              <td>
+                <a href="#/inspeccion/fichas/crear/{{et.et_id}}" class="btn btn-info" title="FICHA DE INSPECCIÓN"><span >FICHA</span></a>
+              </td>
+             <!--  <td>
+                <button ng-click="get_fe_id(funcionario.fun_id, funcionario.per_apellido_primero, funcionario.per_apellido_segundo, funcionario.per_nombres, funcionario.fun_cargo, funcionario.fun_profesion, funcionario.fun_estado)" title="DAR DE BAJA A FUNCIONARIO DEL ESTABLECIMIENTO" class="btn btn-danger" data-toggle="modal" data-target="#miCuadroModal1" ><span class="glyphicon glyphicon-trash"></span></button>
+                <div id="miCuadroModal1" class="modal fade" role="dialog" tabindex="-1">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header bg-red">
+                        <button type="button" class="close" data-dismiss="modal">×</button>
+                        <h4 class="modal-title fg-white">DAR DE BAJA A FUNCIONARIO</h4>
+                      </div>
+                      <div class="modal-body lead text-center">
+                        ¿Está seguro que desea dar de baja a este funcionario?
+                        <div class="well well-sm"><strong>{{nombre_completo | uppercase}}</strong></div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="remove(funcionario.fun_id)"><span class="glyphicon glyphicon-ok"></span> SI</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> NO</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </td> -->
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

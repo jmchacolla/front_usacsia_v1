@@ -1,0 +1,34 @@
+<!-- TOP-MENU inicio -->
+<div ng-include="'./templates/menu_inicio.html'"></div>
+<!-- CONTEXT-MENU  -->
+<div ng-include="'./templates/menu_lateral.html'"></div>
+<!-- CONTENIDO MODULO inicio -->
+    <div class="col-md-8 col-sm-8">
+        <div class="row">
+            <div class="col-md-10">
+                <h2 class="text-primary">
+                    <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
+                    {{ajustes.pagina.titulo}}
+                </h2>
+                <hr>
+            </div>
+        </div>
+        <!--HERRAMIENTAS PARA LA VISTA-->
+        <div class="row">
+            <div class="col-md-12">
+                <h3 ng-if="rol_id == 7">Manual para la página Web</h3>
+                <embed ng-src="{{manualUsuario}}" width="80%" height="375">
+
+            </div>
+            <div class="col-md-12" ng-if="rol_id == 7">
+                <br>
+                <hr>
+                <h3>Manual para la aplicación Android</h3>
+                <embed ng-src="{{manualAndroid}}" width="80%" height="375">
+            </div>
+        </div>
+        
+    </div>
+  
+       
+<!-- CONTENIDO MODULO fin -->

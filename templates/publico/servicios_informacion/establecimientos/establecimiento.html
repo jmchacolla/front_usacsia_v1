@@ -1,0 +1,142 @@
+<div ng-include="'./templates/publico/menu_inicio_publico.html'"></div>
+<!-- CONTENIDO MODULO inicio -->
+	<div class="col-md-12">
+		<div class="row">
+			<div class="col-md-12">
+				<h2 class="text-primary">
+					<span class="glyphicon glyphicon-th-large" aria-hidden="true"></span>
+					Establecimiento de salud: <strong>{{establecimiento.establecimientos.es_nombre}}</strong>
+				</h2>
+				<hr>
+			</div>
+		</div>
+		      <!-- Cabecera -->
+		      <div class="row">
+		      <div class="col-md-12">
+			  <!-- ..............DATOS GENERALES................. -->
+		       <tabs>
+		            <pane title="DATOS GENERALES">
+						<h3 class="text-center text-primary"><strong>DATOS GENERALES</strong></h3>
+						<hr>
+						<div class="row">
+					        <div class="col-md-4">
+						        <label class="text-primary control-label">Fotografia del establecimiento de salud:</label>
+					            <img ng-src="./img-est/{{establecimiento.imagenes.ie_nombre}}" alt="{{establecimiento.establecimientos.es_nombre}}" class="img-thumbnail">
+					        </div>
+					        <div class="col-md-4">
+						        <label class="text-primary control-label">Municipio:</label>
+				            	<p class="lead">{{establecimiento.municipios.mun_nombre}}</p>
+						        <label class="text-primary control-label">Dirección:</label>
+				            	<p class="lead">
+								{{establecimiento.establecimientos.es_zona_localidad_comuni}} 
+								{{establecimiento.establecimientos.es_avenida_calle}}
+								#{{establecimiento.establecimientos.es_numero}}
+								</p>
+						        <label class="text-primary control-label">Números telefónicos:</label>
+				            	<p class="lead" ng-repeat="tel in establecimiento.telefonos">{{tel.te_numero}}</p>
+						        <label class="text-primary control-label">Correo Electronico:</label>
+				            	<p class="lead" ng-if="establecimiento.establecimientos.es_correo_electronico !=''">{{establecimiento.establecimientos.es_correo_electronico}}</p>
+				            	<p class="lead" ng-if="establecimiento.establecimientos.es_correo_electronico ==''">---</p>
+						        <label class="text-primary control-label">Dirección de página Web Institucional:</label>
+				            	<p class="lead" ng-if="establecimiento.establecimientos.es_direccion_web !=''">{{establecimiento.establecimientos.es_direccion_web}}</p>
+				            	<p class="lead" ng-if="establecimiento.establecimientos.es_direccion_web ==''">---</p>
+					        </div>
+					        <div class="col-md-4">
+						        <label class="text-primary control-label">Geolocalización del establecimiento de salud:
+								<!--Latitud:{{establecimiento.es_latitud}}<br>
+									Longitud:{{establecimiento.es_longitud}}<br>-->
+								</label>				  
+								<ng-map center="{{establecimiento.establecimientos.es_latitud}},{{establecimiento.establecimientos.es_longitud}}" zoom="16">
+									<marker position="{{establecimiento.establecimientos.es_latitud}},{{establecimiento.establecimientos.es_longitud}}" title="Hello World!"></marker>
+								</ng-map>
+									<br>
+					        </div>
+						</div>
+						<div class="row">
+					        <div class="col-md-3">
+						        <label class="text-primary control-label">Fecha de creación del establecimiento:</label>
+					            <p class="lead">{{establecimiento.establecimientos.es_fecha_creacion}}</p>
+					        </div>
+					        <div class="col-md-3">
+						        <label class="text-primary control-label">Inicio de actividades del establecimiento:</label>
+				        	    <p class="lead">{{establecimiento.establecimientos.es_fecha_inicio_actividad}}</p>
+					        </div>
+					        <div class="col-md-3">
+						        <label class="text-primary control-label">Horas de atención:</label>
+					            <p class="lead">{{establecimiento.establecimientos.es_horas}}</p>
+					        </div>
+					        <div class="col-md-3">
+						        <label class="text-primary control-label">Horario de atención:</label>
+				        	    <p class="lead">{{establecimiento.establecimientos.es_inicio_atencion  | date: 'H:mm'}} - {{establecimiento.establecimientos.es_final_atencion | date: 'H:mm'}}</p>
+					        </div>
+						</div>
+						<div class="row">
+					        <div class="col-md-4">
+						        <label class="text-primary control-label">Red de salud:</label>
+				            	<p class="lead">{{establecimiento.reds.red_nombre}}</p>
+					        </div>
+					        <div class="col-md-4">
+						        <label class="text-primary control-label">Tipo de establecimiento:</label>
+					            <p class="lead">{{establecimiento.tipos.tip_nombre}}</p>
+					        </div>
+					        <div class="col-md-4">
+						        <label class="text-primary control-label">Nivel:</label>
+				            	<p class="lead">{{establecimiento.establecimientos.es_nivel}}</p>
+					        </div>
+						</div>
+					</pane>	
+		            <pane title="SERVICIOS">
+						<div class="row">
+							<div class="col-md-10 col-md-offset-1" ng-controller="EstablecimientoPrestaCtrl">
+								<h3 class="text-center text-primary"><strong>SERVICIOS</strong></h3>
+								<hr>
+								<div class="text-center" ng-show="loading"><br><img ng-src="./images/image.gif" class="loader-img"></div>
+								<div ng-show="!loading && !msg">No se encontraron resultados</div>
+								<div class="table-responsive">
+									<table class="table table-bordered table-striped table-hover" ng-show="!loading && msg">
+										<thead >
+											<th >Nombre Servicio</th>
+											<th >Tipo Servicio</th>
+										</thead>
+										<tbody ng-repeat="presta in servicio_especialidad | filter:se_nombre">
+										  <tr>
+											<td>{{presta.ser_nombre}}</td>
+											<td>{{presta.ser_tipo}}</td>
+										  </tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</pane>	
+		            <pane title="CONSULTORIOS">
+						<div class="row">
+							<div class="col-md-10 col-md-offset-1" ng-controller="ListaConsultorioCtrl">
+								<h3 class="text-center text-primary"><strong>CONSULTORIOS</strong></h3>
+								<hr>
+									<div class="text-center" ng-show="loading"><br><img ng-src="./images/image.gif" class="loader-img"></div>
+									<div ng-show="!loading && !msg">No se encontraron resultados</div>
+									<div class="table-responsive">
+										<table class="table table-bordered table-striped table-hover" ng-show="!loading && msg">
+										  <thead >
+											<th >Nombre</th>
+											<!--th >Servicio prestado</th-->
+											</thead>
+										  <tbody ng-repeat="consultorio in consultorios | filter:searchText" >
+											<tr>
+											<td>{{consultorio.con_nombre}}</td>
+											<!--td>{{consultorio.ser_nombre}}</td-->
+											</tr>
+										   
+										  </tbody>
+										</table>
+									</div>
+							</div>
+						</div>
+					</pane>	
+		       </tabs>
+			<!-- AQUI VAN LOAS TABLAS O FORMULARIOS incrustados -->
+			</div>
+		</div>
+	</div>
+<!-- CONTENIDO MODULO fin -->

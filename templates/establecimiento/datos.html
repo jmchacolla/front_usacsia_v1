@@ -1,0 +1,95 @@
+<!-- TOP-MENU inicio -->
+<div ng-include="'./templates/menu_inicio.html'"></div>
+<!-- CONTEXT-MENU  -->
+<div ng-include="'./templates/menu_lateral.html'"></div>
+<!-- CONTENIDO MODULO inicio -->
+	<div class="col-md-8 col-sm-8">
+		<div class="row">
+			<div class="col-md-12" >
+				<h2 class="text-primary">
+					<span class="glyphicon glyphicon-th-large" aria-hidden="true"></span>
+					Establecimiento de salud: <strong class="fg-gray">{{establecimiento.establecimientos.es_nombre}}</strong>
+				</h2>
+				<hr class="bg-green">
+			</div>
+		</div>
+		<!-- Cabecera -->
+		<div class="row">
+		    <div class="col-md-12">
+			<!-- AQUI VAN LOAS TABLAS O FORMULARIOS incrustados -->
+					<div class="row">
+				        <div class="col-md-4">
+					        <label class="text-primary control-label">Fotografia del establecimiento de salud:</label>
+							<div style="height:250px !important; overflow:auto;">
+								<img ng-src="./img-est/{{establecimiento.imagenes.ie_nombre}}" alt="{{establecimiento.establecimientos.es_nombre}}" class="img-thumbnail">
+							</div>
+				        </div>
+				        <div class="col-md-4">
+					        <label class="text-primary control-label">Municipio:</label>
+			            	<p class="lead">{{establecimiento.municipios.mun_nombre}}</p>
+					        <label class="text-primary control-label">Dirección:</label>
+			            	<p class="lead">
+							{{establecimiento.establecimientos.es_zona_localidad_comuni}} 
+							{{establecimiento.establecimientos.es_avenida_calle}}
+							#{{establecimiento.establecimientos.es_numero}}
+							</p>
+					        <label class="text-primary control-label">Números telefónicos:</label>
+			            	<p class="lead" ng-repeat="tel in establecimiento.telefonos">{{tel.te_numero}}</p>
+			            	<label class="text-primary control-label">Números de fax:</label>
+			            	<p class="lead">{{establecimiento.establecimientos.es_fax}}</p>
+					        <label class="text-primary control-label">Correo Electrónico:</label>
+			            	<p class="lead" ng-if="establecimiento.establecimientos.es_correo_electronico !=''">{{establecimiento.establecimientos.es_correo_electronico}}</p>
+			            	<p class="lead" ng-if="establecimiento.establecimientos.es_correo_electronico ==''">---</p>
+					        <label class="text-primary control-label">Dirección de página Web Institucional:</label>
+			            	<p class="lead" ng-if="establecimiento.establecimientos.es_direccion_web !=''">{{establecimiento.establecimientos.es_direccion_web}}</p>
+			            	<p class="lead" ng-if="establecimiento.establecimientos.es_direccion_web ==''">---</p>
+				        </div>
+				        <div class="col-md-4">
+				        	<label class="text-primary control-label">Código:</label>
+			            	<p class="lead">{{establecimiento.establecimientos.es_codigo}}</p>
+			            	<label class="text-primary control-label">Resolución Ministerial:</label>
+			            	<p class="lead">{{establecimiento.establecimientos.es_numero_rm}}</p>
+			            	<label class="text-primary control-label">NIT:</label>
+			            	<p class="lead">{{establecimiento.establecimientos.es_nit}}</p>
+			            	<label class="text-primary control-label">Institución de dependencia:</label>
+			            	<p class="lead">{{establecimiento.institucion.ins_nombre}}</p>
+				        </div>
+					</div>
+					<div class="row">
+				        <div class="col-md-3">
+					        <label class="text-primary control-label">Fecha de creación del establecimiento:</label>
+				            <p class="lead">{{establecimiento.establecimientos.es_fecha_creacion}}</p>
+				        </div>
+				        <div class="col-md-3">
+					        <label class="text-primary control-label">Inicio de actividades del establecimiento:</label>
+			        	    <p class="lead">{{establecimiento.establecimientos.es_fecha_inicio_actividad}}</p>
+				        </div>
+				        <div class="col-md-3">
+					        <label class="text-primary control-label">Horas de atención:</label>
+				            <p class="lead">{{establecimiento.establecimientos.es_horas}}</p>
+				        </div>
+				        <div class="col-md-3">
+					        <label class="text-primary control-label">Horario de atención:</label>
+			        	    <p class="lead">{{establecimiento.establecimientos.es_inicio_atencion | date: 'H:mm'}} - {{ establecimiento.establecimientos.es_final_atencion | date: 'H:mm'}}</p>
+				        </div>
+					</div>
+					<div class="row">
+				        <div class="col-md-4">
+					        <label class="text-primary control-label">Red de salud:</label>
+			            	<p class="lead">{{establecimiento.reds.red_nombre}}</p>
+				        </div>
+				        <div class="col-md-4">
+					        <label class="text-primary control-label">Tipo de establecimiento:</label>
+				            <p class="lead">{{establecimiento.tipos.tip_nombre}}</p>
+				        </div>
+				        <div class="col-md-4">
+					        <label class="text-primary control-label">Nivel:</label>
+			            	<p class="lead">{{establecimiento.establecimientos.es_nivel}}</p>
+				        </div>
+					</div>
+				
+			<!-- FIN FORMULARIO O TABLA-->
+			</div>
+		</div>
+	</div>
+<!-- CONTENIDO MODULO fin -->

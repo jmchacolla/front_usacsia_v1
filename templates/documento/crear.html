@@ -1,0 +1,86 @@
+<!-- TOP-MENU inicio -->
+<div ng-include="'./templates/menu_inicio.html'"></div>
+<!-- CONTEXT-MENU  -->
+<div ng-include="'./templates/menu_lateral.html'"></div>
+<!-- CONTENIDO MODULO inicio -->
+<div class="col-md-8 col-sm-8">
+  <div class="row">
+    <div class="col-md-12">
+      <h2 class="text-primary">
+        <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+        {{ajustes.pagina.titulo}}
+      </h2>
+      <hr>
+    </div>
+  </div>
+  <div class="col-md-12">
+    <!-- BUSCAPJURIDICACTRL--> 
+    <div>
+      <div>
+        <div class="row">
+          <label class="control-label">Los campos marcados con asterisco<strong class="fg_red"> *</strong> son obligatorios</label>
+          <div class="col-md-12">
+          <!-- AQUI VAN LAS TABLAS O FORMULARIOS incrustados -->
+          <!-- INICIO -->
+            <form name="docForm" novalidate>
+                <div class="well well-sm">
+                    <div class="panel">
+                      <div class="text-center text-primary">I. DESCRIPCION DE DOCUMENTO</div>
+                      <hr class="bg-red">
+                      <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label for="docnombre" class="control-label ">Documento:</label>
+                                <input name="docnombre" type="text" class="form-control" ng-model="documento.doc_nombre" required/>
+                                <span class="messages" ng-show="docForm.$submitted || docForm.docnombre.$touched">
+                                   <span ng-show="docForm.docnombre.$error.required">El campo es obligatorio.</span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="impop" class="control-label ">Importancia para trámites individuales:</label>
+                                <select class="form-control" name="impop" ng-model="documento.doc_importancia" ng-model-options="{ updateOn: 'blur' }" required>
+                                    <option value="">--Elegir una opción--</option>
+                                    <option value="OBLIGATORIO">OBLIGATORIO</option>
+                                    <option value="NO OBLIGATORIO">NO OBLIGATORIO</option>        
+                                </select>
+                                <span class="messages" ng-show="docForm.$submitted || docForm.impop.$touched">
+                                   <span ng-show="docForm.impop.$error.required">El campo es obligatorio.</span>
+                                </span>
+                            </div>
+                              <div class="col-md-6">
+                                    <label for="impoe" class="control-label ">Importancia para trámites de empresas:</label>
+                                    <select class="form-control" name="impoe" ng-model="documento.doc_importancia_e" ng-model-options="{ updateOn: 'blur' }" required>
+                                        <option value="">--Elegir una opción--</option>
+                                        <option value="OBLIGATORIO">OBLIGATORIO</option>
+                                        <option value="NO OBLIGATORIO">NO OBLIGATORIO</option>        
+                                    </select>
+                                    <span class="messages" ng-show="docForm.$submitted || docForm.impoe.$touched">
+                                       <span ng-show="docForm.impoe.$error.required">El campo es obligatorio.</span>
+                                    </span>
+                              </div>
+                        </div>
+                      </div>
+                      <center>
+                        <a href="#/referenciasRec">
+                          <button type="submit" data-toggle="modal"  class="btn btn-default"  ><span class="glyphicon glyphicon-remove"></span> CANCELAR</button>
+                        </a>
+                        <button ng-if="docForm.$invalid" type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-save"></span>GUARDAR</button>
+                        <button ng-if="docForm.$valid" type="submit" class="btn btn-primary" ng-click="submit()"><span class="glyphicon glyphicon-save"></span>GUARDAR</button>
+                    </center>
+                    </div>
+                    <p ng-show="docForm.$invalid && docForm.$submitted" class="alert alert-danger">Asegúrese de llenar correctamente todos los campos</p>
+                    <p ng-show="ajustes.pagina.success" class="alert alert-success">{{ajustes.pagina.success}}</p>
+                </div>
+            </form>
+          <!-- AQUI VAN LAS TABLAS O FORMULARIOS incrustados -->
+          <!-- INICIO-->
+          </div>
+        </div>
+      </div>
+    </div> <!-- /BUSCAPJURIDICACTRL-->
+  </div>  
+</div>
+
+

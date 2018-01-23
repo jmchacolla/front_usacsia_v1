@@ -1,0 +1,33 @@
+<!-- TOP-MENU inicio -->
+<div ng-include="'./templates/menu_inicio.html'"></div>
+
+<!-- CONTEXT-MENU  -->
+  <div ng-include="'./templates/menu_lateral.html'"></div>
+    <div class="col-md-8 col-sm-8">
+
+        <div class="row">
+           <div class="col-md-12">
+             <h2 class="text-primary">
+               <span class="glyphicon glyphicon-th-large" aria-hidden="true"></span>
+               {{ajustes.pagina.titulo}}
+             </h2>
+             <hr class="bg-red">
+           </div>
+        </div>
+
+        <div class="col-md-12">
+
+            <div>
+                {{personatramite}}
+            </div>
+
+            <div ng-controller="pdf_pago_Ctrl"  align="center">
+               <button type="button" class="btn btn-default" ng-click="openPdf()" >IMPRIMIR PAGO  <span class="glyphicon glyphicon-open-file"></span></button>
+               <button type="button"  class="btn btn-default" ng-click="downloadPdf()">Descargar PDF PAGO  <span class="glyphicon glyphicon-download-alt"></span></button>
+            </div>
+
+
+            
+        </div>
+
+    </div>

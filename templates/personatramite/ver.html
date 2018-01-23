@@ -1,0 +1,147 @@
+<!-- TOP-MENU inicio -->
+<div ng-include="'./templates/menu_inicio.html'"></div>
+<!-- CONTEXT-MENU  -->
+<div ng-include="'./templates/menu_lateral.html'"></div>
+	<!-- CONTENIDO MODULO inicio -->
+	<div class="col-md-8 col-sm-8">
+		<div class="row">
+			<div class="col-md-12">
+				<h2 class="text-primary">
+					<span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+					{{ajustes.pagina.titulo}}{{numero}}
+				</h2>
+				<hr>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+			
+				<div class="well well-sm" style="background-color:#fff;">
+
+					<div class="row">
+		        		<div class="col-md-12">
+		        			<h3 class="text-center text-primary">I. INFORMACIÓN MÉDICA</h3>
+	                   		 <hr class="bg-red">
+		        		</div>
+		        	</div>
+		        	<br>
+		        	<div class="row">
+	              		<div class="col-md-4 col-sm-4">
+	                		<label class="text-primary">Diagnostico</label><br>
+	                		{{pertramite.prueba_medica.pm_diagnostico}}
+	              		</div>
+	              		<div class="col-md-4 col-sm-4">
+	                		<label class="text-primary">Estado Medico:</label><br>
+	                		<!-- {{pertramite.prueba_medica.pm_estado}} -->	
+	                		<p ng-if="pertramite.prueba_medica.pm_estado == 'OK' ">
+	                		CLINICAMENTE SANO	
+	                		</p>
+	                		<p ng-if="pertramite.prueba_medica.pm_estado =='OBSERVADO'">
+	                		{{pertramite.prueba_medica.pm_estado}}	
+	                		</p>
+	                		
+	              		</div>
+	              		<div class="col-md-4 col-sm-4">
+	                		<label class="text-primary">Estado Muestra:</label><br>
+	                		<p ng-if="pertramite.prueba_laboratorio.pl_estado =='NO OBSERVADO'">
+	                		SIN OBSERVACIÓN	
+	                		</p>
+	                		<p ng-if="pertramite.prueba_laboratorio.pl_estado =='OBSERVADO'">
+	                		{{pertramite.prueba_laboratorio.pl_estado}}	
+	                		</p>
+	                		
+	              		</div>
+	              		
+	            	</div>
+	            	<br>
+
+					<h3 class="text-center text-primary">II. DATOS GENERALES</h3>
+	                <hr class="bg-red">   
+			        <br>
+				    <div class="row">
+				    <!-- 	<div class="col-md-3 col-sm-4 text-center" >
+			            	<img ng-src="./img-pac/{{paciente.imagen[0].ima_nombre}}" class="img-thumbnail center">
+			          	</div> -->
+			            <div class="col-md-12 col-sm-11">
+			            	<div class="row">
+			              		<div class="col-md-3 col-sm-6">
+			                		<label class="text-primary">Nombre:</label><br>
+			                		{{pertramite.persona.per_nombres}}
+			              		</div>
+			              		<div class="col-md-3 col-sm-6">
+			                		<label class="text-primary">Apellido paterno:</label><br>
+			                		{{pertramite.persona.per_apellido_primero}}
+			              		</div>
+			              		<div class="col-md-3 col-sm-6">
+			                		<label class="text-primary">Apellido materno:</label><br>
+			                		{{pertramite.persona.per_apellido_segundo}}
+			                	</div>
+			                	<div class="col-md-3 col-sm-6">
+			                		<label class="text-primary">CI:</label><br>
+			                		{{pertramite.persona.per_ci + " "}} {{pertramite.persona.per_ci_expedido | uppercase}}
+			              		</div>
+			            	</div>
+			            	<br>
+			            	<div class="row">
+			              		<!-- <div class="col-md-3 col-sm-6">
+			                		<label class="text-primary">Fecha de nacimiento:</label><br>
+			                		{{pertramite.persona.per_fecha_nacimineto}} --><!-- <br><strong>{{paciente.edad.edad +" año(s) | "+paciente.edad.mes_n+" meses | "+paciente.edad.dia_a+" d&iacute;a(s)"}}</strong> -->
+			              		<!-- </div> -->
+			              		<!-- <div class="col-md-3 col-sm-6">
+			                		<label class="text-primary">Sexo:</label><br>
+			                		{{pertramite.persona.per_genero}}
+			              		</div> -->
+			              	    <div class="col-md-3 col-sm-6">
+			                		<label class="text-primary">Nro. Celular:</label><br>
+			                		{{pertramite.persona.per_numero_celular}}
+			              		</div>
+			              		<!-- <div class="col-md-3 col-sm-6 texto">
+			                		<label class="text-primary">Email:</label><br>
+			                		{{pertramite.persona.per_email}}
+			              		</div> -->
+			              		<div class="col-md-3 col-sm-6 texto">
+			                		<label class="text-primary">Avenida:</label><br>
+			                		{{pertramite.persona.per_avenida_calle}}
+			              		</div>
+			              		<div class="col-md-3 col-sm-6 texto">
+			                		<label class="text-primary">Número:</label><br>
+			                		{{pertramite.persona.per_numero}}
+			              		</div>
+			            	</div>
+			            	<br>
+			          	</div> 
+<!---->
+			          	<div  ng-show="pertramite.persona_tramite.pt_estado_tramite=='APROBADO'"  >
+			          		<div ng-controller="pdf_carneCtrl"  align="center">
+			          		   <button type="button" class="btn btn-default" ng-click="openPdf()" >IMPRIMIR CARNÉ  <span class="glyphicon glyphicon-open-file"></span></button>
+			          		   <button type="button"  class="btn btn-default" ng-click="downloadPdf()">Descargar PDF   <span class="glyphicon glyphicon-download-alt"></span></button>
+			          		</div>
+			          	</div>
+			        </div>
+			        <!-- <br>
+	   				<h3 class="text-center text-primary">III. DIRECCIÓN / LUGAR DE RESIDENCIA</h3>
+	                <hr class="bg-green">   
+		        	<br>   
+			        <div class="row" >
+		          		<div class="col-md-4 col-sm-4">
+		            		<label class="text-primary">Zona/Comunidad:</label><br>
+		            		{{paciente.direccion[0].dir_zona_comunidad | capitalize}}
+		          		</div>    
+		          		<div class="col-md-4 col-sm-4">
+		            		<label class="text-primary">Calle/Avenida:</label><br>
+		            		{{paciente.direccion[0].dir_avenida_calle | capitalize}}
+		          		</div>    
+		          		<div class="col-md-4 col-sm-4">
+		            		<label class="text-primary">Número:</label><br>
+		            		{{paciente.direccion[0].dir_numero | capitalize}}
+		          		</div>       
+		        	</div> 
+		        	<br> -->
+		        	
+			    </div>
+				<!-- FIN -->
+				<!-- AQUI VAN LOAS TABLAS O FORMULARIOS incrustados -->
+			</div>
+		</div>
+	</div>
+<!-- CONTENIDO MODULO fin -->

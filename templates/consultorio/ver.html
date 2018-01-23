@@ -1,0 +1,50 @@
+<!-- TOP-MENU inicio --> 
+<div ng-include="'./templates/menu_inicio.html'"></div>
+<!-- CONTEXT-MENU  -->
+<div ng-include="'./templates/menu_lateral.html'"></div>
+ 
+<!-- CONTENIDO MODULO -->
+  <div class="col-md-8 col-sm-8">
+    <div class="row">
+      <div class="col-md-12">
+        <h2 class="text-primary">
+          <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
+          {{ajustes.pagina.titulo}}
+        </h2>
+        <hr>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <!-- AQUI VAN LAS TABLAS O FORMULARIOS incrustados -->
+        <!-- INICIO -->
+        <div class="well well-sm" style="background-color:#fff;">
+        <h4 class="text-primary text-center">DESCRIPCIÓN DEL CONSULTORIO </h4>
+            <hr class="bg-red">
+          <div class="row">
+            
+            <div class="col-md-6">
+              <label class="text-primary">Nombre del consultorio:</label><br>
+              {{consultorios.ambientes.amb_nombre}}
+            </div>    
+            <div class="col-md-6">
+              <label class="text-primary">Código:</label><br>
+              {{consultorios.consultorios.con_cod}}
+            </div>   
+            <div class="col-md-6">
+              <label class="text-primary">Tipo:</label><br>
+              {{consultorios.ambientes.amb_tipo}}
+            </div> 
+            <div class="col-md-6">
+              <label class="text-primary">Descripción:</label><br>
+              {{consultorios.ambientes.amb_descripcion}}
+            </div>
+          </div>
+        </div>
+    </div>
+    </div>
+    <!-- fin cuerpo -->
+  </div>
+<!-- CONTENIDO MODULO fin -->
+<!--  <button type="button" class="btn  btn-resaltar form-signin">REGISTRAR</button>

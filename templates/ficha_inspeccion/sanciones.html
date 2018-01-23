@@ -1,0 +1,76 @@
+<!-- TOP-MENU inicio -->
+<div ng-include="'./templates/menu_inicio.html'"></div>
+<!-- CONTEXT-MENU -->
+<div ng-include="'./templates/menu_lateral.html'"></div>
+<!-- CONTENIDO MODULO inicio -->
+<div class="col-md-8 col-sm-8">
+  <div class="row">
+    <div class="col-md-12">
+      <h2 class="text-primary">
+        <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+        {{ajustes.pagina.titulo}}
+      </h2>
+      <hr class="bg-red">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="well well-sm">
+        <strong class="pull-left lead">Herramientas: &nbsp;</strong>
+        <form class="form-inline pull-left">
+          <input type="text" class="form-control" placeholder="Filtrar por ..." ng-model="fc_id">
+        </form>
+        &nbsp;&nbsp;
+        <button class="btn btn-default" onclick="generateFUN_AE()"><span class="glyphicon glyphicon-save-file"></span> Exportar lista en PDF</button>
+        <div class="clearfix"></div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 ">
+      <!-- AQUI VAN LAS TABLAS O FORMULARIOS incrustados -->
+      <!-- INICIO -->
+      <div class="text-center" ng-show="loading"><br><img ng-src="./images/image.gif" class="loader-img"></div>
+      <div ng-show="!loading && !msg">No se encontraron resultados</div>
+      <div class="table-responsive">
+        <table class="table table-bordered table-striped table-hover" ng-show="!loading && msg" id="table">
+          <th class="text-primary"ead >
+          <th class="text-primary" >
+              <a href="" ng-click="sortType = 'created_at'; sortReverse = !sortReverse">
+                      Fecha de Recepción
+                      <span ng-show="sortType == 'created_at' && !sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+                        <span ng-show="sortType == 'created_at' && sortReverse" class="glyphicon glyphicon-chevron-down"></span>
+                        </a>
+            </th>
+            <th class="text-primary" >
+              <a href="" ng-click="sortType = 'cat_descripcion'; sortReverse = !sortReverse">Sanción</a>
+             <!--  <span ng-show="sortType == 'per_ci' && !sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+              <span ng-show="sortType == 'per_ci' && sortReverse" class="glyphicon glyphicon-chevron-down"></span> -->
+            </th>
+            <th class="text-primary" >
+              <a href="" ng-click="sortType = 'cat_monto'; sortReverse = !sortReverse">Monto 
+              <!-- <span ng-show="sortType == 'per_apellido_primero' && !sortReverse" class="glyphicon glyphicon-chevron-up"></span>
+              <span ng-show="sortType == 'per_apellido_primero' && sortReverse" class="glyphicon glyphicon-chevron-down"></span> --></a>
+            </th>
+           
+           
+           <!--  <th class="text-primary">Dar de baja</th> -->
+          </thead>
+          <tbody>
+            <tr ng-repeat="fc in ficha_cat_san  | orderBy:sortType:sortReverse | filter:per_ci">
+            <td>
+              {{fc.created_at}}
+            </td>
+              <td>{{fc.cat_descripcion | uppercase}}</td>
+              <td>{{fc.cat_monto}}</td>
+           
+            </tr>
+          </tbody>
+        </table>
+        <button>
+          <a href="#/sancion/ver/{{cate.fc_id}}/{{cate.cat_descripcion}}" class="btn btn-success" title="VER SANCIONES"><span class="glyphicon glyphicon-file"></span> VOLVER AL DETALLE</a>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

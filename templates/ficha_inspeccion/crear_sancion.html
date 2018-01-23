@@ -1,0 +1,143 @@
+<!-- TOP-MENU inicio -->
+<div ng-include="'./templates/menu_inicio.html'"></div>
+<!-- CONTEXT-MENU  -->
+<div ng-include="'./templates/menu_lateral.html'"></div>
+<!-- CONTENIDO MODULO inicio -->
+<div class="col-md-8 col-sm-8">
+    <div class="row">
+      <div class="col-md-12">
+        <h2 class="text-primary">
+          <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+          {{ajustes.pagina.titulo}}
+     
+        </h2>
+        <hr>
+      </div>
+    </div>
+    <div class="col-md-12">
+    <!-- AQUI VAN LAS TABLAS O FORMULARIOS incrustados -->
+    <!-- INICIO -->
+        <div> 
+            <label class="control-label">Los campos marcados con asterisco (<strong class="fg_red">*</strong>) son obligatorios</label> 
+                <!-- CONTENIDO MODULO inicio -->
+            <form role="form" name="addEstablecimiento" novalidate>
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- AQUI VAN LAS TABLAS O FORMULARIOS incrustados -->
+                    <!-- INICIO -->
+                    <div class="well well-sm" style="background-color:#fff;">
+                        <div class="panel">
+                            <h4 class="text-center text-primary">I. DATOS GENERALES</h4>
+                            <hr class="bg-red">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label for="nombreesr" class="control-label">Propietario:</label>
+                                    <input name="nombreesr" disabled class="form-control" id="nombre" type="Text" ng-model="propietario">
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="resolucion" class="control-label">Establecimiento:</label>
+                                    <input disabled class="form-control" id="red" type="Text" ng-model="emp_tra.establecimiento_sol.ess_razon_social" >          
+                                </div>   
+                                <div class="col-md-4">
+                                    <label for="resolucion" class="control-label">Dirección:</label>
+                                    <input disabled class="form-control" id="red" type="Text" ng-model="direccion" >          
+                                </div> 
+                                <div class="col-md-2">
+                                    <label class="control-label ">Fecha:</label>
+                                    <div class="input-group">
+                                          <label class="form-control">{{CurrentDate | date:'dd/MM/yyyy'}} </label>
+                                          <span class="input-group-addon">
+                                              <span class="glyphicon glyphicon-calendar"></span>
+                                          </span>
+                                      </div>
+                                </div>
+                                <div class="col-md-2">
+                                      <label class="control-label ">Hora:</label>
+                                      <div class="input-group">
+                                          <label class="form-control">{{CurrentDate | date:'HH:mm:ss'}}</label>
+                                          <span class="input-group-addon">
+                                              <span class="glyphicon glyphicon-time"></span>
+                                          </span>
+                                      </div>
+                                </div>
+                                <div class="col-md-4">
+                                  <label for="resolucion" class="control-label">Rubro:</label>
+                                  <input disabled class="form-control" id="red" type="Text" ng-model="rubro.re_nombre" >          
+                                </div> 
+                            </div> 
+
+                            <div class="row">
+                                 <div class="col-md-4">
+                                     <label for="sc" class="control-label">Categorias registradas: <strong class="fg_red">*</strong></label>
+                                    <select class="form-control " ng-model="subclacificacion.cle_id" name="sc" ng-change="buscarS(subclacificacion.cle_id)" ng-model="cat" ng-options="cat.cle_id as cat.cle_nombre for cat in cat"  required>
+                                    <option value="">--Elige opcion--</option>
+                                    </select>
+                                </div>
+                                 <div class="col-md-4">
+                                     <label for="sc" class="control-label">Sancion: <strong class="fg_red">*</strong></label>
+                                    <select class="form-control " name="sc" ng-change="agregar(categoria.cat_id,categoria.cat_descripcion,categoria)" ng-model="categoria" ng-options="cat as cat.cat_descripcion+'   -'+cat.cat_area+''+cat.cat_categoria for cat in subcla" required>
+                                    
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row" >
+                                <div class="col-md-8">
+                                     <label for="nombrelab" class="control-label">Sanción seleccionada: <strong class="fg_red">*</strong></label>                                     
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered  table-hover">
+                                            <tbody ng-repeat="items in items track by $index">
+                                                <tr>
+                                                    <td>{{items.cat_codigo+ " " +items.cat_descripcion}}</td>
+                                                    <td>
+                                                         <button type="submit" ng-click="quitar(items.cat_id,items)" class="btn btn-primary"><span class="glyphicon glyphicon-remove"></span></button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+            
+                        </div><!-- fin panel -->
+               <br>
+                <div class="row">
+                    <div class="col-md-6 col-md-offset-3 text-center">
+                        <div class="well well-sm">
+                            <div class="checkbox">
+                                <label style="font-size: 1.5em">
+                                <input type = "checkbox" ng-model = "para_enviar" title="Haga click aqui para habilitar o deshabilitar el envío del formulario"> 
+                                <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
+                                <small style="font-size: 0.6em" class="text-primary" title="Haga click en la casilla de verificación del lado para registrar el establecimiento de salud">
+                                    <span class="glyphicon glyphicon-hand-left"></span>
+                                    <span class="glyphicon glyphicon-chevron-left"></span>
+                                    ¿DESEA GUARDAR ESTE FORMULARIO?
+                                </small>
+                                </label>
+                            </div>
+                            <br>
+                            <button ng-show = "para_enviar && ver" type="submit" class="btn btn-primary" ng-click="submit(); reset()"title="Debe llenar todos los campos obligatorios de manera correcta"><span class="glyphicon glyphicon-save"></span> GUARDAR</button>
+                            <button ng-show = "para_enviar && sancion" type="submit" class="btn btn-primary" ng-click="submitS(); reset()"title="Debe llenar todos los campos obligatorios de manera correcta"><span class="glyphicon glyphicon-save"></span> GUARDAR SANCION</button>
+                        </div>
+                    </div>    
+                </div>      
+            </div>  
+                        
+        <!-- FIN -->
+        <!-- AQUI VAN LOS TABLAS O FORMULARIOS incrustados -->
+        </div>
+    </div>
+    </form>
+                <!-- CONTENIDO MODULO fin -->
+    </div>
+            <p ng-show="ajustes.pagina.success" class="alert alert-success">{{ajustes.pagina.success}}</p>
+        <!-- FIN -->
+      <!-- AQUI VAN LOAS TABLAS O FORMULARIOS incrustados -->
+      </div>
+
+    </div>
+  </div>
+    <script type="text/javascript">
+        $(":file").filestyle({buttonText: " Abrir"});
+        //$('#fileInput').filestyle({buttonName : 'btn-warning'});
+    </script>
+<!-- CONTENIDO MODULO fin -->

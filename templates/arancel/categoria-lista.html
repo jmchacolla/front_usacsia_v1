@@ -1,0 +1,298 @@
+<div ng-include="'./templates/menu_inicio.html'"></div>
+
+<!-- CONTEXT-MENU  -->
+  <div ng-include="'./templates/menu_lateral.html'">
+  </div>
+<!-- CONTENIDO MODULO inicio -->
+  <div class="col-md-8 col-sm-8">
+    <div class="row">
+      <div class="col-md-12">
+        <h2 class="text-primary">
+          <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+          {{ajustes.pagina.titulo}}
+        </h2>
+        <hr>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+      <div class="well well-sm">
+        <strong class="pull-left lead">Herramientas: &nbsp;</strong>
+        <form class="form-inline pull-left">
+          <input type="text" class="form-control" placeholder="Filtrar por ..." ng-model="categoria.cat_codigo">
+        </form>
+        &nbsp;&nbsp;
+        <!--
+        <button class="btn btn-primary"><span class="glyphicon glyphicon-tasks"></span> Exportar lista en XLS</button>
+        <button class="btn btn-default"><span class="glyphicon glyphicon-save-file"></span> Exportar lista en PDF</button><br><br>
+        </div>--> 
+        <div class="clearfix"></div>
+      </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 ">
+      <div class="text-center" ng-show="loading"><br><img ng-src="./images/image.gif" class="loader-img"></div>
+      <div ng-show="!loading && !msg">No se encontraron resultados</div>
+      <form name="addClasificacion" ng-show="!loading && msg">
+          <div>
+              <span class="btn btn-primary" ng-click="veragregar()"><span class="glyphicon glyphicon-plus"> </span> Agregar</span>
+          </div>
+          <div class="well well-sm" ng-if="verform">
+            <div class="form-group">
+              <label for="codigo" class="text-primary">Seleccione una clasificación general:<strong class="fg_red">*</strong></label><br>
+              <select name="serv" class="form-control" ng-model="clasigral.cg_id" ng-options="clasigral.cg_id as clasigral.cg_nombre for clasigral in clasigral" required ng-change="buscaesp(clasigral.cg_id)">
+              <option value="">--Seleccione una opción--</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="codigo" class="text-primary">Seleccione una clasificación de especialidad:<strong class="fg_red">*</strong></label><br>
+              <select name="serv" class="form-control"  ng-model="cle.cle_id" ng-options="cle.cle_id as cle.cle_nombre for cle in cle" required ng-change="buscasub(cle.cle_id)">
+              <option value="">--Seleccione una opción--</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="codigo" class="text-primary">Seleccione una subclasificación:<strong class="fg_red">*</strong></label><br>
+              <select name="serv" class="form-control"  ng-model="catego.sub_id" ng-options="subcla.sub_id as subcla.sub_nombre for subcla in subcla" required>
+              <option value="">--Seleccione una opción--</option>
+              </select>
+            </div>
+            <div class="form-group">
+                <label for="codigo" class="text-primary">Ingrese código secuencial de subcategoria:<strong class="fg_red">*</strong></label>
+                <input type="" class="form-control" name="codigo" ng-model="catego.cat_secuencial" ng-model-options="{ updateOn: 'blur' }" required ng-pattern="patternCadenaNumero" >
+                <span class="messages" ng-show="addClasificacion.codigo.$touched">
+                <span ng-show="addClasificacion.codigo.$error.required">El campo es obligatorio.</span>
+                <span ng-show="addClasificacion.codigo.$error.pattern">No se admiten símbolos especiales.</span>
+                </span>
+            </div>
+            <div class="form-group">
+                <label for="cat_area" class="text-primary">Seleccione área:<strong class="fg_red">*</strong></label>
+                <select name="serv" class="form-control"  ng-model="catego.cat_area" >
+                  <option value="">--Seleccione una opción--</option>
+                  <option value="U">URBANO</option>
+                  <option value="R">RURAL</option>
+                </select>
+                <span class="messages" ng-show="addClasificacion.cat_area.$touched">
+                <span ng-show="addClasificacion.cat_area.$error.required">El campo es obligatorio.</span>
+                <span ng-show="addClasificacion.cat_area.$error.pattern">No se admiten símbolos especiales.</span>
+                </span>
+            </div>
+            <div class="form-group">
+                <label for="cat_categoria" class="text-primary">Ingrese categoria:<strong class="fg_red">*</strong></label>
+                <input type="" class="form-control" name="cat_categoria" placeholder="Categoria" ng-model="catego.cat_categoria" ng-model-options="{ updateOn: 'blur' }" required ng-pattern="patternCadenaNumero" >
+                <span class="messages" ng-show="addClasificacion.cat_categoria.$touched">
+                <span ng-show="addClasificacion.cat_categoria.$error.required">El campo es obligatorio.</span>
+                <span ng-show="addClasificacion.cat_categoria.$error.pattern">No se admiten símbolos especiales.</span>
+                </span>
+            </div>
+            <div class="form-group">
+                <label for="cat_categoria" class="text-primary">Ingrese monto:<strong class="fg_red">*</strong></label>
+                <input type="number" class="form-control" name="cat_categoria"  ng-model="catego.cat_monto" ng-model-options="{ updateOn: 'blur' }" required ng-pattern="patternCadenaNumero" >
+                <span class="messages" ng-show="addClasificacion.cat_categoria.$touched">
+                <span ng-show="addClasificacion.cat_categoria.$error.required">El campo es obligatorio.</span>
+                <span ng-show="addClasificacion.cat_categoria.$error.pattern">No se admiten símbolos especiales.</span>
+                </span>
+            </div>
+            <div class="form-group">
+                <label for="codigo" class="text-primary">Ingrese descripción:<strong class="fg_red">*</strong></label>
+                <input type="" class="form-control" name="cat_descripcion" placeholder="Descripción" ng-model="catego.cat_descripcion" ng-model-options="{ updateOn: 'blur' }" required ng-pattern="patternCadenaNumero" >
+                <span class="messages" ng-show="addClasificacion.cat_descripcion.$touched">
+                <span ng-show="addClasificacion.cat_descripcion.$error.required">El campo es obligatorio.</span>
+                <span ng-show="addClasificacion.cat_descripcion.$error.pattern">No se admiten símbolos especiales.</span>
+                </span>
+            </div>
+            <div class="form-group">
+                <label for="cat_servicio" class="text-primary">Ingrese servicio:<strong class="fg_red">*</strong></label>
+                <input type="" class="form-control" name="cat_servicio" placeholder="Servicio" ng-model="catego.cat_servicio" ng-model-options="{ updateOn: 'blur' }" required ng-pattern="patternCadenaNumero" >
+                <span class="messages" ng-show="addClasificacion.cat_servicio.$touched">
+                <span ng-show="addClasificacion.cat_servicio.$error.required">El campo es obligatorio.</span>
+                <span ng-show="addClasificacion.cat_servicio.$error.pattern">No se admiten símbolos especiales.</span>
+                </span>
+            </div>
+
+            <div>
+                <button class="btn btn-primary" ng-click="submit();reset(addClasificacion)" ng-disabled="addClasificacion.$invalid" title="Debe llenar todos los campos obligatorios de manera correcta"> 
+                  <span class="glyphicon glyphicon-save"></span> GUARDAR
+                </button>
+                <span class="btn btn-default" ng-click="reset(addClasificacion);veragregar()"><span class="glyphicon glyphicon-remove"> </span> Cancelar</span>
+            </div>
+          </div>
+      </form>
+      <div class="table-responsive">
+        
+        <table class="table table-bordered table-striped table-hover" ng-show="!loading && msg">
+          <thead >
+            <th class="text-primary">
+              <a href="" ng-click="sortType = 'per_ci'; sortReverse = !sortReverse">Item</a>
+              <span ng-show="sortType == 'per_ci' && !sortReverse" class="glyphicon glyphicon-sort-by-order"></span>
+              <span ng-show="sortType == 'per_ci' && sortReverse" class="glyphicon glyphicon-sort-by-order-alt"></span>
+            </th>
+            <th class="text-primary">
+              <a href="" ng-click="sortType = 'per_apellido_primero'; sortReverse = !sortReverse">Servicio 
+              <span ng-show="sortType == 'per_apellido_primero' && !sortReverse" class="glyphicon glyphicon-sort-by-alphabet"></span>
+              <span ng-show="sortType == 'per_apellido_primero' && sortReverse" class="glyphicon glyphicon-sort-by-alphabet-alt"></span></a>
+            </th>
+            <th class="text-primary">
+              <a href="" ng-click="sortType = 'per_nombres'; sortReverse = !sortReverse">Descripción 
+              <span ng-show="sortType == 'per_nombres' && !sortReverse" class="glyphicon glyphicon-sort-by-alphabet"></span>
+              <span ng-show="sortType == 'per_nombres' && sortReverse" class="glyphicon glyphicon-sort-by-alphabet-alt"></span></a>
+            </th>
+            <th class="text-primary">Área</th>
+            <th class="text-primary">Categoría</th>
+            <th class="text-primary">Monto (Bs.)</th>
+            <!-- <th class="text-primary">Ver</th> -->
+            <th class="text-primary">Editar</th>
+            <th class="text-primary">Borrar</th>
+          </thead>
+
+          <tbody ng-repeat="categoria in categorias | orderBy:sortType:sortReverse | filter:cat_id">
+            <tr>
+              <td>{{categoria.cat_codigo | uppercase}}</td>
+              <td>{{categoria.cat_servicio}}</td>
+              <td>{{categoria.cat_descripcion}}</td>
+              <td>{{categoria.cat_area}}</td>
+              <td>{{categoria.cat_categoria}}</td>
+              <td>{{categoria.cat_monto | number:2}}</td>
+              <!-- <td>
+                <a href="#/categoria/ver/{{categoria.cat_id}}" class="btn btn-success" title="Detalle"><span class="glyphicon glyphicon-file" title="Ver"></span></a>
+              </td> -->
+              <td class="text-center">
+                <a class="btn btn-primary" title="Editar" data-toggle="modal" data-target="#ModalEdit" ng-click="get_id(categoria)">
+                <span class="glyphicon glyphicon-pencil"></span></a>
+                <div id="ModalEdit" class="modal fade" role="dialog" tabindex="-1">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header bg-red">
+                        <button type="button" class="close" data-dismiss="modal">×</button>
+                        <h4 class="modal-title  fg-white">MODIFICAR DATOS DE CLASIFICACIÓN</h4>
+                      </div>
+                      <div class="modal-body text-center">
+                        Ingrese los datos a modificar
+                        <br>
+                        <div class="row" align="center">
+                          <form class="col-md-12">
+                            <div class="form-group col-md-6">
+                              <label for="codigo" class="text-primary">Seleccione una clasificación general:<strong class="fg_red">*</strong></label><br>
+                              <select name="serv" class="form-control" ng-model="clasigral.cg_id" ng-options="clasigral.cg_id as clasigral.cg_nombre for clasigral in clasigral" required ng-change="buscaesp(clasigral.cg_id)">
+                              <option value="">--Seleccione una opción--</option>
+                              </select>
+                            </div>
+                            <div class="form-group col-md-6">
+                              <label for="codigo" class="text-primary">Seleccione una clasificación de especialidad:<strong class="fg_red">*</strong></label><br>
+                              <select name="serv" class="form-control"  ng-model="cle.cle_id" ng-options="cle.cle_id as cle.cle_nombre for cle in cle" required ng-change="buscasub(cle.cle_id)">
+                              <option value="">--Seleccione una opción--</option>
+                              </select>
+                            </div>
+                            <div class="form-group col-md-6">
+                              <label for="codigo" class="text-primary">Seleccione una subclasificación:<strong class="fg_red">*</strong></label><br>
+                              <select name="serv" class="form-control"  ng-model="cat.sub_id" ng-options="subcla.sub_id as subcla.sub_nombre for subcla in subcla" required>
+                              <option value="">--Seleccione una opción--</option>
+                              </select>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="codigo" class="text-primary">Ingrese código secuencial de subcategoria:<strong class="fg_red">*</strong></label>
+                                <input type="" class="form-control" name="codigo" ng-model="cat.cat_secuencial" ng-model-options="{ updateOn: 'blur' }" required ng-pattern="patternCadenaNumero" >
+                                <span class="messages" ng-show="addClasificacion.codigo.$touched">
+                                <span ng-show="addClasificacion.codigo.$error.required">El campo es obligatorio.</span>
+                                <span ng-show="addClasificacion.codigo.$error.pattern">No se admiten símbolos especiales.</span>
+                                </span>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="cat_area" class="text-primary">Seleccione área:<strong class="fg_red">*</strong></label>
+                                <select name="serv" class="form-control"  ng-model="cat.cat_area" >
+                                  <option value="">--Seleccione una opción--</option>
+                                  <option value="U">URBANO</option>
+                                  <option value="R">RURAL</option>
+                                </select>
+                                <span class="messages" ng-show="addClasificacion.cat_area.$touched">
+                                <span ng-show="addClasificacion.cat_area.$error.required">El campo es obligatorio.</span>
+                                <span ng-show="addClasificacion.cat_area.$error.pattern">No se admiten símbolos especiales.</span>
+                                </span>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="cat_categoria" class="text-primary">Ingrese categoria:<strong class="fg_red">*</strong></label>
+                                <input type="" class="form-control" name="cat_categoria" placeholder="Categoria" ng-model="cat.cat_categoria" ng-model-options="{ updateOn: 'blur' }" required ng-pattern="patternCadenaNumero" >
+                                <span class="messages" ng-show="addClasificacion.cat_categoria.$touched">
+                                <span ng-show="addClasificacion.cat_categoria.$error.required">El campo es obligatorio.</span>
+                                <span ng-show="addClasificacion.cat_categoria.$error.pattern">No se admiten símbolos especiales.</span>
+                                </span>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="cat_monto" class="text-primary">Ingrese monto:<strong class="fg_red">*</strong></label>
+                                <input type="" class="form-control" name="cat_monto"  ng-model="cat.cat_monto" ng-model-options="{ updateOn: 'blur' }" required ng-pattern="patternCadenaNumero" >
+                                <span class="messages" ng-show="addClasificacion.cat_monto.$touched">
+                                <span ng-show="addClasificacion.cat_monto.$error.required">El campo es obligatorio.</span>
+                                <span ng-show="addClasificacion.cat_monto.$error.pattern">No se admiten símbolos especiales.</span>
+                                </span>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="codigo" class="text-primary">Ingrese descripción:<strong class="fg_red">*</strong></label>
+                                <input type="" class="form-control" name="cat_descripcion" placeholder="Descripción" ng-model="cat.cat_descripcion" ng-model-options="{ updateOn: 'blur' }" required ng-pattern="patternCadenaNumero" >
+                                <span class="messages" ng-show="addClasificacion.cat_descripcion.$touched">
+                                <span ng-show="addClasificacion.cat_descripcion.$error.required">El campo es obligatorio.</span>
+                                <span ng-show="addClasificacion.cat_descripcion.$error.pattern">No se admiten símbolos especiales.</span>
+                                </span>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="cat_servicio" class="text-primary">Ingrese servicio:<strong class="fg_red">*</strong></label>
+                                <input type="" class="form-control" name="cat_servicio" placeholder="Servicio" ng-model="cat.cat_servicio" ng-model-options="{ updateOn: 'blur' }" required ng-pattern="patternCadenaNumero" >
+                                <span class="messages" ng-show="addClasificacion.cat_servicio.$touched">
+                                <span ng-show="addClasificacion.cat_servicio.$error.required">El campo es obligatorio.</span>
+                                <span ng-show="addClasificacion.cat_servicio.$error.pattern">No se admiten símbolos especiales.</span>
+                                </span>
+                            </div>
+                        </form>
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">
+                          <span class="glyphicon glyphicon-remove"></span> NO
+                        </button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="update()">
+                          <span class="glyphicon glyphicon-ok"></span> SI
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </td>
+              <td >
+                <button class="btn btn-danger" title="Borrar" data-toggle="modal" data-target="#miCuadroModal1" ng-click="get_id(categoria)" title="Eliminar"><span class="glyphicon glyphicon-trash"></span></button> <!--archivar -->
+                <div id="miCuadroModal1" class="modal fade" role="dialog" tabindex="-1">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header bg-red">
+                        <button type="button" class="close" data-dismiss="modal">×</button>
+                        <h4 class="modal-title  fg-white">ELIMINAR REGISTRO DE CATEGORÍA</h4>
+                      </div>
+                      <div class="modal-body lead text-center">
+                        ¿Está seguro que desea eliminar los registros?
+                        <br>
+                        <div class="well well-sm">
+                          <strong>{{cat.cat_codigo | uppercase}} {{cat.cat_descripcion}}</strong>
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">
+                          <span class="glyphicon glyphicon-remove"></span> NO
+                        </button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="remove(persona.per_id)">
+                          <span class="glyphicon glyphicon-ok"></span> SI
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- FIN -->
+      <!-- AQUI VAN LOAS TABLAS O FORMULARIOS incrustados -->
+      
+      </div>
+    </div>
+  </div>
+
+<!-- CONTENIDO MODULO fin
