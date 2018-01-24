@@ -27,15 +27,13 @@
             </div>
             </div>
         </div>
+
+          <h4>
+            Seleccione un municipio para desplegar las zonas
+          </h4>
+
         <div class="row">
-            <div class="col-md-6">
-                <h3 class="text-primary">
-                   Nueva Zona &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                   <a href="#/zona/crear" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> AGREGAR</a>
-                </h3>
-                <hr>
-            </div>
-            <div class="col-md-4" ng-controller="MunicipioCtrl">
+        <div class="col-md-4" ng-controller="MunicipioCtrl">
               <label class="control-label">Municipio: <strong class="fg_red">*</strong></label>
               <select class="form-control " name="municipio" ng-model="persona.mun_id"  ng-options="municipio.mun_id as municipio.mun_nombre for municipio in municipios" ng-change="ver_zonas(persona.mun_id)" required>
               <option value="">--Elige opcion--</option>
@@ -43,7 +41,15 @@
               <span class="messages" ng-show="addPersona.$submitted || addPersona.municipio.$touched">
                   <span ng-show="addPersona.municipio.$error.required">El campo es obligatorio.</span>
              </span>
-        </div>
+            </div>
+            <div class="col-md-6">
+                <h3 class="text-primary">
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Nueva Zona 
+                   <a href="#/zona/crear" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> AGREGAR</a>
+                </h3>
+                <hr>
+            </div>
+            
         </div>
         <br>
         <div class="row" >
