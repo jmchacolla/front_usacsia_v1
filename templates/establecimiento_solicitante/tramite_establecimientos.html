@@ -48,7 +48,7 @@
             </a>
           </th>
           <th class="text-primary text-center" >Tipo</th>
-          <th class="text-primary text-center" ng-if="user.rol_id == '15'" >Revisar</th>
+          <th class="text-primary text-center" ng-if="user.rol_id == '15' ||  user.rol_id == '1'" >Revisar</th>
         </thead>
         <tbody ng-repeat="establecimiento in establecimientos | orderBy:sortType:sortReverse | filter:ess_razon_social | startFromGrid: currentPage * pageSize | limitTo: pageSize ">
           <tr>
@@ -57,7 +57,7 @@
           <td>{{establecimiento.ess_propietario}}</td>
           <td> {{establecimiento.ess_razon_social}}</td>
           <td>{{establecimiento.ess_tipo}}</td>
-          <td ng-if="user.rol_id == '15'" >
+          <td ng-if="user.rol_id == '15' || user.rol_id == '1'" >
             <a class="btn btn-success" href="#/documento-tramite/revisar/{{establecimiento.et_id}}" title="Ver Establecimiento" ><span class="glyphicon glyphicon-folder-open"></span>&nbsp;  Requisitos</a>
           </td>
           </tr>

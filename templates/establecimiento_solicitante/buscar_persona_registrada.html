@@ -20,10 +20,29 @@
           Para la registrar un establecimiento:
           <ul>
             <li>Seleccione el tipo de propietario&nbsp;&nbsp;&nbsp;
-                  <input type="radio" name="tipo" id="P" value="P" ng-checked="true" ng-click="pag_buscar_persona()"/>
+                  <!-- <input type="radio" name="tipo" id="P" value="P" ng-checked="true" ng-click="pag_buscar_persona()"/>
                   <label for="P">Persona Natural</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                   <input type="radio" name="tipo" id="E" value="E" ng-click="pag_buscar_empresa()"/>
-                  <label for="E">Empresa</label>
+                  <label for="E">Empresa</label> -->
+
+                   <div class="row">
+                      <div class="col-md-6">
+                        <div class="formulario">
+                              <div class="radio">
+                                <div class="col-md-6">
+                                  <input type="radio" name="tipo1" name="chper1" id="chper1" ng-checked="true" ng-click="pag_buscar_persona()">
+                                  <label for="chper1">Persona Natural</label>
+                                </div>
+                                <div class="col-md-6">
+                                  <input type="radio" name="tipo1" id="chemp" ng-click="pag_buscar_empresa()">
+                                  <label for="chemp">Empresa</label>
+                                </div>
+                              </div>
+                            </div>
+                      </div>
+                    </div>
+
+                   
             </li>
             <!-- INSTRUCCIONES PERSONA -->
             <li>Debe ingresar en el buscador el n&uacute;mero de carnet del usuario que solicita el registro de su establecimiento.</li>

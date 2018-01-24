@@ -65,6 +65,7 @@ angular.module("adminApp")
 
 
   $scope.ver=false;
+  $scope.verprueba=false;
   $scope.loading=true;//para hacer un loading
   PruebaLaboratorioService.get(function(data){
     console.log(data);
@@ -358,11 +359,14 @@ function buscaNumeroMuestraCtrl($http, $scope, CONFIG){
               $scope.tamanio="";
               $scope.ver=true;
               $scope.switch=false;
+              $scope.verprueba=false;
           } else if(!respuesta.muestra){
               $scope.ver=false;
+              $scope.verprueba=false;
               $scope.tamanio="El numero de muestra ingresado no fue asignado";
           }
           if(respuesta.pruebalabo){
+             $scope.muestra = respuesta.pruebalabo;
               $scope.tamanio="La muestra ya fue analizada";
               $scope.verprueba=true;
           }

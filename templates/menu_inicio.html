@@ -25,6 +25,11 @@
 					<span class="glyphicon glyphicon-th" aria-hidden="true"></span>
 					Carné Sanitario<span class="caret"></span></a>
 				  	<ul class="dropdown-menu">
+				  
+				  		<li ng-show="menu.CONFIG.ROL_CURRENT_USER == 1 || menu.CONFIG.ROL_CURRENT_USER == 3">	 <a href="#/recaudacion-caja">
+							<span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
+							Recaudaciones</a>
+						</li>
 				  		<li ng-show="menu.CONFIG.ROL_CURRENT_USER == 1 || menu.CONFIG.ROL_CURRENT_USER == 3">	 <a href="#/tramite/crear">
 							<span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
 							Registrar pago</a>
@@ -84,7 +89,7 @@
 							<span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
 								Reporte Observados del dia</a>
 						</li>
-						<li ng-show="menu.CONFIG.ROL_CURRENT_USER == 9 || menu.CONFIG.ROL_CURRENT_USER == 10 || menu.CONFIG.ROL_CURRENT_USER == 7">
+						<li ng-show="menu.CONFIG.ROL_CURRENT_USER == 9 || menu.CONFIG.ROL_CURRENT_USER == 10">
 							<a href="#/reportes/signosvitales" >
 							<span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
 								Reporte Signos</a>
@@ -173,7 +178,7 @@
 			           		Empresas con Requisitos Validos</a>
 			            </li>
 			            <li ng-show="menu.CONFIG.ROL_CURRENT_USER == 1 || menu.CONFIG.ROL_CURRENT_USER == 15 || menu.CONFIG.ROL_CURRENT_USER == 16 || menu.CONFIG.ROL_CURRENT_USER == 14 || menu.CONFIG.ROL_CURRENT_USER == 2 || menu.CONFIG.ROL_CURRENT_USER == 17 || menu.CONFIG.ROL_CURRENT_USER == 18" >
-			            	<a href="#/lista-validacion">
+			            	<a href="#/asignar-inspeccion">
 			            	<span class="glyphicon glyphicon-asterisk" aria-hidden="true"></span>
 			           		Inspectores e Inspecciones</a>
 			            </li>

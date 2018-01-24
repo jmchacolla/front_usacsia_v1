@@ -99,7 +99,7 @@
 			            	<p class="lead" ng-if="ficha_inspeccion.ficha_inspeccion.fi_botiquin==false || ficha_inspeccion.ficha_inspeccion.fi_botiquin =='0'">TIENE</p>
 					</div>
 				</div>
-				<div class="row" ng-if="user.rol_id == '16' ">
+				<div class="row" ng-if="user.rol_id == '16' || user.rol_id == '1' ">
 					<div class="col-md-12">
 					<center>
 						<button  class="btn btn-xm btn-warning glyphicon glyphicon-check" data-toggle="modal" ng-click="rec(cate.fc_id,cate.cat_id)" data-target="#miCuadroModal1" title="Sancionar categoria" > SANCIONAR</button>
