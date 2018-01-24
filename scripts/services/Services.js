@@ -875,3 +875,24 @@ angular.module("adminApp")
     update:{}
   })
 }])
+
+/*jhon --------------reporte caja cas*/
+.factory('ReporteCajaCas', ['$resource', 'CONFIG', function ($resource, CONFIG) {
+  return $resource(CONFIG.DOMINIO_SERVICIOS+"/reportecaja_cas", {},{ 
+    update:{}
+  })
+}])
+/*jhon --------------reporte caja ces form1*/
+.factory('ReporteCajaCesFrom', ['$resource', 'CONFIG', function ($resource, CONFIG) {
+  return $resource(CONFIG.DOMINIO_SERVICIOS+"/reportecaja_cesform", {},{ 
+    update:{}
+  })
+}])
+/*jhon --------------reporte caja ces orden pago*/
+.factory('ReporteCajaCesOrden', ['$resource', 'CONFIG', function ($resource, CONFIG) {
+  return $resource(CONFIG.DOMINIO_SERVICIOS+"/reportecaja_orden", {},{ 
+    update:{}
+  })
+}])
+
+
