@@ -1,16 +1,17 @@
+   <div  ng-controller="CrearFicha1Ctrl">
     <div class="row">
 
           <div class="col-md-4">
               <label for="resolucion" class="control-label">No carnet sanitario:</label>
-              <input class="form-control" id="red" type="Text" ng-model="ficha1" >          
+              <input class="form-control" id="red" type="number" ng-model="ficha1.nocarnet" min="0">          
           </div> 
           <div class="col-md-4">
               <label for="resolucion" class="control-label">Extinguidores:</label>
-              <input class="form-control" id="red" type="Text" ng-model="ficha1.fi_extinguidor">     
+              <input class="form-control" id="red" type="number" ng-model="ficha1.fi_extinguidor" min="0">     
           </div> 
           <div class="col-md-4">
               <label for="resolucion" class="control-label">Botiquin:</label>
-              <input class="form-control" id="red" type="Text" ng-model="ficha1.fi_botiquin">     
+              <input class="form-control" id="red" type="number" ng-model="ficha1.fi_botiquin" min="0">     
           </div>   
          
     </div>
@@ -82,6 +83,7 @@
           </div> 
 
     </div>
+    <br>
                   <div class="row">
                         <div class="col-md-6">
                             <label for="diagnostico" class="control-label ">Detalle de la infraestructura:<strong class="fg_red">*</strong></label><br>
@@ -92,71 +94,67 @@
                         </div>
                   </div>
                   <div class="row">
-                      <div class="col-md-2">
-                          <label for="serv" class="control-label ">Servicios Higienicos:<strong class="fg_red">*</strong></label>
-                          <input name="serv" type="number" ng-model-options="{ updateOn: 'blur' }" class="form-control" id="serv" placeholder="FC" ng-model="ficha1.fi1_servicios_higienicos" min="0" max="400" required>
-                          <span class="messages" ng-show="userForm.$submitted || userForm.serv.$touched ">
-                           <span ng-show="userForm.serv.$error.required">El campo es obligatorio</span>
-                            <!-- <span ng-show="userForm.serv.$error.max">La frecuencia no puede exceder de 400 lpm</span>
-                           <span ng-show="userForm.serv.$error.min">La frecuencia no puede ser menor de 0 lpm</span> -->
-                          </span> 
-                      </div>
-                      <div class="col-md-2">
-                          <label for="otro" class="control-label ">Otros:<strong class="fg_red">*</strong></label>
-                          <input name="otro" type="number" ng-model-options="{ updateOn: 'blur' }" class="form-control" id="otro" placeholder="FC" ng-model="ficha1.fi1_otros_servicios" min="0" max="400" required>
-                          <span class="messages" ng-show="userForm.$submitted || userForm.otro.$touched ">
-                           <span ng-show="userForm.otro.$error.required">El campo es obligatorio</span>
-                         <!--    <span ng-show="userForm.otro.$error.max">La frecuencia no puede exceder de 400 lpm</span>
-                           <span ng-show="userForm.otro.$error.min">La frecuencia no puede ser menor de 0 lpm</span> -->
-                          </span> 
-                      </div>
-                      <div class="col-md-2">
-                          <label for="ino" class="control-label ">Inodoro:<strong class="fg_red">*</strong></label>
-                          <input name="ino" type="number" ng-model-options="{ updateOn: 'blur' }" class="form-control" id="ino" placeholder="FC" ng-model="ficha1.fi1_inodoro" min="0" max="400" required>
-                          <span class="messages" ng-show="userForm.$submitted || userForm.ino.$touched ">
-                           <span ng-show="userForm.ino.$error.required">El campo es obligatorio</span>
-                        <!--     <span ng-show="userForm.ino.$error.max">La frecuencia no puede exceder de 400 lpm</span>
-                           <span ng-show="userForm.ino.$error.min">La frecuencia no puede ser menor de 0 lpm</span> -->
-                          </span> 
-                      </div>
-                      <div class="col-md-2">
-                          <label for="jab" class="control-label ">Jaboncillo:<strong class="fg_red">*</strong></label>
-                          <input name="jab" type="number" ng-model-options="{ updateOn: 'blur' }" class="form-control" id="jab" placeholder="FC" ng-model="ficha1.fi1_jaboncillo" min="0" max="400" required>
-                          <span class="messages" ng-show="userForm.$submitted || userForm.jab.$touched ">
-                           <span ng-show="userForm.jab.$error.required">El campo es obligatorio</span>
-                       <!--      <span ng-show="userForm.jab.$error.max">La frecuencia no puede exceder de 400 lpm</span>
-                           <span ng-show="userForm.jab.$error.min">La frecuencia no puede ser menor de 0 lpm</span> -->
-                          </span> 
-                      </div>
-                      <div class="col-md-2">
-                          <label for="lav" class="control-label ">Lavamanos de porcelana:<strong class="fg_red">*</strong></label>
-                          <input name="lav" type="number" ng-model-options="{ updateOn: 'blur' }" class="form-control" id="lav" placeholder="FC" ng-model="ficha1.fi1_lavamanos_porcelana" min="0" max="400" required>
-                          <span class="messages" ng-show="userForm.$submitted || userForm.lav.$touched ">
-                           <span ng-show="userForm.lav.$error.required">El campo es obligatorio</span>
-                           <!--  <span ng-show="userForm.lav.$error.max">La frecuencia no puede exceder de 400 lpm</span>
-                           <span ng-show="userForm.lav.$error.min">La frecuencia no puede ser menor de 0 lpm</span> -->
-                          </span> 
-                      </div>
-                      <div class="col-md-2">
-                          <label for="to" class="control-label ">Toallas:<strong class="fg_red">*</strong></label>
-                          <input name="to" type="number" ng-model-options="{ updateOn: 'blur' }" class="form-control" id="to" placeholder="FC" ng-model="ficha1.fi1_toallas" min="0" max="400" required>
-                          <span class="messages" ng-show="userForm.$submitted || userForm.to.$touched ">
-                           <span ng-show="userForm.to.$error.required">El campo es obligatorio</span>
-                         <!--    <span ng-show="userForm.to.$error.max">La frecuencia no puede exceder de 400 lpm</span>
-                           <span ng-show="userForm.to.$error.min">La frecuencia no puede ser menor de 0 lpm</span>
- -->                          </span> 
-                      </div>
-                      <div class="col-md-2">
-                          <label for="du" class="control-label ">Duchas:<strong class="fg_red">*</strong></label>
-                          <input name="du" type="number" ng-model-options="{ updateOn: 'blur' }" class="form-control" id="du" placeholder="FC" ng-model="ficha1.fi1_duchas" min="0" max="400" required>
-                          <span class="messages" ng-show="userForm.$submitted || userForm.du.$touched ">
-                           <span ng-show="userForm.du.$error.required">El campo es obligatorio</span>
-                            <!-- <span ng-show="userForm.du.$error.max">La frecuencia no puede exceder de 400 lpm</span>
-                           <span ng-show="userForm.du.$error.min">La frecuencia no puede ser menor de 0 lpm</span> -->
-                          </span> 
-                      </div>
-                  </div>
-                  <div class="row">
+                    <div class="col-md-4">
+                         <div class="formulario">
+                              <div class="checkbox">
+                              <input class="checkbox" type="checkbox" name="ai" id="seleccion" ng-model="ficha1.fi1_servicios_higienicos">
+                              <label for="seleccion">Servicios Higiénicos</label>
+                              </div>
+                        </div>
+                    </div>
+                     <div class="col-md-4">
+                        <div class="formulario">
+                              <div class="checkbox">
+                              <input class="checkbox" type="checkbox" name="ag" id="agua" ng-model="ficha1.fi1_inodoro" ng-init="true" >
+                              <label for="agua">Inodoro</label>
+                              </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="formulario">
+                              <div class="checkbox">
+                              <input class="checkbox" type="checkbox" name="ag" id="calf" ng-model="ficha1.fi1_lavamanos_porcelana" ng-init="checked=false" >
+                              <label for="calf">Lavamanos de porcelan</label>
+                              </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" >
+                    <div class="col-md-4">
+                        <div class="formulario">
+                              <div class="checkbox">
+                              <input class="checkbox" type="checkbox" name="ag" id="fri" ng-model="ficha1.fi1_otros_servicios" ng-init="checked=false" >
+                              <label for="fri">Otros</label>
+                              </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="formulario">
+                              <div class="checkbox">
+                              <input class="checkbox" type="checkbox" name="ag" id="room" ng-model="ficha1.fi1_jaboncillo" ng-init="checked=false" >
+                              <label for="room">Jaboncillo</label>
+                              </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="formulario">
+                              <div class="checkbox">
+                              <input class="checkbox" type="checkbox" name="ag" id="telf" ng-model="ficha1.fi1_toallas" ng-init="checked=false" >
+                              <label for="telf">Toallas</label>
+                              </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="formulario">
+                              <div class="checkbox">
+                              <input class="checkbox" type="checkbox" name="ag" id="tv" ng-model="ficha1.fi1_duchas" ng-init="checked=false" >
+                              <label for="tv">Duchas</label>
+                              </div>
+                        </div>
+                    </div>
+                  
+                </div>
+                <div class="row">
                     <div class="col-md-6">
                             <label for="equi" class="control-label ">Detalle Equipo :<strong class="fg_red">*</strong></label><br>
                             <textarea name="equi" ng-model-options="{ updateOn: 'blur' }" rows="6" cols="45" style="resize: vertical;min-height:70px;max-height: 150px;" placeholder="detalle equipo" ng-model="ficha1.fi1_detalle_equipo" required></textarea>
@@ -172,109 +170,109 @@
                             </span>
                      </div>
                      <div class="col-md-6">
-                            <label for="ot" class="control-label ">Otros:<strong class="fg_red">*</strong></label><br>
-                            <textarea name="ot" ng-model-options="{ updateOn: 'blur' }" rows="6" cols="100" style="resize: vertical;min-height:70px;max-height: 150px;" placeholder="Otros" ng-model="ficha1.fi1_otros" required></textarea>
-                            <span class="messages" ng-show="userForm.$submitted || userForm.ot.$touched">
+                            <label for="ot" class="control-label ">Otros:<!-- <strong class="fg_red">*</strong> --></label><br>
+                            <textarea name="ot" ng-model-options="{ updateOn: 'blur' }" rows="6" cols="100" style="resize: vertical;min-height:70px;max-height: 150px;" placeholder="Otros" ng-model="ficha1.fi1_otros" ></textarea>
+                           <!--  <span class="messages" ng-show="userForm.$submitted || userForm.ot.$touched">
                             <span ng-show="userForm.ot.$error.required">El campo es obligatorio</span>
-                            </span>
+                            </span> -->
                      </div>
                   </div>
                   <div class="row">
                      <div class="col-md-4">
-                        <label for="seguro" class="control-label ">Facilidades para el aseo personal: <strong class="fg_red">*</strong></label>
-                        <select class="form-control" name="seguro" ng-model="ficha1.fi1_aseo_personal" required>
+                        <label for="seguro" class="control-label ">Facilidades para el aseo personal:<!--  <strong class="fg_red">*</strong> --></label>
+                        <select class="form-control" name="seguro" ng-model="ficha1.fi1_aseo_personal" >
                            <option value="BUENO">BUENO</option>
                             <option value="REGULAR">REGULAR</option>
                             <option value="MALO">MALO</option>
                             
                         </select>
-                        <span class="messages" ng-show="userForm.$submitted || userForm.seguro.$touched">
+                        <!-- <span class="messages" ng-show="userForm.$submitted || userForm.seguro.$touched">
                         <span ng-show="userForm.seguro.$error.required">El campo es obligatorio</span>
-                        </span>
+                        </span> -->
                     </div>
                     <div class="col-md-4">
-                        <label for="seguro" class="control-label ">Disposición de residuos Sólidos <strong class="fg_red">*</strong></label>
-                        <select class="form-control" name="seguro" ng-model="ficha1.fi1_residuos_solidos" required>
+                        <label for="seguro" class="control-label ">Disposición de residuos Sólidos <!-- <strong class="fg_red">*</strong> --></label>
+                        <select class="form-control" name="seguro" ng-model="ficha1.fi1_residuos_solidos" >
                            <option value="BUENO">BUENO</option>
                             <option value="REGULAR">REGULAR</option>
                             <option value="MALO">MALO</option>
                             
                         </select>
-                        <span class="messages" ng-show="userForm.$submitted || userForm.seguro.$touched">
+                        <!-- <span class="messages" ng-show="userForm.$submitted || userForm.seguro.$touched">
                         <span ng-show="userForm.seguro.$error.required">El campo es obligatorio</span>
-                        </span>
+                        </span> -->
                     </div>
                     <div class="col-md-4">
-                        <label for="seguro" class="control-label ">Disposición de residuos Sólidos <strong class="fg_red">*</strong></label>
-                        <select class="form-control" name="seguro" ng-model="referencias.br_seguro" required>
+                        <label for="seguro" class="control-label ">Disposición de residuos Sólidos <!-- <strong class="fg_red">*</strong> --></label>
+                        <select class="form-control" name="seguro" ng-model="referencias.br_seguro" >
                            <option value="BUENO">BUENO</option>
                             <option value="REGULAR">REGULAR</option>
                             <option value="MALO">MALO</option>
                             
                         </select>
-                        <span class="messages" ng-show="userForm.$submitted || userForm.seguro.$touched">
+                        <!-- <span class="messages" ng-show="userForm.$submitted || userForm.seguro.$touched">
                         <span ng-show="userForm.seguro.$error.required">El campo es obligatorio</span>
-                        </span>
+                        </span> -->
                     </div>
                     <div class="col-md-4">
-                        <label for="seguro" class="control-label ">Abastecimiento de agua <strong class="fg_red">*</strong></label>
-                        <select class="form-control" name="seguro" ng-model="ficha1.fi1_abastecimiento_agua" required>
+                        <label for="seguro" class="control-label ">Abastecimiento de agua <!-- <strong class="fg_red">*</strong> --></label>
+                        <select class="form-control" name="seguro" ng-model="ficha1.fi1_abastecimiento_agua" >
                            <option value="BUENO">BUENO</option>
                             <option value="REGULAR">REGULAR</option>
                             <option value="MALO">MALO</option>
                             
                         </select>
-                        <span class="messages" ng-show="userForm.$submitted || userForm.seguro.$touched">
+                       <!--  <span class="messages" ng-show="userForm.$submitted || userForm.seguro.$touched">
                         <span ng-show="userForm.seguro.$error.required">El campo es obligatorio</span>
-                        </span>
+                        </span> -->
                     </div> 
                     <div class="col-md-4">
                         <label for="seguro" class="control-label ">Control de insectos y roedores <strong class="fg_red">*</strong></label>
-                        <select class="form-control" name="seguro" ng-model="ficha1.fi1_control_insectos_roedores" required>
+                        <select class="form-control" name="seguro" ng-model="ficha1.fi1_control_insectos_roedores">
                            <option value="BUENO">BUENO</option>
                             <option value="REGULAR">REGULAR</option>
                             <option value="MALO">MALO</option>
                             
                         </select>
-                        <span class="messages" ng-show="userForm.$submitted || userForm.seguro.$touched">
+                      <!--   <span class="messages" ng-show="userForm.$submitted || userForm.seguro.$touched">
                         <span ng-show="userForm.seguro.$error.required">El campo es obligatorio</span>
-                        </span>
+                        </span> -->
                     </div>
                     <div class="col-md-4">
-                        <label for="seguro" class="control-label ">Disposición de residuos Liquidos <strong class="fg_red">*</strong></label>
-                        <select class="form-control" name="seguro" ng-model="ficha1.fi1_residuos_liquidos" required>
+                        <label for="seguro" class="control-label ">Disposición de residuos Liquidos <!-- <strong class="fg_red">*</strong> --></label>
+                        <select class="form-control" name="seguro" ng-model="ficha1.fi1_residuos_liquidos" >
                            <option value="BUENO">BUENO</option>
                             <option value="REGULAR">REGULAR</option>
                             <option value="MALO">MALO</option>
                             
                         </select>
-                        <span class="messages" ng-show="userForm.$submitted || userForm.seguro.$touched">
+                        <!-- <span class="messages" ng-show="userForm.$submitted || userForm.seguro.$touched">
                         <span ng-show="userForm.seguro.$error.required">El campo es obligatorio</span>
-                        </span>
+                        </span> -->
                     </div>
                     <div class="col-md-4">
-                        <label for="seguro" class="control-label ">Distribucion de dependencias<strong class="fg_red">*</strong></label>
-                        <select class="form-control" name="seguro" ng-model="ficha1.fi1_distribucion_dependencias" required>
+                        <label for="seguro" class="control-label ">Distribucion de dependencias<!-- <strong class="fg_red">*</strong> --></label>
+                        <select class="form-control" name="seguro" ng-model="ficha1.fi1_distribucion_dependencias" >
                            <option value="BUENO">BUENO</option>
                             <option value="REGULAR">REGULAR</option>
                             <option value="MALO">MALO</option>
                             
                         </select>
-                        <span class="messages" ng-show="userForm.$submitted || userForm.seguro.$touched">
+                        <!-- <span class="messages" ng-show="userForm.$submitted || userForm.seguro.$touched">
                         <span ng-show="userForm.seguro.$error.required">El campo es obligatorio</span>
-                        </span>
+                        </span> -->
                     </div>
                     <div class="col-md-4">
-                        <label for="seguro" class="control-label ">Conservacion de productos y materia prima <strong class="fg_red">*</strong></label>
-                        <select class="form-control" name="seguro" ng-model="ficha1.fi1_conservacion_productos_materia_prima" required>
+                        <label for="seguro" class="control-label ">Conservacion de productos y materia prima <!-- <strong class="fg_red">*</strong> --></label>
+                        <select class="form-control" name="seguro" ng-model="ficha1.fi1_conservacion_productos_materia_prima" >
                            <option value="BUENO">BUENO</option>
                             <option value="REGULAR">REGULAR</option>
                             <option value="MALO">MALO</option>
                             
                         </select>
-                        <span class="messages" ng-show="userForm.$submitted || userForm.seguro.$touched">
+                        <!-- <span class="messages" ng-show="userForm.$submitted || userForm.seguro.$touched">
                         <span ng-show="userForm.seguro.$error.required">El campo es obligatorio</span>
-                        </span>
+                        </span> -->
                     </div>
                     
                   </div>
@@ -302,3 +300,4 @@
                   <button type="submit" data-toggle="modal"  class="btn btn-danger"  ><span class="glyphicon glyphicon-remove"></span> CANCELAR</button>
                   </a> -->
       </center>
+</div>

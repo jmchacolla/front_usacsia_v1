@@ -283,9 +283,9 @@ var FunG = localStorage.getItem("Funcionario");
     menu:{
       titulo: 'Gestión de Fichas de Inspección',
       items:[
-        /*{nombre:'Establecimientos', enlace:'#/establecimientossol', estilo:''},*/
+        /*{nombre:'Establecimientos', enlace:'#/establecimientossol', estilo:''},
         {nombre:'Propietarios Naturales', enlace:'#/tramites_nat', estilo:''},
-        {nombre:'Propietarios Juridicos', enlace:'#/tramites_jur', estilo:''},
+        {nombre:'Propietarios Juridicos', enlace:'#/tramites_jur', estilo:''},*/
         {nombre:'Establecimientos inspeccionados', enlace:'#/lista-inspeccionados', estilo:''},
         {nombre:'Asignar categoria', enlace:'#/inspeccion/categoria/crear', estilo:'active'}]
     },
@@ -919,13 +919,13 @@ $scope.checked=true;
       fi1_exibe_certificado :false,
       fi1_exibe_carnes :false,
       fi1_infraestructura :'',
-      fi1_servicios_higienicos :0,
-      fi1_otros_servicios :0,
-      fi1_inodoro :0,
-      fi1_jaboncillo :0,
-      fi1_lavamanos_porcelana :0,
-      fi1_toallas :0,
-      fi1_duchas :0,
+      fi1_servicios_higienicos :false,
+      fi1_otros_servicios :false,
+      fi1_inodoro :false,
+      fi1_jaboncillo :false,
+      fi1_lavamanos_porcelana :false,
+      fi1_toallas :false,
+      fi1_duchas :false,
       fi1_detalle_equipo :'',
       fi1_detalle_utencilios :'',
       fi1_otros :'',
@@ -966,7 +966,7 @@ $scope.checked=true;
             angular.copy({}, $scope.ficha1);
             $scope.ajustes.pagina.success = "FICHA REGISTRADA CORRECTAMENTE";
             toastr.success('FICHA REGISTRADA CORRECTAMENTE');
-            /*$route.reload();*/
+          
             $timeout(function() {
               $location.path('/inspeccion/categoria/crear/'+data.ficha1_inspeccion.ficha_inspeccion.fi_id+'/'+et_id);
             },10);
