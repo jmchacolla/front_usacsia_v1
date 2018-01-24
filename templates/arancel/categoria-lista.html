@@ -33,7 +33,7 @@
     <div class="row">
       <div class="col-md-12 ">
       <div class="text-center" ng-show="loading"><br><img ng-src="./images/image.gif" class="loader-img"></div>
-      <div ng-show="!loading && !msg">No se encontraron resultados</div>
+      <div ng-show="!loading && !msg" class="well"><span class="glyphicon glyphicon-info-sign text-info"> </span> No se encontraron resultados</div>
       <form name="addClasificacion" ng-show="!loading && msg">
           <div>
               <span class="btn btn-primary" ng-click="veragregar()"><span class="glyphicon glyphicon-plus"> </span> Agregar</span>

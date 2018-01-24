@@ -125,8 +125,7 @@
                 <tbody ng-repeat="persona in personas">
                   <tr>
                     <td ng-show="persona.per_nombres">{{$index+1}}</td>
-                    <td ng-show="persona.per_nombres">{{persona.per_nombres}}{{persona.per_apellido_primero}}{{persona.per_apellido_segundo}}</td>
-
+                    <td ng-show="persona.per_nombres">{{persona.per_nombres}} {{persona.per_apellido_primero}} {{persona.per_apellido_segundo}}</td>
                     <td ng-show="persona.per_nombres">{{persona.per_ci+" "+persona.per_ci_expedido}}</td>
                     <td ng-show="persona.pjur_id">{{persona.pjur_razon_social}}</td>
                     <td ng-show="persona.pjur_id">{{persona.pjur_nit}}</td>
