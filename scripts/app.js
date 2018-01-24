@@ -1035,6 +1035,7 @@ angular.module("adminApp", ["authService", "ngRoute", "ngResource", "satellizer"
       authorized: [ROLES.ADMIN_CARNET.ROL, ROLES.RESPONSABLE_LAB.ROL]
     }
   })
+  //w 23-01-2018
   .when('/aprobados', {
     templateUrl: 'templates/personatramite/aprobados.html',
     controller: 'AprobadosController',
