@@ -218,7 +218,8 @@ function ($http,CONFIG,$scope, DocumentoTramite2,DocumentoTramiteL,PersonasEstab
 
       $scope.actualizar_empleados=function(a){
         if(a==1){
-          $scope.te.te_estado="APROBADO";
+          // $scope.te.te_estado="APROBADO";
+          $scope.te.te_estado="PROCEDE";
           $scope.te.te_observacion="";
           
         }else{

@@ -1,0 +1,113 @@
+<!-- TOP-MENU inicio -->
+<div ng-include="'./templates/menu_inicio.html'"></div>
+
+<!-- CONTEXT-MENU  -->
+<div ng-include="'./templates/menu_lateral.html'"></div>
+<!-- CONTENIDO MODULO inicio -->
+<div class="col-md-8 col-sm-8">
+  <div class="row">
+    <div class="col-md-12">
+      <h2 class="text-primary">
+        <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+        {{ajustes.pagina.titulo}}
+      </h2>
+      <hr class="bg-red">
+    </div>
+  </div>
+  <!--HERRAMIENTAS PARA LA VISTA-->
+  <div class="row">
+    <div class="col-md-12">
+      <div class="well well-sm">
+        <strong class="pull-left lead">Herramientas: &nbsp;</strong>
+        <form class="form-inline pull-left">
+          <input type="text" class="form-control" placeholder="Filtrar por ..." ng-model="ess_razon_social">
+        </form>
+        &nbsp;&nbsp;
+        <!--<button class="btn btn-primary"><span class="glyphicon glyphicon-tasks"></span> Exportar lista en XLS</button>-->
+        <!-- <button class="btn btn-default" onclick="generateEST()"><span class="glyphicon glyphicon-save-file"></span> Exportar lista en PDF</button>
+        <div class="clearfix"></div> -->
+      </div>
+    </div>
+  </div>
+  <!--FIN herramientas para la vista-->
+  <div class="row">
+    <div class="col-md-12">
+             <button class="btn btn-primary" ng-click="cambio_hab()" ng-if="btn_hab"><span class="glyphicon glyphicon-ok"></span>ASIGNAR A INSPECTORES</button>
+             <button class="btn btn-warning" data-toggle="modal" data-target="#miCuadroModal2" ng-if="!btn_hab" title="Guardar configuración"><span class="glyphicon glyphicon-save"></span> GUARDAR ASIGNACIÓN
+             </button>
+      </div>
+
+      <div id="miCuadroModal2" class="modal fade" role="dialog" tabindex="-1">
+          <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header bg-red">
+                  <button type="button" class="close" data-dismiss="modal">x</button>
+                  <h4 class="modal-title fg-white">Guardar asignación</h4>
+                  </div>
+                  <div class="modal-body lead text-center"> Una vez guardada la asignación no podrá deshacer los cambios.<br>Esta seguro de guardar la asignación?
+                  </div>
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">
+                      <span class="glyphicon glyphicon-remove"></span> NO</button>
+                      <button type="button" class="btn btn-primary" data-dismiss="modal"  ng-click="cambio_hab();update_lista()" >
+                      <span class="glyphicon glyphicon-ok"></span> SI</button>
+                  </div>
+              </div>
+          </div>
+      </div>
+    <div class="col-md-12 ">
+    <!-- AQUI VAN LAS TABLAS O FORMULARIOS incrustados -->
+    <!-- INICIO -->
+    <div class="text-center" ng-show="loading"><br><img ng-src="./images/image.gif" class="loader-img"></div>
+    <div ng-show="!loading && !msg">No se encontraron resultados</div>
+    <div class="table-responsive">
+      <table class="table table-hovertable table-bordered table-striped table-hover" ng-show="!loading && msg" id="tablaES">
+        <thead >
+          <th class="text-primary">Nº</th>
+          <th class="text-primary text-center" >Numero Trámite</th>
+          <th class="text-primary text-center" >Propietario</th>
+          <th class="text-primary text-center" >C.I./NIT</th>
+          <th class="text-primary text-center" >
+            <a href="" ng-click="sortType = 'usa_nombre'; sortReverse = !sortReverse">
+                    Nombre establecimiento
+                <span ng-show="sortType == 'usa_nombre' && !sortReverse" class="glyphicon glyphicon-sort-by-alphabet-alt"></span>
+                <span ng-show="sortType == 'usa_nombre' && sortReverse" class="glyphicon glyphicon-sort-by-alphabet"></span>
+            </a>
+          </th>
+          <th class="text-primary text-center" >Tipo</th>
+          <th class="text-primary text-center" >Dirección</th>
+          <th class="text-primary text-center" >Zona</th>
+          <th class="text-primary text-center" >Inspector</th>
+          <th class="text-primary text-center" >Asignar</th>
+        </thead>
+        <tbody ng-repeat="tramite in tramites | orderBy:sortType:sortReverse ">
+          <tr>
+          <td>{{$index + 1}}</td>
+          <td>{{tramite.et_numero_tramite}}</td>
+          <td>{{tramite.ess_propietario}}</td>
+          <td>{{tramite.ess_ci_nit}}</td>
+          <td> {{tramite.ess_razon_social}}</td>
+          <td>{{tramite.ess_tipo}}</td>
+          <td>{{tramite.ess_avenida_calle+ ' ' +tramite.ess_numero}}</td>
+          <td>{{tramite.zon_nombre}}</td>
+          <td>{{tramite.per_nombres+' '+tramite.per_apellido_primero+' '+tramite.per_apellido_segundo}}</td>
+          <td>
+            <input type="checkbox" name="" ng-disabled="btn_hab" ng-checked="con_estado" ng-model="consultorio.con_estado" ng-click="editado(tramite.et_id)"> 
+          </td>
+          <td ng-if="user.rol_id == '15'" >
+            <a class="btn btn-success" href="#/documento-tramite/revisar/{{tramite.et_id}}" title="Ver Establecimiento" ><span class="glyphicon glyphicon-folder-open"></span>&nbsp;  Requisitos</a>
+          </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <hr>
+    
+    <!-- FIN 
+      <button ng-click="getEstablecimientos(9)">gettt</button>
+    -->
+    <!-- AQUI VAN LOAS TABLAS O FORMULARIOS incrustados -->
+    </div>
+  </div>
+</div>
+<!-- CONTENIDO MODULO fin -->

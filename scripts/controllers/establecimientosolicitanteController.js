@@ -659,6 +659,7 @@ function buscaPersonaRegistradaController($http, $scope, CONFIG){
               $scope.ver=true;
               $scope.resultado='';
               $scope.persona = respuesta.persona.persona;
+              $scope.imagen = respuesta.persona.imagen;
               $scope.zona = respuesta.persona.zona;
               $scope.municipio = respuesta.persona.municipio;
               $scope.provincia = respuesta.persona.provincia;

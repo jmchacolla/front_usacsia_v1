@@ -1,0 +1,97 @@
+<!-- TOP-MENU inicio -->
+<div ng-include="'./templates/menu_inicio.html'"></div>
+
+<!-- CONTEXT-MENU  -->
+<div ng-include="'./templates/menu_lateral.html'"></div>
+<!-- CONTENIDO MODULO inicio -->
+<div class="col-md-8 col-sm-8">
+  <div class="row">
+    <div class="col-md-12">
+      <h2 class="text-primary">
+        <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+        {{ajustes.pagina.titulo}}
+      </h2>
+      <hr class="bg-red">
+    </div>
+  </div>
+  <!--HERRAMIENTAS PARA LA VISTA-->
+  <div class="row">
+    <div class="col-md-12">
+      <div class="well well-sm">
+        <strong class="pull-left lead">Herramientas: &nbsp;</strong>
+        <form class="form-inline pull-left">
+          <input type="text" class="form-control" placeholder="Filtrar por ..." ng-model="ess_razon_social">
+        </form>
+        &nbsp;&nbsp;
+        <!--<button class="btn btn-primary"><span class="glyphicon glyphicon-tasks"></span> Exportar lista en XLS</button>-->
+        <!-- <button class="btn btn-default" onclick="generateEST()"><span class="glyphicon glyphicon-save-file"></span> Exportar lista en PDF</button>
+        <div class="clearfix"></div> -->
+      </div>
+    </div>
+  </div>
+  <!--FIN herramientas para la vista-->
+  <div class="col-md-3">
+      <select class="form-control" ng-options="inspector.per_nombres+' '+inspector.per_apellido_primero+' '+inspector.per_apellido_segundo for inspector in inspectores" ng-model="inspector" ng-change="por_inspector(inspector.fun_id)">
+      <option value="">--TODOS--</option>
+      </select>
+    </div>
+  <div class="row">
+    <div class="col-md-12 ">
+    <!-- AQUI VAN LAS TABLAS O FORMULARIOS incrustados -->
+    <!-- INICIO -->
+   
+    
+    <div class="text-center" ng-show="loading"><br><img ng-src="./images/image.gif" class="loader-img"></div>
+    <div ng-show="!loading && !msg">No se encontraron resultados</div>
+    <div class="table-responsive">
+      <table class="table table-hovertable table-bordered table-striped table-hover" ng-show="!loading && msg" id="tablaES">
+        <thead >
+          <th class="text-primary">Nº</th>
+          <th class="text-primary text-center" >Numero Trámite</th>
+          <th class="text-primary text-center" >Propietario</th>
+          <th class="text-primary text-center" >C.I./NIT</th>
+          <th class="text-primary text-center" >
+            <a href="" ng-click="sortType = 'usa_nombre'; sortReverse = !sortReverse">
+                    Nombre establecimiento
+                <span ng-show="sortType == 'usa_nombre' && !sortReverse" class="glyphicon glyphicon-sort-by-alphabet-alt"></span>
+                <span ng-show="sortType == 'usa_nombre' && sortReverse" class="glyphicon glyphicon-sort-by-alphabet"></span>
+            </a>
+          </th>
+          <th class="text-primary text-center" >Tipo</th>
+          <th class="text-primary text-center" >Dirección</th>
+          <th class="text-primary text-center" >Zona</th>
+          <th class="text-primary text-center" >Inspector</th>
+          <th class="text-primary text-center" >Estado Inspeccion</th>
+        </thead>
+        <tbody ng-repeat="tramite in tramites | orderBy:sortType:sortReverse ">
+          <tr>
+          <td>{{$index + 1}}</td>
+          <td>{{tramite.et_numero_tramite}}</td>
+          <td>{{tramite.ess_propietario}}</td>
+          <td>{{tramite.ess_ci_nit}}</td>
+          <td> {{tramite.ess_razon_social}}</td>
+          <td>{{tramite.ess_tipo}}</td>
+          <td>{{tramite.ess_avenida_calle+ ' ' +tramite.ess_numero}}</td>
+          <td>{{tramite.zon_nombre}}</td>
+          <td>{{tramite.per_nombres+' '+tramite.per_apellido_primero+' '+tramite.per_apellido_segundo}}</td>
+          <td>
+            <p ng-if="tramite.fi_id==null">PENDIENTE</p>
+            <button class="btn btn-primary text-center" ng-if="tramite.fi_id!=null"><span class="glyphicon glyphicon-file"></span></button>
+          </td>
+          <td ng-if="user.rol_id == '15'" >
+            <a class="btn btn-success" href="#/documento-tramite/revisar/{{tramite.et_id}}" title="Ver Establecimiento" ><span class="glyphicon glyphicon-folder-open"></span>&nbsp;  Requisitos</a>
+          </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <hr>
+    
+    <!-- FIN 
+      <button ng-click="getEstablecimientos(9)">gettt</button>
+    -->
+    <!-- AQUI VAN LOAS TABLAS O FORMULARIOS incrustados -->
+    </div>
+  </div>
+</div>
+<!-- CONTENIDO MODULO fin -->
