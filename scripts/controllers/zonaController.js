@@ -8,8 +8,7 @@ angular.module("adminApp")
       titulo: 'Trámites administrativos',
       items:[
        {nombre:'Gestión de Parasitos', enlace:'#/parasito', estilo:''},
-        {nombre:'Gestión de Tratamientos', enlace:'#/tratamiento', estilo:''}/*,
-        {nombre:'Gestión de Enferemdades', enlace:'#/homeenfermedad', estilo:''}*/,
+        {nombre:'Gestión de Tratamientos', enlace:'#/tratamiento', estilo:''},
         {nombre:'Gestión de Zonas', enlace:'#/parasito', estilo:'active'},
          {nombre:'Paises', enlace:'#/homepais', estilo:''}
         ]

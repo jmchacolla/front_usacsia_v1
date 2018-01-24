@@ -6,14 +6,9 @@ angular.module('adminApp')
 .constant('CONFIG', {
   ROL_CURRENT_USER: parseInt(localStorage.getItem("ROL_CURRENT_USER"), 10),//este es el usuario que esta logueado
   ROL_CURRENT_USER_NAME: localStorage.getItem("ROL_CURRENT_USER_NAME"),
-
-   // DOMINIO_SERVICIOS: "http://190.181.60.19/api_awebss/public"
-
-
-// DOMINIO_SERVICIOS: "http://localhost:8000"//---------------------jhon
-
-
-// DOMINIO_SERVICIOS: "http://192.168.6.221:90/api_usacsia_v1_0/public"
+  // DOMINIO_SERVICIOS: "http://190.181.60.19/api_awebss/public"
+  // DOMINIO_SERVICIOS: "http://localhost:8000"//---------------------jhon
+  // DOMINIO_SERVICIOS: "http://192.168.6.221:90/api_usacsia_v1_0/public"
 
 
 

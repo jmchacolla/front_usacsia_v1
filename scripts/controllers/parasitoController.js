@@ -8,10 +8,9 @@ angular.module("adminApp")
       titulo: 'Gestión de Parasitos',
       items:[
        {nombre:'Gestión de Parasitos', enlace:'#/parasito', estilo:'active'},
-        {nombre:'Gestión de Tratamientos', enlace:'#/tratamiento', estilo:''}/*,
-        {nombre:'Gestión de Enferemdades', enlace:'#/homeenfermedad', estilo:''}*/,
-        ,
-        {nombre:'Gestión de Zonas', enlace:'#/parasito', estilo:''},
+        {nombre:'Gestión de Tratamientos', enlace:'#/tratamiento', estilo:''},
+        
+        {nombre:'Gestión de Zonas', enlace:'#/zonas', estilo:''},
          {nombre:'Paises', enlace:'#/homepais', estilo:''}
         ]
     },

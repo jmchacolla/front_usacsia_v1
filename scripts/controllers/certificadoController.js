@@ -141,11 +141,11 @@ console.log("_______sssssssssssssssssss",$scope.tramitecerestado[6].eta_id);
     $scope.empresatra=argument.establecimiento;
     var razon_socialq=$scope.empresatra.establecimiento_sol.ess_razon_social;
     
-    if ($scope.emp_tra.propietario.pro_tipo=='J') {
+    if ($scope.empresatra.propietario.pro_tipo=='J') {
       $scope.propietario=$scope.empresatra.propietario.pjur_razon_social;
       $scope.documento=$scope.empresatra.propietario.pjur_nit;
     }
-    if ($scope.emp_tra.propietario.pro_tipo=='N') {
+    if ($scope.empresatra.propietario.pro_tipo=='N') {
       $scope.propietario=$scope.empresatra.propietario.per_nombres+' '+$scope.empresatra.propietario.per_apellido_primero+' '+$scope.empresatra.propietario.per_apellido_segundo;
       $scope.documento=$scope.empresatra.propietario.per_ci+' '+$scope.empresatra.propietario.per_ci_expedido;
     }
@@ -164,7 +164,7 @@ console.log("_______sssssssssssssssssss",$scope.tramitecerestado[6].eta_id);
    
 
        
-        
+         var vencimiento=$scope.cs.ces_fecha_fin/*moment($scope.empresatra.empresa_tramite.et_vigencia_documento, 'YYYY-MM-DD').format('DD-MM-YYYY')*/;
             var gober='';
             var sedes='';
             var ifirma1='';
@@ -173,7 +173,7 @@ console.log("_______sssssssssssssssssss",$scope.tramitecerestado[6].eta_id);
             var watermark='';
             var tituloqr='';
             //aumentar datos en textoqr
-            var textoqr='USACSIA-CERTIFICADO-SANITARIO '+' '+razon_socialq+' - '+$scope.empresatra.empresa.emp_nit+' - '+$scope.propietario+' - '+$scope.documento+' /Venc: '+$scope.empresatra.empresa_tramite.et_vigencia_documento;
+           
             var razon_social='';
             var clasificacion='';
             var clasificacion2='';
@@ -185,7 +185,7 @@ console.log("_______sssssssssssssssssss",$scope.tramitecerestado[6].eta_id);
             var propietario='';
             var direccion='';
             var gestion='';
-            var vencimiento=$scope.cs.ces_fecha_fin/*moment($scope.empresatra.empresa_tramite.et_vigencia_documento, 'YYYY-MM-DD').format('DD-MM-YYYY')*/;
+           
             var nroregistro='';
             var kardex='';
 
@@ -213,6 +213,7 @@ console.log("_______sssssssssssssssssss",$scope.tramitecerestado[6].eta_id);
                 item2=$scope.fichac[j].cat_codigo;
                 item3=$scope.fichac[k].cat_codigo;
               }
+               var textoqr='USACSIA-CERTIFICADO-SANITARIO '+' '+razon_socialq+' - '+$scope.direccion+' - '+$scope.propietario+' - '+$scope.documento+' /Venc: '+vencimiento+' /Fun: '+$scope.ficha.fun_id+' /Krdx: '+$scope.empresatra.empresa.emp_kardex+'/Cat: '+clasificacion+''+item+''+clasificacion2+''+item2+''+clasificacion3+''+item3;
               
           
 /*waterlogoSEDES*/
