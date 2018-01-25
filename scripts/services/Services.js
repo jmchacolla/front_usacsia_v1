@@ -907,5 +907,15 @@ angular.module("adminApp")
     update:{}
   })
 }])
-
+//familiar
+.factory('PersonasFamiliar', ['$resource', 'CONFIG', function ($resource, CONFIG){
+  return $resource(CONFIG.DOMINIO_SERVICIOS+"/personas_familiar", {}, {
+    update: {method: "PUT", params: {}}
+  })
+}])
+.factory('Familiar', ['$resource', 'CONFIG', function ($resource, CONFIG){
+  return $resource(CONFIG.DOMINIO_SERVICIOS+"/familiar/:per_id", {per_id:"@_per_id"}, {
+    update: {method: "PUT", params: {}}
+  })
+}])
 

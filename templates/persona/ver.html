@@ -28,6 +28,15 @@
 		</div>
 		-->
 		<!--FIN herramientas para la vista-->
+		<div ng-show="edad<15" class="well well-sm text-justify" style="background-color:#ddd;">
+					
+					<!-- ng-show="rol_id==3 || rol_id==6 || rol_id==10"<span ng-show="msg1 && (rol_id==3 || rol_id==6 || rol_id==10)"> -->
+					<span >
+					    <center><button  class="btn btn-primary"  class="col-md-5" ng-click="registra()"><span class="glyphicon glyphicon-user"></span>  AGREGAR FAMILIAR</button>
+					    <a href="#/personas/familiares/{{persona.persona.per_id}}" class="left"><button class="btn btn-primary "  title="Ver Familiares del Paciente" class="left">VER FAMILIARES<span class="glyphicon glyphicon-chevron-right"></span><span class="glyphicon glyphicon-chevron-right"></span></button></a>
+					    </center>
+				    </span>
+		</div>
 		<div class="row">
 			<div class="col-md-12">
 			<!-- AQUI VAN LAS TABLAS O FORMULARIOS incrustados -->
@@ -61,7 +70,7 @@
 		            	<div class="row">
 		              		<div class="col-md-4 col-sm-6 col-xs-6">
 		                		<label class="control-label">Fecha de nacimiento:</label><br>
-		                		{{fecha_nac}}
+		                		{{fecha_nac}}<br><strong>{{edad +" años "}}</strong>
 		                		
 		              		</div>
 		              		<div class="col-md-4 col-sm-6 col-xs-6">

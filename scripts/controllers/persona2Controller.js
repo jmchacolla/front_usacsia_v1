@@ -88,7 +88,7 @@ $scope.zon=false;
     }
   });
   $scope.persona.ima_enlace="./img-per";
-   $scope.persona.ima_tipo="fotografia";
+  $scope.persona.ima_tipo="fotografia";
 
   $scope.submit = function(b,fechaNacimiento/*,suf*/){
 
@@ -109,8 +109,6 @@ $scope.zon=false;
       $scope.persona.per_ci_expedido="EXTRANJERO";
       $scope.persona.per_ci='E-'+b.per_ci;
     }
-    
-
     if($scope.persona.per_tipo_documento=="SIN DOCUMENTO"){
       $scope.persona.per_ci=1234567;
     }
@@ -258,8 +256,8 @@ $scope.paginar= function(url,filas,pagina,operador) {
   }
 }])
 
-.controller('VerPersonaCtrl', [/*'authUser',*/ '$scope', 'Personas', '$routeParams', '$location', 
-  function (/*authUser,*/ $scope, Personas, $routeParams, $location){
+.controller('VerPersonaCtrl', [/*'authUser',*/ '$scope', 'Personas', '$routeParams', '$location','$http','CONFIG','$timeout', 
+  function (/*authUser,*/ $scope, Personas, $routeParams, $location,$http,CONFIG,$timeout){
  /* if(authUser.isLoggedIn()){*/
     $scope.ajustes = {
       menu:{
@@ -287,7 +285,18 @@ $scope.paginar= function(url,filas,pagina,operador) {
       $scope.loading = false;
       $scope.msg = data.mensaje;
       $scope.fecha_nac = moment($scope.persona.persona.per_fecha_nacimiento,"YYYY-MM-DD").format("DD-MM-YYYY");
-    });
+    $http.get(CONFIG.DOMINIO_SERVICIOS+'/persona_edad/'+$scope.persona.persona.per_fecha_nacimiento).success(function(respuesta){
+        console.log("_edad_paciente__",respuesta.edad_paciente);
+        $scope.edad=respuesta.edad_paciente;
+        /*$scope.tramitecerestado=respuesta.tramitecerestado;*/
+      });
+      /*   fin verificar edad*/
+      $scope.registra=function() {
+          $timeout(function() {
+            $location.path('/persona/createF/'+$scope.persona.persona.per_id);
+          },1000);
+        }
+      });
   /*} else {
     $location.path('/inicio');
   }*/
@@ -816,3 +825,246 @@ $scope.zon=false;
 
 
 
+.controller('CreatePerFamiliarCtrl',['authUser', '$scope', 'PersonasFamiliar', 'CONFIG','$http', 'toastr','$location', '$timeout','$routeParams','Zonas',
+function (authUser,$scope, PersonasFamiliar,  CONFIG, $http, toastr, $location, $timeout, $routeParams,Zonas)
+{
+  if(authUser.isLoggedIn()) {
+    $scope.ajustes = {
+      menu:{
+        titulo: 'Gestión de Familiares',
+        items:[
+          {nombre:'Pacientes Registrados', enlace:'#/establecimientos/pacientes', estilo:''},
+          {nombre:'Registrar Paciente', enlace:'#/pacientes/create', estilo:'active'}]
+      },
+      pagina:{
+        titulo:'Registrar Familiar',
+        action:'CREAR'
+      }
+    }
+    $scope.persona = {
+        zon_id:null,
+        per_ci: null,
+        per_tipo_documento: "",
+        per_pais: null,
+        per_ci_expedido: "LP",
+        per_nombres: null,
+        per_apellido_primero: null,
+        per_apellido_segundo: null,
+        per_fecha_nacimiento: null,
+        per_genero: null,
+        per_email: null,
+        per_numero_celular: null,
+        per_clave_publica: "",
+        per_avenida_calle: "",
+        per_numero:null,
+        per_ocupacion:"",
+        per_tipo_permanencia: "",
+
+        ima_nombre: "perfil.jpg",
+        ima_enlace: "./img-per",
+        ima_tipo: "fotografia",
+        fam_parentesco: "",
+        per_id: ""
+    
+  };
+  $scope.zon=false;
+  $scope.ver_zonas=function(mun_id){
+      console.log(mun_id+"<<< MUN_ID");
+      $scope.zon=false;
+      Zonas.get({mun_id:mun_id}, function(data){
+          $scope.zonas=data.zona;
+          console.log("ZOnasss",$scope.zonas);
+          //Agregando 26/10/17
+          if($scope.zonas.length == 0){
+                $scope.zon=true;
+          }
+          console.log("length "+$scope.zonas.length);
+      })
+  };
+    
+/*    $scope.persona = {
+      per_ci: null,
+      per_ci_expedido: "LP",
+      per_nombres: null,
+      per_apellido_primero: null,
+      per_apellido_segundo: null,
+      per_fecha_nacimiento: null,
+      per_genero: null,
+      per_email: null,
+      per_tipo_permanencia: "",
+      per_numero_celular: null,
+      per_clave_publica: "",
+      ima_nombre: "perfil.jpg",
+      ima_enlace: "./img-per",
+      ima_tipo: "fotografia",
+      
+      fam_parentesco: "",
+      per_id: ""
+    };*/
+    $scope.settings = {
+      pageTitle: "Registrar familiar",
+      action: "REGISTRAR"  
+    };
+
+    $scope.msg=false;
+    $scope.msg1=false;
+    $scope.mg=true;
+    var per_id = $routeParams.per_id;
+
+    $scope.persona_fam = {};
+    $scope.per_id=0;
+    $scope.ci=0;
+    $scope.nombre = ""; 
+    $scope.apellido_p = ""; 
+    $scope.apellido_m = "";
+    $scope.parentesco = "";
+
+    $http.get(CONFIG.DOMINIO_SERVICIOS+'/persona/'+per_id).success(function(respuesta){
+        $scope.persona_fam.per_id = respuesta.persona.persona.per_id;
+        $scope.persona_fam.ci = respuesta.persona.persona.per_ci;
+        $scope.persona_fam.nombre = respuesta.persona.persona.per_nombres;
+        $scope.persona_fam.apellido_p = respuesta.persona.persona.per_apellido_primero;
+        $scope.persona_fam.apellido_m = respuesta.persona.persona.per_apellido_segundo;
+    });
+
+    $scope.patternCadena = /^[a-zA-ZñÑáéíóúÁÉÍÓÚ ]*$/;
+    $scope.patternCadenaNumero = /^[a-zA-ZñÑáéíóúÁÉÍÓÚ 0-9]*$/;
+
+    $scope.submit = function(b, fechaNacimiento, c){
+      $scope.persona.per_id=per_id;
+      $scope.persona.per_ci=c;
+      $scope.persona.per_fecha_nacimiento=fechaNacimiento;
+      PersonasFamiliar.save($scope.persona).$promise.then(function(data){
+        if(data.msg){
+          angular.copy({}, $scope.persona);
+          $scope.ajustes.pagina.success = "El familiar fue registrad@ exitosamente";
+          toastr.success('Familiar agregado Correctamente');
+          $timeout(function() {
+               $location.path('/pacientes/familiares/'+data.persona.familiar.per_id);
+          },1000);
+         }
+      });
+    }
+    $scope.reset = function(form) {
+      $scope.persona = {};
+      if (form) {
+        form.$setPristine();
+        form.$setUntouched();
+      }
+    };
+  } else {
+    $location.path('/inicio');
+  }
+}])
+
+.controller('CreateFamiliarCtrl',['$scope', 'Familiar', 'CONFIG','$http', 'toastr','$location', '$timeout','$routeParams','Personas',
+function($scope, Familiar,  CONFIG, $http, toastr, $location, $timeout, $routeParams, Personas)
+{
+     
+   $scope.familiar = {
+     per_id: 0,
+     per_id_familiar: 0,
+     fam_parentesco: ""
+   };
+
+   $scope.get = function(per_id, per_pac){
+      $scope.persona_fam.per_id=per_pac;
+      Personas.get({per_id:per_id}, function(data){
+        console.log("__get de persona__",data.mensaje);
+        $scope.personaF = data.persona;
+        $scope.msg = data.mensaje;
+        //$scope.fecha_nac = moment($scope.persona.persona.per_fecha_nacimiento,"YYYY-MM-DD").format("DD-MM-YYYY");
+      });
+    };
+
+   $scope.submit = function(per_id, per_id_familiar, fam_parentesco){
+      $scope.familiar.per_id=per_id;
+      $scope.familiar.per_id_familiar=per_id_familiar;
+      $scope.familiar.fam_parentesco=fam_parentesco;
+
+      Familiar.save($scope.familiar).$promise.then(function(data){
+        if(data.msg){
+          angular.copy({}, $scope.familiar);
+          $scope.ajustes.pagina.success = "El familiar fue registrad@ exitosamente";
+          toastr.success('Familiar agregado Correctamente'); 
+          $timeout(function() {
+              $location.path('/pacientes/familiares/'+data.familiar.familiar.per_id_familiar);
+          },1000);
+        }
+      });
+   }
+}])
+
+.controller('VerFamPersonaCtrl', ['authUser', '$scope', '$routeParams','toastr','$location', '$timeout','Familiar','Personas','CONFIG',
+  function (authUser, $scope, $routeParams, toastr,$location, $timeout, Familiar, Personas, CONFIG){
+  if(authUser.isLoggedIn()) {
+    $scope.titulo= "Gestión de Pacientes";
+    var SesionG = localStorage.getItem("Sesion");
+    var SesionG = JSON.parse(SesionG);
+    var rol_id1 = CONFIG.ROL_CURRENT_USER;
+    $scope.rol_id = rol_id1;
+    
+    if (rol_id1==1 /*|| rol_id1 == 3 || rol_id1==10*/){
+      $scope.ajustes = {
+        menu:{
+          titulo: 'Gestión de Pacientes',
+          items:[
+            {nombre:'Pacientes Registrados', enlace:'#/establecimientos/pacientes', estilo:''},
+            {nombre:'Registrar Paciente', enlace:'#/pacientes/create', estilo:''},
+            {nombre:'Familiares de paciente', enlace:'#/pacientes/familiares/'+$routeParams.per_id, estilo:'active'}]
+        },
+        pagina:{
+          titulo:'Familiares del Paciente'
+        }
+      }
+    }
+    else{
+      $scope.ajustes = {
+        menu:{
+          titulo: 'Gestión de Pacientes',
+          items:[
+            {nombre:'Pacientes Registrados', enlace:'#/establecimientos/pacientes', estilo:''}]
+        },
+        pagina:{
+          titulo:'Familiares del Paciente'
+        }
+      }
+    };
+
+    $scope.loading=true;
+
+    var per_id = $routeParams.per_id;//obtiene el id
+
+    Familiar.update({per_id:per_id}, $scope.var).$promise.then(function(data){
+
+      if(data.mensaje){
+        $scope.persona_fam = data.familiar;
+        $scope.familiares = data.familiar.familiares;
+
+        if(data.familiar.familiares.length!=0){
+            $scope.ver=true;
+        }else if(data.familiar.familiares.length==0){
+            $scope.ver=false;
+        } 
+
+        if(data.mensaje && $scope.familiares.length > 0){
+          $scope.loading = false;
+          $scope.msg = true;
+        }
+        else {
+          $scope.loading = false;
+          $scope.msg = false;
+        }  
+      }
+    })
+
+    $scope.obt_fam=function(per_id){
+      Personas.get({per_id:per_id}, function(data){
+        $scope.persona = data.persona;
+      });
+    }
+
+  } else {
+    $location.path('/inicio');
+  }
+}])
