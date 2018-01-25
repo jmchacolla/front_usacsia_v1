@@ -496,7 +496,7 @@ function ($scope, ListarTramitesService, $route, toastr,$location)
                       body: [
                                 [
                                   { text: 'UNIDAD DE: '+$scope.persona.tramite.tra_nombre, text: 'FECHA: '+fechaCONT, fontSize:10},
-                                  { rowSpan:7, qr: textoqr, fit:110, alignment: 'right'},
+                                  { rowSpan:8, qr: textoqr, fit:110, alignment: 'right'},
                                 ],
                                 [
                                   {text: 'HEMOS RECIBIDO DEL SR:  '+$scope.persona.persona.per_nombres+" "+$scope.persona.persona.per_apellido_primero+" "+$scope.persona.persona.per_apellido_segundo, fontSize:10}
