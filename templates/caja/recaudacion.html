@@ -65,7 +65,7 @@
             <div class="table-responsive">
                 <table class="table table-striped table-bordered">
                     <thead>
-                        <td class="text-primary text-center" colspan="6">CARNÉ SANITARIO</td>
+                        <td class="text-primary text-center" colspan="6">CARNÉ SANITARIO CAJA</td>
                     </thead>
                     <thead class="text-primary text-center">
                         <th>N°</th>
@@ -87,6 +87,37 @@
                         <tr>
                             <td colspan="5" class="text-primary" align="right">RECAUDACIÓN TOTAL CARNÉ SANITARIO:</td>
                             <td class="lead">Bs. {{totales.totalcas | number:2}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="table-responsive" ng-if="cantcasbanco>0">
+                <table class="table table-striped table-bordered">
+                    <thead>
+                        <td class="text-primary text-center" colspan="7">CARNÉ SANITARIO BANCO</td>
+                    </thead>
+                    <thead class="text-primary text-center">
+                        <th>N°</th>
+                        <th>Detalle</th>
+                        <th>Contribuyente</th>
+                        <th>C.I.</th>
+                        <th>Fecha</th>
+                        <th>N° Transacción</th>
+                        <th>Monto (Bs.)</th>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="reportecasbanco in reportecasbanco">
+                            <td>{{$index+1}}</td>
+                            <td>{{reportecasbanco.tra_nombre}}</td>
+                            <td>{{reportecasbanco.per_nombre_completo}}</td>
+                            <td>{{reportecasbanco.per_ci}}</td>
+                            <td>{{reportecasbanco.pt_fecha_ini}}</td>
+                            <td>{{reportecasbanco.pt_transaccion_banco}}</td>
+                            <td align="right">{{reportecasbanco.pt_monto | number:2}}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="6" class="text-primary" align="right">RECAUDACIÓN TOTAL CARNÉ SANITARIO BANCO:</td>
+                            <td class="lead">Bs. {{totales.totalcasbanco | number:2}}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -120,6 +151,37 @@
                     </tbody>
                 </table>
             </div>
+            <div class="table-responsive" ng-if="cantcesfbanco>0">
+                <table class="table table-striped table-bordered">
+                    <thead>
+                        <td class="text-primary text-center" colspan="7">CERTIFICADO SANITARIO FORMULARIO BANCO</td>
+                    </thead>
+                    <thead class="text-primary text-center">
+                        <th>N°</th>
+                        <th>Detalle</th>
+                        <th>Contribuyente</th>
+                        <th>C.I./NIT</th>
+                        <th>Fecha</th>
+                        <th>N° Transacción</th>
+                        <th>Monto (Bs.)</th>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="reportecesfbanco in reportecesfbanco">
+                            <td>{{$index+1}}</td>
+                            <td>{{reportecesfbanco.tra_nombre}}</td>
+                            <td>{{reportecesfbanco.propietario}}</td>
+                            <td>{{reportecesfbanco.identificador}}</td>
+                            <td>{{reportecesfbanco.et_fecha_ini}}</td>
+                            <td>{{reportecesfbanco.op_transaccion_banco}}</td>
+                            <td align="right">{{reportecesfbanco.et_monto | number:2}}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="6" class="text-primary" align="right">RECAUDACIÓN TOTAL CERTIFICADO SANITARIO FORMULARIO BANCO:</td>
+                            <td class="lead">Bs. {{totales.totalcesformbanco | number:2}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
             <div class="table-responsive">
                 <table class="table table-striped table-bordered">
                     <thead>
@@ -143,8 +205,39 @@
                             <td align="right">{{reporteorden.op_monto_total | number:2}}</td>
                         </tr>
                         <tr>
-                            <td colspan="5" class="text-primary" align="right">RECAUDACIÓN TOTAL CARNÉ SANITARIO:</td>
+                            <td colspan="5" class="text-primary" align="right">RECAUDACIÓN TOTAL ORDEN DE PAGO:</td>
                             <td class="lead">Bs. {{totales.totalorden | number:2}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="table-responsive" ng-if="cantordenbanco>0">
+                <table class="table table-striped table-bordered">
+                    <thead>
+                        <td class="text-primary text-center" colspan="7">ARANCEL ORDEN DE PAGO BANCO</td>
+                    </thead>
+                    <thead class="text-primary text-center">
+                        <th>N°</th>
+                        <th>Detalle</th>
+                        <th>Contribuyente</th>
+                        <th>C.I.</th>
+                        <th>Fecha</th>
+                        <th>N° Transacción</th>
+                        <th>Monto (Bs.)</th>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="reporteordenbanco in reporteordenbanco">
+                            <td>{{$index+1}}</td>
+                            <td>{{reporteordenbanco.ro_tramite}}</td>
+                            <td>{{reporteordenbanco.propietario}}</td>
+                            <td>{{reporteordenbanco.identificador}}</td>
+                            <td>{{reporteordenbanco.op_fecha_pagado}}</td>
+                            <td>{{reporteordenbanco.op_transaccion_banco}}</td>
+                            <td align="right">{{reporteordenbanco.op_monto_total | number:2}}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="6" class="text-primary" align="right">RECAUDACIÓN TOTAL ORDEN DE PAGO BANCO:</td>
+                            <td class="lead">Bs. {{totales.totalordenbanco | number:2}}</td>
                         </tr>
                     </tbody>
                 </table>
