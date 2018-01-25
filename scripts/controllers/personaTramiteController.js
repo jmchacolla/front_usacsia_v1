@@ -78,7 +78,7 @@ angular.module("adminApp")
 
 
 /*CREAR PERSONA TRAMITE---- BUSQUEDA POR CI*/
-.controller('CrearPersonaTramiteCtrl', ['$scope', '$route','PersonaTramite','Tramite' ,'toastr', '$location', function ($scope, $route, PersonaTramite,Tramite,toastr, $location){
+.controller('CrearPersonaTramiteCtrl', ['$scope', '$route','PersonaTramite','Tramite' ,'toastr', '$location','$http','CONFIG','Personas', function ($scope, $route, PersonaTramite,Tramite,toastr, $location,$http,CONFIG,Personas){
   $scope.ajustes = {
     menu:{
       titulo: 'Gestion de solicitudes de trámite',
@@ -124,21 +124,35 @@ angular.module("adminApp")
         tra_vigencia:"",
       };
   $scope.save = function(a, per_id,tra_id,tra_costo){
-    $scope.persona_tramite.per_id=per_id;
-    $scope.persona_tramite.tra_id=tra_id;
-    $scope.persona_tramite.pt_monto=tra_costo;
-    $scope.persona_tramite.fun_id=fun_id;
-    console.log('la persona-tramite que se va a crear', $scope.persona_tramite);
-    PersonaTramite.save($scope.persona_tramite).$promise.then(function(data)
-    {
-      console.log('el data', data);
-      $scope.bloqueo=false;
-        if(data.mensaje){
-          toastr.success('Pago registrado correctamente.');
-               $location.path('/boleta-pago/'+data.persona_tramite.pt_id);
+    $http.get(CONFIG.DOMINIO_SERVICIOS+'/persona_edad2/'+per_id).success(function(respuesta){
+            $scope.edad=respuesta.edad_paciente;
+            $http.get(CONFIG.DOMINIO_SERVICIOS+'/familiar_buscar/'+per_id).success(function(respuesta){
+              $scope.mensaje=respuesta.mensaje;           
+              if ($scope.mensaje =='no' && $scope.edad<15) {
+                     toastr.warning('MENOR DE EDAD, debe registrar a un responsable');
+              }
+              else{
+                    $scope.persona_tramite.per_id=per_id;
+                    $scope.persona_tramite.tra_id=tra_id;
+                    $scope.persona_tramite.pt_monto=tra_costo;
+                    $scope.persona_tramite.fun_id=fun_id;
+                    console.log('la persona-tramite que se va a cerar', $scope.persona_tramite);
+                    PersonaTramite.save($scope.persona_tramite).$promise.then(function(data)
+                    {
+                      console.log('el data', data);
+                      $scope.bloqueo=false;
+                        if(data.mensaje){
+                          toastr.success('Pago registrado correctamente.');
+                               $location.path('/boleta-pago/'+data.persona_tramite.pt_id);
 
-        }
-    })
+                        }
+                    })
+
+              }
+            })
+          })
+    
+    
   }
 
    $scope.ver=false;

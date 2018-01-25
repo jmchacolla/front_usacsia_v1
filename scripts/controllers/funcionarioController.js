@@ -773,8 +773,9 @@ function (/*authUser,*/$scope, Funcionarios, $routeParams, $location, $timeout, 
 
 .controller('apiAppCtrl_Pre', ['$http', '$scope', 'CONFIG','toastr', controladorPrincipal_Pre])
 
-.controller('apiAppCtrl', ['$http', '$scope', 'CONFIG', controladorPrincipal]);
-    
+.controller('apiAppCtrl', ['$http', '$scope', 'CONFIG', controladorPrincipal])
+
+.controller('apiAppCtrl_Edad', ['$http', '$scope', 'CONFIG','toastr', controladorPrincipal_Edad]) ; 
 
 function controladorPrincipal($http, $scope, CONFIG){
   var vm=this;
@@ -783,10 +784,12 @@ function controladorPrincipal($http, $scope, CONFIG){
 
   vm.buscaPersona = function(){
       $scope.tamanio="Cargando...";//////CAMBIADO
-      $http.get(CONFIG.DOMINIO_SERVICIOS+'/pacientes_cedulas/'+vm.per_ci).success(function(respuesta){
-          vm.personas = respuesta;
-          $scope.tamanio=respuesta.length;
-          if(respuesta.length != 0){
+      $http.get(CONFIG.DOMINIO_SERVICIOS+'/personas_ci/'+vm.per_ci).success(function(respuesta){
+          vm.personas = respuesta.persona;
+          /*console.log('__:buscar persona:__',vm.personas.persona);*/
+         $scope.tamanio=respuesta.length;
+          console.log('__:leeeenght:__',respuesta);
+          if(respuesta.persona != null){
               $scope.aa="cero";
               $scope.msg=true;
               $scope.msg1=false;
@@ -797,6 +800,7 @@ function controladorPrincipal($http, $scope, CONFIG){
               $scope.msg=false;
               $http.get(CONFIG.DOMINIO_SERVICIOS+'/personasb/'+vm.per_ci).success(function(respuesta){
                   vm.personas = respuesta.personas;
+                  console.log("__entro a else__",vm.personas);
                   vm.variable = respuesta.c;
                   $scope.tamanio=respuesta.personas.length;
                    $scope.switch=true;
@@ -860,6 +864,29 @@ function controladorPrincipal_Pre($http, $scope, CONFIG, toastr){
       $scope.tamanio="Cargando...";
 
       $http.get(CONFIG.DOMINIO_SERVICIOS+'/personasb/'+vm.per_ci).success(function(respuesta){
+          if(respuesta.personas.length != 0){
+              $scope.pre_reg=true;
+              console.log("__pre_reg true__",$scope.pre_reg,vm.per_ci);
+              toastr.warning('EL CI INTRODUCIDO YA EXISTE');
+          } else if (respuesta.personas.length == 0){
+              $scope.pre_reg=false;
+              console.log("__pre_reg__",$scope.pre_reg,vm.per_ci);
+          }  
+      });
+  }
+}
+
+
+function controladorPrincipal_Edad($http, $scope, CONFIG, toastr){
+  var vm=this;
+  console.log("___LLEGO A BUSQUEDA DE EDAD__");
+  $scope.ss="dcs";
+  //$scope.tamanio=0;
+  $scope.pre_reg=false;
+  vm.buscaPersona = function(){
+      $scope.tamanio="Cargando...";
+
+      $http.get(CONFIG.DOMINIO_SERVICIOS+'/persona_edad/'+vm.fecha).success(function(respuesta){
           if(respuesta.personas.length != 0){
               $scope.pre_reg=true;
               console.log("__pre_reg true__",$scope.pre_reg,vm.per_ci);
