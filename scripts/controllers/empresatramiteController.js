@@ -925,7 +925,7 @@ console.log("propietario natural  ____",$scope.propietario);
    $scope.user = {
       rol_id: CONFIG.ROL_CURRENT_USER
     }
-    if ($scope.user.rol_id == 14) {
+    if ($scope.user.rol_id == 1 || $scope.user.rol_id == 14) {
        $scope.ajustes = {
         menu:{
           titulo: 'Gestión de Establecimientos Solicitantes',
@@ -1080,7 +1080,7 @@ console.log("propietario natural  ____",$scope.propietario);
     menu:{
       titulo: 'Gestión de Establecimientos que no cancelaron',
       items:[
-        {nombre:'Establecimientos validados', enlace:'#//lista-pendientes', estilo:'active'}
+        {nombre:'Establecimientos que no cancelaron', enlace:'#/lista-pendientes', estilo:'active'}
       ]
     },
     pagina:{
