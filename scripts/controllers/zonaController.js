@@ -1,8 +1,8 @@
 'use strict';
 angular.module("adminApp")
 
-.controller('ListarZonaCtrl',['$scope','CONFIG', 'Zonas','$routeParams', '$route', 'toastr', '$location','$timeout',
-  function ($scope, CONFIG, Zonas,$routeParams, $route, toastr, $location,$timeout){
+.controller('ListarZonaCtrl',['$scope','CONFIG', 'Zonas','$routeParams', '$route', 'toastr', '$location','$timeout','ZonasG',
+  function ($scope, CONFIG, Zonas,$routeParams, $route, toastr, $location,$timeout,ZonasG){
   $scope.ajustes = {
     menu:{
       titulo: 'Trámites administrativos',
@@ -33,8 +33,56 @@ angular.module("adminApp")
         
       })
   };
+  var  ide=0;
+  $scope.get_id = function(id,nombre,macro,dist,mun)
+    {
+      ide=id;
+      $scope.zon_nombre=nombre;
+      $scope.zon_macrodistrito=macro;
+      $scope.zon_distrito=dist;
+      $scope.mun_id=mun;
+      /*$scope.zona.zon_nombre=nombre;
+      $scope.zona.zon_macrodistrito=macro; 
+      $scope.zona.zon_distrito=dist;
+      $scope.zona.mun_id=mun;*/
 
+      console.log("llego----",nombre,macro,dist,mun,id);
+    }
 
+  $scope.editar=function(macro,dist,nom){
+      $scope.zona={
+        mun_id:$scope.mun_id,
+        zon_macrodistrito:macro,
+        zon_distrito:dist,
+        zon_nombre:nom
+      }
+
+      ZonasG.update({zon_id:ide},$scope.zona).$promise.then(function(data)
+      {
+        if(data.status)
+        {
+          $scope.ajustes.pagina.success="Zona editado correctamente";
+          toastr.success('Zona editado correctamente');
+          $timeout(function() {
+            $route.reload();
+          },1);
+        }
+      })
+    }
+
+$scope.remove = function()
+    {
+      ZonasG.delete({zon_id:ide}).$promise.then(function(data)
+      {
+        if(data.mensaje)
+        {
+          toastr.success('Zona eliminado correctamente');
+          $timeout(function() {
+            $route.reload();
+          },1);
+        }
+      })
+    }
 
   /*  var  ide=0;
     $scope.get_id = function(id,nombre,descripcion,clasificacion)
