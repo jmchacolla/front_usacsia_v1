@@ -58,6 +58,18 @@
                       <label for="tra" class="text-primary">Trámite:</label>
                       {{tramite.tra_nombre}}
                     </div>
+                    <div class="col-md-6">
+                        <div class="formulario">
+                          <div class="checkbox">
+                           <input type="checkbox" ng-model="vtransaccion" ng-checked="vtransaccion" name="vtransaccion" id="vtransaccion">
+                            <label for="vtransaccion">Transacsión Bancaria</label>
+                          </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12" ng-show="vtransaccion">
+                      <label for="transaccion" class="text-primary">Registrar N° de transacción bancaria:</label><br>
+                      <input type="number" name="nrotransaccion" ng-model="persona_tramite.pt_transaccion_banco" placeholder="Ingrese número de transacción bancaria" class="form-control">
+                    </div>
                     <div class="col-md-12">
                         <label class="text-primary ">Costo del trámite:</label>
                         <center>
@@ -67,7 +79,7 @@
                             </center>
                           </div>
                         </center>
-                    </div>                      
+                    </div>
                   </div>
 
                 </div>

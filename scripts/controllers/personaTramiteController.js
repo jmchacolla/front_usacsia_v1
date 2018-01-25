@@ -96,11 +96,12 @@ angular.module("adminApp")
       tra_id:null, 
       per_id:null,
       fun_id:null,
-      // pt_fecha_ini :"",
       pt_monto:null,
-      pt_tipo_tramite:""
+      pt_tipo_tramite:'',
+      pt_transaccion_banco:''
     };
-
+    $scope.vtransaccion=false;
+    console.log("vtransaccion", $scope.vtransaccion);
     $scope.CurrentDate = new Date();
     Tramite.get({tra_id:1}, function(data){
     $scope.tramite = data.tramite;
@@ -123,7 +124,20 @@ angular.module("adminApp")
         tra_vigencia:"",
       };
   $scope.save = function(a, per_id,tra_id,tra_costo){
-   
+
+    $scope.persona_tramite.per_id=per_id;
+    $scope.persona_tramite.tra_id=tra_id;
+    $scope.persona_tramite.pt_monto=tra_costo;
+    $scope.persona_tramite.fun_id=fun_id;
+    console.log('la persona-tramite que se va a crear', $scope.persona_tramite);
+    PersonaTramite.save($scope.persona_tramite).$promise.then(function(data)
+    {
+      console.log('el data', data);
+      $scope.bloqueo=false;
+        if(data.mensaje){
+          toastr.success('Pago registrado correctamente.');
+               $location.path('/boleta-pago/'+data.persona_tramite.pt_id);
+
 
       
     Personas.get({per_id:per_id}, function(data){
@@ -444,6 +458,10 @@ function ($scope, ListarTramitesService, $route, toastr,$location)
     PersonaTramite.get({pt_id:id}, function(data)
     {
       $scope.persona = data.pertramite;
+      var transaccion="PAGO EN CAJA";
+      if($scope.persona.persona_tramite.pt_transaccion_banco){
+        transaccion=$scope.persona.persona_tramite.pt_transaccion_banco;
+      }
       console.log('persona++++', $scope.persona);
       var fechapago= $scope.persona.persona_tramite.pt_fecha_ini;
       var fecha_cont=moment(new Date(), "YYYY-MM-DD") .format("DD-MM-YYYY");
@@ -463,7 +481,7 @@ function ($scope, ListarTramitesService, $route, toastr,$location)
             console.log("entro al controlador pdf",$scope.persona)
 
             var tituloqr= 'Nro. Trámite: '+$scope.persona.persona_tramite.pt_numero_tramite;
-            var textoqr= 'USACSIA-CARNÉ-SANITARIO-'+$scope.persona.tramite.tra_nombre+'-'+$scope.persona.persona_tramite.pt_numero_tramite+/*'-'$scope.persona.persona.per_nombres+"-"+$scope.persona.persona.per_apellido_primero+"-"+$scope.persona.persona.per_apellido_segundo+*/'-'+$scope.persona.persona.per_ci+'-'+$scope.persona.tramite.tra_costo;
+            var textoqr= 'USACSIA-CARNÉ-SANITARIO-'+$scope.persona.tramite.tra_nombre+'-'+$scope.persona.persona_tramite.pt_numero_tramite+'-'+$scope.persona.persona.per_nombres+'-'+$scope.persona.persona.per_apellido_primero+'-'+$scope.persona.persona.per_apellido_segundo+'-'+$scope.persona.persona.per_ci+'-'+$scope.persona.tramite.tra_costo+'-'+transaccion;
             //estilo, encabezado de QR
             function header(text) {
               return {text: text, margins: [0, 0, 0, 8],alignment: 'right'};
@@ -513,23 +531,29 @@ function ($scope, ListarTramitesService, $route, toastr,$location)
 
                       body: [
                                 [
-                                  { text: 'UNIDAD DE: '+$scope.persona.tramite.tra_nombre, text: 'FECHA: '+fechaCONT},
-                                  { rowSpan:6, qr: textoqr, fit:100, alignment: 'right'},
+                                  { text: 'UNIDAD DE: '+$scope.persona.tramite.tra_nombre, text: 'FECHA: '+fechaCONT, fontSize:10},
+                                  { rowSpan:7, qr: textoqr, fit:110, alignment: 'right'},
                                 ],
                                 [
-                                  {text: 'HEMOS RECIBIDO DEL SR:  '+$scope.persona.persona.per_nombres+" "+$scope.persona.persona.per_apellido_primero+" "+$scope.persona.persona.per_apellido_segundo}
+                                  {text: 'HEMOS RECIBIDO DEL SR:  '+$scope.persona.persona.per_nombres+" "+$scope.persona.persona.per_apellido_primero+" "+$scope.persona.persona.per_apellido_segundo, fontSize:10}
                                 ],
                                 [
-                                  {text: "C.I. N°: "+$scope.persona.persona.per_ci+'  '+$scope.persona.persona.per_ci_expedido}
+                                  {text: "C.I. N°: "+$scope.persona.persona.per_ci+'  '+$scope.persona.persona.per_ci_expedido, fontSize:10}
                                 ],
                                 [
-                                  {text: 'LA SUMA DE:  '+$scope.persona.tramite.tra_costo+" BOLIVIANOS"}
+                                  {text: 'LA SUMA DE:  '+$scope.persona.tramite.tra_costo+".00 BOLIVIANOS", fontSize:10}
                                 ],
                                 [
-                                  {text: 'POR CONCEPTO DE: '+$scope.persona.tramite.tra_nombre}
+                                  {text: 'LA SUMA DE:  DIEZ 00/100 BOLIVIANOS', fontSize:10}
                                 ],
                                 [
-                                  {text: 'TRÁMITE N°: '+ $scope.persona.persona_tramite.pt_numero_tramite}
+                                  {text: 'POR CONCEPTO DE: '+$scope.persona.tramite.tra_nombre, fontSize:10}
+                                ],
+                                [
+                                  {text: 'TRÁMITE N°: '+ $scope.persona.persona_tramite.pt_numero_tramite, fontSize:10}
+                                ],
+                                [
+                                  {text: 'N° TRANSACCIÓN BANCARIA: '+ transaccion, fontSize:10}
                                 ]
                             ],
                     },

@@ -82,8 +82,12 @@
               {{tramite.tra_nombre}}
             </div>
             <div class="col-md-6 col-sm-12">
-              <label class="control-label text-primary">Monto a cancelado:</label>
+              <label class="control-label text-primary">Monto cancelado:</label>
               Bs. {{establecimiento.empresa_tramite.et_monto | number:2}}
+            </div>
+            <div class="col-md-6 col-sm-12" ng-show="establecimiento.empresa_tramite.et_transaccion_banco">
+              <label class="control-label text-primary">N° transacción bancaria:</label>
+              {{establecimiento.empresa_tramite.et_transaccion_banco}}
             </div>
           </div>
         <!-- </div> -->
