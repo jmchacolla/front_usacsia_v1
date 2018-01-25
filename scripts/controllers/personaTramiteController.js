@@ -124,55 +124,33 @@ angular.module("adminApp")
         tra_vigencia:"",
       };
   $scope.save = function(a, per_id,tra_id,tra_costo){
+    $http.get(CONFIG.DOMINIO_SERVICIOS+'/persona_edad2/'+per_id).success(function(respuesta){
+            $scope.edad=respuesta.edad_paciente;
+            $http.get(CONFIG.DOMINIO_SERVICIOS+'/familiar_buscar/'+per_id).success(function(respuesta){
+              $scope.mensaje=respuesta.mensaje;           
+              if ($scope.mensaje =='no' && $scope.edad<15) {
+                     toastr.warning('MENOR DE EDAD, debe registrar a un responsable');
+              }
+              else{
+                    $scope.persona_tramite.per_id=per_id;
+                    $scope.persona_tramite.tra_id=tra_id;
+                    $scope.persona_tramite.pt_monto=tra_costo;
+                    $scope.persona_tramite.fun_id=fun_id;
+                    console.log('la persona-tramite que se va a cerar', $scope.persona_tramite);
+                    PersonaTramite.save($scope.persona_tramite).$promise.then(function(data)
+                    {
+                      console.log('el data', data);
+                      $scope.bloqueo=false;
+                        if(data.mensaje){
+                          toastr.success('Pago registrado correctamente.');
+                               $location.path('/boleta-pago/'+data.persona_tramite.pt_id);
 
-    $scope.persona_tramite.per_id=per_id;
-    $scope.persona_tramite.tra_id=tra_id;
-    $scope.persona_tramite.pt_monto=tra_costo;
-    $scope.persona_tramite.fun_id=fun_id;
-    console.log('la persona-tramite que se va a crear', $scope.persona_tramite);
-    PersonaTramite.save($scope.persona_tramite).$promise.then(function(data)
-    {
-      console.log('el data', data);
-      $scope.bloqueo=false;
-        if(data.mensaje){
-          toastr.success('Pago registrado correctamente.');
-               $location.path('/boleta-pago/'+data.persona_tramite.pt_id);
+                        }
+                    })
 
-
-      
-    Personas.get({per_id:per_id}, function(data){
-      $scope.persona = data.persona;
-      $http.get(CONFIG.DOMINIO_SERVICIOS+'/persona_edad/'+$scope.persona.persona.per_fecha_nacimiento).success(function(respuesta){
-        console.log("_edad_paciente__",respuesta.edad_paciente);
-        $scope.edad=respuesta.edad_paciente;
-      $http.get(CONFIG.DOMINIO_SERVICIOS+'/familiar_buscar/'+per_id).success(function(respuesta){
-        $scope.mensaje=respuesta.mensaje;
-        console.log("__mensaje__",$scope.mensaje);
-        
-        if (/*$scope.mensaje =='no' &&*/ $scope.edad<15) {
-               toastr.warning('Menor de edad debe registrar a un responsable');
-        }
-        else{
-              $scope.persona_tramite.per_id=per_id;
-              $scope.persona_tramite.tra_id=tra_id;
-              $scope.persona_tramite.pt_monto=tra_costo;
-              $scope.persona_tramite.fun_id=fun_id;
-              console.log('la persona-tramite que se va a cerar', $scope.persona_tramite);
-              PersonaTramite.save($scope.persona_tramite).$promise.then(function(data)
-              {
-                console.log('el data', data);
-                $scope.bloqueo=false;
-                  if(data.mensaje){
-                    toastr.success('Pago registrado correctamente.');
-                         $location.path('/boleta-pago/'+data.persona_tramite.pt_id);
-
-                  }
-              })
-        }
-      });
-      });
-
-      });
+              }
+            })
+          })
     
     
   }
@@ -532,7 +510,7 @@ function ($scope, ListarTramitesService, $route, toastr,$location)
                       body: [
                                 [
                                   { text: 'UNIDAD DE: '+$scope.persona.tramite.tra_nombre, text: 'FECHA: '+fechaCONT, fontSize:10},
-                                  { rowSpan:7, qr: textoqr, fit:110, alignment: 'right'},
+                                  { rowSpan:8, qr: textoqr, fit:110, alignment: 'right'},
                                 ],
                                 [
                                   {text: 'HEMOS RECIBIDO DEL SR:  '+$scope.persona.persona.per_nombres+" "+$scope.persona.persona.per_apellido_primero+" "+$scope.persona.persona.per_apellido_segundo, fontSize:10}
