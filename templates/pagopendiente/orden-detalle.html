@@ -26,6 +26,10 @@
                             <span>{{propietario}}</span>
                         </div>
                         <div class="col-md-4 col-sm-6">
+                            <label class="text-primary control-label">C.I./NIT:</label>
+                            <span>{{identificador}}</span>
+                        </div>
+                        <div class="col-md-4 col-sm-6">
                             <label class="text-primary control-label">Establecimiento:</label>
                             <span>{{establecimiento.est_sol.ess_razon_social}}</span>
                         </div>
@@ -73,16 +77,35 @@
                                 <label class="text-primary">Lic. de funcionamiento:</label>
                                 {{establecimiento.empresa.emp_licencia}}
                         </div>
+                        <div class="col-md-4 col-sm-6" ng-show="ordenpago.op_transaccion_banco">
+                                <label class="text-primary">N° Transacción bancaria:</label>
+                                {{ordenpago.op_transaccion_banco}}
+                        </div>
+                        <div class="col-md-6" ng-show="!ordenpago.op_transaccion_banco">
+                            <div class="formulario">
+                              <div class="checkbox">
+                               <input type="checkbox" ng-model="vtransaccion" ng-checked="vtransaccion" name="vtransaccion" id="vtransaccion">
+                                <label for="vtransaccion">Transacsión Bancaria</label>
+                              </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12" ng-if="vtransaccion ">
+                          <label for="transaccion" class="text-primary">Registrar N° de transacción bancaria:</label><br>
+                          <input type="number" name="nrotransaccion" ng-model="ordenpago.op_transaccion_banco" placeholder="Ingrese número de transacción bancaria" class="form-control">
+                        </div>
+                        <br> 
                     </div>
                     <div class="col-md-12 col-sm-12">
                         <div class="table-responsive">
                             <table class="table table-hovertable table-bordered table-striped table-hover"  id="tablaArancel">
-                                <thead>
-                                    <caption class="text-primary text-center">ARANCEL</caption>
+                                <tr>
+                                    <th class="text-primary text-center" colspan="3">ARANCEL</th>
+                                </tr>
+                                <tr>
                                     <th class="text-primary text-center">Nro.</th>
                                     <th class="text-primary text-center">Arancel</th>
                                     <th class="text-primary text-center">Monto (Bs.)</th>
-                                </thead>
+                                </tr>
                                 <tbody >
                                   <tr ng-repeat="pagoa in pagoa | orderBy:sortType:sortReverse">
                                     <td class="text-center">{{$index+1}}</td>
@@ -103,12 +126,10 @@
                         </div>
                         <div class="table-responsive" ng-if='cantsancion>0'>
                             <table class="table table-hovertable table-bordered table-striped table-hover"  id="tablaES"> -->
-                                <tr>
-                                    <td></td>
-                                    <td class="text-primary text-center" colspan="">SANCIONES</td>
-                                    <td></td>
+                                <tr ng-if="cantsancion>0">
+                                    <th class="text-primary text-center" colspan="3">SANCIONES</th>
                                 </tr>
-                                <tr>
+                                <tr ng-if="cantsancion>0">
                                     <th class="text-primary text-center">Nro.</th>
                                     <th class="text-primary text-center">Categoria</th>
                                     <th class="text-primary text-center">Monto (Bs.)</th>
@@ -141,13 +162,13 @@
                         </div>
                     </div>
                     <div class="col-md-12 col-sm-12" align="center" ng-if="tramitecerestado.te_estado=='ASIGNADO'">
-                        <span class="btn btn-primary" ng-click="pagarorden()"><span class="glyphicon glyphicon-plus-sign"> </span> REGISTRAR PAGO</span>
+                        <span class="btn btn-primary" ng-click="pagarorden(ordenpago.op_transaccion_banco)"><span class="glyphicon glyphicon-plus-sign"> </span> REGISTRAR PAGO</span>
                         <a class="btn btn-default" href="#/buscar-propietario"><span class="glyphicon glyphicon-remove"> </span> CANCELAR</a>
                     </div>
-                    <div class="col-md-12">
-                    <hr>
-                      <div align="center" ng-if="tramitecerestado.te_estado=='APROBADO'">
-                         <button type="button" class="btn btn-default" onclick="ordenPago()" >IMPRIMIR PAGO  <span class="glyphicon glyphicon-open-file"></span></button>
+                    <div class="row">
+
+                      <div align="center" ng-if="tramitecerestado.te_estado=='APROBADO'" class="col-md-12 col-sm-12">
+                         <button type="button" class="btn btn-default" ng-click="openOrdenPDF()" >IMPRIMIR PAGO  <span class="glyphicon glyphicon-open-file"></span></button>
                          <button type="button"  class="btn btn-default" ng-click="downloadOrdenPDF()">Descargar PDF PAGO  <span class="glyphicon glyphicon-download-alt"></span></button>
                       </div>
                     </div>

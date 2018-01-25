@@ -21,29 +21,33 @@
         </h3>
         <hr class="bg-red">
       </div>
-      <div>
-        <div class="col-md-12 col-sm-6">
+      <div class="row">
+        <div class="col-md-6">
           <label class="text-primary">Unidad de:</label>
           {{pertramite.tramite.tra_nombre}}
         </div>
-        <div class="col-md-12 col-sm-6">
+        <div class="col-md-6">
           <label class="text-primary">Monto cancelado:</label>
           Bs. {{pertramite.persona_tramite.pt_monto|number:2}}
         </div>
-        <div class="col-md-12 col-sm-6">
+        <div class="col-md-6">
           <label class="text-primary">Hemos recibido del Señor(es):</label>
           {{pertramite.persona.per_nombres}} {{pertramite.persona.per_apellido_primero}} {{pertramite.persona.per_apellido_segundo}}
         </div>
-       <!--  <div class="col-md-12 col-sm-6">
+        <div class="col-md-6" ng-show="pertramite.persona_tramite.pt_transaccion_banco">
+          <label class="text-primary">N° transacción bancaria:</label>
+          {{pertramite.persona_tramite.pt_transaccion_banco}}
+        </div>
+       <!--  <div class="col-md-6">
           <label class="text-primary">La suma de:</label>
           {{monto}}
           <label class="text-primary">Bolivianos</label>
         </div> -->
-        <div class="col-md-12 col-sm-6">
+        <div class="col-md-6">
           <label class="text-primary">Por concepto de:</label>
           {{pertramite.tramite.tra_nombre}}
         </div>
-        <div class="col-md-12 col-sm-6" text-align="center">
+        <div class="col-md-6" text-align="center">
           <label class="text-primary">LA PAZ - </label>
           {{day}}
         </div>
