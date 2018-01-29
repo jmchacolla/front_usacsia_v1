@@ -156,7 +156,7 @@ $scope.zon=false;
         {nombre:'Registrar Ciudadano', enlace:'#/persona/create', estilo:''}]
     },
     pagina:{
-      titulo:'Personas Registrados'
+      titulo:'Personas Registradas'
     }
   }
   

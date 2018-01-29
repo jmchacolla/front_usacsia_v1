@@ -266,8 +266,8 @@ angular.module("adminApp")
 
 
 
-.controller('CrearEstablecimientoSolicitanteCtrl', ['HoraLoop','$scope','$routeParams','PNaturalPJuridicaPro_id','Subclacificacion','EstabSols','Zonas',  '$location', '$timeout', 'toastr',
- function (HoraLoop,$scope,$routeParams, PNaturalPJuridicaPro_id,Subclacificacion,EstabSols,Zonas,  $location, $timeout, toastr){
+.controller('CrearEstablecimientoSolicitanteCtrl', ['HoraLoop','$http','CONFIG','$scope','$routeParams','PNaturalPJuridicaPro_id','Subclacificacion','EstabSols','Zonas',  '$location', '$timeout', 'toastr',
+ function (HoraLoop,$http,CONFIG,$scope,$routeParams, PNaturalPJuridicaPro_id,Subclacificacion,EstabSols,Zonas,  $location, $timeout, toastr){
 
  $scope.ajustes = {
     //Configuraciones del menu:
@@ -295,6 +295,21 @@ angular.module("adminApp")
           console.log('persona juridica dentro del ver persona', $scope.pjuridica);
         }
       });
+
+
+    $scope.nombre_unico=function(ess_nombre){
+      $http({
+          url: CONFIG.DOMINIO_SERVICIOS+'/existe_nombre_establecimiento',
+          method: "GET",
+          params: {ess_razon_social:ess_nombre}
+      }).success(function(data) {
+        console.log('primera datos_paginacion esta lista', data);
+         $scope.existe_nombre=data.messagge;
+         
+      });
+    }
+    
+
 
   $scope.CurrentDate=new Date();
 
@@ -527,7 +542,6 @@ $scope.initMap = function(){
           titulo:'Buscar propietario registrado'
         }
       }
-
     }*/
   
     
@@ -641,6 +655,248 @@ $scope.initMap = function(){
     $location.path('/inicio');
   }*/
 }])
+
+
+.controller('EditarEstablecimientoSolCtrl', ['VerParaEditar','$http','CONFIG','$scope','$routeParams','PNaturalPJuridicaPro_id','Subclacificacion','EstabSols','Zonas',  '$location', '$timeout', 'toastr',
+ function (VerParaEditar,$http,CONFIG,$scope,$routeParams, PNaturalPJuridicaPro_id,Subclacificacion,EstabSols,Zonas,  $location, $timeout, toastr){
+
+ $scope.ajustes = {
+    //Configuraciones del menu:
+    menu:{
+      titulo: 'Gestión de Establecimientos Solicitantes',
+      items:[
+        {nombre:'Revisar Requisitos', enlace:'#/tramite-establecimientosol', estilo:''},
+        {nombre:'Establecimientos Registrados', enlace:'#/establecimientossol', estilo:''},
+        {nombre:'Registrar establecimiento', enlace:'#/establecimientosol/persona', estilo:'active'}]
+    },
+    //Configuraciones de la página
+    pagina:{
+      titulo:'Registrar Establecimiento',
+      action: "CREAR"
+    }
+  }
+
+    
+    var ess_id=$routeParams.ess_id;
+    VerParaEditar.get({ess_id:ess_id},function(data){
+        $scope.establecimiento=data.establecimiento.est_sol;
+        $scope.establecimiento.ess_numero=$scope.establecimiento.ess_numero*1;
+        
+        if(data.establecimiento.pjuridica){
+          $scope.pjuridica=data.establecimiento.pjuridica;
+        }else{
+          $scope.persona=data.establecimiento.persona;
+        }
+        
+        $scope.items1 =data.establecimiento.rubros;
+        $scope.ver_zonas($scope.establecimiento.mun_id);
+
+        console.log('llego al establecimieto editar',$scope.establecimiento);
+      });
+
+
+    $scope.nombre_unico=function(ess_nombre){
+      $http({
+          url: CONFIG.DOMINIO_SERVICIOS+'/existe_nombre_establecimiento',
+          method: "GET",
+          params: {ess_razon_social:ess_nombre}
+      }).success(function(data) {
+        console.log('primera datos_paginacion esta lista', data);
+         $scope.existe_nombre=data.messagge;
+         
+      });
+    }
+    
+
+
+  $scope.CurrentDate=new Date();
+
+  
+  Subclacificacion.get(function(data){
+      $scope.subcla=data.subclacificacion;
+
+
+/*agregar rubros en la empresa*/
+    var aux=null;
+    $scope.items = [];
+    $scope.agregar = function (sub_id, item) {
+      if (item){
+        $scope.items.push(item);
+        for (var i = $scope.subcla.length - 1; i >= 0; i--) {
+          if($scope.subcla[i].sub_id==sub_id){
+            aux=$scope.subcla[i];
+            $scope.subcla.splice(i,1);
+          }
+        };
+        console.log('este es el vector reducido', $scope.subcla);
+        console.log('este es el vector de items', $scope.items);
+      }
+    };
+
+/*quitar rubros en la empresa*/
+    $scope.quitar = function (sub_id,item) {
+      if (sub_id){
+        $scope.subcla.push(item);
+        for (var i = $scope.items.length - 1; i >= 0; i--) {
+          if($scope.items[i].sub_id==sub_id){
+            aux=$scope.items[i];
+            $scope.items.splice(i,1);
+          }
+        };
+      }
+    };
+
+  });
+/*------------------------------------------------*/
+    
+  $scope.zon=false;
+
+  $scope.ver_zonas=function(mun_id){
+      console.log(mun_id+"<<< MUN_ID");
+      $scope.zon=false;
+      Zonas.get({mun_id:mun_id}, function(data){
+          $scope.zonas=data.zona;
+          console.log("ZOnasss",$scope.zonas);
+
+          if($scope.zonas.length == 0){
+                $scope.zon=true;
+          }
+          console.log("length "+$scope.zonas.length);
+      })
+  };
+$scope.latitud=null;
+ $scope.longitud=null;
+ var lat,long;
+
+$scope.ver_mapita=false;
+$scope.initMap = function(){
+  if(!$scope.ver_mapita){
+    $scope.ver_mapita=true;
+        var infowindow = new google.maps.InfoWindow();
+        var marker, i;
+        navigator.geolocation.getCurrentPosition(function(pos) {
+        $scope.position = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
+          // console.log(JSON.stringify($scope.position));
+          // Creamos un objeto mapa y lo situamos en coordenadas actuales
+        /* */   var map = new google.maps.Map(document.getElementById('mapa'),{
+            center: {lat: pos.coords.latitude, lng: pos.coords.longitude},
+            scrollwheel: false,
+            zoom: 16
+            });
+            
+            //marcador solito
+            var marker = new google.maps.Marker({
+              position: new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude),
+              map: map,
+              draggable: true,
+    //        animation: google.maps.Animation.BOUNCE,
+            title: ''
+            });   
+            
+            var markerLatLng = marker.getPosition();
+            $scope.markerLatLng=markerLatLng;
+            $scope.latitud=markerLatLng.lat();
+            $scope.longitud=markerLatLng.lng();
+            console.log("el objeto con la posicion completa",$scope.markerLatLng);
+            console.log("latitud por defecto",$scope.latitud);
+            console.log("longitud por defecto",$scope.longitud);
+            //console.log("POSITIONmmmmm",marker.position.lat.[[Scopes]].0.a);  
+            infowindow.setContent('<h4 class="text-primary">Tú estas aquí <br><small>Esta es tu ubicación aproximada</small></h4>');
+            infowindow.open(map, marker);
+
+            google.maps.event.addListener(marker, 'click', (function(marker) {
+                return function() {
+                var markerLatLng1 = marker.getPosition();
+                document.getElementById("establecimientolatitud").value=markerLatLng1.lat();
+                document.getElementById("establecimientolongitud").value=markerLatLng1.lng();
+                infowindow.open(map, marker);
+                }
+            })(marker));
+
+         })   
+      }else{
+        $scope.ver_mapita=false;
+        document.getElementById("establecimientolatitud").value=0;
+        document.getElementById("establecimientolongitud").value=0;
+      };
+  }
+
+    
+
+  //   $scope.establecimiento = {
+  //   zon_id:null,
+  //   ess_razon_social:null,
+  //   ess_telefono:0,
+  //   ess_correo_electronico:'',
+  //   ess_tipo:'',
+  //   ess_avenida_calle:'',
+  //   ess_numero:0,
+  //   ess_stand:"",
+  //   ess_latitud:0,
+  //   ess_longitud:0,
+  //   ess_altitud:0,
+  //   ess_hora_ini:"",
+  //   ess_hora_fin:"",
+  //   ie_nombre:"centro.png",
+
+  //   ie_enlace: "./img-est",
+
+  //   ie_tipo:"fotografia",
+  //   emp_nit:"",
+  //   emp_url_nit:"",
+  //   emp_url_licencia:""
+  // };
+
+  /*
+  FALTA LLENAR EMP_NIT
+  URL_LICENCIA
+  TRA_ID
+  */
+    
+
+
+  $scope.patternCadena = /^[a-zA-ZñÑáéíóúÁÉÍÓÚ .]*$/;
+  $scope.patternNumero = /^[0-9]*$/;
+  $scope.patternNombreEstab = /^[a-zA-ZñÑáéíóúÁÉÍÓÚ. 0-9()-º]*$/;
+  $scope.patternCadenaNumero = /^[a-zA-ZñÑáéíóúÁÉÍÓÚ. 0-9]*$/;
+  $scope.patternFecha = /^(0[1-9]|1[0-9]|2[0-9]|3[01]).(0[1-9]|1[012]).[0-9]{4}$/;
+  $scope.patternHora = /^[0-9:]*$/;
+  //VALIDAR NUMEROS !!!!!!
+  $scope.submit = function(){
+    $scope.establecimiento.ess_hora_ini=$scope.ehi_h+":"+$scope.ehi_m;
+    $scope.establecimiento.ess_hora_fin=$scope.ehc_h+":"+$scope.ehc_m;
+    $scope.establecimiento.ess_latitud=document.getElementById("establecimientolatitud").value;
+    $scope.establecimiento.ess_longitud=document.getElementById("establecimientolongitud").value;
+    $scope.todo={
+      establecimiento:$scope.establecimiento,
+      vector:$scope.items
+    };
+    console.log('EL OBJETO QUE SE VA A CREAR', $scope.todo);
+      EstabSols.save($scope.todo).$promise.then(function(data){
+        if(data.status) {
+          $scope.ajustes.pagina.success = "Establecimiento añadido correctamente";
+          toastr.success('Establecimiento añadido correctamente');
+          $timeout(function() {
+            $location.path('/establecimientossol');
+        },100);
+        }
+      });
+  };
+
+
+  $scope.reset = function(form) {
+    if (form) {
+      form.$setPristine();
+      form.$setUntouched();
+    }
+  };
+
+}])
+
+
+
+
+
 
 /*BUSCA PERSONA POR CI*/
 .controller('BuscaPersonaRegistradaCtrl', ['$http', '$scope', 'CONFIG', buscaPersonaRegistradaController])

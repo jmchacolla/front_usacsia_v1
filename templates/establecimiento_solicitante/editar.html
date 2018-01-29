@@ -28,7 +28,7 @@
                         <!-- INICIO -->
                         <div class="well well-sm" style="background-color:#fff;">
                             <div class="panel">
-                                <h4 class="text-center text-primary">I. DATOS GENERALES</h4>
+                                <h4 class="text-center text-primary">I. DATOS GENERALESs</h4>
                                 <hr class="bg-red">
                                 <div class="row">
                                     <div class="col-md-4">
@@ -93,7 +93,7 @@
                                                 </div>
                                                 <br>
 
-                                                <div class="row">
+                                                <!-- <div class="row">
                                                     <div class="col-md-6">
                                                         <label for="nrs" class="control-label text-primary">Horario de atención: <strong class="fg_red">*</strong></label>
                                                         <div class="form-group">
@@ -136,7 +136,7 @@
                                                             <span ng-show="estForm.ehch.$error.pattern || estForm.ehcm.$error.pattern">Solo se admiten números.</span>
                                                         </span>
                                                     </div>
-                                                </div>
+                                                </div> -->
                                                 <br/>
 
                                                  <label for="tipo" class="control-label text-primary">Tipo: <strong class="fg_red">*</strong></label>
@@ -184,11 +184,11 @@
                                          <label for="nombrelab" class="control-label text-primary">Rubro de la empresa: <strong class="fg_red">*</strong></label>                                     
                                         <div class="table-responsive">
                                             <table class="table table-bordered  table-hover">
-                                                <tbody ng-repeat="items in items track by $index">
+                                                <tbody ng-repeat="items in items">
                                                     <tr>
-                                                        <td>{{items.sub_nombre}}</td>
+                                                        <td>{{items.re_nombre}}</td>
                                                         <td>
-                                                             <button type="submit" ng-click="quitar(items.sub_id,items)" class="btn btn-primary"><span class="glyphicon glyphicon-remove"></span></button>
+                                                             <button type="submit" ng-click="quitar(items.re_id,items)" class="btn btn-primary"><span class="glyphicon glyphicon-remove"></span></button>
                                                         </td>
                                                     </tr>
                                                 </tbody>

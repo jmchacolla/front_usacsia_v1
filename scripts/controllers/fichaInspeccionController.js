@@ -336,7 +336,6 @@ Cle.get(function(data){
     else{
       $scope.ver=true;
       $scope.sancion=false;
-      
     }
 BusSub.get({cle_id:cle_id}, function(data){
           $scope.buscas=data.subcla;
@@ -912,6 +911,9 @@ $scope.checked=true;
       fi_exibe_carne:false,
       fi_extinguidor:'',
       fi_botiquin:'',
+      fi_latitud:null,
+      fi_longitud:null,
+
       fi1_fecha_realizacion :fecha,
       fi1_observacion:'',
       fi1_estado :'',
@@ -940,6 +942,11 @@ $scope.checked=true;
     
     };
 
+    $scope.ficha_numero={
+        fi_latitud:null,
+        fi_longitud:null,
+    };
+
     $scope.patternCadena = /^[a-zA-ZñÑáéíóúÁÉÍÓÚ ]*$/;
     $scope.patternCadenaNumero = /^[a-zA-ZñÑáéíóúÁÉÍÓÚ 0-9.]*$/;
     
@@ -957,6 +964,8 @@ $scope.checked=true;
         $scope.ficha1.fi_observacion=$scope.ficha1.fi1_observacion;
         console.log("_______GURDANDO_______",$scope.ficha1);
 
+        $scope.ficha1.fi_latitud=$scope.ficha_numero.fi_latitud;
+        $scope.ficha1.fi_longitud=$scope.ficha_numero.fi_longitud;
         Ficha1.save($scope.ficha1).$promise.then(function(data)
         {
           console.log("------GUARDADO.---------",data);
@@ -1043,6 +1052,8 @@ var mes=$scope.CurrentDate.getMonth()+1;
       fi_exibe_carne:false,
       fi_extinguidor:'',
       fi_botiquin:'',
+      fi_latitud:null,
+      fi_longitud:null,
     
       fi2_fecha_realizacion :fecha ,
       fi2_cama :'' ,
@@ -1101,6 +1112,13 @@ var mes=$scope.CurrentDate.getMonth()+1;
     
     };
 
+    $scope.ficha_numero={
+        fi_latitud:null,
+        fi_longitud:null,
+    };
+
+
+
     $scope.patternCadena = /^[a-zA-ZñÑáéíóúÁÉÍÓÚ ]*$/;
     $scope.patternCadenaNumero = /^[a-zA-ZñÑáéíóúÁÉÍÓÚ 0-9.]*$/;
     
@@ -1126,7 +1144,9 @@ var mes=$scope.CurrentDate.getMonth()+1;
 
 
      console.log("_______GURDANDO_______",$scope.ficha1);
-    
+        $scope.ficha2.fi_latitud=$scope.ficha_numero.fi_latitud;
+        $scope.ficha2.fi_longitud=$scope.ficha_numero.fi_longitud;
+
       Ficha2.save($scope.ficha2).$promise.then(function(data)
       {
         console.log("------GUARDADO.---------",data);
@@ -1219,6 +1239,8 @@ var mes=$scope.CurrentDate.getMonth()+1;
         fi_exibe_carne:false,
         fi_extinguidor:'',
         fi_botiquin:'',
+        fi_latitud:null,
+        fi_longitud:null,
         
         fi3_superficie_util :'' ,
         fi3_muros_pintados :'' ,
@@ -1279,9 +1301,16 @@ var mes=$scope.CurrentDate.getMonth()+1;
         fi3_fumigacion : ''
     };
 
+    $scope.ficha_numero={
+        fi_latitud:null,
+        fi_longitud:null,
+    };
+
+
     $scope.patternCadena = /^[a-zA-ZñÑáéíóúÁÉÍÓÚ ]*$/;
     $scope.patternCadenaNumero = /^[a-zA-ZñÑáéíóúÁÉÍÓÚ 0-9.]*$/;
     
+
     $scope.submit = function(b)
     {
         $scope.ficha3.fun_id=fun_id;
@@ -1300,6 +1329,8 @@ var mes=$scope.CurrentDate.getMonth()+1;
         $scope.ficha3.fi3_fecha_realizacion=fecha;
         $scope.ficha3.fi_observacion=$scope.ficha3.fi3_observacion;
     
+        $scope.ficha3.fi_latitud=$scope.ficha_numero.fi_latitud;
+        $scope.ficha3.fi_longitud=$scope.ficha_numero.fi_longitud;
       Ficha3.save($scope.ficha3).$promise.then(function(data)
       {
         console.log("------GUARDADO.---------",data);
@@ -1384,6 +1415,8 @@ var mes=$scope.CurrentDate.getMonth()+1;
         fi_exibe_carne:false,
         fi_extinguidor:'',
         fi_botiquin:'',
+        fi_latitud:null,
+        fi_longitud:null,
         
         fi6_ubicacion:null ,
         fi6_exibicion_certificado:null ,
@@ -1424,6 +1457,11 @@ var mes=$scope.CurrentDate.getMonth()+1;
         fi6_mujeres:0
     };
 
+    $scope.ficha_numero={
+        fi_latitud:null,
+        fi_longitud:null,
+    };
+
     $scope.patternCadena = /^[a-zA-ZñÑáéíóúÁÉÍÓÚ ]*$/;
     $scope.patternCadenaNumero = /^[a-zA-ZñÑáéíóúÁÉÍÓÚ 0-9.]*$/;
     
@@ -1444,6 +1482,8 @@ var mes=$scope.CurrentDate.getMonth()+1;
         $scope.ficha6.fi_fecha_realizacion= fecha;
         $scope.ficha6.fi6_fecha_realizacion=fecha;
         $scope.ficha6.fi_observacion=$scope.ficha6.fi6_observacion;
+        $scope.ficha6.fi_latitud=$scope.ficha_numero.fi_latitud; 
+        $scope.ficha6.fi_longitud=$scope.ficha_numero.fi_longitud; 
     
       Ficha6.save($scope.ficha6).$promise.then(function(data)
       {
@@ -1505,6 +1545,8 @@ function ($http,CONFIG,$scope,Ficha4, $route, toastr,EmpTra,Funcionarios,$routeP
         fi_exibe_carne:false,
         fi_extinguidor:'',
         fi_botiquin:1,
+        fi_latitud:null,
+        fi_longitud:null,
         
         fi4_ubicacion :null,
         fi4_certificado :null,
@@ -1541,6 +1583,10 @@ function ($http,CONFIG,$scope,Ficha4, $route, toastr,EmpTra,Funcionarios,$routeP
         fi4_estado :"",
         fi4_total :null
     };
+    $scope.ficha_numero={
+        fi_latitud:null,
+        fi_longitud:null,
+    };
 
     $scope.patternCadena = /^[a-zA-ZñÑáéíóúÁÉÍÓÚ ]*$/;
     $scope.patternCadenaNumero = /^[a-zA-ZñÑáéíóúÁÉÍÓÚ 0-9.]*$/;
@@ -1553,8 +1599,12 @@ function ($http,CONFIG,$scope,Ficha4, $route, toastr,EmpTra,Funcionarios,$routeP
         
         
         $scope.ficha4.fi_fecha_realizacion= fecha;
-        $scope.ficha4.fi4_fecha_realizacion=fecha;        
-    
+        $scope.ficha4.fi4_fecha_realizacion=fecha;
+
+        $scope.ficha4.fi_latitud=$scope.ficha_numero.fi_latitud;
+        $scope.ficha4.fi_longitud=$scope.ficha_numero.fi_longitud;
+
+        
         console.log('Lo que va a guarfar', $scope.ficha4);
       Ficha4.save($scope.ficha4).$promise.then(function(data)
       {
@@ -1571,6 +1621,7 @@ function ($http,CONFIG,$scope,Ficha4, $route, toastr,EmpTra,Funcionarios,$routeP
       },function () {
         toastr.error("Error inesperado");
       })
+    
     }
     $scope.reset = function(form) {
       $scope.ficha2 = {};
@@ -1672,6 +1723,11 @@ function ($http,CONFIG,$scope,Ficha4, $route, toastr,EmpTra,Funcionarios,$routeP
         fi5_adecuados :null 
     };
 
+    $scope.ficha_numero={
+        fi_latitud:null,
+        fi_longitud:null,
+    };
+
     $scope.patternCadena = /^[a-zA-ZñÑáéíóúÁÉÍÓÚ ]*$/;
     $scope.patternCadenaNumero = /^[a-zA-ZñÑáéíóúÁÉÍÓÚ 0-9.]*$/;
     
@@ -1688,12 +1744,14 @@ function ($http,CONFIG,$scope,Ficha4, $route, toastr,EmpTra,Funcionarios,$routeP
           $scope.ficha2.fi_exibe_certificado=true;
          } */
         
+
         $scope.ficha5.fi_foco_insalubridad=$scope.ficha6.fi5_ubicacion;
         $scope.ficha5.fi_fecha_realizacion= fecha;
         $scope.ficha5.fi6_fecha_realizacion=fecha;
         $scope.ficha5.fi_observacion=$scope.ficha5.fi5_recomendacion;
     
       Ficha5.save($scope.ficha5).$promise.then(function(data)
+
       {
         console.log("------GUARDADO.---------",data);
         if(data.msg)
@@ -1729,63 +1787,59 @@ function ($http,CONFIG,$scope,Ficha4, $route, toastr,EmpTra,Funcionarios,$routeP
 $scope.ver_mapita=false;
 
 
-$scope.latitud=-16.489689;
-$scope.longitud=-68.11929359999999;
-// $scope.initMap = function(){
-//   if(!$scope.ver_mapita){
-//     $scope.ver_mapita=true;
-//         var infowindow = new google.maps.InfoWindow();
-//         var marker, i;
-//         navigator.geolocation.getCurrentPosition(function(pos) {
-//         $scope.position = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
-//           // console.log(JSON.stringify($scope.position));
-//           // Creamos un objeto mapa y lo situamos en coordenadas actuales
-//         /* */   var map = new google.maps.Map(document.getElementById('mapa_inspeccion'),{
-//             center: {lat: pos.coords.latitude, lng: pos.coords.longitude},
-//             scrollwheel: false,
-//             zoom: 16
-//             });
+// $scope.latitud=-16.489689;
+// $scope.longitud=-68.11929359999999;
+$scope.initMap = function(){
+  if(!$scope.ver_mapita){
+    $scope.ver_mapita=true;
+        var infowindow = new google.maps.InfoWindow();
+        var marker, i;
+        navigator.geolocation.getCurrentPosition(function(pos) {
+        $scope.position = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
+          // console.log(JSON.stringify($scope.position));
+          // Creamos un objeto mapa y lo situamos en coordenadas actuales
+        /* */   var map = new google.maps.Map(document.getElementById('mapa_inspeccion'),{
+            center: {lat: pos.coords.latitude, lng: pos.coords.longitude},
+            scrollwheel: false,
+            zoom: 16
+            });
             
-//             //marcador solito
-//             var marker = new google.maps.Marker({
-//               position: new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude),
-//               map: map,
-//               draggable: true,
-//     //        animation: google.maps.Animation.BOUNCE,
-//             title: ''
-//             });   
+            //marcador solito
+            var marker = new google.maps.Marker({
+              position: new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude),
+              map: map,
+              draggable: false,
+              animation: google.maps.Animation.BOUNCE,
+              title: 'Ubicación actual'
+            });   
             
-//             var markerLatLng = marker.getPosition();
-//             $scope.markerLatLng=markerLatLng;
-//             $scope.latitud=markerLatLng.lat();
-//             $scope.longitud=markerLatLng.lng();
-//             console.log("el objeto con la posicion completa",$scope.markerLatLng);
-//             console.log("latitud por defecto",$scope.latitud);
-//             console.log("longitud por defecto",$scope.longitud);
-//             //console.log("POSITIONmmmmm",marker.position.lat.[[Scopes]].0.a);  
-//             infowindow.setContent('<h4 class="text-primary">Tú estas aquí <br><small>Esta es tu ubicación aproximada</small></h4>');
-//             infowindow.open(map, marker);
+            var markerLatLng = marker.getPosition();
+            $scope.markerLatLng=markerLatLng;
+            $scope.ficha_numero.fi_latitud=markerLatLng.lat();
+            $scope.ficha_numero.fi_longitud=markerLatLng.lng();
+            console.log("el objeto con la posicion completa",$scope.markerLatLng);
+            console.log("latitud por defecto del scope", $scope.ficha_numero.fi_latitud);
+            console.log("longitud por defecto del scope",$scope.ficha_numero.fi_longitud);
+            //console.log("POSITIONmmmmm",marker.position.lat.[[Scopes]].0.a);  
+            infowindow.setContent('<h4 class="text-primary">Tú estas aquí <br><small>Esta es tu ubicación aproximada</small></h4>');
+            infowindow.open(map, marker);
 
-//             google.maps.event.addListener(marker, 'click', (function(marker) {
-//                 // return function() {
-//                 // var markerLatLng1 = marker.getPosition();
-//                 // document.getElementById("establecimientolatitud").value=markerLatLng1.lat();
-//                 // document.getElementById("establecimientolongitud").value=markerLatLng1.lng();
-//                 // infowindow.open(map, marker);
-//                 // }
-//             })(marker));
+            // google.maps.event.addListener(marker, 'click', (function(marker) {
+            //     // return function() {
+            //     // var markerLatLng1 = marker.getPosition();
+            //     // document.getElementById("establecimientolatitud").value=markerLatLng1.lat();
+            //     // document.getElementById("establecimientolongitud").value=markerLatLng1.lng();
+            //     // infowindow.open(map, marker);
+            //     // }
+            // })(marker));
 
-//          })   
-//       }else{
-//         $scope.ver_mapita=false;
-//         // document.getElementById("establecimientolatitud").value=0;
-//         // document.getElementById("establecimientolongitud").value=0;
-//       };
-//   }
-
-
-
-
+         })   
+      }else{
+        $scope.ver_mapita=false;
+        // document.getElementById("establecimientolatitud").value=0;
+        // document.getElementById("establecimientolongitud").value=0;
+      };
+  }
 
 }])
 

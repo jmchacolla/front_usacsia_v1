@@ -67,7 +67,7 @@
                             </div> 
                             
                            
-                            <div class="row">
+                        <!--     <div class="row">
                                 <div class="col-md-4">
                                      <label for="sc" class="control-label">Clacificación: <strong class="fg_red">*</strong></label>
                                     <select class="form-control " ng-model="subclacificacion.cle_id" name="sc" ng-change="buscarS(subclacificacion.cle_id)" ng-model="subclasificacion" ng-options="subclacificacion.cle_id as subclacificacion.cle_nombre for subclacificacion in subclacificacion"  required>
@@ -111,7 +111,61 @@
                                         </table>
                                     </div>
                                 </div>
+                            </div> -->
+
+
+                            <!--  -->
+                            <br/>
+                            <h4 class="text-center text-primary">II. CATEGORÍA ARANCELARIA</h4>
+                            <hr class="bg-red">
+                            
+                            <div class="row">
+                                <div class="col-md-4">
+                                     <label for="sc" class="control-label">Clasificación: <strong class="fg_red">*</strong></label>
+                                    <select class="form-control " ng-model="subclacificacion.cle_id" name="sc" ng-change="buscarS(subclacificacion.cle_id)" ng-model="subclasificacion" ng-options="subclacificacion.cle_id as subclacificacion.cle_nombre for subclacificacion in subclacificacion"  required>
+                                    <option value="">--Elige opcion--</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4" ng-show="sancion">
+                                     <label for="sc" class="control-label">Tipo de sancion: <strong class="fg_red">*</strong></label>
+                                    <select class="form-control " name="sc" ng-change="agregar(categoria.cat_id,categoria.cat_descripcion,categoria)" ng-model="categoria" ng-options="cat as cat.cat_descripcion+'   -'+cat.cat_area+''+cat.cat_categoria for cat in subcla" required>
+                                    <option value="">--Elige opcion--</option>
+                                    </select>
+                                </div>
+                                <div  ng-if="ver">
+                                <div class="col-md-4">
+                                     <label for="sc" class="control-label">Subclasificación: <strong class="fg_red">*</strong></label>
+                                    <select class="form-control " name="sc" ng-change="buscarC(buscas.sub_id)" ng-model="buscas.sub_id" ng-options="buscas.sub_id as buscas.sub_nombre+'    '+buscas.sub_id for buscas in buscas" required>
+                                    <option value="">--Elige opcion--</option>
+                                    </select>
+                                </div>
+                                 <div class="col-md-4">
+                                     <label for="sc" class="control-label">Categorias: <strong class="fg_red">*</strong></label>
+                                    <select class="form-control " name="sc" ng-change="agregar(categoria.cat_id,categoria.cat_descripcion,categoria)" ng-model="categoria" ng-options="cat as cat.cat_descripcion+'   -'+cat.cat_area+''+cat.cat_categoria for cat in subcla" required>
+                                    <option value="">--Elige opcion--</option>
+                                    </select>
+                                </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <br/>
+                                     <label for="nombrelab" class="control-label">Categoria seleccionada: <strong class="fg_red">*</strong></label>                                     
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered  table-hover">
+                                            <tbody ng-repeat="items in items track by $index">
+                                                <tr>
+                                                    <td>{{items.cat_codigo+ " " +items.cat_descripcion}}</td>
+                                                    <td>
+                                                         <button type="submit" ng-click="quitar(items.cat_id,items)" class="btn btn-primary"><span class="glyphicon glyphicon-remove"></span></button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
                             </div>
+                            <!--  -->
+
+
                             <div class="row" ng-show="sancion">
                                 <div class="col-md-8">
                                      <label for="nombrelab" class="control-label">Sanción seleccionada: <strong class="fg_red">*</strong></label>                                     

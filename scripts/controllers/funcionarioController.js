@@ -302,7 +302,7 @@ $scope.zon=false;
           {nombre:'Ver Datos del Establecimiento', enlace:'#/establecimientos/ver/'+es_id, estilo:''}]
       },
       pagina:{
-        titulo:'Editar Datos del Funcionario de wendy',
+        titulo:'Editar Datos del Funcionario',
         action:'EDITAR'
       }
     }

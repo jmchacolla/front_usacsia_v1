@@ -76,7 +76,7 @@
           <td>{{tramite.per_nombres+' '+tramite.per_apellido_primero+' '+tramite.per_apellido_segundo}}</td>
           <td>
             <p ng-if="tramite.fi_id==null">PENDIENTE</p>
-            <button class="btn btn-primary text-center" ng-if="tramite.fi_id!=null"><span class="glyphicon glyphicon-file"></span></button>
+            <a href="#/inspeccion/ver/{{tramite.fi_id}}"><button class="btn btn-primary text-center" ng-if="tramite.fi_id!=null"><span class="glyphicon glyphicon-file"></span></button>
           </td>
           <td ng-if="user.rol_id == '15'" >
             <a class="btn btn-success" href="#/documento-tramite/revisar/{{tramite.et_id}}" title="Ver Establecimiento" ><span class="glyphicon glyphicon-folder-open"></span>&nbsp;  Requisitos</a>

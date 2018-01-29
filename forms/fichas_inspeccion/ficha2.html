@@ -487,17 +487,24 @@
                             <span ng-show="formficha2.equi.$error.required">El campo es obligatorio</span>
                             </span>
                      </div>
-                   </div>
-
-       <p ng-show="$parent.ajustes.pagina.success" class="alert alert-success">{{$parent.ajustes.pagina.success}}</p>
-      
-
-       <center>
-     
-                  <button type="submit" data-toggle="modal" ng-click="submitf2($parent.ficha2)"  class="btn btn-primary" ng-disabled="formficha2.$invalid" ><span class="glyphicon glyphicon-save"></span> GUARDAR</button>
-                 <!--  <a href="#/establecimientos/pacientes">
-                  <button type="submit" data-toggle="modal"  class="btn btn-danger"  ><span class="glyphicon glyphicon-remove"></span> CANCELAR</button>
-                  </a> -->
-      </center>
+                   </div>     
+                
+                <div ng-controller="RegistrarUbicacionInspeccionCtrl">
+                    <div class="col-md-12 text-center" >
+                        <br>
+                        <button class="btn btn-primary text-center" ng-click="initMap()">GENERAR POSICIÓN</button>
+                    </div>
+                    <div class="panel" ng-if="ver_mapita">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div id="mapa_inspeccion" style="width: 100%; height: 600px;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <center>           
+                        <button type="submit" data-toggle="modal" ng-click="submitf2($parent.ficha2)"  class="btn btn-primary" ng-disabled="formficha2.$invalid" ><span class="glyphicon glyphicon-save"></span> GUARDAR FICHA</button>
+                    </center>
+                </div>
 
 </div>

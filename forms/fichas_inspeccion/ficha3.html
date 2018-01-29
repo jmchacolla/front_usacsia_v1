@@ -565,9 +565,27 @@
 </div>
        
 
- <center>
+
+            <div ng-controller="RegistrarUbicacionInspeccionCtrl">
+                <div class="col-md-12 text-center" >
+                    <br>
+                    <button class="btn btn-primary text-center" ng-click="initMap()">GENERAR POSICIÓN</button>
+                </div>
+                <div class="panel" ng-if="ver_mapita">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div id="mapa_inspeccion" style="width: 100%; height: 600px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <center>           
+                    <button ng-if="ver_mapita" type="submit" data-toggle="modal" ng-click="submit($parent.ficha3)"  class="btn btn-primary" ng-disabled="formficha3.$invalid" ><span class="glyphicon glyphicon-save"></span> GUARDAR FICHA</button>
+                </center>
+            </div>
+<!--  <center>
      
                   <button type="submit" data-toggle="modal" ng-click="submit($parent.ficha3)"  class="btn btn-primary" ng-disabled="formficha3.$invalid" ><span class="glyphicon glyphicon-save"></span> GUARDAR FICHA</button>
             
-      </center>
+      </center> -->
       </div>
