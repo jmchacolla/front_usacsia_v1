@@ -696,17 +696,18 @@ $scope.initMap = function(){
         latitud_del_establecimiento=$scope.establecimiento.ess_latitud;
         longitud_del_establecimiento=$scope.establecimiento.ess_longitud;
         console.log('llego al establecimieto editar',$scope.establecimiento);
-        initMap($scope.establecimiento.ess_latitud,$scope.establecimiento.ess_longitud );
+        initMap($scope.establecimiento.ess_latitud*1,$scope.establecimiento.ess_longitud*1);
 
-        function initMap(lat,long) {
-          console.log('entro  la funcion de iniciar el mapa lat-long',lat, long);
-          // Create a map object and specify the DOM element for display.
+        function initMap(latiud,longiud) {
+          var posicion_del_establecimieto={lat: latiud, lng:longiud}
+          console.log('entro  la funcion de iniciar el mapa lat-long',lat,long);
+          console.log('entro  la posicion del estavecimiento ',posicion_del_establecimieto);
           var map = new google.maps.Map(document.getElementById('mapa'), {
-            center: {lat: -16.5065855667217, lng:-68.1212996354126 },
+            center: posicion_del_establecimieto,
             zoom: 16
           });
           var marker = new google.maps.Marker({
-            position: {lat:lat, lng: long},
+            position: {lat:latiud, lng: longiud},
             map: map,
             title: 'Hello World!'
           });
