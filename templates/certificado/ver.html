@@ -56,7 +56,7 @@
         <div class="col-md-12">
           <div class="col-md-6 col-sm-6">
             <label for="tra" class="control-label text-primary">Trámite:</label>
-             {{empresatramite.tramite.tra_nombre}}
+             {{empresatramite.empresa_tramite.et_tipo_tramite}}
           </div>
           <div class="col-md-6 col-sm-6">
             <label for="tra" class="control-label text-primary">Número de trámite:</label>
@@ -88,8 +88,8 @@
               
         </div>
         </div>
-<!--          <hr> -->
-        <div ng-show="ver && user.rol_id==14 || user.rol_id==1"  class="col-md-12" align="center" ng-controller="PdfCertificadoCtrl" >
+<!--  "ver && user.rol_id==14 || user.rol_id==1"        <hr> -->
+        <div ng-show=  class="col-md-12" align="center" ng-controller="PdfCertificadoCtrl" >
            <button type="button" class="btn btn-default" ng-click="openPdfCES()" >IMPRIMIR CERTIFICADO  <span class="glyphicon glyphicon-print"></span></button>
            <button type="button"  class="btn btn-default" ng-click="downloadPdfCES()">Descargar PDF CERTIFICADO  <span class="glyphicon glyphicon-download-alt"></span></button>
         </div>

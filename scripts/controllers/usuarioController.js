@@ -180,7 +180,7 @@ if (SesionG.rol_id !=6) {
           { rol_id: 9, rol_nombre: "MEDICO", rol_descripcion: "Registra resultados de consulta, genera reportes"},
           { rol_id: 10, rol_nombre: "ENFERMERA", rol_descripcion: "REGISTRA SIGNOS VITALES"},
           { rol_id: 11, rol_nombre: "RESPONSABLE DE LABORATORIO", rol_descripcion: "Genera reportes mensuales"},
-          { rol_id: 12, rol_nombre: "RECEPSIONISTA DE LABORATORIO", rol_descripcion: "Asigna numero de muestra, asigna consultorio"},
+          { rol_id: 12, rol_nombre: "RECEPCIONISTA DE LABORATORIO", rol_descripcion: "Asigna numero de muestra, asigna consultorio"},
           { rol_id: 13, rol_nombre: "TECNICO DE LABORATORIO", rol_descripcion: "Registra resultados de observacion, genera informes"},
           { rol_id: 14, rol_nombre: "RESPONSABLE DE AREA CERTIFICADO SANITARIO", rol_descripcion: "Genera reportes mensuales, genera firma, firma documentos"},
           { rol_id: 15, rol_nombre: "REVISOR", rol_descripcion: "Registra resultados de observacion de docuemntos"},

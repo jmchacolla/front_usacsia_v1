@@ -317,7 +317,7 @@ angular.module("adminApp", ["authService", "ngRoute", "ngResource", "satellizer"
     templateUrl: 'templates/establecimiento_solicitante/tramite_establecimientos.html',
     controller: 'ListaEstabSolTramitePagadoCtrl'  ,
   data: {
-      authorized: [ROLES.ADMIN_USACSIA.ROL,ROLES.REVISOR.ROL,ROLES.CAJERO.ROL]
+      authorized: [ROLES.ADMIN_USACSIA.ROL,ROLES.REVISOR.ROL,ROLES.CAJERO.ROL,ROLES.ADMIN_CERTIFICADO.ROL]
     }
   })
 
@@ -325,7 +325,7 @@ angular.module("adminApp", ["authService", "ngRoute", "ngResource", "satellizer"
     templateUrl: 'templates/establecimiento_solicitante/crear2.html',
     controller: 'CrearEstablecimientoSolicitanteCtrl',
       data: {
-      authorized: [ROLES.ADMIN_USACSIA.ROL]
+      authorized: [ROLES.ADMIN_USACSIA.ROL,ROLES.ADMIN_CERTIFICADO.ROL]
     }
   })
 //no existe 14-1-2018
@@ -333,7 +333,7 @@ angular.module("adminApp", ["authService", "ngRoute", "ngResource", "satellizer"
     templateUrl: 'templates/establecimiento_solicitante/crear2.html',
     controller: 'VerEstablecimientoSolicitanteCtrl',
       data: {
-      authorized: [ROLES.ADMIN_USACSIA.ROL]
+      authorized: [ROLES.ADMIN_USACSIA.ROL,,ROLES.ADMIN_CERTIFICADO.ROL]
     }
   })
 
@@ -658,7 +658,7 @@ angular.module("adminApp", ["authService", "ngRoute", "ngResource", "satellizer"
     templateUrl: 'templates/asignacion_inspeccion/tramites_asignar.html',
     controller:'AsignarInspeccionCtrl',
     data: {
-      authorized: [ROLES.ADMIN_USACSIA.ROL]
+      authorized: [ROLES.ADMIN_USACSIA.ROL,ROLES.ADMIN_CERTIFICADO.ROL]
     }
   })
 
@@ -682,7 +682,7 @@ angular.module("adminApp", ["authService", "ngRoute", "ngResource", "satellizer"
     templateUrl: 'templates/establecimiento_solicitante/buscar_persona_registrada.html',
     controller: 'BuscarCrearPersonaCtrl',
     data: {
-      authorized: [ROLES.ADMIN_USACSIA.ROL,ROLES.REVISOR.ROL]
+      authorized: [ROLES.ADMIN_USACSIA.ROL,ROLES.REVISOR.ROL,ROLES.ADMIN_CERTIFICADO.ROL]
     }
   })
 /*buscar empresa registrada, para luego registrar su establecimiento*/
@@ -690,7 +690,7 @@ angular.module("adminApp", ["authService", "ngRoute", "ngResource", "satellizer"
     templateUrl: 'templates/establecimiento_solicitante/buscar_empresa_registrada.html',
     controller: 'BuscarCrearPersonaCtrl',
     data: {
-      authorized: [ROLES.ADMIN_USACSIA.ROL,ROLES.REVISOR.ROL]
+      authorized: [ROLES.ADMIN_USACSIA.ROL,ROLES.REVISOR.ROL,ROLES.ADMIN_CERTIFICADO.ROL]
     }
   })
 //
@@ -698,7 +698,7 @@ angular.module("adminApp", ["authService", "ngRoute", "ngResource", "satellizer"
     templateUrl: 'templates/establecimiento_solicitante/verpersona.html',
     controller: 'VerPersonaEstablecimientoSolicitanteCtrl',
     data: {
-      authorized: [ROLES.ADMIN_USACSIA.ROL]
+      authorized: [ROLES.ADMIN_USACSIA.ROL,ROLES.ADMIN_CERTIFICADO.ROL]
     }
   })
 //existe 2 busquedas de propietario
@@ -706,7 +706,7 @@ angular.module("adminApp", ["authService", "ngRoute", "ngResource", "satellizer"
     templateUrl: 'templates/establecimiento_solicitante/verempresa.html',
     controller: 'VerPJuridicaCtrl',
     data: {
-      authorized: [ROLES.ADMIN_USACSIA.ROL]
+      authorized: [ROLES.ADMIN_USACSIA.ROL,ROLES.ADMIN_CERTIFICADO.ROL]
     }
   })
 
@@ -716,7 +716,7 @@ angular.module("adminApp", ["authService", "ngRoute", "ngResource", "satellizer"
     templateUrl: 'templates/pruebalaboratorio/buscar_numeromuestra.html',
     controller: 'CrearPruebaLaboratorioCtrl',
     data: {
-      authorized: [ROLES.ADMIN_USACSIA.ROL, ROLES.TECNICO_LABORATORIO.ROL]
+      authorized: [ROLES.ADMIN_USACSIA.ROL, ROLES.TECNICO_LABORATORIO.ROL,ROLES.RESPONSABLE_LAB.ROL]
     }
   })
 
@@ -724,7 +724,7 @@ angular.module("adminApp", ["authService", "ngRoute", "ngResource", "satellizer"
     templateUrl: 'templates/pruebalaboratorio/crear.html',
     controller: 'EditarPruebaLaboratorioCtrl',
     data: {
-      authorized: [ROLES.ADMIN_USACSIA.ROL, ROLES.TECNICO_LABORATORIO.ROL]
+      authorized: [ROLES.ADMIN_USACSIA.ROL, ROLES.TECNICO_LABORATORIO.ROL,ROLES.RESPONSABLE_LAB.ROL]
     }
   })
 
@@ -732,7 +732,7 @@ angular.module("adminApp", ["authService", "ngRoute", "ngResource", "satellizer"
     templateUrl: 'templates/pruebalaboratorio/ver.html',
     controller: 'VerPruebaLaboratorioCtrl',
     data: {
-      authorized: [ROLES.ADMIN_USACSIA.ROL, ROLES.TECNICO_LABORATORIO.ROL, ROLES.MEDICO.ROL]
+      authorized: [ROLES.ADMIN_USACSIA.ROL, ROLES.TECNICO_LABORATORIO.ROL, ROLES.MEDICO.ROL,ROLES.RESPONSABLE_LAB.ROL]
     }
   })
 
@@ -774,7 +774,7 @@ angular.module("adminApp", ["authService", "ngRoute", "ngResource", "satellizer"
     templateUrl: 'templates/ficha/crear.html',
     controller: 'NumeroFichaController',
     data: {
-      authorized: [ROLES.ADMIN_USACSIA.ROL, ROLES.RECEPCIONISTA.ROL]
+      authorized: [ROLES.ADMIN_USACSIA.ROL, ROLES.RECEPCIONISTA.ROL, ROLES.RECEP_LAB.ROL]
     }
   })
 
@@ -1034,7 +1034,7 @@ angular.module("adminApp", ["authService", "ngRoute", "ngResource", "satellizer"
     templateUrl: 'templates/reportes/rep_observadosdia.html',
     controller: 'ReporteObservadosDiaController',
     data: {
-      authorized: [ROLES.ADMIN_CARNET.ROL, ROLES.RESPONSABLE_LAB.ROL]
+      authorized: [ROLES.ADMIN_USACSIA.ROL,ROLES.ADMIN_CARNET.ROL, ROLES.RESPONSABLE_LAB.ROL]
     }
   })
   .when('/reportes/informedia', {

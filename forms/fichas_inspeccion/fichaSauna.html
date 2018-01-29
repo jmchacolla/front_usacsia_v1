@@ -1,156 +1,348 @@
-<!-- TOP-MENU inicio -->
-<div ng-include="'./templates/menu_inicio.html'"></div>
-<!-- CONTEXT-MENU  -->
-<div ng-include="'./templates/menu_lateral.html'"></div>
-<!-- CONTENIDO MODULO inicio -->
-<div class="col-md-8 col-sm-8">
-  <div class="row">
+<div ng-controller="CrearFichaSaunaCtrl">
     <div class="col-md-12">
-      <h2 class="text-primary">
-        <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
-        {{ajustes.pagina.titulo}}
-      </h2>
-      <hr>
+        <h4 class=" text-center">
+            <strong>
+                FICHA PARA SAUNAS
+            </strong>
+        </h4>
     </div>
-  </div>
-  <div class="col-md-12">
-        <div ng-controller="BuscaPersonaRegistradaCtrl">
-            <p>
-          <h4 class="text-primary">Instrucciones</h4>
-          Para la registrar un establecimiento:
-          <ul>
-            <li>Seleccione el tipo de propietario&nbsp;&nbsp;&nbsp;
-                  <input type="radio" name="tipo" id="P" value="P" ng-checked="true" ng-click="pag_buscar_persona()"/>
-                  <label for="P">Persona Natural</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                  <input type="radio" name="tipo" id="E" value="E" ng-click="pag_buscar_empresa()"/>
-                  <label for="E">Empresa</label>
-            </li>
-            <!-- INSTRUCCIONES PERSONA -->
-            <li>Debe ingresar en el buscador el n&uacute;mero de carnet del usuario que solicita el registro de su establecimiento.</li>
-            <li>Luego pulse en <b>Buscar</b></li>
-          </ul>
-            </p>
-        
-          <div class="well well-sm">
-           <div class="row">
-            <form name="empForm" novalidate>
-             <div class="col-md-6 col-md-offset-2">
-                <input ng-disabled="persona!=null" name="perci" class="form-control input-lg" ng-model="per_ci" type="text" placeholder="Escriba el Nro. de C.I."  required autofocus>
-             </div>
-             <div class="col-md-4">
-                <a ng-disabled="persona!=null" class="btn btn-primary btn-lg" ng-click="buscaPersona()"><span class="glyphicon glyphicon-search"></span> BUSCAR</a>
-             </div>
-            </form>
-           </div>  
-         </div>
-        
+    <hr>
+    <br>
+    <h4 class="text-center text-primary">A. ASPECTO FISICO HIGIÉNICO - SANEAMIENTO AMBIENTAL</h4>
+    <hr class="bg-red"> 
+    <div class="row">
+        <div class="col-md-9">
+           <label class="control-label">1.  Ubicación, alejado de focos de insalubridad<strong class="fg_red">*</strong></label>
+        </div>
+        <div class="col-md-3 form-group"  style="margin-bottom: 0px">                            
+            <div class="input-group">
+                <input class="form-control" name="focos" type="number" ng-model="ficha5.fi5_ubicacion" min="0" max="1"> 
+                <span class="input-group-addon">
+                    <span>/1</span>
+                </span>
+            </div>
+        </div>
+<!-- 
+        <div class="col-md-9">
+           <label class="control-label">2.   Exhibición del certificado sanitario.<strong class="fg_red">*</strong></label>
+        </div>
+        <div class="col-md-3 form-group"  style="margin-bottom: 0px">                            
+            <div class="input-group">
+                <input class="form-control" name="focos" type="number" ng-model="ficha5.fi5_capacidad_dependencia" min="0" max="2"> 
+                <span class="input-group-addon">
+                    <span>/1</span>
+                </span>
+            </div>
+        </div> -->
+        <div class="col-md-9">
+           <label class="control-label">2.  Capacidad y distribución de dependencias y sala de descanso<strong class="fg_red">*</strong></label>
+        </div>
+        <div class="col-md-3 form-group"  style="margin-bottom: 0px">                            
+            <div class="input-group">
+                <input class="form-control" name="focos" type="number" ng-model="ficha5.fi5_capacidad_dependencia" min="0" max="5"> 
+                <span class="input-group-addon">
+                    <span>/5</span>
+                </span>
+            </div>
+        </div>
+        <div class="col-md-9">
 
-          <!-- PROPIETARIO PERSONA -->
-            <div ng-show="!formcrear"><center><h3>RESULTADOS<span class="text-primary"> {{ resultado }} </span></h3></center></div>
-            <!-- SI NO EXISTE LA PERSONA -->
-            <div class="col-md-12" ng-controller="FechaFunCtrl">
-                <div ng-show="noexiste && !formcrear" class="text-center" ng-controller="CrearPersona2Ctrl">
-                    <!-- AQUI VAN LAS TABLAS O FORMULARIOS incrustados -->
-                    <!-- INICIO -->
-                    <label class="control-label">Los campos marcados con asterisco (<strong class="fg_red">*</strong>) son obligatorios</label>
-                    <form name="addPersona" novalidate ng-include="'forms/persona/crear.html'"></form>
-                    <!-- FIN -->
-                    <!-- AQUI VAN LOAS TABLAS O FORMULARIOS incrustados -->
+         
+           <label class="control-label"><strong class="fg_red">*</strong></label>
+        </div>
+        <div class="col-md-3 form-group"  style="margin-bottom: 0px">                            
+            <div class="input-group">
+                <input class="form-control" name="focos" type="number" ng-model="ficha5.fi4_pisos" min="0" max="6"> 
+                <span class="input-group-addon">
+                    <span>/6</span>
+                </span>
+            </div>
+        </div>
+        <div class="col-md-9">
+           <label class="control-label">3.  Protección contra enfermedades TRANSMISIBLES, uso de desinfectantes y ambientadores(3). Limpieza general de cada sala al finalizar la jornada de trabajo y en intervalos(2)<strong class="fg_red">*</strong></label>
+        </div>
+        <div class="col-md-3 form-group"  style="margin-bottom: 0px">                            
+            <div class="input-group">
+                <input class="form-control" name="focos" type="number" ng-model="ficha5.fi5_enfermedades" min="0" max="5"> 
+                <span class="input-group-addon">
+                    <span>/5</span>
+                </span>
+            </div>
+        </div>
+
+        <div class="col-md-9">
+           <label class="control-label">4.  Pisos de material sólido, lisos, impermeables en buen estado, facilidad para la limpieza con desague conectado a red de alcantarillado (3)<strong class="fg_red">*</strong></label>
+        </div>
+        <div class="col-md-3 form-group"  style="margin-bottom: 0px">                            
+            <div class="input-group">
+                <input class="form-control" name="focos" type="number" ng-model="ficha5.fi5_pisos" min="0" max="3"> 
+                <span class="input-group-addon">
+                    <span>/3</span>
+                </span>
+            </div>
+        </div>
+        <div class="col-md-9">
+           <label class="control-label">5.  Cielos rasos, de material sólido, claros impermeables en buen estado, facilidad para la limpieza<strong class="fg_red">*</strong></label>
+        </div>
+        <div class="col-md-3 form-group">                            
+            <div class="input-group"  style="margin-bottom: 0px">
+                <input class="form-control" name="focos" type="number" ng-model="ficha5.fi5_cielo" min="0" max="3"> 
+                <span class="input-group-addon">
+                    <span>/3</span>
+                </span>
+            </div>
+        </div>
+
+        <div class="col-md-9">
+           <label class="control-label">6.  Zócalos, superficie impermeable lisa, lavable en buen estado.<strong class="fg_red">*</strong></label>
+        </div>
+        <div class="col-md-3 form-group"  style="margin-bottom: 0px">                            
+            <div class="input-group">
+                <input class="form-control" name="focos" type="number" ng-model="ficha5.fi5_zocalo" min="0" max="2"> 
+                <span class="input-group-addon">
+                    <span>/2</span>
+                </span>
+            </div>
+        </div>
+        <div class="col-md-9">
+           <label class="control-label">7.  Iluminación natural y artificial.<strong class="fg_red">*</strong></label>
+        </div>
+        <div class="col-md-3 form-group"  style="margin-bottom: 0px">                            
+            <div class="input-group">
+                <input class="form-control" name="focos" type="number" ng-model="ficha5.fi5_iluminacion" min="0" max="3"> 
+                <span class="input-group-addon">
+                    <span>/3</span>
+                </span>
+            </div>
+        </div>
+        <div class="col-md-9">
+           <label class="control-label">8. Abastecimiento de agua potable, cañerias en buen estado, con sus respectivas válvulas de seguridad (3); red reglamentaria de abastecimiento y desague (2)<strong class="fg_red">*</strong></label>
+        </div>
+        <div class="col-md-3 form-group"  style="margin-bottom: 0px">                            
+            <div class="input-group">
+                <input class="form-control" name="focos" type="number" ng-model="ficha5.fi5_abastecimiento" min="0" max="5"> 
+                <span class="input-group-addon">
+                    <span>/5</span>
+                </span>
+            </div>
+        </div>
+        <div class="col-md-9">
+           <label class="control-label">9. Ventilación adecuada<strong class="fg_red">*</strong></label>
+        </div>
+        <div class="col-md-3 form-group"  style="margin-bottom: 0px">                            
+            <div class="input-group">
+                <input class="form-control" name="focos" type="number" ng-model="ficha5.fi5_ventilacion" min="0" max="1"> 
+                <span class="input-group-addon">
+                    <span>/1</span>
+                </span>
+            </div>
+        </div>
+        <div class="col-md-9">
+           <label class="control-label"> 10. Guardarropa con casilleros individuales, de material sólido inoxidable, para ambos sexos <strong class="fg_red">*</strong></label>
+        </div>
+        <div class="col-md-3 form-group"  style="margin-bottom: 0px">                            
+            <div class="input-group">
+                <input class="form-control" name="focos" type="number" ng-model="ficha5.fi5_guardaropa" min="0" max="3"> 
+                <span class="input-group-addon">
+                    <span>/3</span>
+                </span>
+            </div>
+        </div>
+
+        
+        <div class="col-md-9">
+           <label class="control-label">11. Servicios higiénicos completos independientes para ambos sexos (2); artefactos limpios en buen estado y ventilados (1) puerta con cierre automático <strong class="fg_red">*</strong></label>
+        </div>
+        <div class="col-md-3 form-group"  style="margin-bottom: 0px">                            
+            <div class="input-group">
+                <input class="form-control" name="focos" type="number" ng-model="ficha5.fi5_serv_higienico" min="0" max="10"> 
+                <span class="input-group-addon">
+                    <span>/10</span>
+                </span>
+            </div>
+        </div>
+        <div class="col-md-9">
+           <label class="control-label">   12. Duchas con agua fria y caliente permanente (2); rejilla de piso de 5 cms de alto (2), suficientes de acuerdo al establecimiento (1)<strong class="fg_red">*</strong></label>
+        </div>
+        <div class="col-md-3 form-group" style="margin-bottom: 0px">                            
+            <div class="input-group">
+                <input class="form-control" name="focos" type="number" ng-model="ficha5.fi5_ducha" min="0" max="5"> 
+                <span class="input-group-addon">
+                    <span>/5</span>
+                </span>
+            </div>
+        </div>
+         <div class="col-md-9">
+           <label class="control-label">   13. Puertas y ventanas bien construidas (2), con cierre automático que se abran hacia adentro (1)<strong class="fg_red">*</strong></label>
+        </div>
+        <div class="col-md-3 form-group" style="margin-bottom: 0px">                            
+            <div class="input-group">
+                <input class="form-control" name="focos" type="number" ng-model="ficha5.fi5_puerta_ventana" min="0" max="4"> 
+                <span class="input-group-addon">
+                    <span>/4</span>
+                </span>
+            </div>
+        </div>
+
+    </div>
+    <!-- del row -->
+
+        <!-- falta puntuacion para muralla -->
+
+         
+     
+        <!-- ......................................................................... -->
+        <h4 class="text-center text-primary">B. EQUIPOS</h4>
+        <hr class="bg-red"> 
+        <div class="row">
+
+            <div class="col-md-9">
+               <label class="control-label">14.  Muebles, camillas, asientos, sillas, mesones de capacidad suficiente de material y construcción adecuado, en buen estado de conservación<strong class="fg_red">*</strong></label>
+            </div>
+            <div class="col-md-3 form-group"  style="margin-bottom: 0px">                            
+                <div class="input-group">
+                    <input class="form-control" name="focos" type="number" ng-model="ficha5.fi5_muebles" min="0" max="4"> 
+                    <span class="input-group-addon">
+                        <span>/4</span>
+                    </span>
                 </div>
             </div>
-            <!-- SI EXISTE LA PERSONA -->
-            <div ng-show="ver">
-              <div ng-show="loading" class="text-center"><br><img ng-src="./images/image.gif"></div>
-              <div class="well well-sm" class="animated">
-              <div class="panel">
-              <h4 class="text-center text-primary">I. DATOS PERSONALES</h4>
-              <hr class="bg-red">
-                <div class="row"><!--  ng-repeat="imagen in persona.imagen"-->
-                      <div class="col-md-3 col-sm-4 col-xs-8 text-center" >
-                        <img ng-if="imagen!=null" width="100%" max-height="100px" ng-src="{{imagen.ima_enlace}}/{{imagen.ima_nombre}}" class="img-thumbnail center">
-                        <img ng-if="imagen==null" width="100%" max-height="100px" ng-src="./images/perfil.jpg" class="img-thumbnail center">
-                        <p ng-if="imagen==null">SIN FOTOGRAFIA{{persona.imagen.ima_enlace}}</p>
-                      </div>    
-                      <div class="col-md-9 col-sm-8 col-xs-12">
-                        <div class="row">
-                            <div class="col-md-4 col-sm-6 col-xs-6">
-                              <label class="control-label">Nombres:</label><br>
-                              {{persona.per_nombres}}
-                            </div>
-                            <div class="col-md-4 col-sm-6 col-xs-6">
-                              <label class="control-label">Apellido paterno:</label><br>
-                              {{persona.per_apellido_primero}}
-                            </div>
-                            <div class="col-md-4 col-sm-6 col-xs-6">
-                              <label class="control-label">Apellido materno:</label><br>
-                              {{persona.per_apellido_segundo}}
-                            </div>
-                        </div>
-                        <br>
-                        <div class="row">
-                            <div class="col-md-4 col-sm-6 col-xs-6">
-                              <label class="control-label">Fecha de nacimiento:</label><br>
-                              {{persona.per_fecha_nacimiento}}
-                              
-                            </div>
-                            <div class="col-md-4 col-sm-6 col-xs-6">
-                              <label class="control-label ">CI:</label><br>
-                              {{persona.per_ci + " "}} {{persona.per_ci_expedido | uppercase}}
-                            </div>
-                            <div class="col-md-4 col-sm-6 col-xs-6">
-                              <label class="control-label ">Genero:</label><br>
-                              {{persona.per_genero}}
-                            </div>
-                        </div>
-                        <br>
-                        <div class="row">
-                            <div class="col-md-4 col-sm-6 col-xs-6 texto">
-                              <label class="control-label">Email:</label><br>
-                              {{persona.per_email}}
-                            </div>
-                            <div class="col-md-4 col-sm-6 col-xs-6">
-                              <label class="control-label">Nro. Celular:</label><br>
-                              {{persona.per_numero_celular}}
-                            </div>
-                            <div class="col-md-4 col-sm-6 col-xs-6 texto">
-                              <label class="control-label">Ocupacion:</label><br>
-                              {{persona.per_ocupacion}}
-                            </div>
-                        </div>
-                        <br>
-                      </div>    
-                  </div>
-                  <h4 class="text-center text-primary">II. DIRECCIÓN</h4>
-                  <hr class="bg-red"> 
-                  <div>  
-                    <div class="row">
-                        <div class="col-md-4 col-sm-4 col-xs-6">
-                          <label class="control-label">Zona/Comunidad:</label><br>
-                          {{zona.zon_nombre}}
-                        </div>    
-                        <div class="col-md-4 col-sm-4 col-xs-6">
-                          <label class="control-label">Calle/Avenida:</label><br>
-                          {{persona.per_avenida_calle}}
-                        </div>    
-                        <div class="col-md-4 col-sm-4 col-xs-6">
-                          <label class="control-label">Número:</label><br>
-                          {{persona.per_numero}}
-                        </div>    
-                    </div> 
-                  </div>
-              </div>    
-              </div>
-              
-              <div class="text-center">
-                <button ng-show="persona.pro_id==null && pro_id==null" class="btn btn-primary" ng-click="crear_pnatural(persona.per_id)"><span class="glyphicon glyphicon-book"></span> REGISTRAR COMO PROPIETARIO</button>
-                  <a ng-show="persona.pro_id!=null || pro_id!=null" ng-click="recarga()" class="btn btn-primary" ><span class="glyphicon glyphicon-search"></span>  VOLVER A BUSCAR</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                  <a ng-show="pro_id!=null && persona.pro_id==null" class="btn btn-primary" href="#/establecimientosol/crear/{{pro_id}}"><span class="glyphicon glyphicon-home"></span> REGISTRAR ESTABLECIMIENTO</a>
-                  <a ng-show="persona.pro_id!=null && pro_id==null" class="btn btn-primary" href="#/establecimientosol/crear/{{persona.pro_id}}"><span class="glyphicon glyphicon-home"></span> REGISTRAR ESTABLECIMIENTO</a>
-              </div>
+            <div class="col-md-9">
+               <label class="control-label">15.  Maquinarias; quemadores, calderos, tanques de gas, de construcción y material adecuado (4) en buen estado (2); termostatos manómetros, resistentes hasta 9 libras (3), valvulas de 1/4 y 1/2 giro para el cierre de presión de gas, agua y vapor (4), caldero con apagado automático al llegar a 9 libras de presión interna (2)<strong class="fg_red">*</strong></label>
             </div>
-            <!-- /PROPIETARIOPERSONA -->
+            <div class="col-md-3 form-group">                            
+                <div class="input-group"  style="margin-bottom: 0px;">
+                    <input class="form-control" name="focos" type="number" ng-model="ficha5.fi5_maquinarias" min="0" max="15"> 
+                    <span class="input-group-addon">
+                        <span>/15</span>
+                    </span>
+                </div>
+            </div>
+            <div class="col-md-9">
+               <label class="control-label">16.  Facilidades para el aseo de maquinarias, desmontaje adecuado para la limpieza interna (2), puntos de seguridad para obstrucción de basuras 9 (2), ausencia de polvo y suciedad (1); verificar la presión de diseño de cada maquinaria no menor a 250 PSL (3); desinfección de maquinaria (2)<strong class="fg_red">*</strong></label>
+            </div>
+            <div class="col-md-3 form-group"  style="margin-bottom: 0px">                            
+                <div class="input-group">
+                    <input class="form-control" name="focos" ng-model="ficha5.fi5_aseo_maquinaria" type="number" min="0" max="10"> 
+                    <span class="input-group-addon">
+                        <span>/10</span>
+                    </span>
+                </div>
+            </div>
+      
+            <div class="col-md-9">
+               <label class="control-label">17.  Piscina, desinfectantes y cristalizantes autorizados (2), temperatura de agua, salas y salones adecuados (2) certificado de tratamiento de agua (2)<strong class="fg_red">*</strong></label>
+            </div><!-- falta hacer un check d si o no -->
+            <div class="col-md-3 form-group"  style="margin-bottom: 0px">                            
+                <div class="input-group">
+                    <input class="form-control" name="focos" type="number" ng-model="ficha5.fi5_desinfectante" min="0" max="6"> 
+                    <span class="input-group-addon">
+                        <span>/6</span>
+                    </span>
+                </div>
+            </div>
+            
         </div>
-  </div>
+        <h4 class="text-center text-primary">C.   PERSONAL DE SERVICIO</h4>
+        <hr class="bg-red">
+        <div class="row">   
+
+            <div class="col-md-9">
+               <label class="control-label">18.  Estado de salud; sin fiebre, tos, heridas y supuraciones<strong class="fg_red">*</strong></label>
+            </div>
+            <div class="col-md-3 form-group"  style="margin-bottom: 0px">                            
+                <div class="input-group">
+                    <input class="form-control" name="focos" type="number" ng-model="ficha5.fi5_salud_personal" min="0" max="3"> 
+                    <span class="input-group-addon">
+                        <span>/3</span>
+                    </span>
+                </div>
+            </div>
+
+            <div class="col-md-9">
+               <label class="control-label">19.  Habitos: Notoser, escupir, estornudar, fumar durante el periodo o dentro de las salas de trabajo<strong class="fg_red">*</strong></label>
+            </div>
+            <div class="col-md-3 form-group"  style="margin-bottom: 0px">                            
+                <div class="input-group">
+                    <input class="form-control" name="focos" type="number" ng-model="ficha5.fi5_habitos" min="0" max="2"> 
+                    <span class="input-group-addon">
+                        <span>/2</span>
+                    </span>
+                </div>
+            </div>
+            <div class="col-md-9">
+               <label class="control-label">20.  Aseo personal, ropa limpia adecuada (3) buena presentación, higiene del cuerpo, etc.<strong class="fg_red">*</strong></label>
+            </div>
+            <div class="col-md-3 form-group"  style="margin-bottom: 0px">                            
+                <div class="input-group">
+                    <input class="form-control" name="focos" type="number" ng-model="ficha5.fi5_aseo_personal" min="0" max="5"> 
+                    <span class="input-group-addon">
+                        <span>/5</span>
+                    </span>
+                </div>
+            </div>
+            <div class="col-md-9">
+               <label class="control-label">21.  Varios depositos de ropa sucia, basureros de material sólido inoxidable (1), ausencia de material inadecuado (2); extinguidor de incendios, botiquin de primeros auxilios bien equipados (3)<strong class="fg_red">*</strong></label>
+            </div>
+            <div class="col-md-3 form-group"  style="margin-bottom: 0px">                            
+                <div class="input-group">
+                    <input class="form-control" name="focos" type="number" ng-model="ficha5.fi5_depositos_ropa" min="0" max="6"> 
+                    <span class="input-group-addon">
+                        <span>/6</span>
+                    </span>
+                </div>
+            </div>
+
+        </div>
+
+       
+        <div class="row">   
+            
+
+         
+             <div class="panel-body">
+                <div class="col-md-8">
+                        <label for="nombre" class="control-label">Recomendaciones: <strong class="fg_red">*</strong></label>
+                        <label><input  type="checkbox" ng-model="documento.dt_observado">&nbsp;Si</label>
+                        <textarea style="resize: vertical;min-height:70px;max-height: 150px;" ng-show="documento.dt_observado" class="form-control" type="text" ng-model="ficha5.fi5_recomendacion" ng-required="documento.dt_observado" ng-pattern="patternCadena" name="obs">
+                        </textarea>
+                        <span class="messages" ng-show="(docForm.$submitted || docForm.obs.$touched) && documento.dt_observado">
+                            <span ng-show="docForm.obs.$error.required">El campo es obligatorio.</span>
+                        </span>
+                </div>
+            </div>
+
+           
+            
+
+
+        </div>
+           
+           <!--  <div ng-controller="RegistrarUbicacionInspeccionCtrl">
+                <div class="col-md-12 text-center" >
+                    <br>
+                    <button class="btn btn-primary text-center" ng-click="initMap()">GENERAR POSICIÓN</button>
+                </div>
+                <div class="panel" ng-if="ver_mapita">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div id="mapa_inspeccion" style="width: 100%; height: 600px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                 <ng-map center="{{latitud}},{{longitud}}" zoom="16">
+                    <marker position="{{latitud}},{{longitud}}"></marker>
+                </ng-map>
+            </div> -->
+
+           
+
+        <center>
+
+            
+            
+            <button type="submit" data-toggle="modal" ng-click="submit()"  class="btn btn-primary" ng-disabled="formficha5.$invalid" ><span class="glyphicon glyphicon-save"></span> GUARDAR FICHA</button>
+        </center>
+    
 </div>
-
-

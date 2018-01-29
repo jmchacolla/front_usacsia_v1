@@ -19,7 +19,7 @@
         <div class="well well-sm">
            <strong class="pull-left lead">Herramientas: &nbsp;</strong>
             <form class="form-inline pull-left">
-            <input type="text" class="form-control" placeholder="Filtrar por nombre departamento" ng-model="dep_nombre">
+            <input type="text" class="form-control" placeholder="Filtrar por nombre de empresa" ng-model="dep_nombre">
             </form>
         <div class="clearfix"></div>
             
@@ -52,7 +52,7 @@
                     </th>
                     <th >
                         <a href="" ng-click="sortType = 'dep_nombre'; sortReverse = !sortReverse">
-                        Fecha de inspección
+                        Fecha de pago
                         <span ng-show="sortType == 'dep_nombre' && !sortReverse" class="glyphicon glyphicon-sort-by-alphabet"></span>
                      <span ng-show="sortType == 'dep_nombre' && sortReverse" class="glyphicon glyphicon-sort-by-alphabet-alt"></span>
                         </a>
