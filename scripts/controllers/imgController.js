@@ -222,7 +222,7 @@ $scope.persona.ima_nombre=file.name;
                                 $scope.thumbnail.dataUrl = e.target.result;
                             });
                         }
-                        $scope.establecimiento.ima_nombre=file.name;  //obtenemos el nombre de la imagen :)
+                        $scope.establecimiento.ie_nombre=file.name;  //obtenemos el nombre de la imagen :)
                         //$scope.establecimiento.imagenes.ima_nombre=file.name; 
                     });
                 }

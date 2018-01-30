@@ -653,6 +653,22 @@ angular.module("adminApp", ["authService", "ngRoute", "ngResource", "satellizer"
     }
   })
 
+
+  .when('/asignar-inspeccion', {
+    templateUrl: 'templates/asignacion_inspeccion/tramites_asignar.html',
+    controller:'AsignarInspeccionCtrl',
+    data: {
+      authorized: [ROLES.ADMIN_USACSIA.ROL]
+    }
+  })
+
+   .when('/inspeccion-asignada', {
+    templateUrl: 'templates/asignacion_inspeccion/tramites_asignados.html',
+    controller:'InspeccionAsignadasCtrl',
+    data: {
+      authorized: [ROLES.ADMIN_USACSIA.ROL]
+    }
+  })
   
 
 

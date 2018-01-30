@@ -651,6 +651,19 @@ angular.module("adminApp")
   })
 }])
 
+
+
+.factory('TramitesAsignarInspector', ['$resource', 'CONFIG', function ($resource, CONFIG){
+  return $resource(CONFIG.DOMINIO_SERVICIOS+"/tramitecer_asignar_inpeccion")
+}])
+.factory('TramitesAsignadosInspeccion', ['$resource', 'CONFIG', function ($resource, CONFIG){
+  return $resource(CONFIG.DOMINIO_SERVICIOS+"/tramitecer_asignados_inspeccion")
+}])
+.factory('AsignarTramiteInspector', ['$resource', 'CONFIG', function ($resource, CONFIG){
+  return $resource(CONFIG.DOMINIO_SERVICIOS+"/editar_lista_tramitecer_estado")
+}])
+
+
 .factory("HoraLoop",function() {
   return {
     reinicio:function(a){
