@@ -1065,6 +1065,11 @@ angular.module("adminApp", ["authService", "ngRoute", "ngResource", "satellizer"
       authorized: [ROLES.ADMIN_CARNET.ROL, ROLES.ADMIN_USACSIA.ROL]
     }
   })
+  /*jhon -- parte diario*/
+  .when('/recaudacion-caja', {
+    templateUrl: 'templates/caja/recaudacion.html',
+    controller: 'RecaudacionCajaCtrl'
+  })
 
 
 
