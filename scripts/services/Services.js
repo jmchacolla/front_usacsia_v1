@@ -665,7 +665,7 @@ angular.module("adminApp")
 
 
 .factory('AsignarTramiteInspector', ['$resource', 'CONFIG', function ($resource, CONFIG){
-  return $resource(CONFIG.DOMINIO_SERVICIOS+"/")
+  return $resource(CONFIG.DOMINIO_SERVICIOS+"/editar_lista_tramitecer_estado")
 }])
 
 .factory('VerParaEditar', ['$resource', 'CONFIG', function ($resource, CONFIG){

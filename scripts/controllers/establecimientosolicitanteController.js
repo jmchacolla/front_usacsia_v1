@@ -678,29 +678,18 @@ $scope.initMap = function(){
 
     
     var ess_id=$routeParams.ess_id;
-    $scope.items = [];
     VerParaEditar.get({ess_id:ess_id},function(data){
         $scope.establecimiento=data.establecimiento.est_sol;
-
-        $scope.items =data.establecimiento.rubros;
-
-      //   ver_zonas($scope.establecimiento.est_sol.mun_id);
-      //      Zonas.get({mun_id:mun_id}, function(data){
-      //     $scope.zonas=data.zona;
-      //     console.log("ZOnasss",$scope.zonas);
-
-      //     if($scope.zonas.length == 0){
-      //           $scope.zon=true;
-      //     }
-      //     console.log("length "+$scope.zonas.length);
-      // })
-
-
+        $scope.establecimiento.ess_numero=$scope.establecimiento.ess_numero*1;
+        
         if(data.establecimiento.pjuridica){
           $scope.pjuridica=data.establecimiento.pjuridica;
         }else{
           $scope.persona=data.establecimiento.persona;
         }
+        
+        $scope.items1 =data.establecimiento.rubros;
+        $scope.ver_zonas($scope.establecimiento.mun_id);
 
         console.log('llego al establecimieto editar',$scope.establecimiento);
       });
@@ -729,7 +718,7 @@ $scope.initMap = function(){
 
 /*agregar rubros en la empresa*/
     var aux=null;
-    
+    $scope.items = [];
     $scope.agregar = function (sub_id, item) {
       if (item){
         $scope.items.push(item);
@@ -739,8 +728,8 @@ $scope.initMap = function(){
             $scope.subcla.splice(i,1);
           }
         };
-        // console.log('este es el vector reducido', $scope.subcla);
-        // console.log('este es el vector de items', $scope.items);
+        console.log('este es el vector reducido', $scope.subcla);
+        console.log('este es el vector de items', $scope.items);
       }
     };
 

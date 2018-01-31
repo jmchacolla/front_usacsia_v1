@@ -519,10 +519,10 @@ function ($scope, ListarTramitesService, $route, toastr,$location)
                                   {text: "C.I. N°: "+$scope.persona.persona.per_ci+'  '+$scope.persona.persona.per_ci_expedido, fontSize:10}
                                 ],
                                 [
-                                  {text: 'LA SUMA DE:  '+$scope.persona.tramite.tra_costo+".00 BOLIVIANOS", fontSize:10}
+                                  {text: 'LA SUMA DE:  BS. '+$scope.persona.tramite.tra_costo+".00", fontSize:10}
                                 ],
                                 [
-                                  {text: 'LA SUMA DE:  DIEZ 00/100 BOLIVIANOS', fontSize:10}
+                                  {text: 'SON:  VIENTICINCO 00/100 BOLIVIANOS', fontSize:10}
                                 ],
                                 [
                                   {text: 'POR CONCEPTO DE: '+$scope.persona.tramite.tra_nombre, fontSize:10}

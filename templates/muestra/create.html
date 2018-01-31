@@ -65,7 +65,8 @@
                           <label class="control-label text-primary">Número de Muestra:</label>
                           <div class="well well-sm">
                             <center>
-                              <h1 class="h1">{{num_muestra_traido_del_crear}}</h1>
+                              <h1 ng-if="num_muestra_traido_del_crear!=0" class="h1">{{num_muestra_traido_del_crear}}</h1>
+                              <h1 ng-if="num_muestra_traido_del_crear==0" class="h1">--</h1>
                             </center>
                           </div>
                         </div>
