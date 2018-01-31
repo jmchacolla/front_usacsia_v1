@@ -164,7 +164,7 @@ console.log("_______sssssssssssssssssss",$scope.tramitecerestado[6].eta_id);
    
 
        
-        
+         var vencimiento=$scope.cs.ces_fecha_fin/*moment($scope.empresatra.empresa_tramite.et_vigencia_documento, 'YYYY-MM-DD').format('DD-MM-YYYY')*/;
             var gober='';
             var sedes='';
             var ifirma1='';
@@ -173,7 +173,7 @@ console.log("_______sssssssssssssssssss",$scope.tramitecerestado[6].eta_id);
             var watermark='';
             var tituloqr='';
             //aumentar datos en textoqr
-            var textoqr='USACSIA-CERTIFICADO-SANITARIO '+' '+razon_socialq+' - '+$scope.empresatra.empresa.emp_nit+' - '+$scope.propietario+' - '+$scope.documento+' /Venc: '+$scope.empresatra.empresa_tramite.et_vigencia_documento;
+           
             var razon_social='';
             var clasificacion='';
             var clasificacion2='';
@@ -185,7 +185,7 @@ console.log("_______sssssssssssssssssss",$scope.tramitecerestado[6].eta_id);
             var propietario='';
             var direccion='';
             var gestion='';
-            var vencimiento=$scope.cs.ces_fecha_fin/*moment($scope.empresatra.empresa_tramite.et_vigencia_documento, 'YYYY-MM-DD').format('DD-MM-YYYY')*/;
+           
             var nroregistro='';
             var kardex='';
 
@@ -213,6 +213,7 @@ console.log("_______sssssssssssssssssss",$scope.tramitecerestado[6].eta_id);
                 item2=$scope.fichac[j].cat_codigo;
                 item3=$scope.fichac[k].cat_codigo;
               }
+               var textoqr='USACSIA-CERTIFICADO-SANITARIO '+' '+razon_socialq+' - '+$scope.direccion+' - '+$scope.propietario+' - '+$scope.documento+' /Venc: '+vencimiento+' /Fun: '+$scope.ficha.fun_id+' /Krdx: '+$scope.empresatra.empresa.emp_kardex+'/Cat: '+clasificacion+''+item+''+clasificacion2+''+item2+''+clasificacion3+''+item3;
               
           
 /*waterlogoSEDES*/

@@ -485,7 +485,11 @@ angular.module("adminApp")
             fun_id:fun_id,
             te_fecha:new Date(),
             }
+
           $http.put(CONFIG.DOMINIO_SERVICIOS+'/tramitecer_estado_busca/'+$scope.ordenpago.et_id+'/'+3, req2).success(function(respuesta){
+// =======
+//           $http.put(CONFIG.DOMINIO_SERVICIOS+'/verestados/'+$scope.ordenpago.et_id+'/'+3, req2).success(function(respuesta){
+// >>>>>>> 4935d85cec7c282d466198734bf50ebfbe3be478
             console.log("_respuesta__",respuesta);
             $scope.tramitecerestado=respuesta.tramitecerestado;
           });

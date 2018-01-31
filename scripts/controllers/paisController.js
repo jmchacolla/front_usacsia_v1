@@ -7,10 +7,9 @@ angular.module('adminApp')
       titulo: 'Gestión de País',
       items:[
         {nombre:'Gestión de Parasitos', enlace:'#/parasito', estilo:''},
-        {nombre:'Gestión de Tratamientos', enlace:'#/tratamiento', estilo:''},
-        /*{nombre:'Gestión de Enferemdades', enlace:'#/homeenfermedad', estilo:''},*/
+        {nombre:'Gestión de Tratamientos', enlace:'#/tratamiento', estilo:''}
         ,
-        {nombre:'Gestión de Zonas', enlace:'#/parasito', estilo:''},
+        {nombre:'Gestión de Zonas', enlace:'#/zonas', estilo:''},
          {nombre:'Paises', enlace:'#/homepais', estilo:'active'}
        ]
        },
