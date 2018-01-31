@@ -28,7 +28,7 @@ angular.module("adminApp")
       titulo: 'Reportes',
       items:[
         {nombre:'Informe mensual', enlace:'#/reportes/parasitos', estilo:'active'},   ///c7
-        {nombre:'Reportes de signos vitales', enlace:'#/reportes/signosvitales', estilo:''},
+        // {nombre:'Reportes de signos vitales', enlace:'#/reportes/signosvitales', estilo:''},
         {nombre:'Reportes observados por dia', enlace:'#/reportes/observadosdia', estilo:''},
         {nombre:'Informe diario', enlace:'#/reportes/informedia', estilo:''},  //c6
         {nombre:'Control diario', enlace:'#/reportes/controldiario', estilo:''} //c3
@@ -113,7 +113,7 @@ angular.module("adminApp")
       titulo: 'Reportes',
       items:[
         {nombre:'Informe mensual', enlace:'#/reportes/parasitos', estilo:''},   ///c7
-        {nombre:'Reportes de signos vitales', enlace:'#/reportes/signosvitales', estilo:'active'},
+        // {nombre:'Reportes de signos vitales', enlace:'#/reportes/signosvitales', estilo:'active'},
         {nombre:'Reportes observados por dia', enlace:'#/reportes/observadosdia', estilo:''},
         {nombre:'Informe diario', enlace:'#/reportes/informedia', estilo:''},  //c6
         {nombre:'Control diario', enlace:'#/reportes/controldiario', estilo:''} //c3
@@ -188,7 +188,7 @@ angular.module("adminApp")
       titulo: 'Reportes',
       items:[
         {nombre:'Informe mensual', enlace:'#/reportes/parasitos', estilo:''},   ///c7
-        {nombre:'Reportes de signos vitales', enlace:'#/reportes/signosvitales', estilo:''},
+        // {nombre:'Reportes de signos vitales', enlace:'#/reportes/signosvitales', estilo:''},
         {nombre:'Reportes observados por dia', enlace:'#/reportes/observadosdia', estilo:'active'},
         {nombre:'Informe diario', enlace:'#/reportes/informedia', estilo:''},  //c6
         {nombre:'Control diario', enlace:'#/reportes/controldiario', estilo:''} //c3
@@ -220,7 +220,7 @@ angular.module("adminApp")
       titulo: 'Reportes',
       items:[
         {nombre:'Informe mensual', enlace:'#/reportes/parasitos', estilo:''},   ///c7
-        {nombre:'Reportes de signos vitales', enlace:'#/reportes/signosvitales', estilo:''},
+        // {nombre:'Reportes de signos vitales', enlace:'#/reportes/signosvitales', estilo:''},
         {nombre:'Reportes observados por dia', enlace:'#/reportes/observadosdia', estilo:''},
         {nombre:'Informe diario', enlace:'#/reportes/informedia', estilo:'active'}, ///c6
         {nombre:'Control diario', enlace:'#/reportes/controldiario', estilo:''} //c3
@@ -275,7 +275,7 @@ angular.module("adminApp")
       titulo: 'Reportes',
       items:[
         {nombre:'Informe mensual', enlace:'#/reportes/parasitos', estilo:''},   ///c7
-        {nombre:'Reportes de signos vitales', enlace:'#/reportes/signosvitales', estilo:''},
+        // {nombre:'Reportes de signos vitales', enlace:'#/reportes/signosvitales', estilo:''},
         {nombre:'Reportes observados por dia', enlace:'#/reportes/observadosdia', estilo:''},
         {nombre:'Informe diario', enlace:'#/reportes/informedia', estilo:''},  //c6
         {nombre:'Control diario', enlace:'#/reportes/controldiario', estilo:'active'} //c3

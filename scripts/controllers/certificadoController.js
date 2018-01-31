@@ -141,11 +141,11 @@ console.log("_______sssssssssssssssssss",$scope.tramitecerestado[6].eta_id);
     $scope.empresatra=argument.establecimiento;
     var razon_socialq=$scope.empresatra.establecimiento_sol.ess_razon_social;
     
-    if ($scope.emp_tra.propietario.pro_tipo=='J') {
+    if ($scope.empresatra.propietario.pro_tipo=='J') {
       $scope.propietario=$scope.empresatra.propietario.pjur_razon_social;
       $scope.documento=$scope.empresatra.propietario.pjur_nit;
     }
-    if ($scope.emp_tra.propietario.pro_tipo=='N') {
+    if ($scope.empresatra.propietario.pro_tipo=='N') {
       $scope.propietario=$scope.empresatra.propietario.per_nombres+' '+$scope.empresatra.propietario.per_apellido_primero+' '+$scope.empresatra.propietario.per_apellido_segundo;
       $scope.documento=$scope.empresatra.propietario.per_ci+' '+$scope.empresatra.propietario.per_ci_expedido;
     }

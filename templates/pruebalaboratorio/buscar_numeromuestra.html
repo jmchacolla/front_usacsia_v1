@@ -40,7 +40,7 @@
           </form>
          </div>
          <div><center><h3>RESULTADOS<span class="text-primary">  {{ tamanio }} </span></h3></center></div>
-         <div ng-if="ver">
+         <div ng-if="ver || verprueba">
             <div class="lead text-center">
               <hr class="bg-red">
             </div>
@@ -71,10 +71,10 @@
                         </div>
                       </div>
                       <center>
-                        <button ng-if="!negcreado" type="submit" class="btn btn-success" ng-click="saveplnegativo(muestra.mue_id)"><span class="glyphicon glyphicon-minus"></span> NEGATIVO</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                          <button ng-if="!negcreado" type="submit" ng-click="savepl(muestra.mue_id)" class="btn btn-danger"><span class="glyphicon glyphicon-plus"></span> POSITIVO</button>
-                        <button ng-if="negcreado" type="submit" class="btn btn-danger" ng-click="recarga()"><span class="glyphicon glyphicon-search"></span>VOLVER A BUSCAR</button>
-                        <button ng-if="negcreado" type="submit" class="btn btn-default" ng-click="cancelar()"><span class="glyphicon glyphicon-floppy-remove"></span>CANCELAR</button>
+                        <button ng-if="!negcreado && !verprueba" type="submit" class="btn btn-success" ng-click="saveplnegativo(muestra.mue_id)"><span class="glyphicon glyphicon-minus"></span> NEGATIVO</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                          <button ng-if="!negcreado && !verprueba" type="submit" ng-click="savepl(muestra.mue_id)" class="btn btn-danger"><span class="glyphicon glyphicon-plus"></span> POSITIVO</button>
+                        <button ng-if="negcreado || verprueba" type="submit" class="btn btn-danger" ng-click="recarga()"><span class="glyphicon glyphicon-search"></span>VOLVER A BUSCAR</button>
+                        <button ng-if="negcreado && !verprueba" type="submit" class="btn btn-default" ng-click="cancelar()"><span class="glyphicon glyphicon-floppy-remove"></span>CANCELAR</button>
                     </center>
                     </div>
                   </div>

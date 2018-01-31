@@ -361,7 +361,7 @@ angular.module("adminApp")
                           fun_id:fun_id,
                           te_fecha:new Date(),
                           }
-                        $http.put(CONFIG.DOMINIO_SERVICIOS+'/wen2/'+et_id+'/'+3, req).success(function(respuesta){
+                        $http.put(CONFIG.DOMINIO_SERVICIOS+'/tramitecer_estado_busca/'+et_id+'/'+3, req).success(function(respuesta){
                           console.log("_respuesta__",respuesta);
                           $scope.tramitecerestado=respuesta.tramitecerestado;
                         });
@@ -485,7 +485,7 @@ angular.module("adminApp")
             fun_id:fun_id,
             te_fecha:new Date(),
             }
-          $http.put(CONFIG.DOMINIO_SERVICIOS+'/wen2/'+$scope.ordenpago.et_id+'/'+3, req2).success(function(respuesta){
+          $http.put(CONFIG.DOMINIO_SERVICIOS+'/tramitecer_estado_busca/'+$scope.ordenpago.et_id+'/'+3, req2).success(function(respuesta){
             console.log("_respuesta__",respuesta);
             $scope.tramitecerestado=respuesta.tramitecerestado;
           });

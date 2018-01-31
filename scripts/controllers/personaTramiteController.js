@@ -588,7 +588,7 @@ function ($scope, ListarTramitesService, $route, toastr,$location)
   $scope.user = {
     rol_id: CONFIG.ROL_CURRENT_USER
   }
-  if ($scope.user.rol_id==1) {
+  if ($scope.user.rol_id==1 || $scope.user.rol_id==7) {
   $scope.ajustes = {
     menu:{
       titulo: 'Aprobados por fecha',
