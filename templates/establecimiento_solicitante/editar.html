@@ -186,9 +186,9 @@
                                             <table class="table table-bordered  table-hover">
                                                 <tbody ng-repeat="items in items">
                                                     <tr>
-                                                        <td>{{items.re_nombre}}</td>
+                                                        <td>{{items.sub_nombre}}</td>
                                                         <td>
-                                                             <button type="submit" ng-click="quitar(items.re_id,items)" class="btn btn-primary"><span class="glyphicon glyphicon-remove"></span></button>
+                                                             <button type="submit" ng-click="quitar(items.sub_id,items)" class="btn btn-primary"><span class="glyphicon glyphicon-remove"></span></button>
                                                         </td>
                                                     </tr>
                                                 </tbody>
@@ -254,7 +254,7 @@
                                     </div>
                                 </div>
                             </div>   
-                            <div class="panel" ng-if="ver_mapita">
+                            <div class="panel" >
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div id="mapa" style="width: 100%; height: 600px;">

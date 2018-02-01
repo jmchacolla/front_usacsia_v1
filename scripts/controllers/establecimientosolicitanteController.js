@@ -678,8 +678,11 @@ $scope.initMap = function(){
 
     
     var ess_id=$routeParams.ess_id;
+    $scope.items = [];
+    var latitud_del_establecimiento=null;
+    var longitud_del_establecimiento=null;
     VerParaEditar.get({ess_id:ess_id},function(data){
-        $scope.establecimiento=data.establecimiento.est_sol;
+        $scope.establecimiento=data.establecimiento.est_sol;        
         $scope.establecimiento.ess_numero=$scope.establecimiento.ess_numero*1;
         
         if(data.establecimiento.pjuridica){
@@ -688,11 +691,29 @@ $scope.initMap = function(){
           $scope.persona=data.establecimiento.persona;
         }
         
-        $scope.items1 =data.establecimiento.rubros;
+        $scope.items=data.establecimiento.rubros;
         $scope.ver_zonas($scope.establecimiento.mun_id);
-
+        latitud_del_establecimiento=$scope.establecimiento.ess_latitud;
+        longitud_del_establecimiento=$scope.establecimiento.ess_longitud;
         console.log('llego al establecimieto editar',$scope.establecimiento);
+        initMap($scope.establecimiento.ess_latitud,$scope.establecimiento.ess_longitud );
+
+        function initMap(lat,long) {
+          console.log('entro  la funcion de iniciar el mapa lat-long',lat, long);
+          // Create a map object and specify the DOM element for display.
+          var map = new google.maps.Map(document.getElementById('mapa'), {
+            center: {lat: -16.5065855667217, lng:-68.1212996354126 },
+            zoom: 16
+          });
+          var marker = new google.maps.Marker({
+            position: {lat:lat, lng: long},
+            map: map,
+            title: 'Hello World!'
+          });
+        }
+        console.log('latitud y longitud---',latitud_del_establecimiento, longitud_del_establecimiento);
       });
+    console.log('llego al establecimieto editarrrrrrrrr',latitud_del_establecimiento);
 
 
     $scope.nombre_unico=function(ess_nombre){
@@ -714,11 +735,18 @@ $scope.initMap = function(){
   
   Subclacificacion.get(function(data){
       $scope.subcla=data.subclacificacion;
+      for (var i = $scope.items.length - 1; i >= 0; i--) {
+        for (var j = $scope.subcla.length - 1; j >= 0; j--) {
+          if($scope.subcla[j].sub_id==$scope.items[i].sub_id){
+             $scope.subcla.splice(j,1);
+          };
+        };
+      };
 
 
 /*agregar rubros en la empresa*/
     var aux=null;
-    $scope.items = [];
+    
     $scope.agregar = function (sub_id, item) {
       if (item){
         $scope.items.push(item);
@@ -764,9 +792,15 @@ $scope.initMap = function(){
           console.log("length "+$scope.zonas.length);
       })
   };
+
+
+
 $scope.latitud=null;
  $scope.longitud=null;
  var lat,long;
+
+          
+
 
 $scope.ver_mapita=false;
 $scope.initMap = function(){
