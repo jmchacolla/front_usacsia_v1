@@ -213,6 +213,12 @@ angular.module("adminApp")
     update: {method: "PUT", params: {}}
   })
 }])
+//------------------------CREAR FICHA 5---------------------------
+.factory('Ficha5', ['$resource', 'CONFIG', function ($resource, CONFIG) {
+  return $resource(CONFIG.DOMINIO_SERVICIOS+"/ficha5", {}, {
+    update: {method: "PUT", params: {}}
+  })
+}])
 //------------------------CREAR FICHA 6----------------------------
 .factory('Ficha6', ['$resource', 'CONFIG', function ($resource, CONFIG) {
   return $resource(CONFIG.DOMINIO_SERVICIOS+"/ficha6", {}, {

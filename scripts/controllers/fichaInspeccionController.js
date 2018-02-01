@@ -1636,7 +1636,7 @@ function ($http,CONFIG,$scope,Ficha4, $route, toastr,EmpTra,Funcionarios,$routeP
 
 
 
-.controller('CrearFichaSaunaCtrl', ['$http','CONFIG','$scope','Ficha6', '$route', 'toastr','EmpTra','Funcionarios','$routeParams','$timeout','$location', function ($http,CONFIG,$scope,Ficha6, $route, toastr,EmpTra,Funcionarios,$routeParams,$timeout,$location){
+.controller('CrearFichaSaunaCtrl', ['$http','CONFIG','$scope','Ficha5', '$route', 'toastr','EmpTra','Funcionarios','$routeParams','$timeout','$location', function ($http,CONFIG,$scope,Ficha5, $route, toastr,EmpTra,Funcionarios,$routeParams,$timeout,$location){
   $scope.ajustes = {
     menu:{
       titulo: 'Gestión de Fichas de Inspección',
@@ -1674,43 +1674,53 @@ function ($http,CONFIG,$scope,Ficha4, $route, toastr,EmpTra,Funcionarios,$routeP
         fi_extinguidor:'',
         fi_botiquin:'',
         
-        fi6_ubicacion:null ,
-        fi6_exibicion_certificado:null ,
-        fi6_capacidad_dependencias:null ,
-        fi6_piso:null ,
-        fi6_cielo_raso:null ,
-        fi6_muralla:null ,
-        fi6_puerta_ventana:null ,
-        fi6_ventilacion:null ,
-        fi6_iluminacion:null ,
-        fi6_abastecimiento_agua:null ,
-        fi6_purificacion_agua:null ,
-        fi6_eliminacion_agua:null ,
-        fi6_servicios_higienicos:null ,
-        fi6_facilidad_aseo:null ,
-        fi6_guardaropa:null ,
-        fi6_eliminacion_basura:null ,
-        fi6_aseo_dependencias:null ,
-        fi6_maquinaria_artefactos:null ,
-        fi6_fitros:null ,
-        fi6_transfugadora:null ,
-        fi6_lavado_envases:null ,
-        fi6_desinfeccion_envases:null ,
-        fi6_materia_prima:null ,
-        fi6_eliminacion_productos:null ,
-        fi6_proteccion_contaminacion:null ,
-        fi6_deposito:null ,
-        fi6_manipulador_salud:null ,
-        fi6_manipulador_aseo:null ,
-        fi6_manipulador_habitos:null ,
-        fi6_manipulador_carne:null ,
-        fi6_overoles:null ,
-        fi6_botiquin:null ,
-        fi6_extinguidor:null ,
-        fi6_control_vectores:'' ,
-        fi6_observaciones:'',
-        fi6_hombres:0,
-        fi6_mujeres:0
+        fi5_ubicacion : null,
+        fi5_capacidad_dependencia :null ,
+        /*fi5_sauna_sec_vapor : null,*/
+        fi5_enfermedades :null ,
+        /*fi5_limpieza : null,*/
+        fi5_pisos :null ,
+        fi5_cielo : null,
+        fi5_zocalo :null ,
+        fi5_iluminacion :null ,
+        fi5_abastecimiento :null ,
+        /*fi5_red_desague :null ,*/
+        fi5_ventilacion :null ,
+        fi5_guardaropa :null ,
+        fi5_serv_higienico :null ,
+        /*fi5_artefactos :null ,
+        fi5_puerta_auto : null,*/
+        fi5_ducha :null ,
+        /*fi5_rejilla_piso :null ,
+        fi5_rejilla_suf : null,*/
+        fi5_puerta_ventana :null ,
+       /* fi5_puerta_cierre : null,*/
+        fi5_muebles :null ,
+        fi5_maquinarias :null ,
+       /* fi5_estado_maquinaria :null ,
+        fi5_term_res : null,
+        fi5_valvulas :null ,
+        fi5_caldero :null ,*/
+        fi5_aseo_maquinaria :null ,
+        /*fi5_seguridad : null,
+        fi5_polvo : null,
+        fi5_verif_presion :null ,
+        fi5_desinf_maq : null,*/
+        fi5_desinfectante :null ,
+       /* fi5_temp_agua :null ,
+        fi5_certificado_tratamiento :null ,
+        fi5_certificado_tratamiento_otro:null ,*/
+        fi5_salud_personal :null ,
+        fi5_habitos :null ,
+        fi5_aseo_personal :null ,
+        fi5_depositos_ropa :null ,
+        /*fi5_ausensia_mat :null ,
+        fi5_extin_botiq : null,*/
+        fi5_recomendacion:null ,
+        fi5_total :null ,
+        fi5_estado:null ,
+        fi5_autorizados : null,
+        fi5_adecuados :null 
     };
 
     $scope.ficha_numero={
@@ -1723,9 +1733,9 @@ function ($http,CONFIG,$scope,Ficha4, $route, toastr,EmpTra,Funcionarios,$routeP
     
     $scope.submit = function(b)
     {
-        $scope.ficha6.fun_id=fun_id;
-        $scope.ficha6.et_id=et_id;
-        $scope.ficha6.fi_estado='INSPECCIONADO';
+        $scope.ficha5.fun_id=fun_id;
+        $scope.ficha5.et_id=et_id;
+        $scope.ficha5.fi_estado='INSPECCIONADO';
 
         /* if ($scope.ficha2.fi2_exibe_carnes!=null) {
           $scope.ficha2.fi_exibe_carne=true;
@@ -1734,14 +1744,14 @@ function ($http,CONFIG,$scope,Ficha4, $route, toastr,EmpTra,Funcionarios,$routeP
           $scope.ficha2.fi_exibe_certificado=true;
          } */
         
-        $scope.ficha6.fi_foco_insalubridad=$scope.ficha6.fi6_foco_insalubridad;
-        $scope.ficha6.fi_fecha_realizacion= fecha;
-        $scope.ficha6.fi6_fecha_realizacion=fecha;
-        $scope.ficha6.fi_observacion=$scope.ficha6.fi6_observacion;
 
-        $scope.ficha6.fi_latitud=$scope.ficha_numero.fi_latitud;
-        $scope.ficha6.fi_longitud=$scope.ficha_numero.fi_longitud;
-      Ficha6.save($scope.ficha6).$promise.then(function(data)
+        $scope.ficha5.fi_foco_insalubridad=$scope.ficha6.fi5_ubicacion;
+        $scope.ficha5.fi_fecha_realizacion= fecha;
+        $scope.ficha5.fi6_fecha_realizacion=fecha;
+        $scope.ficha5.fi_observacion=$scope.ficha5.fi5_recomendacion;
+    
+      Ficha5.save($scope.ficha5).$promise.then(function(data)
+
       {
         console.log("------GUARDADO.---------",data);
         if(data.msg)
@@ -1752,7 +1762,7 @@ function ($http,CONFIG,$scope,Ficha4, $route, toastr,EmpTra,Funcionarios,$routeP
           toastr.success('FICHA REGISTRADA CORRECTAMENTE');
           /*$route.reload();*/
            $timeout(function() {
-            $location.path('/inspeccion/categoria/crear/'+data.ficha6_inspeccion.ficha_inspeccion.fi_id+'/'+et_id);
+            $location.path('/inspeccion/categoria/crear/'+data.ficha5_inspeccion.ficha_inspeccion.fi_id+'/'+et_id);
           },10);
         }
       },function () {
