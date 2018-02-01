@@ -682,8 +682,14 @@ $scope.initMap = function(){
     var latitud_del_establecimiento=null;
     var longitud_del_establecimiento=null;
     VerParaEditar.get({ess_id:ess_id},function(data){
-        $scope.establecimiento=data.establecimiento.est_sol;        
+        $scope.establecimiento=data.establecimiento.est_sol;
+        $scope.imagen=data.establecimiento.imagen;
+        $scope.establecimiento.ie_enlace=data.establecimiento.imagen.ie_enlace;
+        $scope.establecimiento.ie_nombre=data.establecimiento.imagen.ima_nombre;
         $scope.establecimiento.ess_numero=$scope.establecimiento.ess_numero*1;
+        $scope.url_salvado=$scope.imagen.ie_enlace;
+        $scope.nombre_salvado=$scope.imagen.ima_nombre
+
         
         if(data.establecimiento.pjuridica){
           $scope.pjuridica=data.establecimiento.pjuridica;
@@ -691,6 +697,16 @@ $scope.initMap = function(){
           $scope.persona=data.establecimiento.persona;
         }
         
+        /*para horas de atencion del establecimiento*/
+        var horas_ini=$scope.establecimiento.ess_hora_ini.split(':');
+        $scope.ehi_h=horas_ini[0]*1;
+        $scope.ehi_m=horas_ini[1]*1;
+         var horas_ini=$scope.establecimiento.ess_hora_fin.split(':');
+        $scope.ehc_h=horas_ini[0]*1;
+        $scope.ehc_m=horas_ini[1]*1;
+        console.log('---------------------------horas iniciales de atencion del establecimient',horas_ini);
+
+
         $scope.items=data.establecimiento.rubros;
         $scope.ver_zonas($scope.establecimiento.mun_id);
         latitud_del_establecimiento=$scope.establecimiento.ess_latitud;
@@ -857,37 +873,17 @@ $scope.initMap = function(){
   }
 
     
-
-  //   $scope.establecimiento = {
-  //   zon_id:null,
-  //   ess_razon_social:null,
-  //   ess_telefono:0,
-  //   ess_correo_electronico:'',
-  //   ess_tipo:'',
-  //   ess_avenida_calle:'',
-  //   ess_numero:0,
-  //   ess_stand:"",
-  //   ess_latitud:0,
-  //   ess_longitud:0,
-  //   ess_altitud:0,
-  //   ess_hora_ini:"",
-  //   ess_hora_fin:"",
-  //   ie_nombre:"centro.png",
-
-  //   ie_enlace: "./img-est",
-
-  //   ie_tipo:"fotografia",
-  //   emp_nit:"",
-  //   emp_url_nit:"",
-  //   emp_url_licencia:""
-  // };
-
-  /*
-  FALTA LLENAR EMP_NIT
-  URL_LICENCIA
-  TRA_ID
-  */
-    
+    $scope.hora=function(a,b){
+    if(a==1)
+      $scope.ehi_h=b;
+    if(a==2)
+      $scope.ehi_m=b;
+    if(a==3)
+      $scope.ehc_h=b;
+    if(a==4)
+      $scope.ehc_m=b;
+    console.log("supuesta hora",$scope.ehi_h,':',$scope.ehi_m, '------',$scope.ehc_h,':',$scope.ehc_m);
+  };
 
 
   $scope.patternCadena = /^[a-zA-ZñÑáéíóúÁÉÍÓÚ .]*$/;
@@ -907,10 +903,10 @@ $scope.initMap = function(){
       vector:$scope.items
     };
     console.log('EL OBJETO QUE SE VA A CREAR', $scope.todo);
-      EstabSols.save($scope.todo).$promise.then(function(data){
+      EstabSols.update({ess_id:ess_id},$scope.todo).$promise.then(function(data){
         if(data.status) {
-          $scope.ajustes.pagina.success = "Establecimiento añadido correctamente";
-          toastr.success('Establecimiento añadido correctamente');
+          $scope.ajustes.pagina.success = "Establecimiento editado correctamente";
+          toastr.success('Establecimiento editado correctamente');
           $timeout(function() {
             $location.path('/establecimientossol');
         },100);

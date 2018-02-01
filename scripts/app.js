@@ -825,7 +825,7 @@ angular.module("adminApp", ["authService", "ngRoute", "ngResource", "satellizer"
     templateUrl: 'templates/personatramite/boleta.html',
     controller: 'BoletaCtrl',
     data: {
-      authorized: [ROLES.ADMIN_USACSIA.ROL, ROLES.CAJERO.ROL]
+      authorized: [ROLES.ADMIN_USACSIA.ROL, ROLES.CAJERO.ROL, ROLES.ADMIN_CARNET.ROL]
     }
   })
 

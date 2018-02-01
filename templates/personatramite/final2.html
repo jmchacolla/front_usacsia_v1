@@ -51,7 +51,7 @@
               <span ng-show="sortType == 'per_nombres' && sortReverse" class="glyphicon glyphicon-chevron-down"></span></a>
             </th>
             <th class="text-primary" >Ocupación</th>
-            <th class="text-primary" ng-if="user.rol_id == '1' || user.rol_id == '2'">Aprobación</th>
+            <th class="text-primary" ng-if="user.rol_id == '1' || user.rol_id == '2' || user.rol_id == '7'">Aprobación</th>
             <th class="text-primary" >Ver</th>
            <!--  <th>Editar</th>
             <th>Dar de baja</th> -->
@@ -62,7 +62,7 @@
               <td>{{pt.per_apellido_primero + " " + pt.per_apellido_segundo}}</td>
               <td>{{pt.per_nombres}}</td>
               <td>{{pt.per_ocupacion}}</td>
-              <td ng-if="user.rol_id == '1' || user.rol_id == '2'">
+              <td ng-if="user.rol_id == '1' || user.rol_id == '2' || user.rol_id == '7'">
                 <!-- BOTON PARA CUADROS MODALES -->
                 <button ng-disabled="pt.pt_estado_tramite == 'APROBADO'" class="btn btn-xs btn-warning glyphicon glyphicon-check" data-toggle="modal" ng-click="rec(pt.pt_id,pt.per_id)" data-target="#miCuadroModal1" title="Recepción" >Aprobación</button>
                   <!--CUADRO MODAL-->

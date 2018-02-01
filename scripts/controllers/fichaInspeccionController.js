@@ -1659,7 +1659,7 @@ function ($http,CONFIG,$scope,Ficha4, $route, toastr,EmpTra,Funcionarios,$routeP
   console.log("__HORA__",fecha);
 
 
-  $scope.ficha6 = {
+  $scope.ficha5 = {
 
         et_id :null,
         fun_id :null,
@@ -1673,6 +1673,9 @@ function ($http,CONFIG,$scope,Ficha4, $route, toastr,EmpTra,Funcionarios,$routeP
         fi_exibe_carne:false,
         fi_extinguidor:'',
         fi_botiquin:'',
+        fi_latitud:null,
+        fi_longitud:null,
+
         
         fi5_ubicacion : null,
         fi5_capacidad_dependencia :null ,
@@ -1749,7 +1752,8 @@ function ($http,CONFIG,$scope,Ficha4, $route, toastr,EmpTra,Funcionarios,$routeP
         $scope.ficha5.fi_fecha_realizacion= fecha;
         $scope.ficha5.fi6_fecha_realizacion=fecha;
         $scope.ficha5.fi_observacion=$scope.ficha5.fi5_recomendacion;
-    
+        $scope.ficha5.fi_latitud=$scope.ficha_numero.fi_latitud
+        $scope.ficha5.fi_longitud=$scope.ficha_numero.fi_longitud;
       Ficha5.save($scope.ficha5).$promise.then(function(data)
 
       {

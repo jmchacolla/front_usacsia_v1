@@ -34,7 +34,7 @@
                                     <div class="col-md-4">
                                         <div class="well well-sm">
                                             <div ng-if="thumbnail.dataUrl == ''">
-                                                <img ng-src="./images/centro.png" align="center" class="img-responsive img-thumbnail"/>
+                                                <img ng-src="{{url_salvado}}/{{nombre_salvado}}" align="center" class="img-responsive img-thumbnail"/>
                                             </div>
                                             <div ng-if="thumbnail.dataUrl != ''" style="height:190px !important; overflow:auto;">
                                                 <img ng-src="{{ thumbnail.dataUrl }}" align="center" class="img-responsive img-thumbnail"/>
@@ -93,7 +93,7 @@
                                                 </div>
                                                 <br>
 
-                                                <!-- <div class="row">
+                                                <div class="row">
                                                     <div class="col-md-6">
                                                         <label for="nrs" class="control-label text-primary">Horario de atención: <strong class="fg_red">*</strong></label>
                                                         <div class="form-group">
@@ -136,7 +136,7 @@
                                                             <span ng-show="estForm.ehch.$error.pattern || estForm.ehcm.$error.pattern">Solo se admiten números.</span>
                                                         </span>
                                                     </div>
-                                                </div> -->
+                                                </div>
                                                 <br/>
 
                                                  <label for="tipo" class="control-label text-primary">Tipo: <strong class="fg_red">*</strong></label>
@@ -250,7 +250,7 @@
                                     
                                     <div class="col-md-12 text-center">
                                         <br>
-                                        <button class="btn btn-primary text-center" ng-click="initMap()">GENERAR POSICIÓN</button>
+                                        <button class="btn btn-primary text-center" ng-click="initMap()">EDITAR POSICIÓN</button>
                                     </div>
                                 </div>
                             </div>   
