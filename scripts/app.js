@@ -532,6 +532,16 @@ angular.module("adminApp", ["authService", "ngRoute", "ngResource", "satellizer"
       authorized: [ROLES.ADMIN_USACSIA.ROL,ROLES.ADMIN_CARNET.ROL]
     }*/
   })
+
+
+  .when('/estasblecimiento_solicitante/editar/:ess_id',{
+   templateUrl:'templates/establecimiento_solicitante/editar.html',
+   controller: 'EditarEstablecimientoSolCtrl',
+    /*data: {
+      authorized: [ROLES.ADMIN_USACSIA.ROL,ROLES.ADMIN_CARNET.ROL]
+    }*/
+  })
+
 //=========================         EMPRESA TRAMITE     =======================================
    //etapa 1 =PENDIENTE
   .when('/lista-solicitantes', {

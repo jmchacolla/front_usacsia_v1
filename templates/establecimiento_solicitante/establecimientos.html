@@ -53,7 +53,7 @@
           <!--<th >Red</th>
           <th class="text-primary text-center" >Municipio</th> -->
           <th class="text-primary text-center" >Ver</th>
-          <!-- <th class="text-primary text-center">Editar</th> -->
+          <th class="text-primary text-center">Editar</th>
           <!-- <th class="text-primary text-center">Borrar</th> -->
         </thead>
         <tbody ng-repeat="establecimiento in establecimientos | orderBy:sortType:sortReverse | filter:ess_razon_social | startFromGrid: currentPage * pageSize | limitTo: pageSize ">
@@ -68,8 +68,11 @@
           <td>{{establecimiento.usa_municipio}}</td>-->
           <!--Ver Establecimiento-->
 
-          <td>
+          <td class="text-center">
             <a class="btn btn-success" href="#/estasblecimiento_solicitante/ver/{{establecimiento.ess_id}}" title="Ver Establecimiento" ><span class="glyphicon glyphicon-file "></span></a>
+          </td>
+          <td class="text-center">
+            <a class="btn btn-danger" href="#/estasblecimiento_solicitante/editar/{{establecimiento.ess_id}}" title="Editar Establecimiento" ><span class="glyphicon glyphicon-pencil "></span></a>
           </td>
 
           <!--Editar establecimiento-->

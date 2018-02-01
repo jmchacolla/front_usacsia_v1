@@ -283,10 +283,29 @@
                                 <textarea name="ob24" ng-model-options="{ updateOn: 'blur' }" rows="6" cols="40" style="resize: vertical;min-height:70px;max-height: 150px;" placeholder="Detalle de la infraestructura" ng-model="ficha6.fi6_observaciones" ></textarea>
                             </div>
                           </div>
-  
-                            <center>
+                          
+
+                          <div ng-controller="RegistrarUbicacionInspeccionCtrl">
+                            <div class="col-md-12 text-center" >
+                                <br>
+                                <button class="btn btn-primary text-center" ng-click="initMap()">GENERAR POSICIÓN</button>
+                            </div>
+                            <div class="panel" ng-if="ver_mapita">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div id="mapa_inspeccion" style="width: 100%; height: 600px;">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <center>           
+                                <button ng-if="ver_mapita" type="submit" data-toggle="modal" ng-click="submit($parent.ficha6)"  class="btn btn-primary" ng-disabled="formficha6.$invalid" ><span class="glyphicon glyphicon-save"></span> GUARDAR FICHA</button>
+                            </center>
+                        </div>
+
+                           <!--  <center>
      
-                  <button type="submit" data-toggle="modal" ng-click="submit($parent.ficha6)"  class="btn btn-primary" ng-disabled="formficha6.$invalid" ><span class="glyphicon glyphicon-save"></span> GUARDAR FICHA</button>
+                  <button type="submit" data-toggle="modal" ng-click="submit($parent.ficha6)"  class="btn btn-primary" ng-disabled="formficha6.$invalid" ><span class="glyphicon glyphicon-save"></span> GUARDAR FICHA</button> -->
              
       </center>
 </div>

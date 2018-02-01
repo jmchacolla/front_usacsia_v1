@@ -664,6 +664,18 @@ angular.module("adminApp")
 }])
 
 
+.factory('AsignarTramiteInspector', ['$resource', 'CONFIG', function ($resource, CONFIG){
+  return $resource(CONFIG.DOMINIO_SERVICIOS+"/")
+}])
+
+.factory('VerParaEditar', ['$resource', 'CONFIG', function ($resource, CONFIG){
+  return $resource(CONFIG.DOMINIO_SERVICIOS+"/ver_para_editar/:ess_id", {ess_id:"@ess_id"}, {
+    update: {method: "PUT", params: {ess_id: "@ess_id"}}
+  })
+}])
+
+
+
 .factory("HoraLoop",function() {
   return {
     reinicio:function(a){

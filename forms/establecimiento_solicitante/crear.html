@@ -1,89 +1,256 @@
-<div class="well well-sm">
-  <div class="panel">
-      <h4 class="text-center text-primary">I. DATOS GENERALES</h4>
-      <hr class="bg-red">
-      <br>
-      <div class="row">
-          <div class="col-md-3">
-              <div class="well well-sm">
-                  <div ng-if="thumbnail.dataUrl == ''">
-                      <img ng-src="./images/perfil.jpg" align="center" class="img-responsive img-thumbnail"/>
-                  </div>
-                  <div ng-if="thumbnail.dataUrl != ''" style="height:190px !important; overflow:auto;">
-                    <img ng-src="{{ thumbnail.dataUrl }}" align="center" class="img-responsive img-thumbnail"/>
-                  </div>
-                  <div class="clearfix">
-                  </div>
-                  <div class="form-group">
-                    <label>Cargar Imagen</label>
-                    <input type="file" name="fileInput" id ="fileInput" class="filestyle" data-buttonText="Find file"  file-model="vista.ima_nombre" onchange="angular.element(this).scope().photoChanged(this.files)" />
-                    <input type="hidden" name="" ng-model="persona.ima_nombre" value="{{persona.ima_nombre}}">
-                    {{vista.ima_enlace}}
-                    <br>
-                  </div> 
-              </div>
-          </div>    
-          <div class="col-md-9">
-              <div class="row">
-                  <div class="col-md-6">
-                      <label class="control-label">Tipo de Documento</label>
-                      <select class="form-control" name="tipo_doc" ng-model="persona.per_tipo_documento" ng-model-options="{ updateOn: 'blur' }" required>
-                          <option value="CI">CARNET DE IDENTIDAD</option>
-                          <option value="PASAPORTE">PASAPORTE</option>        
-                      </select>
-                      <span class="messages" ng-show="addPersona.$submitted || addPersona.tipo_doc.$touched">
-                         <span ng-show="addPersona.tipo_doc.$error.required">El campo es obligatorio.</span>
-                      </span>
-                  </div>
-                  <div class="col-md-6" ng-show="nac">
-                      <div ng-controller="PaisCtrl">
-                          <label class="cotrol-label">Pais</label>    
-                          <select class="form-control" name="nacionalidad" ng-model="persona.per_pais"  ng-options="pais.nac_id as pais.nac_nombre for pais in paises" ng-model-options="{ updateOn: 'blur' }" ng-required="required_p">
-                          </select>
-                          <span class="messages" ng-show="addPersona.$submitted || addPersona.nacionalidad.$touched">
-                              <span ng-show="addPersona.nacionalidad.$error.required">El campo es obligatorio.</span>
+ <div class="row">
+    <div class="col-md-12">
+    <!-- AQUI VAN LAS TABLAS O FORMULARIOS incrustados -->
+    <!-- INICIO -->
+    <div class="well well-sm" style="background-color:#fff;">
+        <div class="panel">
+            <h4 class="text-center text-primary">I. DATOS GENERALES</h4>
+            <hr class="bg-red">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="well well-sm">
+                        <div ng-if="thumbnail.dataUrl == ''">
+                            <img ng-src="./images/centro.png" align="center" class="img-responsive img-thumbnail"/>
+                        </div>
+                        <div ng-if="thumbnail.dataUrl != ''" style="height:190px !important; overflow:auto;">
+                            <img ng-src="{{ thumbnail.dataUrl }}" align="center" class="img-responsive img-thumbnail"/>
+                        </div>
+                        <div class="clearfix">
+                        </div>
+                        <div class="form-group">
+                            <label class="text-primary">Cargar Imagen</label>
+                            <input type="file" name="fileInput" id ="fileInput" class="filestyle" data-buttonText="Find file"  file-model="vista.ie_nombre" onchange="angular.element(this).scope().photoChanged(this.files)" />
+                            <input type="hidden" name="" ng-model="establecimiento.ie_nombre" value="{{establecimiento.ie_nombre}}">
+                            <br>
+                        </div> 
+                    </div>
+                </div>
+
+                <div class="col-md-8">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <label ng-show="persona.per_genero=='M'" for="nombre" class="control-label text-primary">Propietario:</label>
+                                    <label ng-show="persona.per_genero=='F'" for="nombre" class="control-label text-primary">Propietaria:</label>
+                                    <label ng-show="pjuridica!=null" for="nombre" class="control-label text-primary">Empresa Propietaria:</label>
+                                    <p>
+                                        {{persona.per_nombres+" "+persona.per_apellido_primero+" "+persona.per_apellido_segundo}}
+                                    </p>
+                                    <p>
+                                        {{pjuridica.pjur_razon_social}}
+                                    </p>
+                                </div>
+                                <div class="col-md-4">
+                                    <label ng-show="persona!=null" for="nombre" class="control-label text-primary">C.I.:</label>
+                                    <label ng-show="pjuridica!=null" for="nombre" class="control-label text-primary">NIT</label>
+                                    <p>
+                                        {{persona.per_ci+" "+persona.per_ci_expedido}}
+                                        {{pjuridica.pjur_nit}}
+                                    </p>
+                                </div>
+                            </div>
+                            <hr>
+                            <label for="nrs" class="control-label text-primary">Nombre o razón social: <strong class="fg_red">*</strong></label>
+                                 <input type="text" class="form-control" name="nrs" ng-change="nombre_unico(establecimiento.ess_razon_social)" ng-model="establecimiento.ess_razon_social" required placeholder="Nombre del establecimiento">
+                                <span class="messages" ng-show="estForm.$submitted || estForm.nrs.$touched">
+                                    <span ng-show=" estForm.nrs.$error.required">El campo es obligatorio.</span>
+                                    <span ng-show="estForm.nrs.$error.pattern">No se admiten símbolos especiales.</span>
+                                    <span ng-show="existe_nombre">Este nombre ya está en uso.</span>
+                                </span>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="nrs" class="control-label text-primary">Stand:</label>
+                                     <input type="text" class="form-control"  ng-model="establecimiento.ess_stand" placeholder="Numero de Stand">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="nrs" class="control-label text-primary">NIT del Establecimiento:</label>
+                                     <input type="text" class="form-control"  ng-model="establecimiento.emp_nit" placeholder="NIT del establecimiento">
+                                </div>
+                            </div>
+                            <br>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="nrs" class="control-label text-primary">Horario de atención: <strong class="fg_red">*</strong></label>
+                                    <div class="form-group">
+                                        <label for="ehih" class="col-lg-2 control-label">De: </label>
+                                        <div class="col-lg-10">
+                                                <div class="input-group">
+                                                    <input type="number" style="" class="form-control" ng-change="hora(1,ehi_h)" name="ehih" ng-model="ehi_h" placeholder="00" min="0" max="23" required>
+                                                    <span class="input-group-addon" style="background: none;font-weight: bold;">:</span>
+                                                    <input type="number" style="" class="form-control" ng-change="hora(2,ehi_m)" name="ehim" ng-model="ehi_m" placeholder="00" min="0" max="59" required>
+                                                    <span class="input-group-addon">
+                                                        <span class="glyphicon glyphicon-time"></span>
+                                                    </span>
+                                                </div>
+                                        </div>
+                                    </div>
+                                    <span class="messages" ng-show="estForm.$submitted || estForm.ehih.$touched">
+                                        <span ng-show=" estForm.ehih.$error.required">El campo es obligatorio.</span>
+                                    </span>
+                                    <span class="messages" ng-show="estForm.$submitted || estForm.ehim.$touched">
+                                        <span ng-show=" estForm.ehim.$error.required">El campo es obligatorio.</span>
+                                    </span>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="ehc" class="control-label text-primary">&nbsp;<strong class="fg_red"></strong></label>
+                                    <div class="form-group">
+                                        <label for="ehc" class="col-lg-2 control-label">A: </label>
+                                        <div class="col-lg-10">
+                                                 <div class="input-group">
+                                                    <input type="number" style="" class="form-control" ng-change="hora(3,ehc_h)" name="ehch" ng-model="ehc_h" placeholder="00" min="0" max="23" required ng-patern="patternNumero">
+                                                    <span class="input-group-addon" style="background: none;font-weight: bold;">:</span>
+                                                    <input type="number" style="" class="form-control" ng-change="hora(4,ehc_m)" name="ehcm" ng-model="ehc_m" placeholder="00" min="0" max="59" required ng-pattern="patternNumero">
+                                                    <span class="input-group-addon">
+                                                        <span class="glyphicon glyphicon-time"></span>
+                                                    </span>
+                                                </div>
+                                        </div>
+                                    </div>
+                                    <span class="messages" ng-show="estForm.$submitted || estForm.ehch.$touched || estForm.ehcm.$touched">
+                                        <span ng-show=" estForm.ehch.$error.required || estForm.ehcm.$error.required">Los campos son obligatorios.</span>
+                                        <span ng-show="estForm.ehch.$error.pattern || estForm.ehcm.$error.pattern">Solo se admiten números.</span>
+                                    </span>
+                                </div>
+                            </div>
+                            <br/>
+
+                             <label for="tipo" class="control-label text-primary">Tipo: <strong class="fg_red">*</strong></label>
+                                <select class="form-control " name="tipo" ng-model="establecimiento.ess_tipo"  required>
+                                  <option value="">--Elige opcion--</option>
+                                  <option value="PUBLICO">PUBLICO</option>
+                                  <option value="PRIVADO">PRIVADO</option>
+                                </select>
+                                  <span class="messages" ng-show="estForm.$submitted || estForm.tipo.$touched">
+                                      <span ng-show="estForm.tipo.$error.required">El campo es obligatorio.</span>
+                                 </span>
+                                 <br/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <label class="control-label text-primary" for="tipo">Teléfono:</label>
+                        <input type="number" class="form-control" name="telefono" placeholder="Ej: 2262626" ng-model="establecimiento.ess_telefono" ng-model-options="{ updateOn: 'blur' }" min="2000000" max="79999999">
+                        <span class="messages" ng-show="estForm.telefono.$touched">
+                            <span ng-show="estForm.telefono.$error.min">Número de teléfono incorrecto, el número no puede ser menor a 2000000.</span>
+                            <span ng-show="estForm.telefono.$error.max">Número de teléfono incorrecto, el número no puede ser mayor a 79999999.</span>
                         </span>
-                      </div>
-                  </div>
-              </div>
-              <br>
-              <div class="row">
-                  <div class="col-md-4">
-                    <label for="nombre" class="control-label">Nombre: <strong class="fg_red">*</strong></label>
-                    <input class="form-control" name="nombres" type="text" placeholder="Nombre" ng-model="persona.per_nombres" ng-model-options="{ updateOn: 'blur' }" required ng-pattern="patternCadena" autofocus>
-                    <span class="messages" ng-show="addPersona.nombres.$touched">
-                      <span ng-show="addPersona.nombres.$error.required">El campo es obligatorio.</span>
-                      <span ng-show="addPersona.nombres.$error.pattern">No se admiten símbolos especiales o números.</span>
+                </div>
+                    
+                <div class="col-md-4">
+                    <label class="control-label text-primary" for="email">Email:</label>
+                    <input type="email" name="email" class="form-control" placeholder="Ej. micorreo@hotmail.com" ng-model="establecimiento.ess_correo_electronico" ng-model-options="{ updateOn: 'blur' }">
+                    <span class="messages" ng-show="estForm.$submitted || estForm.email.$touched">
+                        <span ng-show="estForm.email.$error.email">Formato de email incorrecto.</span>
                     </span>
-                  </div>
-                  <div class="col-md-4">
-                    <label for="nombre" class="control-label">Apellido paterno: <strong class="fg_red">*</strong></label>
-                    <input class="form-control" name="apellido_primero" type="text" placeholder="Apellido paterno" ng-model="persona.per_apellido_primero" ng-model-options="{ updateOn: 'blur' }" required ng-pattern="patternCadena">
-                    <span class="messages" ng-show="addPersona.$submitted || addPersona.apellido_primero.$touched">
-                      <span ng-show="addPersona.apellido_primero.$error.required">El campo es obligatorio.</span>
-                      <span ng-show="addPersona.apellido_primero.$error.pattern">No se admiten símbolos especiales o números.</span>
+                </div> 
+                <div class="col-md-4">
+                     <label for="sc" class="control-label text-primary">Rubro de la empresa: <strong class="fg_red">*</strong></label>
+                    <select class="form-control " name="sc" ng-change="agregar(subclasificacion.sub_id,subclasificacion)" ng-model="subclasificacion" ng-options="subcla as subcla.sub_nombre for subcla in subcla">
+                    <option value="">--Elige opcion--</option>
+                    </select>
+                    <span class="messages" ng-show="estForm.sc.$touched">
+                        <span ng-show="estForm.sc.$error.required">El campo es obligatorio.</span>
                     </span>
-                  </div>
-                  <div class="col-md-4">
-                    <label for="nombre" class="control-label">Apellido materno: <strong class="fg_red">*</strong></label>
-                    <input class="form-control" name="apellido_segundo" type="text" placeholder="Apellido materno" ng-model="persona.per_apellido_segundo" ng-model-options="{ updateOn: 'blur' }" required ng-pattern="patternCadena">
-                    <span class="messages" ng-show="addPersona.$submitted || addPersona.apellido_segundo.$touched">
-                      <span ng-show="addPersona.apellido_segundo.$error.required">El campo es obligatorio.</span>
-                      <span ng-show="addPersona.apellido_segundo.$error.pattern">No se admiten símbolos especiales o números.</span>
+                </div>         
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-12">
+                     <label for="nombrelab" class="control-label text-primary">Rubro de la empresa: <strong class="fg_red">*</strong></label>                                     
+                    <div class="table-responsive">
+                        <table class="table table-bordered  table-hover">
+                            <tbody ng-repeat="items in items track by $index">
+                                <tr>
+                                    <td>{{items.sub_nombre}}</td>
+                                    <td>
+                                         <button type="submit" ng-click="quitar(items.sub_id,items)" class="btn btn-primary"><span class="glyphicon glyphicon-remove"></span></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <br>
+        <h4 class="text-center text-primary">II. DIRECCIÓN DEL ESTABLECIMIENTO</h4>
+        <hr class="bg-red">
+        <div class="panel">
+            <div class="row">  
+                <div class="col-md-4" ng-controller="MunicipioCtrl">
+                    <label class="control-label text-primary">Municipio: <strong class="fg_red">*</strong></label>
+                    <select class="form-control " name="municipio" ng-model="establecimiento.mun_id"  ng-options="municipio.mun_id as municipio.mun_nombre for municipio in municipios" ng-change="ver_zonas(establecimiento.mun_id)" required>
+                    <option value="">--Elige opcion--</option>
+                    </select>
+                    <span class="messages" ng-show="estForm.$submitted || estForm.municipio.$touched">
+                        <span ng-show="estForm.municipio.$error.required">El campo es obligatorio.</span>
+                   </span>
+                </div> 
+                <div class="col-md-4">
+                  <label class="control-label text-primary">Zona/Comunidad: <strong class="fg_red">*</strong></label>
+                    <select ng-show="!zon" class="form-control " name="zona_comunidad" ng-model="establecimiento.zon_id"  ng-options="zona.zon_id as zona.zon_nombre for zona in zonas" required>
+                    </select>
+                        <span  class="messages" ng-show="estForm.$submitted || estForm.zona_comunidad.$touched">
+                        <span ng-show="estForm.zona_comunidad.$error.required">El campo es obligatorio.</span>
+                        <span ng-show="estForm.zona_comunidad.$error.pattern">Formato introducido es incorrecta.</span>
                     </span>
-                  </div>
-              </div>
-              <br>
-              <br>
-          </div>  
-      </div> <!-- fin class row  -->
-      <br>
-      <h4 class="text-center text-primary">II. DIRECCIÓN</h4>
-      <hr class="bg-red">
-      <br> 
-  </div>     
+                  
+                </div>
+                <div class="col-md-4">
+                    <label class="control-label text-primary">Calle/Avenida: <strong class="fg_red">*</strong></label>
+                    <input type="" class="form-control" id="calleavenida" name="calleavenida" placeholder="Calle/Avenida" ng-model="establecimiento.ess_avenida_calle" ng-model-options="{ updateOn: 'blur' }" required ng-pattern="patternCadenaNumero">
+                    <span class="messages" ng-show="estForm.calleavenida.$touched">
+                        <span ng-show="estForm.calleavenida.$error.required">El campo es obligatorio.</span>
+                        <span ng-show="estForm.calleavenida.$error.pattern">No se admiten símbolos especiales.</span>
+                    </span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4"><!--VALIDAR NUMEROS !!!!!!-->
+                    <label class="control-label text-primary">Número: <strong class="fg_red">*</strong></label>
+                    <input type="number" class="form-control" id="numero" name="numero" placeholder="Número" ng-model="establecimiento.ess_numero" ng-model-options="{ updateOn: 'blur' }" required min="0">
+                    <span class="messages" ng-show="estForm.numero.$touched">
+                        <span ng-show="estForm.numero.$error.required">El campo es obligatorio.</span>
+                    </span>
+                </div>
+                <div class="col-md-4">
+                    <label class="control-label text-primary">Latitud:</label>
+                    <input disabled type="" class="form-control" id="establecimientolatitud" placeholder="Latitud" ng-model="establecimiento.ess_latitud">
+                </div>    
+                <div class="col-md-4">
+                    <label class="control-label text-primary">Longitud:</label>
+                    <input disabled type="" class="form-control" id="establecimientolongitud" placeholder="Longitud" ng-model="establecimiento.ess_longitud">
+                </div>   
+                
+                <div class="col-md-12 text-center">
+                    <br>
+                    <button class="btn btn-primary text-center" ng-click="initMap()">GENERAR POSICIÓN</button>
+                </div>
+            </div>
+        </div>   
+        <div class="panel" ng-if="ver_mapita">
+            <div class="row">
+                <div class="col-md-12">
+                    <div id="mapa" style="width: 100%; height: 600px;">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3 text-center">
+                    <button ng-if="estForm.$invalid" type="submit" class="btn btn-primary" title="Debe llenar todos los campos obligatorios de manera correcta"><span class="glyphicon glyphicon-save"></span> GUARDAR</button>
+                    <button ng-if="estForm.$valid" type="submit" class="btn btn-primary" ng-click="submit(ehih,ehim,ehch,ehcm); vista.enviar();reset(estForm)"title="Debe llenar todos los campos obligatorios de manera correcta"><span class="glyphicon glyphicon-save"></span> GUARDAR</button>
+            </div>    
+        </div>      
+    </div>  
+    
+    <!-- FIN -->
+    <!-- AQUI VAN LOS TABLAS O FORMULARIOS incrustados -->
+    
+    </div>
 </div>
-<p ng-show="$parent.ajustes.pagina.success" class="alert alert-success" role="alert">
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-  {{$parent.ajustes.pagina.success}}
-</p>
+<p ng-show="estForm.$invalid && estForm.$submitted" class="alert alert-danger">Asegúrese de llenar correctamente todos los campos</p>
+<p ng-show="ajustes.pagina.success" class="alert alert-success">{{ajustes.pagina.success}}</p>

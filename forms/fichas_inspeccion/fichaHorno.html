@@ -408,7 +408,7 @@
 
         </div>
            
-           <!--  <div ng-controller="RegistrarUbicacionInspeccionCtrl">
+            <div ng-controller="RegistrarUbicacionInspeccionCtrl">
                 <div class="col-md-12 text-center" >
                     <br>
                     <button class="btn btn-primary text-center" ng-click="initMap()">GENERAR POSICIÓN</button>
@@ -421,18 +421,8 @@
                         </div>
                     </div>
                 </div>
-                 <ng-map center="{{latitud}},{{longitud}}" zoom="16">
-                    <marker position="{{latitud}},{{longitud}}"></marker>
-                </ng-map>
-            </div> -->
-
-           
-
-        <center>
-
-            
-            
-            <button type="submit" data-toggle="modal" ng-click="submit()"  class="btn btn-primary" ng-disabled="formficha4.$invalid" ><span class="glyphicon glyphicon-save"></span> GUARDAR FICHA</button>
-        </center>
-    
+                <center>           
+                    <button ng-if="ver_mapita" type="submit" data-toggle="modal" ng-click="submit()"  class="btn btn-primary" ng-disabled="formficha4.$invalid" ><span class="glyphicon glyphicon-save"></span> GUARDAR FICHA</button>
+                </center>
+            </div>
 </div>
