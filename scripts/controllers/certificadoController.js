@@ -182,6 +182,9 @@ console.log("_______sssssssssssssssssss",$scope.tramitecerestado[6].eta_id);
             var item='';
             var item2='';
             var item3='';
+            var monto='';
+            var monto2='';
+            var monto3='';
             var propietario='';
             var direccion='';
             var gestion='';
@@ -190,10 +193,11 @@ console.log("_______sssssssssssssssssss",$scope.tramitecerestado[6].eta_id);
             var kardex='';
 
             for (var i = $scope.fichac.length - 1; i >= 0; i--) {
-              console.log("este es el i___________",$scope.fichac.length);
+              console.log("este es el i___________",$scope.fichac);
               if (i==0) {
                 clasificacion =$scope.fichac[i].cat_area+''+$scope.fichac[i].cat_categoria;
                 item=$scope.fichac[i].cat_codigo;
+                monto=$scope.fichac[i].cat_monto;
                 
               }
               if (i==1) {
@@ -202,6 +206,8 @@ console.log("_______sssssssssssssssssss",$scope.tramitecerestado[6].eta_id);
                 clasificacion2 =$scope.fichac[j].cat_area+''+$scope.fichac[j].cat_categoria;
                 item=$scope.fichac[i].cat_codigo;
                 item2=$scope.fichac[j].cat_codigo;
+                monto=$scope.fichac[i].cat_monto;
+                monto2=$scope.fichac[j].cat_monto;
               }
               if (i==2) {
                 var j=i--;
@@ -212,8 +218,11 @@ console.log("_______sssssssssssssssssss",$scope.tramitecerestado[6].eta_id);
                 item=$scope.fichac[i].cat_codigo;
                 item2=$scope.fichac[j].cat_codigo;
                 item3=$scope.fichac[k].cat_codigo;
+                monto=$scope.fichac[i].cat_monto;
+                monto2=$scope.fichac[j].cat_monto;
+                monto3=$scope.fichac[k].cat_monto;
               }
-               var textoqr='USACSIA-CERTIFICADO-SANITARIO '+' '+razon_socialq+' - '+$scope.direccion+' - '+$scope.propietario+' - '+$scope.documento+' /Venc: '+vencimiento+' /Fun: '+$scope.ficha.fun_id+' /Krdx: '+$scope.empresatra.empresa.emp_kardex+'/Cat: '+clasificacion+''+item+''+clasificacion2+''+item2+''+clasificacion3+''+item3;
+               var textoqr='USACSIA-CERTIFICADO-SANITARIO '+' '+razon_socialq+' - '+$scope.direccion+' - '+$scope.propietario+' - '+$scope.documento+' /Venc: '+vencimiento+' /Fun: '+$scope.ficha.fun_id+' /Krdx: '+$scope.empresatra.empresa.emp_kardex+'/Cat: '+clasificacion+' '+item+' '+monto+' '+clasificacion2+' '+item2+' '+monto2+' '+clasificacion3+' '+item3+' '+monto3;
               
           
 /*waterlogoSEDES*/
@@ -318,7 +327,7 @@ console.log("_______sssssssssssssssssss",$scope.tramitecerestado[6].eta_id);
                               ],
                               [
                                 {text:'N° DE REGISTRO: ',alignment:'left', bold:true, fontSize:13},
-                                {text:/*'nroregistro'*/ 1245, alignment:'center', bold:true, fontSize:15},
+                                {text:$scope.ficha.fun_id, alignment:'center', bold:true, fontSize:15},
                                 {text:'KARDEX: ',alignment:'left', bold:true, fontSize:13},
                                 {text:$scope.empresatra.empresa.emp_kardex, alignment:'center', bold:true, fontSize:15},
                               ],

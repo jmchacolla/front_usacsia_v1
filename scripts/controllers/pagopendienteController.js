@@ -21,7 +21,7 @@ angular.module("adminApp")
           titulo:'Boleta de pago'
         }
       }
-
+      $scope.vtransaccion=false;
       $http.get(CONFIG.DOMINIO_SERVICIOS+'/verestados/'+et_id+'/'+3).success(function(respuesta){
         $scope.tramitecerestado=respuesta.tramitecerestado;
         console.log("_respuesta__",$scope.tramitecerestado);
@@ -43,13 +43,14 @@ angular.module("adminApp")
         })
     })
 
-    $scope.save=function (et_id, tra_costo) {
+    $scope.save=function (et_id, tra_costo, et_transaccion_banco) {
       // var today=moment().format('DD-MM-YYYY');
       var pago={
               fun_id:fun_id,/*-------debe recoger de la sesion*/
               et_estado_pago:'PAGADO',
               et_estado_tramite:'INICIADO',
-              et_monto:tra_costo
+              et_monto:tra_costo,
+              et_transaccion_banco:et_transaccion_banco
           };
           console.log('+++++++++pago', pago);
           var tramite={et_id:et_id};
@@ -65,8 +66,6 @@ angular.module("adminApp")
           toastr.success('Pago registrado exitosamente');
 
           if (argument.mensaje) {
-
-
               $scope.usuario={
                 usu_identificador:argument.empt.ess_id,
                 usu_tipo:"E",
@@ -135,8 +134,10 @@ angular.module("adminApp")
     var identificador="";
     var textoqr="";
     var fecha_pago=moment($scope.establecimiento.empresa_tramite.et_fecha_ini, "YYYY-MM-DD") .format("DD-MM-YYYY");
-    // var horaC=fecha_cont[1];
-    // var fechaCONT = moment(fecha_cont,"DD-MM-YYYY").format("DD-MM-YYYY");
+    var transaccion="PAGO EN CAJA";
+    if($scope.establecimiento.empresa_tramite.et_transaccion_banco){
+      transaccion=$scope.establecimiento.empresa_tramite.et_transaccion_banco;
+    }
     var firma_acomp = "FIRMA USUARIO";
     var bolivia="";
     var gober="";
@@ -149,7 +150,7 @@ angular.module("adminApp")
       nombre=$scope.establecimiento.propietario.pjur_razon_social;
       identificador= $scope.establecimiento.propietario.pjur_nit;
     }
-    textoqr='CERTIFICADO SANITARIO-'+identificador+'-'+nombre+' '+ $scope.establecimiento.empresa_tramite.et_monto+'-FORMULARIO DE INICIO DE TRÁMITE CERTIFICADO SANITARIO'+fecha_pago;
+    textoqr='CERTIFICADO SANITARIO-'+identificador+'-'+nombre+'-'+ $scope.establecimiento.empresa_tramite.et_monto+'-'+transaccion+'-FORMULARIO DE INICIO DE TRÁMITE CERTIFICADO SANITARIO'+fecha_pago;
     var img2 =convertImgToDataURLviaCanvas("./scripts/escudo-gober.png", function(base64Img) {
       gober =base64Img;
       var img3 =convertImgToDataURLviaCanvas("./scripts/logoSEDES.png", function(base64Img) {
@@ -160,7 +161,14 @@ angular.module("adminApp")
                 pageOrientation: 'landscape',
                 pageSize: 'A5',
                 pageMargins: [ 40,40,40,40 ],
-
+                info: {/*Metadatos*/
+                  title: 'Boleta de pago',
+                  author: 'USACSIA-SEDES LA PAZ',
+                  subject: 'Boleta de Pago',
+                  keywords: 'certificado sanitario',
+                  creator: 'USACSIA',
+                  producer: 'USACSIA',
+                  },
                 content: [
 
                         {
@@ -185,10 +193,11 @@ angular.module("adminApp")
                             table: {
                               widths: [400, 100],
                               body: [
-                                      [{text: 'UNIDAD DE:  CERTIFICADO SANITARIO'}, { rowSpan:6, qr: textoqr, fit:100, alignment: 'right'},],
+                                      [{text: 'UNIDAD DE:  CERTIFICADO SANITARIO'}, { rowSpan:7, qr: textoqr, fit:100, alignment: 'right'}],
                                       [{text: "C.I./NIT:  "+ identificador}],
                                       [{text: 'HEMOS RECIBIDO DEL SR:  '+ nombre}],
                                       [{text: 'LA SUMA DE:  '+ $scope.establecimiento.empresa_tramite.et_monto+" BOLIVIANOS"}],
+                                      [{text: 'N° TRANSACCIÓN BANCARIA:  '+transaccion}],
                                       [{text: 'POR CONCEPTO DE:  FORMULARIO DE INICIO DE TRÁMITE CERTIFICADO SANITARIO'}],
                                       [{text: 'FECHA:  '+fecha_pago}]
                               ],
@@ -199,22 +208,18 @@ angular.module("adminApp")
                               border: [false, false, false, false]
                                
                         },
-
-
-
-                  
                 ]
              };       
 
 
 
         $scope.openPdfF1 = function() {
-          console.log('llego maricas');
+          // console.log('llego maricas');
           pdfMake.createPdf(docDefinition).open();
         };
 
         $scope.downloadPdfF1 = function() {
-          console.log('llego maricas');
+          // console.log('llego maricas');
           pdfMake.createPdf(docDefinition).download();
         };
 
@@ -449,6 +454,7 @@ angular.module("adminApp")
     var FunG = localStorage.getItem("Funcionario");
     var FunG = JSON.parse(FunG);
     var fun_id = FunG.fun_id;
+    $scope.vtransaccion=false;
 
     $http.get(CONFIG.DOMINIO_SERVICIOS+'/verordenpago/'+op_id).success(function(data){
         $scope.emptra=data.emptra;
@@ -468,13 +474,20 @@ angular.module("adminApp")
         EstabSols.get({ess_id:$scope.emptra.ess_id}, function (argument) {
           $scope.establecimiento=argument.establecimiento;
           console.log(' $scope.establecimiento', $scope.establecimiento);
-        })
-
-        $scope.pagarorden=function (data) {
+          if( $scope.establecimiento.propietario.per_id){
+            $scope.propietario=$scope.establecimiento.propietario.per_nombres+' '+$scope.establecimiento.propietario.per_apellido_primero+' '+$scope.establecimiento.propietario.per_apellido_segundo;
+            $scope.identificador=$scope.establecimiento.propietario.per_ci+'  '+$scope.establecimiento.propietario.per_ci_expedido;
+          }
+          if( $scope.establecimiento.propietario.pjur_id){
+            $scope.propietario=$scope.establecimiento.propietario.pjur_razon_social;
+            $scope.identificador= $scope.establecimiento.propietario.pjur_nit;
+          }
+        $scope.pagarorden=function (op_transaccion_banco) {
           var req={
             fun_cajero_id:fun_id,
             op_estado_pago:'PAGADO',
-            op_fecha_pagado:new Date()
+            op_fecha_pagado:new Date(),
+            op_transaccion_banco:op_transaccion_banco
           };
           $http.put(CONFIG.DOMINIO_SERVICIOS+'/orden_pago/'+$scope.ordenpago.op_id,req).success(function(respuesta){
             console.log("_respuesta__",respuesta);
@@ -487,35 +500,235 @@ angular.module("adminApp")
             }
 
           $http.put(CONFIG.DOMINIO_SERVICIOS+'/tramitecer_estado_busca/'+$scope.ordenpago.et_id+'/'+3, req2).success(function(respuesta){
-// =======
-//           $http.put(CONFIG.DOMINIO_SERVICIOS+'/verestados/'+$scope.ordenpago.et_id+'/'+3, req2).success(function(respuesta){
-// >>>>>>> 4935d85cec7c282d466198734bf50ebfbe3be478
+          // =======
+          //           $http.put(CONFIG.DOMINIO_SERVICIOS+'/verestados/'+$scope.ordenpago.et_id+'/'+3, req2).success(function(respuesta){
+          // >>>>>>> 4935d85cec7c282d466198734bf50ebfbe3be478
             console.log("_respuesta__",respuesta);
             $scope.tramitecerestado=respuesta.tramitecerestado;
           });
         }
+        
+        var headers = {
+            fila_0:{
+                col_1:{ text: 'ARANCEL', style: 'tableHeader',colSpan: 2, alignment: 'center' },
+            },
+            fila_1:{
+                col_1:{ text: 'ARANCEL', style: 'tableHeader', alignment: 'center' },
+                col_2:{ text: 'MONTO (Bs.)', style: 'tableHeader', alignment: 'center' }
+            }
+        }
+
+        var tabla1 = [];
+        for (var key in headers){
+            if (headers.hasOwnProperty(key)){
+                var header = headers[key];
+                var row = new Array();
+                row.push( header.col_1 );
+                row.push( header.col_2 );
+                tabla1.push(row);
+            }
+        }
+        for (var key in $scope.pagoa) 
+        {
+            if ($scope.pagoa.hasOwnProperty(key))
+            {
+                var data = $scope.pagoa[key];
+                var row = new Array();
+                row.push( data.pa_descripcion.toString());
+                row.push( data.pa_monto.toString());
+                tabla1.push(row);
+            }
+        }
+
+        var cabeceras = {
+            fila_0:{
+                col_1:{ text: 'SANCIONES', style: 'tableHeader',colSpan: 2, alignment: 'center' },
+            },
+            fila_1:{
+                col_1:{ text: 'ARANCEL', style: 'tableHeader', alignment: 'center' },
+                col_2:{ text: 'MONTO (Bs.)', style: 'tableHeader', alignment: 'center' }
+            }
+        }
+
+        var tabla2 = [];
+        for (var key in cabeceras){
+            if (cabeceras.hasOwnProperty(key)){
+                var header = cabeceras[key];
+                var row = new Array();
+                row.push( header.col_1 );
+                row.push( header.col_2 );
+                tabla2.push(row);
+            }
+        }
+        for (var key in $scope.pagos) 
+        {
+            if ($scope.pagos.hasOwnProperty(key))
+            {
+                var data = $scope.pagos[key];
+                var row = new Array();
+                row.push( data.ps_descripcion.toString());
+                row.push( data.ps_monto.toString());
+                tabla2.push(row);
+            }
+        }
+        var nombre="";
+        var monto=null;
+        var identificador="";
+        var textoqr="";
+        var fecha_pago=moment($scope.ordenpago.op_fecha_pagado, "YYYY-MM-DD") .format("DD-MM-YYYY");
+        var transaccion="PAGO EN CAJA";
+        if($scope.ordenpago.op_transaccion_banco){
+          transaccion=$scope.ordenpago.op_transaccion_banco;
+        }
+        var firma_acomp = "FIRMA USUARIO";
+        var bolivia="";
+        var gober="";
+        var sedes="";
+        if( $scope.establecimiento.propietario.per_id){
+          nombre=$scope.establecimiento.propietario.per_nombres+' '+$scope.establecimiento.propietario.per_apellido_primero+' '+$scope.establecimiento.propietario.per_apellido_segundo;
+        identificador=$scope.establecimiento.propietario.per_ci+'  '+$scope.establecimiento.propietario.per_ci_expedido;
+        }
+        if( $scope.establecimiento.propietario.pjur_id){
+          nombre=$scope.establecimiento.propietario.pjur_razon_social;
+          identificador= $scope.establecimiento.propietario.pjur_nit;
+        }
+        textoqr='CERTIFICADO SANITARIO-'+'COMPROBANTE DE ORDEN DE PAGO-'+$scope.establecimiento.empresatramite.et_numero_tramite+'-'+identificador+'-'+nombre+'-'+ $scope.ordenpago.op_monto_total+'-'+transaccion+'-'+fecha_pago;
+        var img2 =convertImgToDataURLviaCanvas("./scripts/escudo-gober.png", function(base64Img) {
+          gober =base64Img;
+          var img3 =convertImgToDataURLviaCanvas("./scripts/logoSEDES.png", function(base64Img) {
+            sedes =base64Img;
+
+              var docDefinition = {
+                      pageMargins: [30, 10, 30, 10],
+                      pageOrientation: 'landscape',
+                      pageSize: 'A5',
+                      info: {/*Metadatos*/
+                        title: 'Boleta de pago',
+                        author: 'USACSIA-SEDES LA PAZ',
+                        subject: 'Boleta de Pago',
+                        keywords: 'certificado sanitario',
+                        creator: 'USACSIA',
+                        producer: 'USACSIA',
+                        },
+
+                      // footer: function(currentPage, pageCount) {
+                      //     return { text:'Pagina '+ currentPage.toString() + ' de ' + pageCount, alignment: 'center',margin:[0,30,0,0] };
+                      // },
+                      content: [
+                          {
+                            image: gober, width: 68, height: 73
+                          },
+                          {
+                            image: sedes, width: 35, height: 55, alignment:'right', absolutePosition:{x:450, y:30}
+                          },
+                          {
+                            text: "GOBIERNO AUTONOMO DEPARTAMENTAL DE LA PAZ\nSERVICIO DEPARTAMENTAL DE SALUD\nUNIDAD DE SALUD AMBIENTAL CONTROL SANITARIO E INOCUIDAD ALIMENTARIA\nCAJA RECAUDADORA DE USACSIA",
+                            alignment: 'center', fontSize:8, absolutePosition:{x:80, y:40}
+                          },
+                          {text: 'REVISADO', bold: true, fontSize:10 , absolutePosition:{x:110, y:370}},
+                          {text: 'FIRMA USUARIO', bold: true, fontSize:10 , absolutePosition:{x:400, y:370}},
+                          {
+                            text: "COMPROBANTE DE ORDEN DE PAGO\n\n",
+                            alignment: 'center', bold: true
+                          },
+                          {
+                              table: {
+                                widths: [400, 100],
+                                body: [
+                                        [{text: 'UNIDAD DE:  CERTIFICADO SANITARIO', fontSize:9}, { rowSpan:7, qr: textoqr, fit:100, alignment: 'right'}],
+                                        [{text: "C.I./NIT:  "+ identificador, fontSize:9}],
+                                        [{text: 'HEMOS RECIBIDO DEL SR:  '+ nombre, fontSize:9}],
+                                        [{text: 'LA SUMA DE:  '+ $scope.ordenpago.op_monto_total+" BOLIVIANOS", fontSize:9}],
+                                        [{text: 'N° TRANSACCIÓN BANCARIA:  '+transaccion, fontSize:9}],
+                                        [{text: 'POR CONCEPTO DE:  FORMULARIO DE INICIO DE TRÁMITE CERTIFICADO SANITARIO', fontSize:9}],
+                                        [{text: 'FECHA:  '+fecha_pago, fontSize:9}]
+                                ],
+
+                              } ,
+                                layout: 'noBorders',
+                                border: [false, false, false, false]
+                                 
+                          },
+                          {
+                            table:{
+                              withs:[400, 400],
+                              body:[
+                                      [
+                                        {
+                                          table: {
+                                              widths: [ '*', '*'],
+                                              headerRows: 2,
+                                              body: tabla1
+                                          }, fontSize:9
+                                        },
+                                        {
+                                          table: {
+                                              widths: [ '*', '*'],
+                                              headerRows: 2,
+                                              body: tabla2
+                                          }, fontSize:9
+                                        }
+                                      ],
+                              ]
+                            },
+                            layout: 'noBorders',
+                            border: [false, false, false, false],
+                            alignment:'center'
+
+                          }
+                      ],
+
+              }
+
+
+
+              $scope.openOrdenPDF=function (data) {
+                console.log('llego maricas');
+                pdfMake.createPdf(docDefinition).open();
+              };
+              $scope.downloadOrdenPDF = function() {
+                console.log('llego maricas');
+                pdfMake.createPdf(docDefinition).download();
+              };
+          });//-----img3
+        });//----img2
+         function convertImgToDataURLviaCanvas(url, callback, outputFormat) {
+            var img = new Image();
+            img.crossOrigin = 'Anonymous';
+            img.onload = function() {
+              var canvas = document.createElement('CANVAS');
+              var ctx = canvas.getContext('2d');
+              var dataURL;
+              canvas.height = this.height;
+              canvas.width = this.width;
+              ctx.drawImage(this, 0, 0);
+              dataURL = canvas.toDataURL(outputFormat);
+              callback(dataURL);
+              canvas = null;
+            };
+            img.src = url;
+        };
+
+
+        })//-----/EstabSols
+
     });
     
-    $scope.openOrdenPDF=function (data) {
-      console.log('llego maricas');
-      pdfMake.createPdf(docDefinition).open();
-    };
-    $scope.downloadOrdenPDF = function() {
-      console.log('llego maricas');
-      pdfMake.createPdf(docDefinition).download();
-    };
 
 
 
 
-    var docDefinition = {
+
+
+
+/*    var docDefinition = {
                 
                 pageOrientation: 'landscape',
                 pageSize: 'A5',
                 pageMargins: [ 30, 10, 30, 10 ],
 
                 content: [
-
+*/
                 //   {
                 //   table: {
                 //   widths: [110, 310, 100],
@@ -555,7 +768,7 @@ angular.module("adminApp")
                 //       fit:50,
                 //       alignment: 'right'
                 //     },
-                {
+               /* {
                    text: "C.I./NIT:  "+'identificador', fontSize: 12, alignment: 'right'
                 },
                 {
@@ -594,29 +807,29 @@ angular.module("adminApp")
                             table: {
                             widths: [130, 130, 130,130],
                             body: [
-                                  ['\n \n',''/*,'',''*/],
-                                  ['\n \n',''/*,'\n\n',''*/],
-                                  ['',''/*,'\n\n',''*/],                                  
-                                  [{text: 'REVISADO', bold: true, alignment: 'center'},
-                                  {text: 'FIRMA USUARIO', bold: true,alignment: 'center'}/*,{text: '', bold: true,alignment: 'center'},{text: '', bold: true, alignment: 'center' }*/]
-                              ]
-                            },
-                            layout: 'noBorders',
-                            style: 'cuerpo1',
-                            border: [true, false, true, true]
-                          }
-                        ],
-                      ],
-                      style: 'cuerpo' 
-                    }     
-                },
+//                                  ['\n \n',''/*,'',''*///],
+//                                   ['\n \n',''/*,'\n\n',''*/],
+//                                   ['',''/*,'\n\n',''*/],                                  
+//                                   [{text: 'REVISADO', bold: true, alignment: 'center'},
+//                                   {text: 'FIRMA USUARIO', bold: true,alignment: 'center'}/*,{text: '', bold: true,alignment: 'center'},{text: '', bold: true, alignment: 'center' }*/]
+//                               ]
+//                             },
+//                             layout: 'noBorders',
+//                             style: 'cuerpo1',
+//                             border: [true, false, true, true]
+//                           }
+//                         ],
+//                       ],
+//                       style: 'cuerpo' 
+//                     }     
+//                 },
 
 
 
                   
-                ]
-             };       
-
+//                 ]
+//              };       
+// */
 
 
 }])

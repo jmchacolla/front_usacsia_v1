@@ -1,4 +1,4 @@
-﻿'use strict';
+'use strict';
 angular.module("adminApp", ["authService", "ngRoute", "ngResource", "satellizer", "toastr", "platypus.tabs", 'ngMap', 'vcRecaptcha','angular.filter', 'angularMoment'])
 
 .config(['$routeProvider', '$authProvider', 'CONFIG', 'ROLES', function ($routeProvider, $authProvider, CONFIG, ROLES){
@@ -1081,8 +1081,21 @@ angular.module("adminApp", ["authService", "ngRoute", "ngResource", "satellizer"
     templateUrl: 'templates/caja/recaudacion.html',
     controller: 'RecaudacionCajaCtrl'
   })
-
-
+  //crear familiar
+  .when('/persona/createF/:per_id', {
+    templateUrl: 'forms/persona/persona_fam.html',
+    controller: 'CreatePerFamiliarCtrl',
+    data: {
+      authorized: [ROLES.ADMIN_USACSIA.ROL, ROLES.ADMIN_CARNET.ROL]
+    }
+  })
+  .when('/personas/familiares/:per_id', {
+    templateUrl: 'templates/familiar/ver_fam.html',
+    controller: 'VerFamPersonaCtrl',
+    data: {
+      authorized: [ROLES.ADMIN_USACSIA.ROL, ROLES.ADMIN_CARNET.ROL]
+    }
+  })
 
 
 

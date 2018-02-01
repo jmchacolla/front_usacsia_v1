@@ -27,15 +27,13 @@
             </div>
             </div>
         </div>
+
+          <h4>
+            Seleccione un municipio para desplegar las zonas
+          </h4>
+
         <div class="row">
-            <div class="col-md-6">
-                <h3 class="text-primary">
-                   Nueva Zona &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                   <a href="#/zona/crear" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> AGREGAR</a>
-                </h3>
-                <hr>
-            </div>
-            <div class="col-md-4" ng-controller="MunicipioCtrl">
+        <div class="col-md-4" ng-controller="MunicipioCtrl">
               <label class="control-label">Municipio: <strong class="fg_red">*</strong></label>
               <select class="form-control " name="municipio" ng-model="persona.mun_id"  ng-options="municipio.mun_id as municipio.mun_nombre for municipio in municipios" ng-change="ver_zonas(persona.mun_id)" required>
               <option value="">--Elige opcion--</option>
@@ -43,7 +41,15 @@
               <span class="messages" ng-show="addPersona.$submitted || addPersona.municipio.$touched">
                   <span ng-show="addPersona.municipio.$error.required">El campo es obligatorio.</span>
              </span>
-        </div>
+            </div>
+            <div class="col-md-6">
+                <h3 class="text-primary">
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Nueva Zona 
+                   <a href="#/zona/crear" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> AGREGAR</a>
+                </h3>
+                <hr>
+            </div>
+            
         </div>
         <br>
         <div class="row" >
@@ -60,85 +66,96 @@
                         <th >Macrodistrito</th>
                         <th >Distrito</th>
                         <th >Zona</th> 
-                       <!--  <th >Editar</th> 
-                        <th >Eliminar</th>  -->
+                         <th >Editar</th> 
+                       <th >Eliminar</th> 
                     </thead>
-                    <tbody ng-repeat="zonas in zonas | orderBy:sortType:sortReverse | filter:searchText">
+                    <tbody ng-repeat="zona in zonas | orderBy:sortType:sortReverse | filter:searchText">
                       <tr>
-                        <td>{{zonas.zon_macrodistrito | uppercase}}</td>
-                        <td>{{zonas.zon_distrito | uppercase}}</td>
-                        <td>{{zonas.zon_nombre | uppercase}}</td>
-                        <!-- <td>
-                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#miCuadroModalEditar" ng-click="get_id(parasito.par_id, parasito.par_nombre,parasito.par_descripcion,parasito.par_clasificacion)" title="Editar">
+                        <td>{{zona.zon_macrodistrito | uppercase}}</td>
+                        <td>{{zona.zon_distrito | uppercase}}</td>
+                        <td>{{zona.zon_nombre | uppercase}}</td>
+                        <td>
+                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#miCuadroModalEditar" ng-click="get_id(zona.zon_id, zona.zon_nombre,zona.zon_macrodistrito,zona.zon_distrito,zona.mun_id)" title="Editar">
                               <span class="glyphicon glyphicon-pencil"></span>
-                            </button> -->
+                            </button>
                             <!--CUADRO MODAL EDITAR-->
-                            <!-- <div id="miCuadroModalEditar" class="modal fade" role="dialog" tabindex="-1">
+                            <div id="miCuadroModalEditar" class="modal fade" role="dialog" tabindex="-1">
                               <div class="modal-dialog">
                                 <div class="modal-content">
                                   <div class="modal-header bg-red">
                                     <button type="button" class="close" data-dismiss="modal">×</button>
-                                    <h4 class="modal-title fg-white">EDITAR PARASITO</h4>
+                                    <h4 class="modal-title fg-white">EDITAR ZONA</h4>
                                   </div>
                                   <div class="modal-body lead text-center">
                                     <br>
                                     <div class="well well-sm">
-                                        <strong>{{parasito.par_nombre}}</strong>
+                                        <strong>{{zon_nombre}}</strong>
                                         <div class="panel">
                                             <div class="panel-body">
-                                                <div class="row">
+                                                <!-- <div class="row">
+                                                
                                                     <div class="form-group col-md-12">
                                                         <label for="nomc">Nombre:</label>
                                                         <input name="nomc" type="" class="form-control" id="" ng-model="nombre">
-                                                    </div>
-                                                </div>
+                                                    </div> 
+                                                </div>-->
                                                 <div class="row">
-                                                    <div class="form-group col-md-12">
+                                                    <label class="control-label ">Macrodistrito:</label>
+                                                    <input type="" class="form-control"  name="macro" ng-model="zon_macrodistrito" required>
+                                                   <!--  <div class="form-group col-md-12">
                                                         <label for="nomc" class="control-label">Descripción:</label>
                                                         <textarea class="form-control" style="resize: vertical;min-height:100px;max-height: 150px;" ng-model="descripcion"></textarea>
-                                                    </div>
+                                                    </div> -->
                                                 </div>
                                                 <div class="row">
-                                                    <div class="form-group col-md-12">
+                                                  <label class="control-label ">Distrito:</label>
+                                                  <input type="" class="form-control" name="dist" ng-model="zon_distrito">
+                                                    <!-- <div class="form-group col-md-12">
                                                         <label for="nomc" class="control-label">Clasificación:</label>
                                                         <input name="nomc" type="" class="form-control" id="" ng-model="clasificacion">
-                                                    </div>
+                                                    </div> -->
                                                 </div>
+                                                <div class="row">
+                                                  <label for="sevref" class="control-label ">Nombre de Zona:<strong class="fg_red"> *</strong></label>
+                                                  <input  type="" class="form-control" name="zon" ng-model="zon_nombre">
+                                                </div>
+
                                             </div>
                                         </div>
                                     </div>
                                   </div>
                                   <div class="modal-footer">
-                                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="editar(nombre,descripcion,clasificacion)"><span class="glyphicon glyphicon-save"></span> GUARDAR</button>
-                                    <button type="button" class="btn btn-danger" data-dismiss="modal">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">
                                         <span class="glyphicon glyphicon-remove"></span>
                                         CANCELAR</button>
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="editar(zon_macrodistrito,zon_distrito,zon_nombre)"><span class="glyphicon glyphicon-save"></span> GUARDAR</button>
 
                                   </div>
                                   
                                 </div>
                               </div>
-                            </div> -->
+                            </div>
                             <!--FIN CUADRO MODAL-->                                        
-                       <!--  </td>
+                        </td>
+                       
                         <td>
-                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#miCuadroModalEliminar" ng-click="get_id1(parasito.par_id, parasito.par_nombre)" title="Eliminar">
+                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#miCuadroModalEliminar" ng-click="get_id(zona.zon_id, zona.zon_nombre,zona.zon_macrodistrito,zona.zon_distrito,zona.mun_id)" title="Eliminar">
                               <span class="glyphicon glyphicon-trash"></span>
                             </button>
-                             -->
+                            
                             <!--CUADRO MODAL ELIMINAR-->
-                            <!-- <div id="miCuadroModalEliminar" class="modal fade" role="dialog" tabindex="-1">
+                            <div id="miCuadroModalEliminar" class="modal fade" role="dialog" tabindex="-1">
                               <div class="modal-dialog">
                                 <div class="modal-content">
                                   <div class="modal-header bg-red">
                                     <button type="button" class="close" data-dismiss="modal">×</button>
-                                    <h4 class="modal-title fg-white">ELIMINAR PARÁSITO</h4>
+                                    <h4 class="modal-title fg-white">ELIMINAR ZONA</h4>
                                   </div>
                                   <div class="modal-body lead text-center">
-                                    ¿Esta seguro que desea eliminar este Parásito?
+                                    ¿Esta seguro que desea eliminar esta zona?
                                     <br>
                                     <div class="well well-sm">
-                                        <strong>{{nombre}}</strong>
+                                        <strong>{{zon_nombre}}</strong>
                                     </div>
                                   </div>
                                   <div class="modal-footer">
@@ -149,7 +166,7 @@
                                   </div>
                                 </div>
                               </div>
-                            </div> -->
+                            </div>
                             <!--FIN CUADRO MODAL-->
                         <!-- </td> -->
 

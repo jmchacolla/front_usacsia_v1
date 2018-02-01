@@ -56,25 +56,25 @@ angular.module("adminApp")
       var emptr={
                 ess_id:persona.ess_id,
                 fun_id:fun_id, 
-                et_tipo_tramite:'RENOVACION'
+                et_tipo_tramite:'RENOVACION',
+                tra_id:2
               };
 
       $scope.ess_id=emptr.ess_id;
       if (persona.et_estado_pago=='VENCIDO') {
-        EmpresaTramite.save(emptr).promise.then(function (argument) {
-          console.log('et_id------', argument.et_id);
-          if (argument.msg) {
+        EmpresaTramite.save(emptr).$promise.then(function (argument) {
+          console.log('et_id------', argument.empt.et_id);
+          if (argument.mensaje) {
             toastr.success('Generando nuevo trámite');
-
-            
             $timeout(function() {
-                $location.path('/boleta-ces/'+argument.et_id);
+                $location.path('/boleta-ces/'+argument.empt.et_id);
             },1000);
           }
         });
       }
       if(!persona.et_vigencia_documento|| persona.et_estado_tramite !='APROBADO')
       {
+          console.log('akiiiiiiiiiiii');
         $timeout(function() {
             $location.path('/boleta-ces/'+persona.et_id);
         },1000);
@@ -87,13 +87,13 @@ angular.module("adminApp")
       if(persona.et_estado_tramite=='APROBADO'&& c<=30)
       {   console.log("_____ENTRA AL IF DE APROBADO");
         
-          EmpresaTramite.save(emptr).promise.then(function (argument) {
-            console.log('et_id------', argument.et_id);
-            if (argument.msg) {
+          EmpresaTramite.save(emptr).$promise.then(function (argument) {
+            console.log('et_id------', argument.empt.et_id);
+            if (argument.mensaje) {
               toastr.success('Generando nuevo trámite');
              
               $timeout(function() {
-                  $location.path('/boleta-ces/'+argument.et_id);
+                  $location.path('/boleta-ces/'+argument.empt.et_id);
               },1000);
             }
           })
@@ -925,7 +925,7 @@ console.log("propietario natural  ____",$scope.propietario);
    $scope.user = {
       rol_id: CONFIG.ROL_CURRENT_USER
     }
-    if ($scope.user.rol_id == 14) {
+    if ($scope.user.rol_id == 1 || $scope.user.rol_id == 14) {
        $scope.ajustes = {
         menu:{
           titulo: 'Gestión de Establecimientos Solicitantes',
@@ -1080,7 +1080,7 @@ console.log("propietario natural  ____",$scope.propietario);
     menu:{
       titulo: 'Gestión de Establecimientos que no cancelaron',
       items:[
-        {nombre:'Establecimientos validados', enlace:'#//lista-pendientes', estilo:'active'}
+        {nombre:'Establecimientos que no cancelaron', enlace:'#/lista-pendientes', estilo:'active'}
       ]
     },
     pagina:{

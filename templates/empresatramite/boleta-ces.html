@@ -84,12 +84,24 @@
                 <label class="text-primary">Unidad de:</label>
                 {{tramite.tra_nombre}}
               </div>
+              <div class="col-md-6">
+                  <div class="formulario">
+                    <div class="checkbox">
+                     <input type="checkbox" ng-model="vtransaccion" ng-checked="vtransaccion" name="vtransaccion" id="vtransaccion">
+                      <label for="vtransaccion">Transacsión Bancaria</label>
+                    </div>
+                  </div>
+              </div>
+              <div class="col-md-12" ng-show="vtransaccion">
+                <label for="transaccion" class="text-primary">Registrar N° de transacción bancaria:</label><br>
+                <input type="number" name="nrotransaccion" ng-model="establecimiento.empresa_tramite.et_transaccion_banco" placeholder="Ingrese número de transacción bancaria" class="form-control">
+              </div>
             <div class="col-md-12 col-sm-12">
                 <div><label class="control-label text-primary">Monto a cancelar:</label></div>
                 <div class="well well-sm col-md-12">
                   <center>
                     <h3 ng-if="tramite.tra_costo==null">--</h3>
-                    <h3 ng-if="tramite.tra_costo!=null"><strong>Bs. {{tramite.tra_costo}}</strong></h3>
+                    <h1 ng-if="tramite.tra_costo!=null"><strong>Bs. {{tramite.tra_costo}}</strong></h1>
                   </center>
                 </div>
             </div>
@@ -98,7 +110,7 @@
         <div class="col-md-12">
           <center>
             <div class="col-md-4 col-md-offset-4 text-center" ng-if="establecimiento.empresa_tramite.et_estado_pago=='PENDIENTE'">
-                <button type="submit" class="btn btn-success" ng-click="save(establecimiento.empresa_tramite.et_id, tramite.tra_costo)" ng-disabled="establecimiento.empresa_tramite.et_estado_pago=='PAGADO'"><span class="glyphicon glyphicon-plus"></span> REGISTRAR PAGO</button>
+                <button type="submit" class="btn btn-success" ng-click="save(establecimiento.empresa_tramite.et_id, tramite.tra_costo, establecimiento.empresa_tramite.et_transaccion_banco)" ng-disabled="establecimiento.empresa_tramite.et_estado_pago=='PAGADO'"><span class="glyphicon glyphicon-plus"></span> REGISTRAR PAGO</button>
             </div>
             <div class="col-md-4 col-md-offset-4 text-center" ng-if="establecimiento.empresa_tramite.et_estado_pago=='PAGADO'">
                 <span class="glyphicon glyphicon-info-sign text-info"></span> El inicio de trámite ya fué cancelado.

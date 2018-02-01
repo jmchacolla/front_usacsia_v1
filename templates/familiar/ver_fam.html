@@ -1,0 +1,46 @@
+<!-- TOP-MENU inicio -->
+<div ng-include="'./templates/menu_inicio.html'"></div>
+<!-- CONTEXT-MENU  -->
+	<div ng-include="'./templates/menu_lateral.html'">
+	</div>
+<!-- CONTENIDO MODULO inicio -->
+	<div class="col-md-8 col-sm-8">
+		<div class="row">
+			<div class="col-md-12">
+				<h2 class="text-primary">
+					<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+					{{ajustes.pagina.titulo}}
+				</h2>
+				<hr>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<div class="well well-sm text-justify" style="background-color:#ddd;">
+					<h3><center><span class="text-primary">FAMILIARES DE: </span><strong>{{persona_fam.persona.per_nombres+"  "+persona_fam.persona.per_apellido_primero+"  "+persona_fam.persona.per_apellido_segundo}}</strong></center></h3>
+				</div>
+				<div ng-show="loading" class="text-center"><br><img ng-src="./images/image.gif" class="loader-img"></div>
+				<div ng-show="!loading && !msg">EL PACIENTE NO TIENE REGISTRADO NINGUN FAMILIAR.</div>
+				<div class="table-responsive">
+					<table class="table table-bordered table-striped table-hover" ng-show="!loading && msg">
+						<thead >
+							<th >NÚMERO</th>
+							<th >NOMBRE</th>
+							<th >APELLIDO PATERNO</th>
+							<th >APELLIDO MATERNO</th>		
+							<th >PARENTESCO</th>	
+						</thead>
+						<tbody ng-repeat="fam in familiares">
+						  <tr>
+						  	<td>{{$index +1}}</td>
+							<td>{{fam.per_nombres}}</td>
+							<td>{{fam.per_apellido_primero}}</td>
+							<td>{{fam.per_apellido_segundo}}</td>
+							<td>{{fam.fam_parentesco}}</td>
+						  </tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>  
+	</div>
